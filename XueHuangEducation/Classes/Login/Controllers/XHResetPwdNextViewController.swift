@@ -1,0 +1,66 @@
+//
+//  XHResetPwdNextViewController.swift
+//  XueHuangEducation
+//
+//  Created by tsaievan on 21/4/18.
+//  Copyright © 2018年 tsaievan. All rights reserved.
+//
+
+import UIKit
+
+class XHResetPwdNextViewController: XHBaseViewController {
+    
+    ///< 输入密码两次的页面
+    lazy var resetPwdView: XHLoginDetailView = {
+        let view = XHLoginDetailView(loginType: .reinput)
+        view.backgroundColor = .white
+        view.delegate = self
+        return view
+    }()
+    
+    lazy var nameLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.textColor = COLOR_CLOBAL_LIGHT_GRAY
+        lbl.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
+        lbl.textAlignment = .center
+        guard let username = response?.username else {
+            return lbl
+        }
+        lbl.text = "您好! \(username)"
+        return lbl
+    }()
+    
+    var response: XHGetPasswordResult?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+    }
+}
+
+// MARK: - 设置UI
+extension XHResetPwdNextViewController {
+    fileprivate func setupUI() {
+        title = "重置密码"
+        view.addSubview(nameLabel)
+        view.addSubview(resetPwdView)
+        makeConstraints()
+    }
+    
+    fileprivate func makeConstraints() {
+        nameLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(view).offset(UIDevice.iPhoneX ? 84 + 15 : 64 + 15)
+            make.left.right.equalTo(view)
+        }
+        
+        resetPwdView.snp.makeConstraints { (make) in
+            make.top.equalTo(nameLabel.snp.bottom).offset(15)
+            make.left.bottom.right.equalTo(view)
+        }
+    }
+}
+
+// MARK: - XHLoginDetailViewDelegate代理
+extension XHResetPwdNextViewController: XHLoginDetailViewDelegate {
+    
+}
