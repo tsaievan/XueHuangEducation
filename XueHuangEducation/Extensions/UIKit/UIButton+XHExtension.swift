@@ -10,8 +10,8 @@ import UIKit
 
 extension UIButton {
     convenience init(title: String,
-                     titleColor: UIColor? = COLOR_GLOBAL_DARKGRAY,
-                     selectedColor: UIColor? = COLOR_GLOBAL_DARKGRAY,
+                     titleColor: UIColor? = COLOR_GLOBAL_DARK_GRAY,
+                     selectedColor: UIColor? = COLOR_GLOBAL_DARK_GRAY,
                      fontSize: CGFloat? = 14,
                      target: Any?,
                      action: Selector,

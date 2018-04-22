@@ -21,7 +21,7 @@ class XHLoginSegmentView: UIView {
     lazy var accountButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setTitle("账号登录", for: .normal)
-        btn.setTitleColor(COLOR_GLOBAL_DARKGRAY, for: .normal)
+        btn.setTitleColor(COLOR_GLOBAL_DARK_GRAY, for: .normal)
         btn.setTitleColor(COLOR_GLOBAL_BLUE, for: .selected)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.tag = 0
@@ -33,7 +33,7 @@ class XHLoginSegmentView: UIView {
     lazy var phoneButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setTitle("手机快捷登录", for: .normal)
-        btn.setTitleColor(COLOR_GLOBAL_DARKGRAY, for: .normal)
+        btn.setTitleColor(COLOR_GLOBAL_DARK_GRAY, for: .normal)
         btn.setTitleColor(COLOR_GLOBAL_BLUE, for: .selected)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         btn.tag = 1

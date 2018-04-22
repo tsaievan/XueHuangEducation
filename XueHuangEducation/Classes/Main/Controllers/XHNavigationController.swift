@@ -15,6 +15,6 @@ class XHNavigationController: UINavigationController {
             .foregroundColor : UIColor.white
         ]
         self.navigationBar.tintColor = .white
-        self.navigationBar.barTintColor = COLOR_GLOBAL_DARKGRAY
+        self.navigationBar.barTintColor = COLOR_GLOBAL_DARK_GRAY
     }
 }

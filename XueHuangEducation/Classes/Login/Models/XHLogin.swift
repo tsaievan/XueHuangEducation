@@ -79,6 +79,43 @@ class XHLogin {
         }
     }
     
+    
+    /// 账号密码登录的逻辑
+    ///
+    /// - Parameters:
+    ///   - withAccount: 账号
+    ///   - password: 密码
+    ///   - success: 成功的回调
+    ///   - failue: 失败的回调
+    class func accountLogin(withAccount: String, password: String, success: XHLoginSuccess?, failue: XHLoginFailue?) {
+        let params = [
+            "UserName" : withAccount,
+            "Password" : password,
+            "stamp" : "\(arc4random())"
+        ]
+        XHNetwork.GET(url: URL_APP_LOGIN_PASSWORD_LOGIN, params: params, success: { (response) in
+            guard let json = response as? [String : Any],
+                let result = XHAccountLoginResult(JSON: json),
+                let code = result.result else {
+                    return
+            }
+            if code == "ok" {
+                success?()
+            }else if code == "error" {
+                failue?("登录失败")
+            }else {
+                failue?("登录失败")
+            }
+        }) { (error) in
+            let err = error as NSError
+            if err.code == -1009 {
+                failue?("网络连接失败")
+            }else {
+                failue?("登录失败")
+            }
+        }
+    }
+    
     /// 找回密码
     ///
     /// - Parameters:

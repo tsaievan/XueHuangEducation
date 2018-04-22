@@ -53,6 +53,27 @@ class XHRegistView: UIView {
         return textField
     }()
     
+    ///< 同意打勾的按钮
+    lazy fileprivate var agreeButton: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.setImage(UIImage(named: "regist_agree_button_normal"), for: .normal)
+        btn.setImage(UIImage(named: "regist_agree_button_selected"), for: .selected)
+        btn.sizeToFit()
+        btn.addTarget(self, action: #selector(didSelectedAgreeButtonAction), for: .touchUpInside)
+        return btn
+    }()
+    
+    ///< 我已经阅读并同意Label
+    lazy var agreeDescLabel: UILabel = {
+        let lbl = UILabel(text: "我已经阅读并同意", textColor: COLOR_GLOBAL_DARK_GRAY)
+        return lbl
+    }()
+    
+    lazy var xhProtocolButton: UIButton = {
+        let btn = UIButton(title: "《学煌教育服务协议》", titleColor: COLOR_GLOBAL_BLUE, fontSize: FONT_SIZE_14, target: self, action: #selector(didClickXHProtocolButtonAction), controlEvents: .touchUpInside)
+        return btn
+    }()
+    
     ///< 注册按钮
     lazy fileprivate var registButton: UIButton = {
         let btn = UIButton(type: .custom)
@@ -71,7 +92,7 @@ class XHRegistView: UIView {
         let btn = UIButton(type: .custom)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
         btn.setTitle("获取验证码", for: .normal)
-        btn.setTitleColor(COLOR_GLOBAL_DARKGRAY, for: .normal)
+        btn.setTitleColor(COLOR_GLOBAL_DARK_GRAY, for: .normal)
         btn.layer.cornerRadius = 5
         btn.layer.masksToBounds = true
         btn.layer.borderWidth = 0.5
@@ -80,6 +101,19 @@ class XHRegistView: UIView {
         btn.addTarget(self, action: #selector(didClickGetAuthButtonAction), for: .touchUpInside)
         return btn
     }()
+    
+    var mobileIsNull: Bool {
+        ///< 验证手机号码是否为空
+        if mobieTextField.text == nil {
+            XHAlertHUD.showError(withStatus: "手机号码不能为空")
+            return true
+        }
+        if mobieTextField.text! == "" {
+            XHAlertHUD.showError(withStatus: "手机号码不能为空")
+            return true
+        }
+        return false
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -99,8 +133,11 @@ extension XHRegistView {
         addSubview(authCodeTextField)
         addSubview(userAccountTextField)
         addSubview(passwordTextField)
-        addSubview(registButton)
         addSubview(getAuthButton)
+        addSubview(agreeButton)
+        addSubview(agreeDescLabel)
+        addSubview(xhProtocolButton)
+        addSubview(registButton)
         makeConstraints()
     }
     
@@ -135,8 +172,23 @@ extension XHRegistView {
             make.leading.trailing.height.equalTo(userAccountTextField)
         }
         
+        agreeButton.snp.makeConstraints { (make) in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(5)
+            make.leading.equalTo(passwordTextField)
+        }
+        
+        agreeDescLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(agreeButton.snp.right).offset(5)
+            make.centerY.equalTo(agreeButton)
+        }
+        
+        xhProtocolButton.snp.makeConstraints { (make) in
+            make.left.equalTo(agreeDescLabel.snp.right)
+            make.centerY.equalTo(agreeDescLabel)
+        }
+        
         registButton.snp.makeConstraints { (make) in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(15)
+            make.top.equalTo(xhProtocolButton.snp.bottom).offset(15)
             make.leading.trailing.height.equalTo(userAccountTextField)
         }
     }
@@ -145,11 +197,34 @@ extension XHRegistView {
 
 // MARK: - 按钮点击事件
 extension XHRegistView {
+    
+    ///< 点击注册按钮
     @objc fileprivate func didClickRegistButtonAction(sender: UIButton) {
         
     }
     
+    ///< 点击获取验证码按钮
     @objc fileprivate func didClickGetAuthButtonAction(sender: UIButton) {
+        ///< 验证手机号码是否为空
+        if mobileIsNull {
+            return
+        }
+        if !XHRegExTool.isPhoneNumber(phoneNumber: mobieTextField.text!) {
+            XHAlertHUD.showError(withStatus: "手机号码格式不正确")
+            return
+        }
+        ///< 不给连续点击的机会
+        sender.isEnabled = false
+//        delegate?.loginDetailViewDidClickGetAuthButton?(loginDetailView: self, sender: sender)
+    }
+    
+    ///< 勾选了同意服务协议按钮
+    @objc fileprivate func didSelectedAgreeButtonAction(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+    }
+    
+    ///< 点击服务协议按钮
+    @objc fileprivate func didClickXHProtocolButtonAction(sender: UIButton) {
         
     }
 }

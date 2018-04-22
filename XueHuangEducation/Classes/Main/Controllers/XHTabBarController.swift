@@ -55,13 +55,13 @@ extension XHTabBarController {
 }
 
 extension XHTabBarController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        let tabBarVc = XHTabBarController()
-        tabBarVc.selectedIndex = 2
-        UIView.animate(withDuration: 5) {
-            
-        }
-        UIApplication.shared.keyWindow?.rootViewController = tabBarVc
-        return true
-    }
+//    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+//        let tabBarVc = XHTabBarController()
+//        tabBarVc.selectedIndex = 2
+//        UIView.animate(withDuration: 5) {
+//            
+//        }
+//        UIApplication.shared.keyWindow?.rootViewController = tabBarVc
+//        return true
+//    }
 }

@@ -88,7 +88,7 @@ class XHLoginDetailView: UIView {
         let btn = UIButton(type: .custom)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
         btn.setTitle("获取验证码", for: .normal)
-        btn.setTitleColor(COLOR_GLOBAL_DARKGRAY, for: .normal)
+        btn.setTitleColor(COLOR_GLOBAL_DARK_GRAY, for: .normal)
         btn.layer.cornerRadius = 5
         btn.layer.masksToBounds = true
         btn.layer.borderWidth = 0.5
@@ -365,8 +365,10 @@ extension XHLoginDetailView {
                 return
             }
             let textString =  string as NSString
-            if textString.length >= 11 {
-                userAccountTextField.text = textString.substring(to: 11)
+            if userAccountTextField.placeholder! == "请输入手机号" { ///< 表明是手机号的输入框
+                if textString.length >= 11 {
+                    userAccountTextField.text = textString.substring(to: 11)
+                }
             }
         }
         

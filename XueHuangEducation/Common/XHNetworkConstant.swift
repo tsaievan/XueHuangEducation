@@ -13,8 +13,11 @@ let URL_BASE = "http://120.77.242.84:8083"
 ///< 21. 手机快捷登录
 let URL_APP_REGIST_PHONE_LOGIN = "xhweb/appRegist.do?phoneLogin"
 
-///< 26. 获取手机验证码
+///< 23. 获取手机验证码
 let URL_APP_REGIST_GET_CODE = "xhweb/appRegist.do?getCode"
+
+///< 26. 密码验证登录
+let URL_APP_LOGIN_PASSWORD_LOGIN = "xhweb/appLogin.do?doLogin"
 
 ///< 27. 找回密码
 let URL_APP_LOGIN_GET_PASSWORD = "xhweb/appLogin.do?getPassword"

@@ -46,12 +46,22 @@ extension XHLoginViewController: XHLoginViewDelegate {
         }
         XHAlertHUD.show(timeInterval: 0)
         ///< 在控制器中写一些重要的逻辑
-        XHLogin.mobileLogin(withMobile: info.account!, authCode: info.password!, success: {
-            XHAlertHUD.showSuccess(withStatus: "登录成功", completion: {
-                print("登录成功")
+        if loginView.loginType == .accountLogin {
+            XHLogin.accountLogin(withAccount: info.account!, password: info.password!, success: {
+                
+            }, failue: { (errorReason) in
+                
             })
-        }) { (errorReason) in
-            XHAlertHUD.showError(withStatus: errorReason)
+            
+        }
+        if loginView.loginType == .phoneLogin {
+            XHLogin.mobileLogin(withMobile: info.account!, authCode: info.password!, success: {
+                XHAlertHUD.showSuccess(withStatus: "登录成功", completion: {
+                    print("登录成功")
+                })
+            }) { (errorReason) in
+                XHAlertHUD.showError(withStatus: errorReason)
+            }
         }
     }
     

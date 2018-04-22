@@ -12,7 +12,7 @@ let SCREEN_WIDTH = UIScreen.main.bounds.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.height
 
 ///< 全局的颜色
-let COLOR_GLOBAL_DARKGRAY: UIColor = UIColor(hexColor: "#393a3f")
+let COLOR_GLOBAL_DARK_GRAY: UIColor = UIColor(hexColor: "#393a3f")
 let COLOR_GLOBAL_BLUE: UIColor = UIColor(hexColor: "#3399ff")
 let COLOR_CLOBAL_LIGHT_GRAY: UIColor = UIColor(hexColor: "#DEDEE2")
 
