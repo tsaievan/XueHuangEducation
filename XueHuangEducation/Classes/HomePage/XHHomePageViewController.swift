@@ -9,16 +9,19 @@
 import UIKit
 
 class XHHomePageViewController: XHBaseViewController {
-
+    
+    
+    
+    ///< 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+    }
+}
 
+extension XHHomePageViewController {
+    fileprivate func setupUI() {
         self.navigationItem.title = "学煌教育网"
         self.view.backgroundColor = .white
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

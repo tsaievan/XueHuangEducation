@@ -15,6 +15,7 @@
 		574E5A1C2089CEE2009EAF93 /* XHGetPasswordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574E5A1B2089CEE2009EAF93 /* XHGetPasswordResult.swift */; };
 		5795B459208D7D8D00ECD58F /* XHResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5795B458208D7D8D00ECD58F /* XHResult.swift */; };
 		5795B45B208D805400ECD58F /* XHModifyPwdResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5795B45A208D805400ECD58F /* XHModifyPwdResult.swift */; };
+		579A1E75208DDE70004D4A11 /* XHTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579A1E74208DDE70004D4A11 /* XHTableView.swift */; };
 		57A62AC620887A4D00C9D5D2 /* Bundle+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62ABE20887A4D00C9D5D2 /* Bundle+XHExtension.swift */; };
 		57A62AC720887A4D00C9D5D2 /* String+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62ABF20887A4D00C9D5D2 /* String+XHExtension.swift */; };
 		57A62AC820887A4D00C9D5D2 /* UIButton+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62AC120887A4D00C9D5D2 /* UIButton+XHExtension.swift */; };
@@ -62,6 +63,7 @@
 		574E5A1B2089CEE2009EAF93 /* XHGetPasswordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHGetPasswordResult.swift; sourceTree = "<group>"; };
 		5795B458208D7D8D00ECD58F /* XHResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHResult.swift; sourceTree = "<group>"; };
 		5795B45A208D805400ECD58F /* XHModifyPwdResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHModifyPwdResult.swift; sourceTree = "<group>"; };
+		579A1E74208DDE70004D4A11 /* XHTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTableView.swift; sourceTree = "<group>"; };
 		57A62ABE20887A4D00C9D5D2 /* Bundle+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+XHExtension.swift"; sourceTree = "<group>"; };
 		57A62ABF20887A4D00C9D5D2 /* String+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+XHExtension.swift"; sourceTree = "<group>"; };
 		57A62AC120887A4D00C9D5D2 /* UIButton+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+XHExtension.swift"; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 		57A62B112088B73400C9D5D2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				579A1E74208DDE70004D4A11 /* XHTableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				57A62B1D2088B73400C9D5D2 /* XHProfileViewController.swift in Sources */,
 				57A62AFA2088983200C9D5D2 /* XHNetwork.swift in Sources */,
 				57A62AC820887A4D00C9D5D2 /* UIButton+XHExtension.swift in Sources */,
+				579A1E75208DDE70004D4A11 /* XHTableView.swift in Sources */,
 				57A62AC720887A4D00C9D5D2 /* String+XHExtension.swift in Sources */,
 				57A62B1A2088B73400C9D5D2 /* XHBaseViewController.swift in Sources */,
 				57A62AC620887A4D00C9D5D2 /* Bundle+XHExtension.swift in Sources */,

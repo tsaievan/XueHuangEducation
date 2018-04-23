@@ -10,6 +10,9 @@ import UIKit
 ///< baseURL
 let URL_BASE = "http://120.77.242.84:8083"
 
+///< 1. 获取主页面数据
+let URL_HOMEPAGE_LIST = "xhweb/appController.do?list"
+
 ///< 21. 手机快捷登录
 let URL_APP_REGIST_PHONE_LOGIN = "xhweb/appRegist.do?phoneLogin"
 
