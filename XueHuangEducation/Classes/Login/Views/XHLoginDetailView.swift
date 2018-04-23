@@ -184,7 +184,10 @@ class XHLoginDetailView: UIView {
         case .accountLogin:
             viewType = .accountLogin
             getAuthButton.isHidden = true
-            if let userInfo = XHPreferences[.USERDEFAULT_GET_PASSWORD_RESULT_KEY],
+            
+            if let username = XHPreferences[.USERDEFAULT_LOGIN_ACCOUNT] {
+                userAccountTextField.text = username
+            }else if let userInfo = XHPreferences[.USERDEFAULT_GET_PASSWORD_RESULT_KEY],
                 let username = userInfo.username {
                 userAccountTextField.text = username
             }
@@ -197,7 +200,9 @@ class XHLoginDetailView: UIView {
         case .phoneLogin:
             viewType = .phoneLogin
             getAuthButton.isHidden = false
-            if let userInfo = XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY],
+            if let mobile = XHPreferences[.USERDEFAULT_LOGIN_MOBILE] {
+                userAccountTextField.text = mobile
+            }else if let userInfo = XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY],
                 let mobile = userInfo.phonebind {
                 userAccountTextField.text = mobile
             }

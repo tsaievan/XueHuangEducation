@@ -53,6 +53,14 @@ extension XHLoginViewController: XHLoginViewDelegate {
                 XHAlertHUD.showSuccess(withStatus: "登录成功", completion: {
                     ///< 将member数据保存到用户偏好设置里面去
                     XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = response
+                    if let username = response.accounts {
+                        XHPreferences[.USERDEFAULT_LOGIN_ACCOUNT] = username
+                    }
+                    if let mobile = response.phonebind {
+                        XHPreferences[.USERDEFAULT_LOGIN_MOBILE] = mobile
+                    }
+                    let tabBarController = XHTabBarController()
+                    UIApplication.shared.keyWindow?.rootViewController = tabBarController
                 })
             }, failue: { (errorReason) in
                 XHAlertHUD.showError(withStatus: errorReason)

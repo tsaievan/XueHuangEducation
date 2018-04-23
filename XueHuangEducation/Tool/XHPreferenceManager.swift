@@ -129,6 +129,8 @@ extension XHPreferenceManager {
             if let object = newValue {
                 let data = NSKeyedArchiver.archivedData(withRootObject: object)
                 defaults.set(data, forKey: key.rawValue)
+            }else {
+                defaults.removeObject(forKey: key.rawValue)
             }
         }
     }
@@ -145,6 +147,8 @@ extension XHPreferenceManager {
             if let object = newValue {
                 let data = NSKeyedArchiver.archivedData(withRootObject: object)
                 defaults.set(data, forKey: key.rawValue)
+            }else {
+                defaults.removeObject(forKey: key.rawValue)
             }
         }
     }

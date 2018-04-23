@@ -1,20 +1,40 @@
  [
-  {
-  "className" : "XHHomePageViewController",
-  "title" : "首页",
-  "normalImage" : "tabBar_homePage_normal",
-  "selectedImage" : "tabBar_homePage_selected"
-  },
-  {
-  "className" : "XHLoginViewController",
-  "title" : "登录",
-  "normalImage" : "tabBar_login_normal",
-  "selectedImage" : "tabBar_login_selected"
-  },
-  {
-  "className" : "XHProfileViewController",
-  "title" : "我的",
-  "normalImage" : "tabBar_profile_normal",
-  "selectedImage" : "tabBar_profile_selected"
-  }
+  [  {
+   "className" : "XHHomePageViewController",
+   "title" : "首页",
+   "normalImage" : "tabBar_homePage_normal",
+   "selectedImage" : "tabBar_homePage_selected"
+   },
+   {
+   "className" : "XHLoginViewController",
+   "title" : "退出登录",
+   "normalImage" : "tabBar_login_normal",
+   "selectedImage" : "tabBar_login_selected"
+   },
+   {
+   "className" : "XHProfileViewController",
+   "title" : "我的",
+   "normalImage" : "tabBar_profile_normal",
+   "selectedImage" : "tabBar_profile_selected"
+   }
+  ],
+  [  {
+   "className" : "XHHomePageViewController",
+   "title" : "首页",
+   "normalImage" : "tabBar_homePage_normal",
+   "selectedImage" : "tabBar_homePage_selected"
+   },
+   {
+   "className" : "XHLoginViewController",
+   "title" : "登录",
+   "normalImage" : "tabBar_login_normal",
+   "selectedImage" : "tabBar_login_selected"
+   },
+   {
+   "className" : "XHLoginViewController",
+   "title" : "我的",
+   "normalImage" : "tabBar_profile_normal",
+   "selectedImage" : "tabBar_profile_selected"
+   }
+  ]
 ]

@@ -34,21 +34,43 @@ extension XHTabBarController {
         guard let path = Bundle.main.path(forResource: "XHControllersInfo.json", ofType: nil),
             let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .init(rawValue: 0)),
             let info = try? JSONSerialization.jsonObject(with: data, options: .allowFragments),
-            let infoArray = info as? [[String : Any]] else {
+            let infoArray = info as? [[[String : Any]]] else {
                 return
         }
-        for vcInfo in infoArray {
-            guard let clsName = vcInfo["className"] as? String,
-                let bundleName = Bundle.bundleName,
-            let vcCls = NSClassFromString(bundleName + "." + clsName),
-            let vc = vcCls.alloc() as? UIViewController else {
-                continue
+        if let _ = XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] {
+            guard let vcArray = infoArray.first else {
+                return
             }
-            vc.title = vcInfo["title"] as? String
-            vc.tabBarItem.image = UIImage(named: vcInfo["normalImage"] as? String ?? "")
-            vc.tabBarItem.selectedImage = UIImage(named: vcInfo["selectedImage"] as? String ?? "")
-            let nav = XHNavigationController(rootViewController: vc)
-            addChildViewController(nav)
+            for vcInfo in vcArray {
+                guard let clsName = vcInfo["className"] as? String,
+                    let bundleName = Bundle.bundleName,
+                    let vcCls = NSClassFromString(bundleName + "." + clsName),
+                    let vc = vcCls.alloc() as? UIViewController else {
+                        continue
+                }
+                vc.title = vcInfo["title"] as? String
+                vc.tabBarItem.image = UIImage(named: vcInfo["normalImage"] as? String ?? "")
+                vc.tabBarItem.selectedImage = UIImage(named: vcInfo["selectedImage"] as? String ?? "")
+                let nav = XHNavigationController(rootViewController: vc)
+                addChildViewController(nav)
+            }
+        }else {
+            guard let vcArray = infoArray.last else {
+                return
+            }
+            for vcInfo in vcArray {
+                guard let clsName = vcInfo["className"] as? String,
+                    let bundleName = Bundle.bundleName,
+                    let vcCls = NSClassFromString(bundleName + "." + clsName),
+                    let vc = vcCls.alloc() as? UIViewController else {
+                        continue
+                }
+                vc.title = vcInfo["title"] as? String
+                vc.tabBarItem.image = UIImage(named: vcInfo["normalImage"] as? String ?? "")
+                vc.tabBarItem.selectedImage = UIImage(named: vcInfo["selectedImage"] as? String ?? "")
+                let nav = XHNavigationController(rootViewController: vc)
+                addChildViewController(nav)
+            }
         }
     }
 }
@@ -61,17 +83,24 @@ extension XHTabBarController: UITabBarControllerDelegate {
             return true
         }
         if loginVc.isKind(of: kls) { ///< 表明是登录页面
-            let alert = UIAlertController(title: "确定要退出登录吗?", message: nil, preferredStyle: .alert)
-            ///< 退出登录后清空用户数据
-            let action = UIAlertAction(title: "确定", style: .destructive, handler: { (action) in
-                
-            })
-            let cancel = UIAlertAction(title: "取消", style: .default, handler: nil)
-            alert.addAction(action)
-            alert.addAction(cancel)
-            self.present(alert, animated: true, completion: nil)
-            
-            return false
+            if let _ = XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] {
+                let alert = UIAlertController(title: "确定要退出登录吗?", message: nil, preferredStyle: .alert)
+                ///< 退出登录后清空用户数据
+                let action = UIAlertAction(title: "确定", style: .destructive, handler: { (action) in
+                    XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
+                    let tabBarController = XHTabBarController()
+                    UIApplication.shared.keyWindow?.rootViewController = tabBarController
+                    ///< 默认选中登录页面
+                    tabBarController.selectedIndex = 1
+                })
+                let cancel = UIAlertAction(title: "取消", style: .default, handler: nil)
+                alert.addAction(action)
+                alert.addAction(cancel)
+                self.present(alert, animated: true, completion: nil)
+                return false
+            }else {
+                return true
+            }
         }
         return true
     }
