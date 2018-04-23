@@ -12,7 +12,7 @@ typealias XHGetAuthCodeSuccess = () -> ()
 typealias XHGetAuthCodeFailue = () -> ()
 typealias XHMobileLoginSuccess = () -> ()
 typealias XHMobileLoginFailue = (String) -> ()
-typealias XHAccountLoginSuccess = (XHAccountLoginResult) -> ()
+typealias XHAccountLoginSuccess = (XHLoginMember) -> ()
 typealias XHAccountLoginFailue = (String) -> ()
 typealias XHGetPwdSuccess = (XHGetPasswordResult) -> ()
 typealias XHGetPwdFailue = (String) -> ()
@@ -100,11 +100,12 @@ class XHLogin {
         XHNetwork.GET(url: URL_APP_LOGIN_PASSWORD_LOGIN, params: params, success: { (response) in
             guard let json = response as? [String : Any],
                 let result = XHAccountLoginResult(JSON: json),
-                let loginState = result.states else {
+                let loginState = result.states,
+                let member = result.member else {
                     return
             }
             if loginState == true { ///< 登录成功
-                success?(result)
+                success?(member)
             }else { ///< 登录失败
                 guard let result = result.result else {
                     failue?("登录失败")

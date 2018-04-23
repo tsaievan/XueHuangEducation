@@ -133,11 +133,11 @@ extension XHPreferenceManager {
         }
     }
     
-    subscript(key: XHPreferenceKey<XHAccountLoginResult>) -> XHAccountLoginResult? {
+    subscript(key: XHPreferenceKey<XHLoginMember>) -> XHLoginMember? {
         get {
-            var object: XHAccountLoginResult?
+            var object: XHLoginMember?
             if let data = defaults.data(forKey: key.rawValue) {
-                object = NSKeyedUnarchiver.unarchiveObject(with: data) as? XHAccountLoginResult
+                object = NSKeyedUnarchiver.unarchiveObject(with: data) as? XHLoginMember
             }
             return object
         }
