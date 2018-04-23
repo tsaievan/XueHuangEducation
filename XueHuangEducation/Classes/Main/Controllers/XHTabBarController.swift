@@ -15,7 +15,6 @@ class XHTabBarController: UITabBarController {
     }
 }
 
-
 // MARK: - 设置UI
 extension XHTabBarController {
     
@@ -55,13 +54,25 @@ extension XHTabBarController {
 }
 
 extension XHTabBarController: UITabBarControllerDelegate {
-//    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-//        let tabBarVc = XHTabBarController()
-//        tabBarVc.selectedIndex = 2
-//        UIView.animate(withDuration: 5) {
-//            
-//        }
-//        UIApplication.shared.keyWindow?.rootViewController = tabBarVc
-//        return true
-//    }
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        guard let loginVc = viewController.childViewControllers.first,
+            let bundleName = Bundle.bundleName,
+        let kls = NSClassFromString(bundleName + "." + "XHLoginViewController") else {
+            return true
+        }
+        if loginVc.isKind(of: kls) { ///< 表明是登录页面
+            let alert = UIAlertController(title: "确定要退出登录吗?", message: nil, preferredStyle: .alert)
+            ///< 退出登录后清空用户数据
+            let action = UIAlertAction(title: "确定", style: .destructive, handler: { (action) in
+                
+            })
+            let cancel = UIAlertAction(title: "取消", style: .default, handler: nil)
+            alert.addAction(action)
+            alert.addAction(cancel)
+            self.present(alert, animated: true, completion: nil)
+            
+            return false
+        }
+        return true
+    }
 }
