@@ -51,6 +51,7 @@ extension XHLoginViewController: XHLoginViewDelegate {
                 (response) in
                 ///< completion的闭包中要写一些登录成功的逻辑
                 XHAlertHUD.showSuccess(withStatus: "登录成功", completion: {
+                    ///< 将member数据保存到用户偏好设置里面去
                     XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = response
                 })
             }, failue: { (errorReason) in
