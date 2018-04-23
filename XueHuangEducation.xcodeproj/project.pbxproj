@@ -124,6 +124,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		579A1E76208DE0AC004D4A11 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		579A1E77208DE0AD004D4A11 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57A62B012088B73400C9D5D2 /* XHHomePageViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		579A1E78208DE0AD004D4A11 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		57A62ABD20887A4D00C9D5D2 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,7 +216,9 @@
 		57A62B002088B73400C9D5D2 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
-				57A62B012088B73400C9D5D2 /* XHHomePageViewController.swift */,
+				579A1E77208DE0AD004D4A11 /* Controllers */,
+				579A1E76208DE0AC004D4A11 /* Models */,
+				579A1E78208DE0AD004D4A11 /* Views */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
