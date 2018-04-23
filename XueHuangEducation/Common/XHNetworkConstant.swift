@@ -21,3 +21,6 @@ let URL_APP_LOGIN_PASSWORD_LOGIN = "xhweb/appLogin.do?doLogin"
 
 ///< 27. 找回密码
 let URL_APP_LOGIN_GET_PASSWORD = "xhweb/appLogin.do?getPassword"
+
+///< 28. 修改密码
+let URL_APP_LOGIN_ALTER_PASSWORD = "xhweb/appLogin.do?alterPassword"

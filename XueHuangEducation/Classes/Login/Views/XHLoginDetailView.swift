@@ -219,9 +219,10 @@ class XHLoginDetailView: UIView {
             loginButton.setTitle("下一步", for: .normal)
             registButton.isHidden = true
             findPwdButton.isHidden = true
-        default:
+        case .reinput:
+            viewType = .reinput
             getAuthButton.isHidden = true
-            userAccountTextField.placeholder = "请输密码"
+            userAccountTextField.placeholder = "请输入密码"
             userAccountTextField.isSecureTextEntry = true
             passwordTextField.placeholder = "请再次输入密码"
             passwordTextField.isSecureTextEntry = true
@@ -339,6 +340,12 @@ extension XHLoginDetailView {
         if viewType == .phoneLogin { ///< 如果是验证码的输入框, 还要判断手机号格式是否正确
             if !XHRegExTool.isPhoneNumber(phoneNumber: userAccountTextField.text!) {
                 XHAlertHUD.showError(withStatus: "手机号码格式不正确")
+                return
+            }
+        }
+        if viewType == .reinput {
+            if userAccountTextField.text! != passwordTextField.text! { ///< 两次输入的密码不一致
+                XHAlertHUD.showError(withStatus: "两次输入的密码不一致")
                 return
             }
         }

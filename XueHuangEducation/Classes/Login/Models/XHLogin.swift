@@ -165,4 +165,38 @@ class XHLogin {
             }
         }
     }
+    
+    class func reinputPassword(password: String, success: XHGetPwdSuccess?, failue: XHGetPwdFailue?) {
+        guard let result = XHPreferences[.USERDEFAULT_GET_PASSWORD_RESULT_KEY],
+        let userID = result.userid else {
+            return
+        }
+        let params = [
+            "id" : userID,
+            "loginPassword" : password
+            ]
+        XHNetwork.GET(url: URL_APP_LOGIN_ALTER_PASSWORD, params: params, success: { (response) in
+            guard let json = response as? [String : Any],
+                let result = XHGetPasswordResult(JSON: json),
+                let code = result.result else {
+                    return
+            }
+            if code == "ok" { ///< 有该用户, 并且成功获取验证码
+                success?(result)
+            }else if code == "no" { ///< 有该用户但获取验证码失败
+                failue?(result.msg ?? "获取验证码失败")
+            }else if code == "nophone" {
+                failue?("此号码没有注册记录")
+            }else {
+                failue?("获取验证码失败")
+            }
+        }) { (error) in
+            let err = error as NSError
+            if err.code == -1009 {
+                failue?("网络连接失败")
+            }else {
+                failue?("获取验证码失败")
+            }
+        }
+    }
 }

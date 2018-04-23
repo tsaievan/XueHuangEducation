@@ -44,6 +44,7 @@ extension XHResetPwdNextViewController {
         title = "重置密码"
         view.addSubview(nameLabel)
         view.addSubview(resetPwdView)
+        view.backgroundColor = .white
         makeConstraints()
     }
     
@@ -54,7 +55,7 @@ extension XHResetPwdNextViewController {
         }
         
         resetPwdView.snp.makeConstraints { (make) in
-            make.top.equalTo(nameLabel.snp.bottom).offset(15)
+            make.top.equalTo(nameLabel.snp.bottom)
             make.left.bottom.right.equalTo(view)
         }
     }
@@ -62,5 +63,15 @@ extension XHResetPwdNextViewController {
 
 // MARK: - XHLoginDetailViewDelegate代理
 extension XHResetPwdNextViewController: XHLoginDetailViewDelegate {
-    
+    ///< 点击了确认按钮
+    func loginDetailViewDidClickLoginButton(loginDetailView: XHLoginDetailView, sender: UIButton) {
+        guard let info = loginDetailView.info else {
+            return
+        }
+        XHLogin.reinputPassword(password: info.account!, success: { (result) in
+            
+        }) { (errorReason) in
+            
+        }
+    }
 }

@@ -63,29 +63,29 @@ extension XHResetPwdViewController: XHLoginDetailViewDelegate {
             XHAlertHUD.showError(withStatus: string)
             self.resetPwdView.getAuthButtonEnable = true
         }
-        
-        ///< 点击下一步按钮
-        func loginDetailViewDidClickLoginButton(loginDetailView: XHLoginDetailView, sender: UIButton) {
-            guard let info = loginDetailView.info,
-                let inputAuthCode = info.password,
-                let response = XHPreferences[.USERDEFAULT_GET_PASSWORD_RESULT_KEY],
-                let saveAuthCode = response.code,
-                let currentTime = response.currentTime else {
-                    XHAlertHUD.showError(withStatus: "验证码错误")
-                    return
-            }
-            if (CFAbsoluteTimeGetCurrent() - currentTime >= TIME_INTERVAL_MAX_GET_AUTH_CODE) { ///< 超过了最大时间, 需要重新获取验证码
-                XHAlertHUD.showError(withStatus: "验证码超时, 请重新获取")
-                return
-            }
-            ///< 输入的字符串和保留的字符串相同, 表明验证成功, 进行下一步操作
-            if inputAuthCode == saveAuthCode { ///< 跳转到下一级控制器
-                let nextVc = XHResetPwdNextViewController()
-                nextVc.response = response
-                navigationController?.pushViewController(nextVc, animated: true)
-            }else {
+    }
+    
+    ///< 点击下一步按钮
+    func loginDetailViewDidClickLoginButton(loginDetailView: XHLoginDetailView, sender: UIButton) {
+        guard let info = loginDetailView.info,
+            let inputAuthCode = info.password,
+            let response = XHPreferences[.USERDEFAULT_GET_PASSWORD_RESULT_KEY],
+            let saveAuthCode = response.code,
+            let currentTime = response.currentTime else {
                 XHAlertHUD.showError(withStatus: "验证码错误")
-            }
+                return
+        }
+        if (CFAbsoluteTimeGetCurrent() - currentTime >= TIME_INTERVAL_MAX_GET_AUTH_CODE) { ///< 超过了最大时间, 需要重新获取验证码
+            XHAlertHUD.showError(withStatus: "验证码超时, 请重新获取")
+            return
+        }
+        ///< 输入的字符串和保留的字符串相同, 表明验证成功, 进行下一步操作
+        if inputAuthCode == saveAuthCode { ///< 跳转到下一级控制器
+            let nextVc = XHResetPwdNextViewController()
+            nextVc.response = response
+            navigationController?.pushViewController(nextVc, animated: true)
+        }else {
+            XHAlertHUD.showError(withStatus: "验证码错误")
         }
     }
 }

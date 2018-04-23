@@ -24,5 +24,5 @@ let FONT_SIZE_16: CGFloat = 16.0
 let COLOR_BUTTON_BORDER_GETAUTH_DARKGRAY = UIColor(hexColor: "#d2d2d2")
 
 ///< 获取验证码的最大时间 (10min)
-let TIME_INTERVAL_MAX_GET_AUTH_CODE: TimeInterval = 30.0
+let TIME_INTERVAL_MAX_GET_AUTH_CODE: TimeInterval = Double(MAXFLOAT)
 
