@@ -56,7 +56,12 @@ class XHLogin {
                 failue?("发送验证码失败")
             }
         }) { (error) in
-            failue?("发送验证码失败")
+            let err = error as NSError
+            if err.code == -1009 {
+                failue?("网络连接失败")
+            }else {
+                failue?("发送验证码失败")
+            }
         }
     }
     
