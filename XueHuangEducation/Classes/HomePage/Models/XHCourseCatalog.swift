@@ -40,6 +40,8 @@ class XHCourseCatalog: NSObject, Mappable {
     var updateDate: XHCreatTime?
     ///< 更新者姓名
     var updateName: String?
+    ///< 自定义名称
+    var customName: String?
     
     required init?(map: Map) {
     }
@@ -60,5 +62,6 @@ class XHCourseCatalog: NSObject, Mappable {
         updateBy                  <- map["updateBy"]
         updateDate                <- map["updateDate"]
         updateName                <- map["updateName"]
+        customName                <- map["customName"]
     }
 }

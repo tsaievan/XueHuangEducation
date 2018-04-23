@@ -24,15 +24,58 @@ class XHHomePage {
             let model = XHHomePageList(JSON: json) else {
                 return
             }
+            ///< 转成模型之后开始处理数据
             var mtArray = [[Any]]()
-            if let catalog = model.courseCatalogs {
-                mtArray.append(catalog)
+            var newCatalogs = [XHCourseCatalog]()
+            var titles = [XHCourseCatalog]()
+            if let catalogs = model.courseCatalogs {
+                for catalog in catalogs {
+                    guard let level = catalog.courseClassLevel else {
+                        return
+                    }
+                    ///< 显示的是小标题
+                    if level == "0" {
+                        titles.append(catalog)
+                    }
+                    var title: String = "建工类"
+                    if let titleModel = titles.first {
+                        title = titleModel.courseClassName ?? "建工类"
+                    }
+                    ///< 各个按钮的名称
+                    if level == "1" {
+                        catalog.customName = title
+                        newCatalogs.append(catalog)
+                    }
+                }
+                mtArray.append(newCatalogs)
             }
-            if let recomNetCourse = model.isRecomNetCourse {
-                mtArray.append(recomNetCourse)
+            var newRecomNetCourses = [XHNetCourse]()
+            if let recomNetCourses = model.isRecomNetCourse {
+                if recomNetCourses.count >= 4 {
+                    for (index, recom) in recomNetCourses.enumerated() {
+                        newRecomNetCourses.append(recom)
+                        if index >= 3 {
+                            break
+                        }
+                    }
+                    mtArray.append(newRecomNetCourses)
+                }else {
+                    mtArray.append(recomNetCourses)
+                }
             }
-            if let hotNetCourse = model.hotNetCourse {
-                mtArray.append(hotNetCourse)
+            var newHotNetCourses = [XHNetCourse]()
+            if let hotNetCourses = model.hotNetCourse {
+                if hotNetCourses.count >= 4 {
+                    for (index, hot) in hotNetCourses.enumerated() {
+                        newHotNetCourses.append(hot)
+                        if index >= 3 {
+                            break
+                        }
+                    }
+                    mtArray.append(newHotNetCourses)
+                }else {
+                    mtArray.append(hotNetCourses)
+                }
             }
             success?(mtArray)
         }) { (error) in
