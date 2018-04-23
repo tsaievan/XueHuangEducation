@@ -96,16 +96,30 @@ class XHLogin {
         XHNetwork.GET(url: URL_APP_LOGIN_PASSWORD_LOGIN, params: params, success: { (response) in
             guard let json = response as? [String : Any],
                 let result = XHAccountLoginResult(JSON: json),
-                let code = result.result else {
+                let loginState = result.states else {
                     return
             }
-            if code == "ok" {
-                success?()
-            }else if code == "error" {
-                failue?("登录失败")
-            }else {
-                failue?("登录失败")
+            if loginState == true { ///< 登录成功
+                                success?()
+            }else { ///< 登录失败
+                guard let result = result.result else {
+                    failue?("登录失败")
+                    return
+                }
+                if result.msg == "noaccount" {
+                    failue?("此账户还未注册")
+                }else {
+                    failue?("登录失败")
+                }
+                
             }
+//            if code == "ok" {
+//                success?()
+//            }else if code == "error" {
+//                failue?("登录失败")
+//            }else {
+//                failue?("登录失败")
+//            }
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {

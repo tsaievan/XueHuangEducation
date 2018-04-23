@@ -48,9 +48,12 @@ extension XHLoginViewController: XHLoginViewDelegate {
         ///< 在控制器中写一些重要的逻辑
         if loginView.loginType == .accountLogin {
             XHLogin.accountLogin(withAccount: info.account!, password: info.password!, success: {
-                
+                ///< completion的闭包中要写一些登录成功的逻辑
+                XHAlertHUD.showSuccess(withStatus: "登录成功", completion: {
+                    
+                })
             }, failue: { (errorReason) in
-                
+                XHAlertHUD.showError(withStatus: errorReason)
             })
             
         }
