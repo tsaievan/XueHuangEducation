@@ -84,7 +84,7 @@ extension XHLoginViewController: XHLoginViewDelegate {
         XHAlertHUD.show(timeInterval: 0)
         ///< 调获取验证码的接口
         weak var weakSelf = self
-        XHLogin.getAuthCode(withMobile: info.account!, success: {
+        XHLogin.getAuthCode(withMobile: info.account!, isRegist: false, success: {
             XHAlertHUD.showSuccess(withStatus: "验证码已成功发送", completion: {
                 guard let ws = weakSelf else {
                     return
@@ -92,11 +92,12 @@ extension XHLoginViewController: XHLoginViewDelegate {
                 ws.loginView.setupTimer()
             })
         }) {
+            (errorReason) in
             guard let ws = weakSelf else {
                 return
             }
             ws.loginView.getAuthButtonEnable = true
-            XHAlertHUD.showError(withStatus: "发送失败")
+            XHAlertHUD.showError(withStatus: errorReason)
         }
     }
     

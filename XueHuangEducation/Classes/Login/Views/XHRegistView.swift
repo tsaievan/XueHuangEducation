@@ -8,6 +8,12 @@
 
 import UIKit
 
+@objc
+protocol XHRegistViewDelegate: NSObjectProtocol {
+    @objc optional
+    func registViewDidTaphaveAccountLabel(registView: XHRegistView, sender: UITapGestureRecognizer)
+}
+
 class XHRegistView: UIView {
     ///< 手机号输入框
     lazy fileprivate var mobieTextField: UITextField = {
@@ -102,6 +108,21 @@ class XHRegistView: UIView {
         return btn
     }()
     
+    ///< `我已有账号!`Label
+    lazy var haveAccountLabel: UILabel = {
+        let lblText = NSMutableAttributedString(string: "我已有账号!去登录", attributes: [NSAttributedStringKey.foregroundColor : COLOR_GLOBAL_BLUE])
+        lblText.setAttributes([NSAttributedStringKey.foregroundColor : COLOR_GLOBAL_DARK_GRAY], range: NSRange(location: 0, length: "我已有账号!".count))
+        let lbl = UILabel()
+        lbl.attributedText = lblText
+        lbl.textAlignment = .center
+        lbl.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
+        lbl.sizeToFit()
+        lbl.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTaphaveAccountLabelAction))
+        lbl.addGestureRecognizer(tap)
+        return lbl
+    }()
+    
     var mobileIsNull: Bool {
         ///< 验证手机号码是否为空
         if mobieTextField.text == nil {
@@ -115,6 +136,8 @@ class XHRegistView: UIView {
         return false
     }
     
+    weak var delegate: XHRegistViewDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -123,6 +146,15 @@ class XHRegistView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - 生命周期
+extension XHRegistView {
+    override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        ///< 每次进入页面, 同意按钮自动打勾
+        agreeButton.isSelected = true
     }
 }
 
@@ -138,6 +170,7 @@ extension XHRegistView {
         addSubview(agreeDescLabel)
         addSubview(xhProtocolButton)
         addSubview(registButton)
+        addSubview(haveAccountLabel)
         makeConstraints()
     }
     
@@ -191,6 +224,11 @@ extension XHRegistView {
             make.top.equalTo(xhProtocolButton.snp.bottom).offset(15)
             make.leading.trailing.height.equalTo(userAccountTextField)
         }
+        
+        haveAccountLabel.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self)
+            make.top.equalTo(registButton.snp.bottom).offset(30)
+        }
     }
 }
 
@@ -226,5 +264,25 @@ extension XHRegistView {
     ///< 点击服务协议按钮
     @objc fileprivate func didClickXHProtocolButtonAction(sender: UIButton) {
         
+    }
+    
+    ///< 点击`去登录`label
+    @objc fileprivate func didTaphaveAccountLabelAction(sender: UITapGestureRecognizer) {
+        delegate?.registViewDidTaphaveAccountLabel?(registView: self, sender: sender)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if mobieTextField.isFirstResponder {
+            mobieTextField.resignFirstResponder()
+        }
+        if authCodeTextField.isFirstResponder {
+            authCodeTextField.resignFirstResponder()
+        }
+        if userAccountTextField.isFirstResponder {
+            userAccountTextField.resignFirstResponder()
+        }
+        if passwordTextField.isFirstResponder {
+            passwordTextField.resignFirstResponder()
+        }
     }
 }

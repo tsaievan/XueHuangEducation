@@ -9,7 +9,7 @@
 import UIKit
 
 typealias XHGetAuthCodeSuccess = () -> ()
-typealias XHGetAuthCodeFailue = () -> ()
+typealias XHGetAuthCodeFailue = (String) -> ()
 typealias XHMobileLoginSuccess = () -> ()
 typealias XHMobileLoginFailue = (String) -> ()
 typealias XHAccountLoginSuccess = (XHLoginMember) -> ()
@@ -27,11 +27,19 @@ class XHLogin {
     ///   - withMobile: 手机号码
     ///   - success: 成功的回调
     ///   - failue: 失败的回调
-    class func getAuthCode(withMobile: String, success: XHGetAuthCodeSuccess?, failue: XHGetAuthCodeFailue?) {
-        let params = [
-            "telphone" : withMobile,
-            "isRegister" : "false"
-        ]
+    class func getAuthCode(withMobile: String, isRegist: Bool, success: XHGetAuthCodeSuccess?, failue: XHGetAuthCodeFailue?) {
+        var params: [String: Any]
+        if isRegist {
+            params = [
+                "telphone" : withMobile,
+                "isRegister" : "true"
+            ]
+        }else {
+            params = [
+                "telphone" : withMobile,
+                "isRegister" : "false"
+            ]
+        }
         XHNetwork.GET(url: URL_APP_REGIST_GET_CODE, params: params, success: { (response) in
             guard let json = response as? [String : Any],
                 let result = XHGetAuthCodeResult(JSON: json),
@@ -39,12 +47,16 @@ class XHLogin {
                     return
             }
             if code == 1 {
-                success?()
+                if let msg = result.msg {
+                    failue?(msg)
+                }else {
+                    success?()
+                }
             }else {
-                failue?()
+                failue?("发送验证码失败")
             }
         }) { (error) in
-            failue?()
+            failue?("发送验证码失败")
         }
     }
     

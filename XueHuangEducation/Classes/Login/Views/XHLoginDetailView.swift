@@ -171,7 +171,6 @@ class XHLoginDetailView: UIView {
         super.init(frame: frame)
         setupUI()
         registNotification()
-        addGestures()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -302,11 +301,6 @@ extension XHLoginDetailView {
             make.width.equalTo(userAccountTextField).multipliedBy(0.35)
         }
     }
-    
-    fileprivate func addGestures() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapTheLoginDetailView))
-        addGestureRecognizer(tap)
-    }
 }
 
 
@@ -368,12 +362,6 @@ extension XHLoginDetailView {
         info = (userAccountTextField.text!, passwordTextField.text!)
         delegate?.loginDetailViewDidClickLoginButton?(loginDetailView: self, sender: sender)
     }
-    
-    ///< 触摸了屏幕, textField都放弃第一响应者
-    @objc fileprivate func tapTheLoginDetailView(sender: UITapGestureRecognizer) {
-        userAccountTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
-    }
 }
 
 // MARK: - 通知回调事件
@@ -431,5 +419,17 @@ extension XHLoginDetailView {
         getAuthButton.isEnabled = false
         getAuthButton.setTitle(title, for: .disabled)
         getAuthButton.setTitleColor(COLOR_CLOBAL_LIGHT_GRAY, for: .disabled)
+    }
+}
+
+// MARK: - 其他事件
+extension XHLoginDetailView {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if userAccountTextField.isFirstResponder {
+            userAccountTextField.resignFirstResponder()
+        }
+        if passwordTextField.isFirstResponder {
+            passwordTextField.resignFirstResponder()
+        }
     }
 }

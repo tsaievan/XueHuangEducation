@@ -12,6 +12,7 @@ class XHRegistViewController: XHBaseViewController {
     
     lazy var registView: XHRegistView = {
         let rv = XHRegistView()
+        rv.delegate = self
         return rv
     }()
 
@@ -33,5 +34,12 @@ extension XHRegistViewController {
             make.top.equalTo(view).offset(UIDevice.iPhoneX ? 84 : 64)
             make.left.bottom.right.equalTo(view)
         }
+    }
+}
+
+// MARK: - XHRegistViewDelegate代理
+extension XHRegistViewController: XHRegistViewDelegate {
+    func registViewDidTaphaveAccountLabel(registView: XHRegistView, sender: UITapGestureRecognizer) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
