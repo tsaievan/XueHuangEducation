@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class XHAccountLoginResult: NSObject, Mappable {
+class XHAccountLoginResult: NSObject, Mappable,NSCoding {
     ///< Url
     var Url: String?
     ///< 状态信息 `ok`等
@@ -75,5 +75,51 @@ class XHAccountLoginResult: NSObject, Mappable {
         updateBy         <- map["updateBy"]
         updateDate       <- map["updateDate"]
         updateName       <- map["updateName"]
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        Url = aDecoder.decodeObject(forKey: "Url") as? String
+        msg = aDecoder.decodeObject(forKey: "msg") as? String
+        states = aDecoder.decodeObject(forKey: "states") as? Bool
+        result = aDecoder.decodeObject(forKey: "result") as? XHLoginBaseResult
+        member = aDecoder.decodeObject(forKey: "member") as? XHLoginMember
+        emailbind = aDecoder.decodeObject(forKey: "emailbind") as? String
+        endTime = aDecoder.decodeObject(forKey: "endTime") as? TimeInterval
+        id = aDecoder.decodeObject(forKey: "id") as? String
+        isDownloadVideo = aDecoder.decodeObject(forKey: "isDownloadVideo") as? Int
+        loginPassword = aDecoder.decodeObject(forKey: "loginPassword") as? String
+        phonebind = aDecoder.decodeObject(forKey: "phonebind") as? String
+        photo = aDecoder.decodeObject(forKey: "photo") as? String
+        position = aDecoder.decodeObject(forKey: "position") as? String
+        province = aDecoder.decodeObject(forKey: "province") as? String
+        regLocation = aDecoder.decodeObject(forKey: "regLocation") as? Int
+        startTime = aDecoder.decodeObject(forKey: "startTime") as? TimeInterval
+        state = aDecoder.decodeObject(forKey: "state") as? Int
+        updateBy = aDecoder.decodeObject(forKey: "updateBy") as? String
+        updateDate = aDecoder.decodeObject(forKey: "updateDate") as? TimeInterval
+        updateName = aDecoder.decodeObject(forKey: "updateName") as? String
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(Url, forKey: "Url")
+        aCoder.encode(msg, forKey: "msg")
+        aCoder.encode(states, forKey: "states")
+        aCoder.encode(result, forKey: "result")
+        aCoder.encode(member, forKey: "member")
+        aCoder.encode(emailbind, forKey: "emailbind")
+        aCoder.encode(endTime, forKey: "endTime")
+        aCoder.encode(id, forKey: "id")
+        aCoder.encode(isDownloadVideo, forKey: "isDownloadVideo")
+        aCoder.encode(loginPassword, forKey: "loginPassword")
+        aCoder.encode(phonebind, forKey: "phonebind")
+        aCoder.encode(photo, forKey: "photo")
+        aCoder.encode(position, forKey: "position")
+        aCoder.encode(province, forKey: "province")
+        aCoder.encode(regLocation, forKey: "regLocation")
+        aCoder.encode(startTime, forKey: "startTime")
+        aCoder.encode(state, forKey: "state")
+        aCoder.encode(updateBy, forKey: "updateBy")
+        aCoder.encode(updateDate, forKey: "updateDate")
+        aCoder.encode(updateName, forKey: "updateName")
     }
 }

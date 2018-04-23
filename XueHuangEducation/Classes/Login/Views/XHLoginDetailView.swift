@@ -197,6 +197,10 @@ class XHLoginDetailView: UIView {
         case .phoneLogin:
             viewType = .phoneLogin
             getAuthButton.isHidden = false
+            if let userInfo = XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY],
+                let mobile = userInfo.phonebind {
+                userAccountTextField.text = mobile
+            }
             userAccountTextField.placeholder = "请输入手机号"
             userAccountTextField.keyboardType = .phonePad
             passwordTextField.placeholder = "请输入验证码"

@@ -28,4 +28,5 @@ class PreferenceKeys: RawRepresentable, Hashable {
 
 extension PreferenceKeys {
     static let USERDEFAULT_GET_PASSWORD_RESULT_KEY = XHPreferenceKey<XHGetPasswordResult>("USERDEFAULT_GET_PASSWORD_RESULT_KEY")
+    static let USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY = XHPreferenceKey<XHAccountLoginResult>("USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY")
 }

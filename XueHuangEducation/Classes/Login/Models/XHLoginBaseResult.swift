@@ -9,7 +9,19 @@
 import UIKit
 import ObjectMapper
 
-class XHLoginBaseResult: NSObject, Mappable {
+class XHLoginBaseResult: NSObject, Mappable, NSCoding {
+    required init?(coder aDecoder: NSCoder) {
+        Url = aDecoder.decodeObject(forKey: "Url") as? String
+        msg = aDecoder.decodeObject(forKey: "msg") as? String
+        states = aDecoder.decodeObject(forKey: "states") as? Bool
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(Url, forKey: "Url")
+        aCoder.encode(msg, forKey: "msg")
+        aCoder.encode(states, forKey: "states")
+    }
+    
     ///< Url
     var Url: String?
     ///< 状态信息 `ok`等
