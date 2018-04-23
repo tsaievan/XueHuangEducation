@@ -48,6 +48,7 @@ extension XHLoginViewController: XHLoginViewDelegate {
         ///< 在控制器中写一些重要的逻辑
         if loginView.loginType == .accountLogin {
             XHLogin.accountLogin(withAccount: info.account!, password: info.password!, success: {
+                (response) in
                 ///< completion的闭包中要写一些登录成功的逻辑
                 XHAlertHUD.showSuccess(withStatus: "登录成功", completion: {
                     
@@ -55,7 +56,6 @@ extension XHLoginViewController: XHLoginViewDelegate {
             }, failue: { (errorReason) in
                 XHAlertHUD.showError(withStatus: errorReason)
             })
-            
         }
         if loginView.loginType == .phoneLogin {
             XHLogin.mobileLogin(withMobile: info.account!, authCode: info.password!, success: {
@@ -74,10 +74,19 @@ extension XHLoginViewController: XHLoginViewDelegate {
         }
         XHAlertHUD.show(timeInterval: 0)
         ///< 调获取验证码的接口
+        weak var weakSelf = self
         XHLogin.getAuthCode(withMobile: info.account!, success: {
-            self.loginView.setupTimer()
+            XHAlertHUD.showSuccess(withStatus: "验证码已成功发送", completion: {
+                guard let ws = weakSelf else {
+                    return
+                }
+                ws.loginView.setupTimer()
+            })
         }) {
-            self.loginView.getAuthButtonEnable = true
+            guard let ws = weakSelf else {
+                return
+            }
+            ws.loginView.getAuthButtonEnable = true
             XHAlertHUD.showError(withStatus: "发送失败")
         }
     }

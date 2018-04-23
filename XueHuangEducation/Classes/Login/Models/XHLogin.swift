@@ -10,8 +10,10 @@ import UIKit
 
 typealias XHGetAuthCodeSuccess = () -> ()
 typealias XHGetAuthCodeFailue = () -> ()
-typealias XHLoginSuccess = () -> ()
-typealias XHLoginFailue = (String) -> ()
+typealias XHMobileLoginSuccess = () -> ()
+typealias XHMobileLoginFailue = (String) -> ()
+typealias XHAccountLoginSuccess = (XHAccountLoginResult) -> ()
+typealias XHAccountLoginFailue = (String) -> ()
 typealias XHGetPwdSuccess = (XHGetPasswordResult) -> ()
 typealias XHGetPwdFailue = (String) -> ()
 typealias XHModifyPwdSuccess = () -> ()
@@ -53,7 +55,7 @@ class XHLogin {
     ///   - authCode: 验证码
     ///   - success: 成功的回调
     ///   - failue: 失败的回调
-    class func mobileLogin(withMobile: String, authCode: String, success: XHLoginSuccess?, failue: XHLoginFailue?) {
+    class func mobileLogin(withMobile: String, authCode: String, success: XHMobileLoginSuccess?, failue: XHMobileLoginFailue?) {
         let params = [
             "phone" : withMobile,
             "code" : authCode
@@ -89,7 +91,7 @@ class XHLogin {
     ///   - password: 密码
     ///   - success: 成功的回调
     ///   - failue: 失败的回调
-    class func accountLogin(withAccount: String, password: String, success: XHLoginSuccess?, failue: XHLoginFailue?) {
+    class func accountLogin(withAccount: String, password: String, success: XHAccountLoginSuccess?, failue: XHAccountLoginFailue?) {
         let params = [
             "UserName" : withAccount,
             "Password" : password,
@@ -102,7 +104,7 @@ class XHLogin {
                     return
             }
             if loginState == true { ///< 登录成功
-                                success?()
+                success?(result)
             }else { ///< 登录失败
                 guard let result = result.result else {
                     failue?("登录失败")
@@ -115,13 +117,6 @@ class XHLogin {
                 }
                 
             }
-//            if code == "ok" {
-//                success?()
-//            }else if code == "error" {
-//                failue?("登录失败")
-//            }else {
-//                failue?("登录失败")
-//            }
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {

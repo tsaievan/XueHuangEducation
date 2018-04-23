@@ -184,6 +184,10 @@ class XHLoginDetailView: UIView {
         case .accountLogin:
             viewType = .accountLogin
             getAuthButton.isHidden = true
+            if let userInfo = XHPreferences[.USERDEFAULT_GET_PASSWORD_RESULT_KEY],
+                let username = userInfo.username {
+                userAccountTextField.text = username
+            }
             userAccountTextField.placeholder = "请输入用户名"
             passwordTextField.placeholder = "请输入密码"
             passwordTextField.snp.remakeConstraints { (make) in
