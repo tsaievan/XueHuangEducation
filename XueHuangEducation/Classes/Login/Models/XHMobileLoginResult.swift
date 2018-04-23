@@ -9,20 +9,20 @@
 import UIKit
 import ObjectMapper
 
-class XHMobileLoginResult: Mappable{
-    ///< 结果
-    ///< 成功: ok
-    ///< 失败: error
-    var result: String?
-    
+class XHMobileLoginResult: XHResult{
     ///< 失败时, 该字段有值
     var message: String?
     
     required init?(map: Map) {
+        super.init(map: map)
     }
     
-    func mapping(map: Map) {
-        result      <- map["result"]
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         message     <- map["message"]
     }
 }

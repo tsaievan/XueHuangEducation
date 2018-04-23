@@ -9,12 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class XHGetPasswordResult: NSObject, Mappable, NSCoding {
-    ///< 结果
-    ///< 有该用户并成功获取验证码: ok
-    ///< 有该用户但获取验证码失败: no
-    ///< 没有该用户: nophone
-    var result: String?
+class XHGetPasswordResult: XHResult {
     
     ///< 用户名
     var username: String?
@@ -32,10 +27,11 @@ class XHGetPasswordResult: NSObject, Mappable, NSCoding {
     var currentTime: Double?
     
     required init?(map: Map) {
+        super.init(map: map)
     }
     
-    func mapping(map: Map) {
-        result        <- map["result"]
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         username      <- map["username"]
         userid        <- map["userid"]
         code          <- map["code"]
@@ -45,7 +41,7 @@ class XHGetPasswordResult: NSObject, Mappable, NSCoding {
     
     ///< 实现归结档的协议方法
     required init?(coder aDecoder: NSCoder) {
-        result = aDecoder.decodeObject(forKey: "result") as? String
+        super.init(coder: aDecoder)
         username = aDecoder.decodeObject(forKey: "username") as? String
         userid = aDecoder.decodeObject(forKey: "userid") as? String
         code = aDecoder.decodeObject(forKey: "code") as? String
@@ -53,8 +49,8 @@ class XHGetPasswordResult: NSObject, Mappable, NSCoding {
         currentTime = aDecoder.decodeObject(forKey: "currentTime") as? Double
     }
     
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(result, forKey: "result")
+    override func encode(with aCoder: NSCoder) {
+        super.encode(with: aCoder)
         aCoder.encode(username, forKey: "username")
         aCoder.encode(userid, forKey: "userid")
         aCoder.encode(code, forKey: "code")

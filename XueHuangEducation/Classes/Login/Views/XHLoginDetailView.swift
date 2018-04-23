@@ -230,6 +230,9 @@ class XHLoginDetailView: UIView {
                 make.top.equalTo(userAccountTextField.snp.bottom).offset(15)
                 make.leading.height.trailing.equalTo(userAccountTextField)
             }
+            registButton.isHidden = true
+            findPwdButton.isHidden = true
+            loginButton.setTitle("确 定", for: .normal)
         }
     }
     

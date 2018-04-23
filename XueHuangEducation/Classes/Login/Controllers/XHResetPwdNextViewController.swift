@@ -68,10 +68,13 @@ extension XHResetPwdNextViewController: XHLoginDetailViewDelegate {
         guard let info = loginDetailView.info else {
             return
         }
-        XHLogin.reinputPassword(password: info.account!, success: { (result) in
-            
+        XHLogin.reinputPassword(password: info.account!, success: { () in
+            ///< 登录成功后返回登录页面
+            XHAlertHUD.showSuccess(withStatus: "修改成功", completion: {            
+                self.navigationController?.popToRootViewController(animated: true)
+            })
         }) { (errorReason) in
-            
+            XHAlertHUD.showError(withStatus: errorReason)
         }
     }
 }
