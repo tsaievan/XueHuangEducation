@@ -7,5 +7,6 @@ pod 'SnapKit'
 pod 'SVProgressHUD'
 pod 'Alamofire'
 pod 'ObjectMapper'
+pod 'SDWebImage'
 
 end
