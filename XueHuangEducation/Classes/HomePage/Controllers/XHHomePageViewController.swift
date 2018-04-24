@@ -105,6 +105,10 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 0 {
+            let footerView = XHCourseCatalogSectionFooterView()
+            return footerView
+        }
         return nil
     }
     
