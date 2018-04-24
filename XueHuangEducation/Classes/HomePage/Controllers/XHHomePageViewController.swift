@@ -119,5 +119,9 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
         return 10
     }
     
+    ///< 点击cell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
     
 }
