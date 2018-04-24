@@ -83,7 +83,7 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
         }else {
             cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_HOMEPAGE_NETCOURSE, for: indexPath)
             guard let newCell = cell as? XHNetCourseCell,
-                let catalogs = dataArray[indexPath.section] as? [XHCourseCatalog] else {
+                let catalogs = dataArray[indexPath.section] as? [XHNetCourse] else {
                     return UITableViewCell()
             }
             newCell.catalogs = catalogs
@@ -121,6 +121,7 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
     
     ///< 点击cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        ///< 取消选中
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
