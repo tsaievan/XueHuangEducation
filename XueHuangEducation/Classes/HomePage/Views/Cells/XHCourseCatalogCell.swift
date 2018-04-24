@@ -13,7 +13,8 @@ import SnapKit
 class XHCourseCatalogButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.cornerRadius = 20
+        backgroundColor = .white
+        layer.cornerRadius = RADIUS_HOMEPAGE_CATALOG_BUTTON
         layer.masksToBounds = true
         layer.borderWidth = 1.5
         layer.borderColor = COLOR_CATALOG_BUTTON_BORDER_COLOR.cgColor
@@ -27,8 +28,11 @@ class XHCourseCatalogButton: UIButton {
 
 ///< 首页课程分类的button的容器
 class XHCourseCatalogButtonsContainterView: UIView {
-    
+    ///< 最后一个按钮
     var lastButton: XHCourseCatalogButton?
+    
+    ///< 上一个按钮
+    var beforeButton: XHCourseCatalogButton?
     
     var catalogs: [XHCourseCatalog]? {
         didSet {
@@ -40,21 +44,40 @@ class XHCourseCatalogButtonsContainterView: UIView {
             let buttonH = HEIGHT_HOMEPAGE_CATALOG_BUTTON
             for (index, model) in models.enumerated() {
                 let btn = XHCourseCatalogButton(type: .custom)
-                btn.x = MARGIN_GLOBAL_15 + (CGFloat(index % 3) * (buttonW + MARGIN_GLOBAL_15))
-                btn.y = MARGIN_GLOBAL_15 + (CGFloat(index / 3) * (buttonH + MARGIN_GLOBAL_15))
-                btn.width = buttonW
-                btn.height = buttonH
+                addSubview(btn)
+                btn.snp.makeConstraints({ (make) in
+                    make.width.equalTo(buttonW)
+                    make.height.equalTo(buttonH)
+                    if let beforeButton = beforeButton {
+                        if index % 3 == 0 { ///< 第一列
+                            make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
+                        }else {
+                            make.left.equalTo(beforeButton.snp.right).offset(MARGIN_GLOBAL_15)
+                        }
+                    make.top.equalTo(self).offset(MARGIN_GLOBAL_10 + (CGFloat(index / 3) * (buttonH + MARGIN_GLOBAL_10)))
+                    }else {
+                        make.top.equalTo(self).offset(MARGIN_GLOBAL_10)
+                        make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
+                    }
+                    
+                })
                 btn.setTitle(model.courseClassName, for: .normal)
                 btn.setTitleColor(COLOR_CATALOG_BUTTON_TITLE_COLOR, for: .normal)
                 btn.titleLabel?.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
                 if index == models.count - 1 { ///< 表明是最后一个按钮
                     lastButton = btn
-                    height = btn.y + btn.height
-                    print("\(height)")
-                    layoutIfNeeded()
                 }
-                addSubview(btn)
+                beforeButton = btn
             }
+            
+            ///< 将bottom的底部设置与最后一个button的bottom相同
+            guard let last = lastButton else {
+                return
+            }
+            self.snp.makeConstraints({ (make) in
+                make.bottom.equalTo(last).offset(MARGIN_GLOBAL_10)
+            })
+            layoutIfNeeded()
         }
     }
 }
@@ -63,7 +86,7 @@ class XHCourseCatalogCell: UITableViewCell {
     
     lazy var buttonsView: XHCourseCatalogButtonsContainterView = {
         let cv = XHCourseCatalogButtonsContainterView()
-        cv.backgroundColor = .cyan
+        cv.backgroundColor = COLOR_HOMEPAGE_BACKGROUND
         return cv
     }()
     
@@ -92,6 +115,9 @@ extension XHCourseCatalogCell {
     }
     
     fileprivate func makeConstraints() {
-        
+        buttonsView.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(contentView)
+            make.bottom.equalTo(contentView).priority(.low)
+        }
     }
 }

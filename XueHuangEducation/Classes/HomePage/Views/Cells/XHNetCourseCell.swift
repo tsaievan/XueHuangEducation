@@ -9,16 +9,9 @@
 import UIKit
 
 class XHNetCourseCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    var catalogs: [XHCourseCatalog]? {
+        didSet {
+            
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

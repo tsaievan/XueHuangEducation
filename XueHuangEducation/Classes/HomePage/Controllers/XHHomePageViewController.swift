@@ -77,10 +77,16 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             newCell.catalogs = catalogs
+            return newCell
         }else {
             cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_HOMEPAGE_NETCOURSE, for: indexPath)
+            guard let newCell = cell as? XHNetCourseCell,
+                let catalogs = dataArray[indexPath.section] as? [XHCourseCatalog] else {
+                    return UITableViewCell()
+            }
+            newCell.catalogs = catalogs
+            return newCell
         }
-        return cell!
     }
     
     ///< 把广告view放到这里
@@ -102,8 +108,10 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 44
+            return 40
         }
         return 10
     }
+    
+    
 }

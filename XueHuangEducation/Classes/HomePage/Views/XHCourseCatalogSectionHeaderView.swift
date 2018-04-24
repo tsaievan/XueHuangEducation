@@ -34,7 +34,6 @@ class XHCourseCatalogSectionHeaderView: UIView {
         lbl.font = UIFont.boldSystemFont(ofSize: 17)
         lbl.sizeToFit()
         return lbl
-        
     }()
     
     override init(frame: CGRect) {
@@ -49,6 +48,7 @@ class XHCourseCatalogSectionHeaderView: UIView {
 
 extension XHCourseCatalogSectionHeaderView {
     fileprivate func setupUI() {
+        backgroundColor = COLOR_HOMEPAGE_BACKGROUND
         addSubview(imageView)
         addSubview(titleLabel)
         makeConstraints()
@@ -57,7 +57,7 @@ extension XHCourseCatalogSectionHeaderView {
     fileprivate func makeConstraints() {
         imageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
-            make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
+            make.left.equalTo(self).offset(MARGIN_GLOBAL_20)
         }
         
         titleLabel.snp.makeConstraints { (make) in
