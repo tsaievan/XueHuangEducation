@@ -15,6 +15,8 @@ class XHHomePageViewController: XHBaseViewController {
     
     lazy var tableView: XHTableView = {
         let t = XHTableView(frame: .zero, style: .grouped)
+        ///< 取出分割线
+        t.separatorStyle = .none
         t.dataSource = self
         t.delegate = self
         return t

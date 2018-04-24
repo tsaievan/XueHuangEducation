@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		266AEA3266FE904F74331219 /* Pods_XueHuangEducation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24AEB8EE5EBF7EF9D075D04 /* Pods_XueHuangEducation.framework */; };
+		57098817208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57098816208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift */; };
 		571C801D208CC12C005CD369 /* XHLoginBaseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C801C208CC12C005CD369 /* XHLoginBaseResult.swift */; };
 		571C801F208CC1E5005CD369 /* XHLoginMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C801E208CC1E5005CD369 /* XHLoginMember.swift */; };
 		571C8021208CC488005CD369 /* XHAccountLoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C8020208CC488005CD369 /* XHAccountLoginResult.swift */; };
@@ -63,6 +64,7 @@
 /* Begin PBXFileReference section */
 		1146A33339A28FE1F29ADDE0 /* Pods-XueHuangEducation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XueHuangEducation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XueHuangEducation/Pods-XueHuangEducation.debug.xcconfig"; sourceTree = "<group>"; };
 		2E63452E6AB35C4E372E7C60 /* Pods-XueHuangEducation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XueHuangEducation.release.xcconfig"; path = "Pods/Target Support Files/Pods-XueHuangEducation/Pods-XueHuangEducation.release.xcconfig"; sourceTree = "<group>"; };
+		57098816208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalogSectionFooterView.swift; sourceTree = "<group>"; };
 		571C801C208CC12C005CD369 /* XHLoginBaseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHLoginBaseResult.swift; sourceTree = "<group>"; };
 		571C801E208CC1E5005CD369 /* XHLoginMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHLoginMember.swift; sourceTree = "<group>"; };
 		571C8020208CC488005CD369 /* XHAccountLoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHAccountLoginResult.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				5763359B208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift */,
+				57098816208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift */,
 				57633596208EBBD4009DAF86 /* Cells */,
 			);
 			path = Views;
@@ -536,6 +539,7 @@
 				57A62B212088E6D300C9D5D2 /* XHMobileLoginResult.swift in Sources */,
 				574E5A1C2089CEE2009EAF93 /* XHGetPasswordResult.swift in Sources */,
 				57A62B1C2088B73400C9D5D2 /* XHTabBarController.swift in Sources */,
+				57098817208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift in Sources */,
 				57D5010920897BB100DD0DBD /* XHResetPwdViewController.swift in Sources */,
 				57A62AC920887A4D00C9D5D2 /* UIColor+XHExtension.swift in Sources */,
 				57A62ACC20887A4D00C9D5D2 /* UIView+XHExtension.swift in Sources */,

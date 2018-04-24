@@ -99,7 +99,6 @@ class XHCourseCatalogCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
