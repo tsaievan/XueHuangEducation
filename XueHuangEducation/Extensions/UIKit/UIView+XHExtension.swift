@@ -13,7 +13,7 @@ extension UIView {
     ///< View的x值
     var x: CGFloat {
         set {
-            let X = x
+            let X = newValue
             frame.origin.x = X
         }
         get {
@@ -24,7 +24,7 @@ extension UIView {
     ///< View的y值
     var y: CGFloat {
         set {
-            let Y = y
+            let Y = newValue
             frame.origin.y = Y
         }
         get {
@@ -34,7 +34,7 @@ extension UIView {
     ///< View的宽度
     var width: CGFloat {
         set {
-            let W = width
+            let W = newValue
             frame.size.width = W
         }
         get {
@@ -44,7 +44,7 @@ extension UIView {
     ///< View的高度
     var height: CGFloat {
         set {
-            let H = height
+            let H = newValue
             frame.size.height = H
         }
         get {

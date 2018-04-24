@@ -15,13 +15,29 @@ let SCREEN_HEIGHT = UIScreen.main.bounds.height
 let COLOR_GLOBAL_DARK_GRAY: UIColor = UIColor(hexColor: "#393a3f")
 let COLOR_GLOBAL_BLUE: UIColor = UIColor(hexColor: "#3399ff")
 let COLOR_CLOBAL_LIGHT_GRAY: UIColor = UIColor(hexColor: "#DEDEE2")
+let COLOR_HOMEPAGE_BACKGROUND: UIColor = UIColor(hexColor: "#F2F2F7")
+let COLOR_CATALOG_BUTTON_BORDER_COLOR: UIColor = UIColor(hexColor: "#CCCCCC")
+let COLOR_CATALOG_BUTTON_TITLE_COLOR: UIColor = UIColor(hexColor: "#333333")
 
 ///< 全局的数字
 let FONT_SIZE_14: CGFloat = 14.0
 let FONT_SIZE_16: CGFloat = 16.0
 
+///< cell的identifier
+let CELL_IDENTIFIER_HOMEPAGE_CATALOG = "CELL_IDENTIFIER_HOMEPAGE_CATALOG"
+let CELL_IDENTIFIER_HOMEPAGE_NETCOURSE = "CELL_IDENTIFIER_HOMEPAGE_NETCOURSE"
+
+///< 一些魔法数字, 边距等
+///< 全局
+let MARGIN_GLOBAL_15: CGFloat = 15
+
+
+///< 首页
+let MARGIN_HOMEPAGE_CATALOG_BUTTON: CGFloat = 20
+let HEIGHT_HOMEPAGE_CATALOG_BUTTON: CGFloat = 40
+
 ///< 控件的颜色
-let COLOR_BUTTON_BORDER_GETAUTH_DARKGRAY = UIColor(hexColor: "#d2d2d2")
+let COLOR_BUTTON_BORDER_GETAUTH_DARKGRAY = UIColor(hexColor: "#D2D2D2")
 
 ///< 获取验证码的最大时间 (10min)
 let TIME_INTERVAL_MAX_GET_AUTH_CODE: TimeInterval = Double(MAXFLOAT)

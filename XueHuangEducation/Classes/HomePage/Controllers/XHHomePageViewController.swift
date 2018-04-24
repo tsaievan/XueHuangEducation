@@ -14,7 +14,7 @@ class XHHomePageViewController: XHBaseViewController {
     var dataSource: [[Any]]?
     
     lazy var tableView: XHTableView = {
-        let t = XHTableView()
+        let t = XHTableView(frame: .zero, style: .grouped)
         t.dataSource = self
         t.delegate = self
         return t
@@ -24,12 +24,16 @@ class XHHomePageViewController: XHBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        XHAlertHUD.show(timeInterval: 0)
         XHHomePage.getHomePageList(success: { (data) in
+            XHAlertHUD.dismiss()
             self.dataSource = data
             self.tableView.reloadData()
         }) { (errorReason) in
             XHAlertHUD.showError(withStatus: errorReason)
         }
+        tableView.register(XHCourseCatalogCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_HOMEPAGE_CATALOG)
+        tableView.register(XHNetCourseCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_HOMEPAGE_NETCOURSE)
     }
 }
 
@@ -58,18 +62,48 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let data = dataSource else {
-            return 0
-        }
-        return data[section].count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        var cell: UITableViewCell?
+        guard let dataArray = dataSource else {
+            return UITableViewCell()
+        }
+        if indexPath.section == 0 {
+            cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_HOMEPAGE_CATALOG, for: indexPath)
+            guard let newCell = cell as? XHCourseCatalogCell,
+            let catalogs = dataArray[indexPath.section] as? [XHCourseCatalog] else {
+                return UITableViewCell()
+            }
+            newCell.catalogs = catalogs
+        }else {
+            cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_HOMEPAGE_NETCOURSE, for: indexPath)
+        }
+        return cell!
     }
     
     ///< 把广告view放到这里
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            let headerView = XHCourseCatalogSectionHeaderView()
+            guard let data = dataSource else {
+                return headerView
+            }
+            headerView.models = data[section] as? [XHCourseCatalog]
+            return headerView
+        }
         return nil
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 44
+        }
+        return 10
     }
 }
