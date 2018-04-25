@@ -24,6 +24,7 @@ let COLOR_HOMEPAGE_COURSE_ICON_BLUE: UIColor = UIColor(hexColor: "#27C1F4")
 
 
 ///< 全局的数字
+let FONT_SIZE_13: CGFloat = 13.0
 let FONT_SIZE_14: CGFloat = 14.0
 let FONT_SIZE_16: CGFloat = 16.0
 

@@ -30,7 +30,11 @@ class XHNetCourseButton: UIControl {
     lazy var titleLabel: UILabel = {
         let lbl = UILabel()
         lbl.textColor = .darkGray
-        lbl.font = UIFont.systemFont(ofSize: FONT_SIZE_16)
+        if UIDevice.iPhoneSE {
+            lbl.font = UIFont.systemFont(ofSize: FONT_SIZE_13)
+        }else {
+            lbl.font = UIFont.systemFont(ofSize: FONT_SIZE_16)
+        }
         lbl.numberOfLines = 0
         lbl.sizeToFit()
         return lbl
@@ -88,6 +92,20 @@ extension XHNetCourseButton {
 
 ///< 首页课程分类的button的容器
 class XHNetCourseButtonsContainterView: UIView {
+    
+    lazy var tipView: UIView = {
+        let t = UIView()
+        t.backgroundColor = COLOR_GLOBAL_BLUE
+        t.layer.cornerRadius = 2
+        t.layer.masksToBounds = true
+        return t
+    }()
+    
+    lazy var tipLabel: UILabel = {
+        let lbl = UILabel(text: "", textColor: COLOR_HOMEPAGE_TIP_LABEL_COLOR, fontSize: FONT_SIZE_16)
+        return lbl
+    }()
+    
     ///< 最后一个按钮
     var lastButton: XHNetCourseButton?
     
@@ -96,11 +114,14 @@ class XHNetCourseButtonsContainterView: UIView {
     
     var catalogs: [XHNetCourse]? {
         didSet {
-            guard let models = catalogs else {
+            guard let models = catalogs,
+            let first = models.first,
+            let title = first.catalogName else {
                 return
             }
+            tipLabel.text = title
             ///< 循环创建button
-            let buttonW = (SCREEN_WIDTH - 3.0 * MARGIN_GLOBAL_20) / 2
+            let buttonW = (SCREEN_WIDTH - 2.0 * MARGIN_GLOBAL_25) / 2
             let buttonH: CGFloat = 160
             for (index, model) in models.enumerated() {
                 let btn = XHNetCourseButton()
@@ -110,16 +131,15 @@ class XHNetCourseButtonsContainterView: UIView {
                     make.height.equalTo(buttonH)
                     if let beforeButton = beforeButton {
                         if index % 2 == 0 { ///< 第一列
-                            make.left.equalTo(self).offset(MARGIN_GLOBAL_25)
+                            make.left.equalTo(self).offset(MARGIN_GLOBAL_10)
                         }else {
                             make.left.equalTo(beforeButton.snp.right).offset(MARGIN_GLOBAL_10)
                         }
-                        make.top.equalTo(self).offset(MARGIN_GLOBAL_10 + (CGFloat(index / 2) * (buttonH + MARGIN_GLOBAL_10)))
+                        make.top.equalTo(tipView.snp.bottom).offset(MARGIN_GLOBAL_10 + (CGFloat(index / 2) * (buttonH + MARGIN_GLOBAL_10)))
                     }else {
-                        make.top.equalTo(self).offset(MARGIN_GLOBAL_10)
-                        make.left.equalTo(self).offset(MARGIN_GLOBAL_25)
+                        make.top.equalTo(tipView.snp.bottom).offset(MARGIN_GLOBAL_10)
+                        make.left.equalTo(self).offset(MARGIN_GLOBAL_10)
                     }
-                    
                 })
                 btn.model = model
                 if index == models.count - 1 { ///< 表明是最后一个按钮
@@ -138,27 +158,47 @@ class XHNetCourseButtonsContainterView: UIView {
             layoutIfNeeded()
         }
     }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension XHNetCourseButtonsContainterView {
+    fileprivate func setupUI() {
+        addSubview(tipView)
+        addSubview(tipLabel)
+        makeConstraints()
+    }
+    
+    fileprivate func makeConstraints() {
+        
+        tipView.snp.makeConstraints { (make) in
+            make.top.equalTo(MARGIN_GLOBAL_10)
+            make.left.equalTo(MARGIN_GLOBAL_10)
+            make.width.equalTo(4)
+            make.height.equalTo(15)
+        }
+        
+        tipLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(tipView)
+            make.left.equalTo(tipView.snp.right).offset(MARGIN_GLOBAL_10)
+        }
+    }
 }
 
 
 class XHNetCourseCell: UITableViewCell {
     
-    lazy var tipView: UIView = {
-        let t = UIView()
-        t.backgroundColor = COLOR_GLOBAL_BLUE
-        t.layer.cornerRadius = 2
-        t.layer.masksToBounds = true
-        return t
-    }()
-    
-    lazy var tipLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: COLOR_HOMEPAGE_TIP_LABEL_COLOR, fontSize: FONT_SIZE_16)
-        return lbl
-    }()
-    
     lazy var buttonsView: XHNetCourseButtonsContainterView = {
         let cv = XHNetCourseButtonsContainterView()
-        cv.backgroundColor = .yellow
+        cv.layer.cornerRadius = 5
+        cv.layer.masksToBounds = true
+        cv.backgroundColor = .white
         return cv
     }()
     
@@ -181,29 +221,19 @@ class XHNetCourseCell: UITableViewCell {
 // MARK: - 设置UI
 extension XHNetCourseCell {
     fileprivate func setupUI() {
-        backgroundColor = .cyan
-        contentView.addSubview(tipView)
-        contentView.addSubview(tipLabel)
+        backgroundColor = COLOR_HOMEPAGE_BACKGROUND
+        contentView.backgroundColor = .clear
         contentView.addSubview(buttonsView)
+        contentView.layer.cornerRadius = 5
+        contentView.layer.masksToBounds = true
         makeConstraints()
     }
     
     fileprivate func makeConstraints() {
-        tipView.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView).offset(MARGIN_GLOBAL_10)
-            make.left.equalTo(contentView).offset(MARGIN_GLOBAL_15)
-            make.width.equalTo(10)
-            make.height.equalTo(27)
-        }
-        
-        tipLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(tipView)
-            make.left.equalTo(tipView.snp.right).offset(5)
-        }
-        
         buttonsView.snp.makeConstraints { (make) in
-            make.top.equalTo(tipView.snp.bottom).offset(10)
-            make.left.right.equalTo(contentView)
+            make.top.equalTo(contentView)
+            make.left.equalTo(contentView).offset(MARGIN_GLOBAL_10)
+            make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_10)
             make.bottom.equalTo(contentView).priority(.low)
         }
     }

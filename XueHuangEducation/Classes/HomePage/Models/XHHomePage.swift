@@ -51,6 +51,9 @@ class XHHomePage {
             }
             var newRecomNetCourses = [XHNetCourse]()
             if let recomNetCourses = model.isRecomNetCourse {
+                if let first = recomNetCourses.first {
+                    first.catalogName = "推荐课程"
+                }
                 if recomNetCourses.count >= 4 {
                     for (index, recom) in recomNetCourses.enumerated() {
                         newRecomNetCourses.append(recom)
@@ -65,6 +68,9 @@ class XHHomePage {
             }
             var newHotNetCourses = [XHNetCourse]()
             if let hotNetCourses = model.hotNetCourse {
+                if let first = hotNetCourses.first {
+                    first.catalogName = "热门课程"
+                }
                 if hotNetCourses.count >= 4 {
                     for (index, hot) in hotNetCourses.enumerated() {
                         newHotNetCourses.append(hot)

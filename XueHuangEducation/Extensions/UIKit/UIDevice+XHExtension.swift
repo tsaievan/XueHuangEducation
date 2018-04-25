@@ -16,4 +16,11 @@ extension UIDevice {
         }
         return false
     }
+    
+    class var iPhoneSE: Bool {
+        if UIScreen.main.bounds.height == 568 {
+            return true
+        }
+        return false
+    }
 }

@@ -119,6 +119,13 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
         return 10
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 200
+        }
+        return 0.01
+    }
+    
     ///< 点击cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ///< 取消选中

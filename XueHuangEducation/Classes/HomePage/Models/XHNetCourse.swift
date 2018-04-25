@@ -48,12 +48,15 @@ class XHNetCourse: NSObject, Mappable {
     var video: String?
     ///< 视频文件地址
     var videoSrc: String?
+    ///< 分类名称
+    var catalogName: String?
     
     required init?(map: Map) {
     }
     
     func mapping(map: Map) {
         catalogId         <- map["catalogId"]
+        catalogName       <- map["catalogName"]
         courseTeacher     <- map["courseTeacher"]
         creatBy           <- map["creatBy"]
         createDate        <- map["createDate"]
