@@ -39,10 +39,20 @@ class XHHomePageViewController: XHBaseViewController {
     }
     
     override func router(withEventName eventName: String, userInfo: [String : Any]) {
+        ///< 点击了分类的按钮
         if eventName == EVENT_CLICK_CATALOG_BUTTON {
             guard let model = userInfo[MODEL_CLICK_CATALOG_BUTTON] as? XHCourseCatalog else {
                 return
             }
+        }
+        
+        ///< 点击推荐课程/热门课程的按钮
+        if eventName == EVENT_CLICK_COURSE_BUTTON {
+            guard let model = userInfo[MODEL_CLICK_COURSE_BUTTON] as? XHNetCourse,
+            let videoUrl = model.video else {
+                return
+            }
+            print("\(videoUrl)")
         }
     }
 }
@@ -138,6 +148,5 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ///< 取消选中
         tableView.deselectRow(at: indexPath, animated: false)
-    }
-    
+    }   
 }

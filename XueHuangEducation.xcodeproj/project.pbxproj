@@ -25,6 +25,7 @@
 		5795B459208D7D8D00ECD58F /* XHResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5795B458208D7D8D00ECD58F /* XHResult.swift */; };
 		5795B45B208D805400ECD58F /* XHModifyPwdResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5795B45A208D805400ECD58F /* XHModifyPwdResult.swift */; };
 		579A1E75208DDE70004D4A11 /* XHTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579A1E74208DDE70004D4A11 /* XHTableView.swift */; };
+		57A2A6D52091A77900DD03BC /* XHWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2A6D42091A77900DD03BC /* XHWebViewController.swift */; };
 		57A62AC620887A4D00C9D5D2 /* Bundle+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62ABE20887A4D00C9D5D2 /* Bundle+XHExtension.swift */; };
 		57A62AC720887A4D00C9D5D2 /* String+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62ABF20887A4D00C9D5D2 /* String+XHExtension.swift */; };
 		57A62AC820887A4D00C9D5D2 /* UIButton+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62AC120887A4D00C9D5D2 /* UIButton+XHExtension.swift */; };
@@ -82,6 +83,7 @@
 		5795B458208D7D8D00ECD58F /* XHResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHResult.swift; sourceTree = "<group>"; };
 		5795B45A208D805400ECD58F /* XHModifyPwdResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHModifyPwdResult.swift; sourceTree = "<group>"; };
 		579A1E74208DDE70004D4A11 /* XHTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTableView.swift; sourceTree = "<group>"; };
+		57A2A6D42091A77900DD03BC /* XHWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWebViewController.swift; sourceTree = "<group>"; };
 		57A62ABE20887A4D00C9D5D2 /* Bundle+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+XHExtension.swift"; sourceTree = "<group>"; };
 		57A62ABF20887A4D00C9D5D2 /* String+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+XHExtension.swift"; sourceTree = "<group>"; };
 		57A62AC120887A4D00C9D5D2 /* UIButton+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+XHExtension.swift"; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 		57A62B0C2088B73400C9D5D2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				57A2A6D42091A77900DD03BC /* XHWebViewController.swift */,
 				57A62B0D2088B73400C9D5D2 /* XHBaseViewController.swift */,
 				57A62B0E2088B73400C9D5D2 /* XHNavigationController.swift */,
 				57A62B0F2088B73400C9D5D2 /* XHTabBarController.swift */,
@@ -556,6 +559,7 @@
 				57779809209177D400BE74AE /* UIResponder+XHExtension.swift in Sources */,
 				57A62B182088B73400C9D5D2 /* XHLoginSegmentView.swift in Sources */,
 				572B8C9F208E0944005EC6CD /* XHCourseCatalog.swift in Sources */,
+				57A2A6D52091A77900DD03BC /* XHWebViewController.swift in Sources */,
 				57CA59D3208B05D6004C6393 /* XHResetPwdNextViewController.swift in Sources */,
 				57A62B162088B73400C9D5D2 /* XHLogin.swift in Sources */,
 				57A62AF620887F0300C9D5D2 /* XHAlertHUD.swift in Sources */,

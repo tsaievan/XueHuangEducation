@@ -11,6 +11,7 @@ import UIKit
 class XHNetCourseButton: UIControl {
     lazy var iconView: UIView = {
         let iv = UIView()
+        iv.isUserInteractionEnabled = false
         iv.backgroundColor = COLOR_HOMEPAGE_COURSE_ICON_BLUE
         iv.layer.cornerRadius = 5
         iv.layer.masksToBounds = true
@@ -19,6 +20,7 @@ class XHNetCourseButton: UIControl {
     
     lazy var iconImageView: UIImageView = {
         let iv = UIImageView(image: UIImage(named: "image_homepage_courseIcon"))
+        iv.isUserInteractionEnabled = false
         return iv
     }()
     
@@ -90,8 +92,14 @@ extension XHNetCourseButton {
     }
 }
 
+protocol XHNetCourseButtonsContainterViewDelegate: NSObjectProtocol {
+    func netCourseButtonsContainterViewDidNetCourseButton(containterView: XHNetCourseButtonsContainterView, sender: UIControl)
+}
+
 ///< 首页课程分类的button的容器
 class XHNetCourseButtonsContainterView: UIView {
+    
+    var delegate: XHNetCourseButtonsContainterViewDelegate?
     
     lazy var tipView: UIView = {
         let t = UIView()
@@ -125,6 +133,7 @@ class XHNetCourseButtonsContainterView: UIView {
             let buttonH: CGFloat = 160
             for (index, model) in models.enumerated() {
                 let btn = XHNetCourseButton()
+                btn.tag = index
                 addSubview(btn)
                 btn.snp.makeConstraints({ (make) in
                     make.width.equalTo(buttonW)
@@ -146,6 +155,7 @@ class XHNetCourseButtonsContainterView: UIView {
                     lastButton = btn
                 }
                 beforeButton = btn
+                btn.addTarget(self, action: #selector(didNetCourseCatalogButtonAction), for: .touchUpInside)
             }
             
             ///< 将bottom的底部设置与最后一个button的bottom相同
@@ -165,6 +175,13 @@ class XHNetCourseButtonsContainterView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension XHNetCourseButtonsContainterView {
+    @objc
+    fileprivate func didNetCourseCatalogButtonAction(sender: UIControl) {
+        delegate?.netCourseButtonsContainterViewDidNetCourseButton(containterView: self, sender: sender)
     }
 }
 
@@ -196,6 +213,7 @@ class XHNetCourseCell: UITableViewCell {
     
     lazy var buttonsView: XHNetCourseButtonsContainterView = {
         let cv = XHNetCourseButtonsContainterView()
+        cv.delegate = self
         cv.layer.cornerRadius = 5
         cv.layer.masksToBounds = true
         cv.backgroundColor = .white
@@ -236,5 +254,14 @@ extension XHNetCourseCell {
             make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_10)
             make.bottom.equalTo(contentView).priority(.low)
         }
+    }
+}
+
+extension XHNetCourseCell: XHNetCourseButtonsContainterViewDelegate {
+    func netCourseButtonsContainterViewDidNetCourseButton(containterView: XHNetCourseButtonsContainterView, sender: UIControl) {
+        guard let models = catalogs else {
+            return
+        }
+        router(withEventName: EVENT_CLICK_COURSE_BUTTON, userInfo: [MODEL_CLICK_COURSE_BUTTON : models[sender.tag]])
     }
 }
