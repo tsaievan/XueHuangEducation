@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-///< 首页分类的button
+// MARK: - 首页分类的button
 class XHCourseCatalogButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,8 +26,15 @@ class XHCourseCatalogButton: UIButton {
     
 }
 
-///< 首页课程分类的button的容器
+protocol XHCourseCatalogButtonsContainterViewDelegate: NSObjectProtocol {
+    func courseCatalogButtonsContainterViewDidClickCatalogButton(containterView: XHCourseCatalogButtonsContainterView, sender: UIButton)
+}
+
+// MARK: - 首页课程分类的button的容器
 class XHCourseCatalogButtonsContainterView: UIView {
+    
+    ///< 代理
+    var delegate: XHCourseCatalogButtonsContainterViewDelegate?
     ///< 最后一个按钮
     var lastButton: XHCourseCatalogButton?
     
@@ -44,6 +51,7 @@ class XHCourseCatalogButtonsContainterView: UIView {
             let buttonH = HEIGHT_HOMEPAGE_CATALOG_BUTTON
             for (index, model) in models.enumerated() {
                 let btn = XHCourseCatalogButton(type: .custom)
+                btn.tag = index
                 addSubview(btn)
                 btn.snp.makeConstraints({ (make) in
                     make.width.equalTo(buttonW)
@@ -64,6 +72,7 @@ class XHCourseCatalogButtonsContainterView: UIView {
                 btn.setTitle(model.courseClassName, for: .normal)
                 btn.setTitleColor(COLOR_CATALOG_BUTTON_TITLE_COLOR, for: .normal)
                 btn.titleLabel?.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
+                btn.addTarget(self, action: #selector(didClickCourseCatalogButtonAction), for: .touchUpInside)
                 if index == models.count - 1 { ///< 表明是最后一个按钮
                     lastButton = btn
                 }
@@ -82,11 +91,20 @@ class XHCourseCatalogButtonsContainterView: UIView {
     }
 }
 
+extension XHCourseCatalogButtonsContainterView {
+    @objc
+    fileprivate func didClickCourseCatalogButtonAction(sender: UIButton) {
+        delegate?.courseCatalogButtonsContainterViewDidClickCatalogButton(containterView: self, sender: sender)
+    }
+}
+
+// MARK: - XHCourseCatalogCell
 class XHCourseCatalogCell: UITableViewCell {
     
     lazy var buttonsView: XHCourseCatalogButtonsContainterView = {
         let cv = XHCourseCatalogButtonsContainterView()
         cv.backgroundColor = COLOR_HOMEPAGE_BACKGROUND
+        cv.delegate = self
         return cv
     }()
     
@@ -120,3 +138,15 @@ extension XHCourseCatalogCell {
         }
     }
 }
+
+extension XHCourseCatalogCell: XHCourseCatalogButtonsContainterViewDelegate {
+    func courseCatalogButtonsContainterViewDidClickCatalogButton(containterView: XHCourseCatalogButtonsContainterView, sender: UIButton) {
+        guard let models = catalogs else {
+            return
+        }
+        if models.count > sender.tag {
+            router(withEventName: EVENT_CLICK_CATALOG_BUTTON, userInfo: [MODEL_CLICK_CATALOG_BUTTON : models[sender.tag]])
+        }
+    }
+}
+

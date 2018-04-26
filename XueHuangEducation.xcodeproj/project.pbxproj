@@ -21,6 +21,7 @@
 		57633598208EBC0E009DAF86 /* XHCourseCatalogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57633597208EBC0E009DAF86 /* XHCourseCatalogCell.swift */; };
 		5763359A208ED343009DAF86 /* XHNetCourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57633599208ED343009DAF86 /* XHNetCourseCell.swift */; };
 		5763359C208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763359B208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift */; };
+		57779809209177D400BE74AE /* UIResponder+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57779808209177D400BE74AE /* UIResponder+XHExtension.swift */; };
 		5795B459208D7D8D00ECD58F /* XHResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5795B458208D7D8D00ECD58F /* XHResult.swift */; };
 		5795B45B208D805400ECD58F /* XHModifyPwdResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5795B45A208D805400ECD58F /* XHModifyPwdResult.swift */; };
 		579A1E75208DDE70004D4A11 /* XHTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579A1E74208DDE70004D4A11 /* XHTableView.swift */; };
@@ -77,6 +78,7 @@
 		57633597208EBC0E009DAF86 /* XHCourseCatalogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalogCell.swift; sourceTree = "<group>"; };
 		57633599208ED343009DAF86 /* XHNetCourseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourseCell.swift; sourceTree = "<group>"; };
 		5763359B208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalogSectionHeaderView.swift; sourceTree = "<group>"; };
+		57779808209177D400BE74AE /* UIResponder+XHExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+XHExtension.swift"; sourceTree = "<group>"; };
 		5795B458208D7D8D00ECD58F /* XHResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHResult.swift; sourceTree = "<group>"; };
 		5795B45A208D805400ECD58F /* XHModifyPwdResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHModifyPwdResult.swift; sourceTree = "<group>"; };
 		579A1E74208DDE70004D4A11 /* XHTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTableView.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				57A62AC420887A4D00C9D5D2 /* UILabel+XHExtension.swift */,
 				57A62AC520887A4D00C9D5D2 /* UIView+XHExtension.swift */,
 				57D5010A2089A92F00DD0DBD /* UIDevice+XHExtension.swift */,
+				57779808209177D400BE74AE /* UIResponder+XHExtension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 				571C801F208CC1E5005CD369 /* XHLoginMember.swift in Sources */,
 				572B8CA3208E098C005EC6CD /* XHNetCourse.swift in Sources */,
 				5795B459208D7D8D00ECD58F /* XHResult.swift in Sources */,
+				57779809209177D400BE74AE /* UIResponder+XHExtension.swift in Sources */,
 				57A62B182088B73400C9D5D2 /* XHLoginSegmentView.swift in Sources */,
 				572B8C9F208E0944005EC6CD /* XHCourseCatalog.swift in Sources */,
 				57CA59D3208B05D6004C6393 /* XHResetPwdNextViewController.swift in Sources */,

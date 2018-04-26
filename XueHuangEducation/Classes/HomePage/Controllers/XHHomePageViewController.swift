@@ -37,6 +37,14 @@ class XHHomePageViewController: XHBaseViewController {
         tableView.register(XHCourseCatalogCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_HOMEPAGE_CATALOG)
         tableView.register(XHNetCourseCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_HOMEPAGE_NETCOURSE)
     }
+    
+    override func router(withEventName eventName: String, userInfo: [String : Any]) {
+        if eventName == EVENT_CLICK_CATALOG_BUTTON {
+            guard let model = userInfo[MODEL_CLICK_CATALOG_BUTTON] as? XHCourseCatalog else {
+                return
+            }
+        }
+    }
 }
 
 extension XHHomePageViewController {
