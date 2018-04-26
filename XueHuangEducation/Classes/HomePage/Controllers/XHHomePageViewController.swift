@@ -52,7 +52,11 @@ class XHHomePageViewController: XHBaseViewController {
             let videoUrl = model.video else {
                 return
             }
-            print("\(videoUrl)")
+//            print("\(videoUrl)")
+            let url = URL(string: videoUrl)
+            let webVc = XHShowNetCourseViewController()
+            webVc.videoUrl = url
+            navigationController?.pushViewController(webVc, animated: true)
         }
     }
 }

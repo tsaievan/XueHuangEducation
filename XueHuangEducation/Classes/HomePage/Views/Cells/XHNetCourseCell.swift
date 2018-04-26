@@ -193,7 +193,6 @@ extension XHNetCourseButtonsContainterView {
     }
     
     fileprivate func makeConstraints() {
-        
         tipView.snp.makeConstraints { (make) in
             make.top.equalTo(MARGIN_GLOBAL_10)
             make.left.equalTo(MARGIN_GLOBAL_10)
