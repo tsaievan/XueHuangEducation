@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class XHNetCourse: NSObject, Mappable {
+class XHNetCourse: NSObject, Mappable, NSCoding {
     ///< 分类id
     var catalogId: String?
     ///< 课程讲师
@@ -75,5 +75,51 @@ class XHNetCourse: NSObject, Mappable {
         updateName        <- map["updateName"]
         video             <- map["video"]
         videoSrc          <- map["videoSrc"]
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        catalogId = aDecoder.decodeObject(forKey: "catalogId") as? String
+        catalogName = aDecoder.decodeObject(forKey: "catalogName") as? String
+        courseTeacher = aDecoder.decodeObject(forKey: "courseTeacher") as? String
+        creatBy = aDecoder.decodeObject(forKey: "creatBy") as? String
+        createDate = aDecoder.decodeObject(forKey: "createDate") as? XHCreatTime
+        createName = aDecoder.decodeObject(forKey: "createName") as? String
+        delDate = aDecoder.decodeObject(forKey: "delDate") as? Int
+        delflag = aDecoder.decodeObject(forKey: "delflag") as? Int
+        id = aDecoder.decodeObject(forKey: "id") as? String
+        isrecom = aDecoder.decodeObject(forKey: "isrecom") as? Bool
+        netCourseId = aDecoder.decodeObject(forKey: "netCourseId") as? String
+        netCourseName = aDecoder.decodeObject(forKey: "netCourseName") as? String
+        netCourseOrder = aDecoder.decodeObject(forKey: "netCourseOrder") as? Int
+        st = aDecoder.decodeObject(forKey: "st") as? Int
+        state = aDecoder.decodeObject(forKey: "state") as? Int
+        updateBy = aDecoder.decodeObject(forKey: "updateBy") as? String
+        updateDate = aDecoder.decodeObject(forKey: "updateDate") as? XHCreatTime
+        updateName = aDecoder.decodeObject(forKey: "updateName") as? String
+        video = aDecoder.decodeObject(forKey: "video") as? String
+        videoSrc = aDecoder.decodeObject(forKey: "videoSrc") as? String
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(catalogId, forKey: "catalogId")
+        aCoder.encode(catalogName, forKey: "catalogName")
+        aCoder.encode(courseTeacher, forKey: "courseTeacher")
+        aCoder.encode(creatBy, forKey: "creatBy")
+        aCoder.encode(createDate, forKey: "createDate")
+        aCoder.encode(createName, forKey: "createName")
+        aCoder.encode(delDate, forKey: "delDate")
+        aCoder.encode(delflag, forKey: "delflag")
+        aCoder.encode(id, forKey: "id")
+        aCoder.encode(isrecom, forKey: "isrecom")
+        aCoder.encode(netCourseId, forKey: "netCourseId")
+        aCoder.encode(netCourseName, forKey: "netCourseName")
+        aCoder.encode(netCourseOrder, forKey: "netCourseOrder")
+        aCoder.encode(st, forKey: "st")
+        aCoder.encode(state, forKey: "state")
+        aCoder.encode(updateBy, forKey: "updateBy")
+        aCoder.encode(updateDate, forKey: "updateDate")
+        aCoder.encode(updateName, forKey: "updateName")
+        aCoder.encode(video, forKey: "video")
+        aCoder.encode(videoSrc, forKey: "videoSrc")
     }
 }

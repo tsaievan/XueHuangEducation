@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class XHCourseCatalog: NSObject, Mappable {
+class XHCourseCatalog: NSObject, Mappable, NSCoding {
     ///< courseClassCode
     var courseClassCode: String?
     ///< 课程分类级别
@@ -63,5 +63,43 @@ class XHCourseCatalog: NSObject, Mappable {
         updateDate                <- map["updateDate"]
         updateName                <- map["updateName"]
         customName                <- map["customName"]
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        courseClassCode = aDecoder.decodeObject(forKey: "courseClassCode") as? String
+        courseClassLevel = aDecoder.decodeObject(forKey: "courseClassLevel") as? String
+        courseClassName = aDecoder.decodeObject(forKey: "courseClassName") as? String
+        courseClassOrder = aDecoder.decodeObject(forKey: "courseClassOrder") as? String
+        createBy = aDecoder.decodeObject(forKey: "createBy") as? String
+        createDate = aDecoder.decodeObject(forKey: "createDate") as? XHCreatTime
+        createName = aDecoder.decodeObject(forKey: "createName") as? String
+        delDate = aDecoder.decodeObject(forKey: "delDate") as? Int
+        delflag = aDecoder.decodeObject(forKey: "delflag") as? Int
+        iconAddr = aDecoder.decodeObject(forKey: "iconAddr") as? String
+        id = aDecoder.decodeObject(forKey: "id") as? String
+        pId = aDecoder.decodeObject(forKey: "pId") as? String
+        updateBy = aDecoder.decodeObject(forKey: "updateBy") as? String
+        updateDate = aDecoder.decodeObject(forKey: "updateDate") as? XHCreatTime
+        updateName = aDecoder.decodeObject(forKey: "updateName") as? String
+        customName = aDecoder.decodeObject(forKey: "customName") as? String
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(courseClassCode, forKey: "courseClassCode")
+        aCoder.encode(courseClassLevel, forKey: "courseClassLevel")
+        aCoder.encode(courseClassName, forKey: "courseClassName")
+        aCoder.encode(courseClassOrder, forKey: "courseClassOrder")
+        aCoder.encode(createBy, forKey: "createBy")
+        aCoder.encode(createDate, forKey: "createDate")
+        aCoder.encode(createName, forKey: "createName")
+        aCoder.encode(delDate, forKey: "delDate")
+        aCoder.encode(delflag, forKey: "delflag")
+        aCoder.encode(iconAddr, forKey: "iconAddr")
+        aCoder.encode(id, forKey: "id")
+        aCoder.encode(pId, forKey: "pId")
+        aCoder.encode(updateBy, forKey: "updateBy")
+        aCoder.encode(updateDate, forKey: "updateDate")
+        aCoder.encode(updateName, forKey: "updateName")
+        aCoder.encode(customName, forKey: "customName")
     }
 }
