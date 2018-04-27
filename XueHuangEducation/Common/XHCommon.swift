@@ -63,4 +63,15 @@ let MODEL_CLICK_CATALOG_BUTTON = "MODEL_CLICK_CATALOG_BUTTON"
 let MODEL_CLICK_COURSE_BUTTON = "MODEL_CLICK_COURSE_BUTTON"
 let CELL_FOR_COURSE_BUTTON = "CELL_FOR_COURSE_BUTTON"
 
+extension Notification.Name {
+    ///< 下载首页数据成功/失败的通知
+    public struct XHDownloadHomePageData {
+        static let success = Notification.Name(rawValue: "XHDownloadHomePageDataSuccess")
+        static let failue = Notification.Name(rawValue: "XHDownloadHomePageDataFailue")
+    }
+}
+
+let KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA = "KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA"
+let KEY_DOWNLOAD_HOME_PAGE_FAILUE_DATA = "KEY_DOWNLOAD_HOME_PAGE_FAILUE_DATA"
+
 

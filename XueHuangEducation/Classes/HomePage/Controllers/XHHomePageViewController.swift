@@ -9,6 +9,18 @@
 import UIKit
 import SnapKit
 
+///< 在app刚启动时就开始隐式加载数据
+extension AppDelegate {
+    func downloadHomepageData() {
+        XHHomePage.getHomePageList(success: { (data) in
+            NotificationCenter.default.post(name: NSNotification.Name.XHDownloadHomePageData.success, object: self, userInfo: [KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA : data])
+        }) { (errorReason) in
+            NotificationCenter.default.post(name: NSNotification.Name.XHDownloadHomePageData.failue, object: self, userInfo: [KEY_DOWNLOAD_HOME_PAGE_FAILUE_DATA : errorReason])
+        }
+    }
+}
+
+
 class XHHomePageViewController: XHBaseViewController {
     
     var dataSource: [[Any]]?
@@ -28,16 +40,10 @@ class XHHomePageViewController: XHBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        NotificationCenter.default.addObserver(self, selector: #selector(downloadHomePageDataSuccess), name: NSNotification.Name.XHDownloadHomePageData.success, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(downloadHomePageDataFailue), name: NSNotification.Name.XHDownloadHomePageData.failue, object: nil)
         XHAlertHUD.show(timeInterval: 0)
-        XHHomePage.getHomePageList(success: { (data) in
-            XHAlertHUD.dismiss()
-            self.dataSource = data
-            self.tableView.reloadData()
-        }) { (errorReason) in
-            XHAlertHUD.showError(withStatus: errorReason)
-        }
-        tableView.register(XHCourseCatalogCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_HOMEPAGE_CATALOG)
-        tableView.register(XHNetCourseCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_HOMEPAGE_NETCOURSE)
+
     }
     
     override func router(withEventName eventName: String, userInfo: [String : Any]) {
@@ -64,11 +70,14 @@ class XHHomePageViewController: XHBaseViewController {
     }
 }
 
+// MARK: - 设置UI
 extension XHHomePageViewController {
     fileprivate func setupUI() {
         navigationItem.title = "学煌教育网"
         view.backgroundColor = .white
         view.addSubview(tableView)
+        tableView.register(XHCourseCatalogCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_HOMEPAGE_CATALOG)
+        tableView.register(XHNetCourseCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_HOMEPAGE_NETCOURSE)
         makeConstraints()
     }
     
@@ -156,4 +165,26 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
         ///< 取消选中
         tableView.deselectRow(at: indexPath, animated: false)
     }   
+}
+
+extension XHHomePageViewController {
+    @objc
+    fileprivate func downloadHomePageDataSuccess(notification: Notification) {
+        XHAlertHUD.dismiss()
+        guard let info = notification.userInfo,
+        let data = info[KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA] as? [[Any]] else {
+            return
+        }
+        self.dataSource = data
+        self.tableView.reloadData()
+    }
+    
+    @objc
+    fileprivate func downloadHomePageDataFailue(notification: Notification) {
+        guard let info = notification.userInfo,
+            let errorReason = info[KEY_DOWNLOAD_HOME_PAGE_FAILUE_DATA] as? String else {
+                return
+        }
+        XHAlertHUD.showError(withStatus: errorReason)
+    }
 }

@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = XHTabBarController()
         window?.makeKeyAndVisible()
         setAlertHudAttributes()
+        downloadHomepageData()
         return true
     }
 
