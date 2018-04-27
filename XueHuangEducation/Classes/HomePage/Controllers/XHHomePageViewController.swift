@@ -17,6 +17,8 @@ class XHHomePageViewController: XHBaseViewController {
         let t = XHTableView(frame: .zero, style: .grouped)
         ///< 取出分割线
         t.separatorStyle = .none
+        t.showsVerticalScrollIndicator = false
+        t.showsHorizontalScrollIndicator = false
         t.dataSource = self
         t.delegate = self
         return t

@@ -24,6 +24,7 @@
 		57779809209177D400BE74AE /* UIResponder+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57779808209177D400BE74AE /* UIResponder+XHExtension.swift */; };
 		5795B459208D7D8D00ECD58F /* XHResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5795B458208D7D8D00ECD58F /* XHResult.swift */; };
 		5795B45B208D805400ECD58F /* XHModifyPwdResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5795B45A208D805400ECD58F /* XHModifyPwdResult.swift */; };
+		57978F882092B26500036159 /* XHPlayNetCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57978F872092B26500036159 /* XHPlayNetCourseViewController.swift */; };
 		579A1E75208DDE70004D4A11 /* XHTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579A1E74208DDE70004D4A11 /* XHTableView.swift */; };
 		57A2A6D52091A77900DD03BC /* XHWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2A6D42091A77900DD03BC /* XHWebViewController.swift */; };
 		57A2A6FC2091EAA400DD03BC /* XHShowNetCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2A6FB2091EAA400DD03BC /* XHShowNetCourseViewController.swift */; };
@@ -83,6 +84,7 @@
 		57779808209177D400BE74AE /* UIResponder+XHExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+XHExtension.swift"; sourceTree = "<group>"; };
 		5795B458208D7D8D00ECD58F /* XHResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHResult.swift; sourceTree = "<group>"; };
 		5795B45A208D805400ECD58F /* XHModifyPwdResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHModifyPwdResult.swift; sourceTree = "<group>"; };
+		57978F872092B26500036159 /* XHPlayNetCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHPlayNetCourseViewController.swift; sourceTree = "<group>"; };
 		579A1E74208DDE70004D4A11 /* XHTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTableView.swift; sourceTree = "<group>"; };
 		57A2A6D42091A77900DD03BC /* XHWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWebViewController.swift; sourceTree = "<group>"; };
 		57A2A6FB2091EAA400DD03BC /* XHShowNetCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHShowNetCourseViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			children = (
 				57A62B012088B73400C9D5D2 /* XHHomePageViewController.swift */,
 				57A2A6FB2091EAA400DD03BC /* XHShowNetCourseViewController.swift */,
+				57978F872092B26500036159 /* XHPlayNetCourseViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				57D5010920897BB100DD0DBD /* XHResetPwdViewController.swift in Sources */,
 				57A62AC920887A4D00C9D5D2 /* UIColor+XHExtension.swift in Sources */,
 				57A62ACC20887A4D00C9D5D2 /* UIView+XHExtension.swift in Sources */,
+				57978F882092B26500036159 /* XHPlayNetCourseViewController.swift in Sources */,
 				57CA59D9208B7511004C6393 /* XHRegistViewController.swift in Sources */,
 				5795B45B208D805400ECD58F /* XHModifyPwdResult.swift in Sources */,
 				571C801F208CC1E5005CD369 /* XHLoginMember.swift in Sources */,
