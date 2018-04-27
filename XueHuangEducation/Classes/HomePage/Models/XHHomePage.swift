@@ -19,6 +19,8 @@ class XHHomePage {
     ///   - success: 获取首页数据成功的回调
     ///   - failue: 获取首页数据失败的回调
     class func getHomePageList(success: XHGetHomePageListSuccess?, failue: XHGetHomePageListFailue?) {
+        
+        ///< 先从缓存里面取, 然后再发起网络请求
         XHNetwork.GET(url: URL_HOMEPAGE_LIST, params: nil, success: { (response) in
             guard let json = response as? [String : Any],
             let model = XHHomePageList(JSON: json) else {

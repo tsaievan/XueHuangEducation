@@ -28,6 +28,7 @@
 		579A1E75208DDE70004D4A11 /* XHTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579A1E74208DDE70004D4A11 /* XHTableView.swift */; };
 		57A2A6D52091A77900DD03BC /* XHWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2A6D42091A77900DD03BC /* XHWebViewController.swift */; };
 		57A2A6FC2091EAA400DD03BC /* XHShowNetCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2A6FB2091EAA400DD03BC /* XHShowNetCourseViewController.swift */; };
+		57A4E4FD209384C800F8BADE /* XHStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A4E4FC209384C800F8BADE /* XHStorageManager.swift */; };
 		57A62AC620887A4D00C9D5D2 /* Bundle+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62ABE20887A4D00C9D5D2 /* Bundle+XHExtension.swift */; };
 		57A62AC720887A4D00C9D5D2 /* String+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62ABF20887A4D00C9D5D2 /* String+XHExtension.swift */; };
 		57A62AC820887A4D00C9D5D2 /* UIButton+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62AC120887A4D00C9D5D2 /* UIButton+XHExtension.swift */; };
@@ -88,6 +89,7 @@
 		579A1E74208DDE70004D4A11 /* XHTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTableView.swift; sourceTree = "<group>"; };
 		57A2A6D42091A77900DD03BC /* XHWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWebViewController.swift; sourceTree = "<group>"; };
 		57A2A6FB2091EAA400DD03BC /* XHShowNetCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHShowNetCourseViewController.swift; sourceTree = "<group>"; };
+		57A4E4FC209384C800F8BADE /* XHStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHStorageManager.swift; sourceTree = "<group>"; };
 		57A62ABE20887A4D00C9D5D2 /* Bundle+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+XHExtension.swift"; sourceTree = "<group>"; };
 		57A62ABF20887A4D00C9D5D2 /* String+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+XHExtension.swift"; sourceTree = "<group>"; };
 		57A62AC120887A4D00C9D5D2 /* UIButton+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+XHExtension.swift"; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				57A62AF92088983200C9D5D2 /* XHNetwork.swift */,
 				57CA59D4208B1BD8004C6393 /* XHPreferenceKey.swift */,
 				57CA59D6208B1F8E004C6393 /* XHPreferenceManager.swift */,
+				57A4E4FC209384C800F8BADE /* XHStorageManager.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -521,22 +524,22 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-XueHuangEducation/Pods-XueHuangEducation-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Cache/Cache.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/YYCache/YYCache.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCache.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -599,6 +602,7 @@
 				57A62B1B2088B73400C9D5D2 /* XHNavigationController.swift in Sources */,
 				57A62AEF20887B5600C9D5D2 /* XHCommon.swift in Sources */,
 				57A62ACA20887A4D00C9D5D2 /* UIImage+XHExtension.swift in Sources */,
+				57A4E4FD209384C800F8BADE /* XHStorageManager.swift in Sources */,
 				57A62AEB20887B5600C9D5D2 /* AppDelegate.swift in Sources */,
 				57A62B142088B73400C9D5D2 /* XHHomePageViewController.swift in Sources */,
 			);

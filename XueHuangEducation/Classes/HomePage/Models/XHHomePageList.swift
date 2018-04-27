@@ -32,6 +32,6 @@ class XHHomePageList: NSObject, Mappable, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(courseCatalogs, forKey: "courseCatalogs")
         aCoder.encode(isRecomNetCourse, forKey: "isRecomNetCourse")
-        aCoder.encode(hotNetCourse, forKey: "hotNetCourse")
+        aCoder.encode(hotNetCourse, forKey: "courseCatalogs")
     }
 }

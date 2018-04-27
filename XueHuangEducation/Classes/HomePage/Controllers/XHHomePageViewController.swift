@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 
+
 ///< 在app刚启动时就开始隐式加载数据
 extension AppDelegate {
     func downloadHomepageData() {
@@ -175,8 +176,8 @@ extension XHHomePageViewController {
         let data = info[KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA] as? [[Any]] else {
             return
         }
-        self.dataSource = data
-        self.tableView.reloadData()
+        dataSource = data
+        tableView.reloadData()
     }
     
     @objc
@@ -185,6 +186,7 @@ extension XHHomePageViewController {
             let errorReason = info[KEY_DOWNLOAD_HOME_PAGE_FAILUE_DATA] as? String else {
                 return
         }
+        tableView.reloadData()
         XHAlertHUD.showError(withStatus: errorReason)
     }
 }
