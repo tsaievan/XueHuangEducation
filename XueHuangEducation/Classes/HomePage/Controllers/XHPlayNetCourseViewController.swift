@@ -11,7 +11,7 @@ import AVKit
 
 class XHPlayNetCourseViewController: XHBaseViewController {
     
-    var player: AVPlayerLayer
+//    var player: AVPlayerLayer
     
     override func viewDidLoad() {
         super.viewDidLoad()

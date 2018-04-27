@@ -8,5 +8,6 @@ pod 'SVProgressHUD'
 pod 'Alamofire'
 pod 'ObjectMapper'
 pod 'SDWebImage'
+pod 'MJRefresh'
 
 end
