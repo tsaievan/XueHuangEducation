@@ -9,5 +9,6 @@ pod 'Alamofire'
 pod 'ObjectMapper'
 pod 'SDWebImage'
 pod 'MJRefresh'
+pod 'YYCache'
 
 end
