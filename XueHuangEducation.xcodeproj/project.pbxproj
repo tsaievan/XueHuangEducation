@@ -190,6 +190,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		57A4E51E20946D8500F8BADE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		57A62ABD20887A4D00C9D5D2 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,8 +327,8 @@
 		57A62B0B2088B73400C9D5D2 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				57A4E51E20946D8500F8BADE /* Models */,
 				57A62B0C2088B73400C9D5D2 /* Controllers */,
-				57A62B102088B73400C9D5D2 /* Models */,
 				57A62B112088B73400C9D5D2 /* Views */,
 			);
 			path = Main;
@@ -336,13 +343,6 @@
 				57A62B0F2088B73400C9D5D2 /* XHTabBarController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		57A62B102088B73400C9D5D2 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		57A62B112088B73400C9D5D2 /* Views */ = {

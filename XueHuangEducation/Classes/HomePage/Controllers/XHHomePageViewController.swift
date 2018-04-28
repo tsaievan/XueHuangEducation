@@ -13,7 +13,9 @@ import MJRefresh
 extension AppDelegate {
     ///< 在app刚启动时就开始隐式加载数据
     func downloadHomepageData() {
+        XHAlertHUD.show(timeInterval: 0)
         XHHomePage.getHomePageList(success: { (data) in
+            XHPreferences[.HOMEPAGE_TOTAL_DATA_KEY] = data
             NotificationCenter.default.post(name: NSNotification.Name.XHDownloadHomePageData.success, object: self, userInfo: [KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA : data])
         }) { (errorReason) in
             NotificationCenter.default.post(name: NSNotification.Name.XHDownloadHomePageData.failue, object: self, userInfo: [KEY_DOWNLOAD_HOME_PAGE_FAILUE_DATA : errorReason])
@@ -46,7 +48,10 @@ class XHHomePageViewController: XHBaseViewController {
         setupUI()
         NotificationCenter.default.addObserver(self, selector: #selector(downloadHomePageDataSuccess), name: NSNotification.Name.XHDownloadHomePageData.success, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(downloadHomePageDataFailue), name: NSNotification.Name.XHDownloadHomePageData.failue, object: nil)
-        XHAlertHUD.show(timeInterval: 0)
+        if let data = XHPreferences[.HOMEPAGE_TOTAL_DATA_KEY] {
+            dataSource = data
+            tableView.reloadData()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -212,6 +217,10 @@ extension XHHomePageViewController {
         }) { (errorReason) in
             self.tableView.mj_header.endRefreshing()
             XHAlertHUD.showError(withStatus: errorReason)
+            if let data = XHPreferences[.HOMEPAGE_TOTAL_DATA_KEY] {
+                self.dataSource = data
+                self.tableView.reloadData()
+            }
         }
     }
 }

@@ -31,4 +31,5 @@ extension PreferenceKeys {
     static let USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY = XHPreferenceKey<XHLoginMember>("USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY")
     static let USERDEFAULT_LOGIN_ACCOUNT = XHPreferenceKey<String>("USERDEFAULT_LOGIN_ACCOUNT")
     static let USERDEFAULT_LOGIN_MOBILE = XHPreferenceKey<String>("USERDEFAULT_LOGIN_MOBILE")
+    static let HOMEPAGE_TOTAL_DATA_KEY = XHPreferenceKey<[[Any]]>("HOMEPAGE_TOTAL_DATA_KEY")
 }

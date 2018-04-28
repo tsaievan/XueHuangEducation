@@ -152,4 +152,22 @@ extension XHPreferenceManager {
             }
         }
     }
+    
+    subscript(key: XHPreferenceKey<[[Any]]>) -> [[Any]]? {
+        get {
+            var object: [[Any]]?
+            if let data = defaults.data(forKey: key.rawValue) {
+                object = NSKeyedUnarchiver.unarchiveObject(with: data) as? [[Any]]
+            }
+            return object
+        }
+        set {
+            if let object = newValue {
+                let data = NSKeyedArchiver.archivedData(withRootObject: object)
+                defaults.set(data, forKey: key.rawValue)
+            }else {
+                defaults.removeObject(forKey: key.rawValue)
+            }
+        }
+    }
 }
