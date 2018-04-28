@@ -9,7 +9,26 @@
 import UIKit
 import ObjectMapper
 
-class XHCourseCatalog: NSObject, Mappable, NSCoding {
+enum XHCourseCatalogCodingKeys: CodingKey {
+    case courseClassCode
+    case courseClassLevel
+    case courseClassName
+    case courseClassOrder
+    case createBy
+    case createDate
+    case createName
+    case delDate
+    case delflag
+    case iconAddr
+    case id
+    case pId
+    case updateBy
+    case updateDate
+    case updateName
+    case customName
+}
+
+class XHCourseCatalog: XHBaseModel {
     ///< courseClassCode
     var courseClassCode: String?
     ///< 课程分类级别
@@ -44,9 +63,11 @@ class XHCourseCatalog: NSObject, Mappable, NSCoding {
     var customName: String?
     
     required init?(map: Map) {
+        super.init(map: map)
     }
     
-    func mapping(map: Map) {
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         courseClassCode           <- map["courseClassCode"]
         courseClassLevel          <- map["courseClassLevel"]
         courseClassName           <- map["courseClassName"]
@@ -66,6 +87,7 @@ class XHCourseCatalog: NSObject, Mappable, NSCoding {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         courseClassCode = aDecoder.decodeObject(forKey: "courseClassCode") as? String
         courseClassLevel = aDecoder.decodeObject(forKey: "courseClassLevel") as? String
         courseClassName = aDecoder.decodeObject(forKey: "courseClassName") as? String
@@ -84,7 +106,8 @@ class XHCourseCatalog: NSObject, Mappable, NSCoding {
         customName = aDecoder.decodeObject(forKey: "customName") as? String
     }
     
-    func encode(with aCoder: NSCoder) {
+    override func encode(with aCoder: NSCoder) {
+        super.encode(with: aCoder)
         aCoder.encode(courseClassCode, forKey: "courseClassCode")
         aCoder.encode(courseClassLevel, forKey: "courseClassLevel")
         aCoder.encode(courseClassName, forKey: "courseClassName")
@@ -101,5 +124,47 @@ class XHCourseCatalog: NSObject, Mappable, NSCoding {
         aCoder.encode(updateDate, forKey: "updateDate")
         aCoder.encode(updateName, forKey: "updateName")
         aCoder.encode(customName, forKey: "customName")
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        let vaules = try? decoder.container(keyedBy: XHCourseCatalogCodingKeys.self)
+        courseClassCode = try vaules?.decode(String.self, forKey: .courseClassCode)
+        courseClassLevel = try vaules?.decode(String.self, forKey: .courseClassLevel)
+        courseClassName = try vaules?.decode(String.self, forKey: .courseClassName)
+        courseClassOrder = try vaules?.decode(String.self, forKey: .courseClassOrder)
+        createBy = try vaules?.decode(String.self, forKey: .createBy)
+        createDate = try vaules?.decode(XHCreatTime.self, forKey: .createDate)
+        createName = try vaules?.decode(String.self, forKey: .createName)
+        delDate = try vaules?.decode(Int.self, forKey: .delDate)
+        delflag = try vaules?.decode(Int.self, forKey: .delflag)
+        iconAddr = try vaules?.decode(String.self, forKey: .iconAddr)
+        id = try vaules?.decode(String.self, forKey: .id)
+        pId = try vaules?.decode(String.self, forKey: .pId)
+        updateBy = try vaules?.decode(String.self, forKey: .updateBy)
+        updateDate = try vaules?.decode(XHCreatTime.self, forKey: .updateDate)
+        updateName = try vaules?.decode(String.self, forKey: .updateName)
+        customName = try vaules?.decode(String.self, forKey: .customName)
+    }
+    
+    override func encode(to encoder: Encoder) throws {
+        try? super.encode(to: encoder)
+        var courseCatalog = encoder.container(keyedBy: XHCourseCatalogCodingKeys.self)
+        try courseCatalog.encode(courseClassCode, forKey: .courseClassCode)
+        try courseCatalog.encode(courseClassLevel, forKey: .courseClassLevel)
+        try courseCatalog.encode(courseClassName, forKey: .courseClassName)
+        try courseCatalog.encode(courseClassOrder, forKey: .courseClassOrder)
+        try courseCatalog.encode(createBy, forKey: .createBy)
+        try courseCatalog.encode(createDate, forKey: .createDate)
+        try courseCatalog.encode(createName, forKey: .createName)
+        try courseCatalog.encode(delDate, forKey: .delDate)
+        try courseCatalog.encode(delflag, forKey: .delflag)
+        try courseCatalog.encode(iconAddr, forKey: .iconAddr)
+        try courseCatalog.encode(id, forKey: .id)
+        try courseCatalog.encode(pId, forKey: .pId)
+        try courseCatalog.encode(updateBy, forKey: .updateBy)
+        try courseCatalog.encode(updateDate, forKey: .updateDate)
+        try courseCatalog.encode(updateName, forKey: .updateName)
+        try courseCatalog.encode(customName, forKey: .customName)
     }
 }

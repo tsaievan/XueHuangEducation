@@ -29,6 +29,7 @@
 		57A2A6D52091A77900DD03BC /* XHWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2A6D42091A77900DD03BC /* XHWebViewController.swift */; };
 		57A2A6FC2091EAA400DD03BC /* XHShowNetCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2A6FB2091EAA400DD03BC /* XHShowNetCourseViewController.swift */; };
 		57A4E4FD209384C800F8BADE /* XHStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A4E4FC209384C800F8BADE /* XHStorageManager.swift */; };
+		57A4E51D20944A9600F8BADE /* XHBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A4E51C20944A9600F8BADE /* XHBaseModel.swift */; };
 		57A62AC620887A4D00C9D5D2 /* Bundle+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62ABE20887A4D00C9D5D2 /* Bundle+XHExtension.swift */; };
 		57A62AC720887A4D00C9D5D2 /* String+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62ABF20887A4D00C9D5D2 /* String+XHExtension.swift */; };
 		57A62AC820887A4D00C9D5D2 /* UIButton+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62AC120887A4D00C9D5D2 /* UIButton+XHExtension.swift */; };
@@ -90,6 +91,7 @@
 		57A2A6D42091A77900DD03BC /* XHWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWebViewController.swift; sourceTree = "<group>"; };
 		57A2A6FB2091EAA400DD03BC /* XHShowNetCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHShowNetCourseViewController.swift; sourceTree = "<group>"; };
 		57A4E4FC209384C800F8BADE /* XHStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHStorageManager.swift; sourceTree = "<group>"; };
+		57A4E51C20944A9600F8BADE /* XHBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHBaseModel.swift; sourceTree = "<group>"; };
 		57A62ABE20887A4D00C9D5D2 /* Bundle+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+XHExtension.swift"; sourceTree = "<group>"; };
 		57A62ABF20887A4D00C9D5D2 /* String+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+XHExtension.swift"; sourceTree = "<group>"; };
 		57A62AC120887A4D00C9D5D2 /* UIButton+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+XHExtension.swift"; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 		57A62B102088B73400C9D5D2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				57A4E51C20944A9600F8BADE /* XHBaseModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 				574E5A1C2089CEE2009EAF93 /* XHGetPasswordResult.swift in Sources */,
 				57A62B1C2088B73400C9D5D2 /* XHTabBarController.swift in Sources */,
 				57098817208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift in Sources */,
+				57A4E51D20944A9600F8BADE /* XHBaseModel.swift in Sources */,
 				57A2A6FC2091EAA400DD03BC /* XHShowNetCourseViewController.swift in Sources */,
 				57D5010920897BB100DD0DBD /* XHResetPwdViewController.swift in Sources */,
 				57A62AC920887A4D00C9D5D2 /* UIColor+XHExtension.swift in Sources */,

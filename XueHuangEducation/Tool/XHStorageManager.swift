@@ -9,7 +9,7 @@
 import UIKit
 import Cache
 
-let XHStorage = XHStorageManager.shared
+let XHStorage = XHStorageManager.shared.storage
 
 class XHStorageManager: NSObject {
     
@@ -32,9 +32,3 @@ class XHStorageManager: NSObject {
     }
 }
 
-extension XHStorageManager {
-    public func setObject<T: Codable>(_ object: T, forKey key: String,
-                                      expiry: Expiry? = nil) throws {
-        try storage?.setObject(object, forKey: key, expiry: expiry)
-    }
-}

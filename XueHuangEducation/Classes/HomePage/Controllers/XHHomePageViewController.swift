@@ -13,18 +13,20 @@ import MJRefresh
 extension AppDelegate {
     ///< 在app刚启动时就开始隐式加载数据
     func downloadHomepageData() {
-        XHHomePage.getHomePageList(success: { (data) in
-            NotificationCenter.default.post(name: NSNotification.Name.XHDownloadHomePageData.success, object: self, userInfo: [KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA : data])
-        }) { (errorReason) in
-            NotificationCenter.default.post(name: NSNotification.Name.XHDownloadHomePageData.failue, object: self, userInfo: [KEY_DOWNLOAD_HOME_PAGE_FAILUE_DATA : errorReason])
-        }
+        
+//        XHHomePage.getHomePageList(success: { (data) in
+//            try? XHStorage?.setObject(data, forKey: KEY_DOWNLOAD_HOME_PAGE_DATA_FOR_CACHE)
+////            NotificationCenter.default.post(name: NSNotification.Name.XHDownloadHomePageData.success, object: self, userInfo: [KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA : data])
+//        }) { (errorReason) in
+//            NotificationCenter.default.post(name: NSNotification.Name.XHDownloadHomePageData.failue, object: self, userInfo: [KEY_DOWNLOAD_HOME_PAGE_FAILUE_DATA : errorReason])
+//        }
     }
 }
 
 
-class XHHomePageViewController: XHBaseViewController {
+class XHHomePageViewController<T: Codable>: XHBaseViewController {
     
-    var dataSource: [[Any]]?
+    var dataSource: [[T]]?
     
     lazy var tableView: XHTableView = {
         let t = XHTableView(frame: .zero, style: .grouped)
@@ -44,9 +46,15 @@ class XHHomePageViewController: XHBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        NotificationCenter.default.addObserver(self, selector: #selector(downloadHomePageDataSuccess), name: NSNotification.Name.XHDownloadHomePageData.success, object: nil)
+        guard let storage = XHStorage,
+            let data = try? storage.object(ofType: [[T]].self, forKey: KEY_DOWNLOAD_HOME_PAGE_DATA_FOR_CACHE) else {
+                return
+        }
+        dataSource = data
+        tableView.reloadData()
+//        NotificationCenter.default.addObserver(self, selector: #selector(downloadHomePageDataSuccess), name: NSNotification.Name.XHDownloadHomePageData.success, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(downloadHomePageDataFailue), name: NSNotification.Name.XHDownloadHomePageData.failue, object: nil)
-        XHAlertHUD.show(timeInterval: 0)
+//        XHAlertHUD.show(timeInterval: 0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -116,11 +124,17 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
         }
         if indexPath.section == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_HOMEPAGE_CATALOG, for: indexPath)
-            guard let newCell = cell as? XHCourseCatalogCell,
-            let catalogs = dataArray[indexPath.section] as? [XHCourseCatalog] else {
+            guard let newCell = cell as? XHCourseCatalogCell else {
                 return UITableViewCell()
             }
-            newCell.catalogs = catalogs
+            var mtArray = [XHCourseCatalog]()
+            for catalog in dataArray[indexPath.section] {
+                guard let model = catalog as? XHCourseCatalog else {
+                    continue
+                }
+                mtArray.append(model)
+            }
+            newCell.catalogs = mtArray
             return newCell
         }else {
             cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_HOMEPAGE_NETCOURSE, for: indexPath)
@@ -181,7 +195,7 @@ extension XHHomePageViewController {
     fileprivate func downloadHomePageDataSuccess(notification: Notification) {
         XHAlertHUD.dismiss()
         guard let info = notification.userInfo,
-        let data = info[KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA] as? [[Any]] else {
+        let data = info[KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA] as? [[XHBaseModel]] else {
             return
         }
         dataSource = data
@@ -205,13 +219,19 @@ extension XHHomePageViewController {
     ///< 下拉刷新
     @objc
     fileprivate func pullToRefreshAction() {
-        XHHomePage.getHomePageList(success: { (data) in
-            self.tableView.mj_header.endRefreshing()
-            self.dataSource = data
-            self.tableView.reloadData()
-        }) { (errorReason) in
-            self.tableView.mj_header.endRefreshing()
-            XHAlertHUD.showError(withStatus: errorReason)
-        }
+        XHHomePage.getHomePageList(success: { () in
+            <#code#>
+        }, failue: <#T##XHHomePage.XHGetHomePageListFailue?##XHHomePage.XHGetHomePageListFailue?##(String) -> ()#>)
+//        XHHomePage.getHomePageList(success: { (data) in
+//            guard let codableData = data as? [[XHBaseModel]] else {
+//                return
+//            }
+//            self.tableView.mj_header.endRefreshing()
+//            self.dataSource = codableData
+//            self.tableView.reloadData()
+//        }) { (errorReason) in
+//            self.tableView.mj_header.endRefreshing()
+//            XHAlertHUD.showError(withStatus: errorReason)
+//        }
     }
 }

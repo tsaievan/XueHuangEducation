@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class XHCreatTime: NSObject, NSCoding {
+class XHCreatTime: NSObject, NSCoding, Codable {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(date, forKey: "date")
         aCoder.encode(day, forKey: "day")

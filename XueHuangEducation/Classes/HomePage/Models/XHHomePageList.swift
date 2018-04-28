@@ -9,27 +9,54 @@
 import UIKit
 import ObjectMapper
 
-class XHHomePageList: NSObject, Mappable, NSCoding {
+enum XHHomePageListCodingKeys: CodingKey {
+    case courseCatalogs
+    case isRecomNetCourse
+    case hotNetCourse
+}
+
+class XHHomePageList: XHBaseModel {
+    
     var courseCatalogs: [XHCourseCatalog]?
     var isRecomNetCourse: [XHNetCourse]?
     var hotNetCourse: [XHNetCourse]?
     
     required init?(map: Map) {
+        super.init(map: map)
     }
     
-    func mapping(map: Map) {
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         courseCatalogs         <- map["courseCatalogs"]
         isRecomNetCourse       <- map["isRecomNetCourse"]
         hotNetCourse           <- map["hotNetCourse"]
     }
     
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        let vaules = try? decoder.container(keyedBy: XHHomePageListCodingKeys.self)
+        courseCatalogs = try vaules?.decode([XHCourseCatalog].self, forKey: .courseCatalogs)
+        isRecomNetCourse = try vaules?.decode([XHNetCourse].self, forKey: .isRecomNetCourse)
+        hotNetCourse = try vaules?.decode([XHNetCourse].self, forKey: .hotNetCourse)
+    }
+    
+    override func encode(to encoder: Encoder) throws {
+        try? super.encode(to: encoder)
+        var homePageList = encoder.container(keyedBy: XHHomePageListCodingKeys.self)
+        try homePageList.encode(courseCatalogs, forKey: .courseCatalogs)
+        try homePageList.encode(isRecomNetCourse, forKey: .isRecomNetCourse)
+        try homePageList.encode(hotNetCourse, forKey: .hotNetCourse)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         courseCatalogs = aDecoder.decodeObject(forKey: "courseCatalogs") as? [XHCourseCatalog]
         isRecomNetCourse = aDecoder.decodeObject(forKey: "isRecomNetCourse") as? [XHNetCourse]
         hotNetCourse = aDecoder.decodeObject(forKey: "hotNetCourse") as? [XHNetCourse]
     }
     
-    func encode(with aCoder: NSCoder) {
+    override func encode(with aCoder: NSCoder) {
+        super.encode(with: aCoder)
         aCoder.encode(courseCatalogs, forKey: "courseCatalogs")
         aCoder.encode(isRecomNetCourse, forKey: "isRecomNetCourse")
         aCoder.encode(hotNetCourse, forKey: "courseCatalogs")
