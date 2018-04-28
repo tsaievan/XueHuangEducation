@@ -8,10 +8,10 @@
 
 import UIKit
 import SnapKit
+import MJRefresh
 
-
-///< 在app刚启动时就开始隐式加载数据
 extension AppDelegate {
+    ///< 在app刚启动时就开始隐式加载数据
     func downloadHomepageData() {
         XHHomePage.getHomePageList(success: { (data) in
             NotificationCenter.default.post(name: NSNotification.Name.XHDownloadHomePageData.success, object: self, userInfo: [KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA : data])
@@ -34,6 +34,9 @@ class XHHomePageViewController: XHBaseViewController {
         t.showsHorizontalScrollIndicator = false
         t.dataSource = self
         t.delegate = self
+        
+        ///< 设置上下拉刷新的事件
+        t.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(pullToRefreshAction))
         return t
     }()
     
@@ -44,7 +47,11 @@ class XHHomePageViewController: XHBaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(downloadHomePageDataSuccess), name: NSNotification.Name.XHDownloadHomePageData.success, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(downloadHomePageDataFailue), name: NSNotification.Name.XHDownloadHomePageData.failue, object: nil)
         XHAlertHUD.show(timeInterval: 0)
-
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     override func router(withEventName eventName: String, userInfo: [String : Any]) {
@@ -168,6 +175,7 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
     }   
 }
 
+// MARK: - 处理通知事件
 extension XHHomePageViewController {
     @objc
     fileprivate func downloadHomePageDataSuccess(notification: Notification) {
@@ -188,5 +196,22 @@ extension XHHomePageViewController {
         }
         tableView.reloadData()
         XHAlertHUD.showError(withStatus: errorReason)
+    }
+}
+
+// MARK: - 事件处理
+extension XHHomePageViewController {
+    
+    ///< 下拉刷新
+    @objc
+    fileprivate func pullToRefreshAction() {
+        XHHomePage.getHomePageList(success: { (data) in
+            self.tableView.mj_header.endRefreshing()
+            self.dataSource = data
+            self.tableView.reloadData()
+        }) { (errorReason) in
+            self.tableView.mj_header.endRefreshing()
+            XHAlertHUD.showError(withStatus: errorReason)
+        }
     }
 }

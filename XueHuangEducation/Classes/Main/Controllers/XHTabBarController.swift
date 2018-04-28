@@ -87,6 +87,8 @@ extension XHTabBarController: UITabBarControllerDelegate {
                 let alert = UIAlertController(title: "确定要退出登录吗?", message: nil, preferredStyle: .alert)
                 ///< 退出登录后清空用户数据
                 let action = UIAlertAction(title: "确定", style: .destructive, handler: { (action) in
+                    
+                    ///< 这里要调用一个登出接口
                     XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
                     let tabBarController = XHTabBarController()
                     UIApplication.shared.keyWindow?.rootViewController = tabBarController
