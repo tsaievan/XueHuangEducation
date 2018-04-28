@@ -27,3 +27,7 @@ let URL_APP_LOGIN_GET_PASSWORD = "xhweb/appLogin.do?getPassword"
 
 ///< 28. 修改密码
 let URL_APP_LOGIN_ALTER_PASSWORD = "xhweb/appLogin.do?alterPassword"
+
+///< 29. 解密播放视频链接
+let URL_APP_DECRYPT_VIDEO_PLAYER_URL = "xhweb/appController.do?getDecryptPlayMp4Url"
+

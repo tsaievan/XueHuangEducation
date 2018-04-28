@@ -29,6 +29,7 @@
 		57A2A6D52091A77900DD03BC /* XHWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2A6D42091A77900DD03BC /* XHWebViewController.swift */; };
 		57A2A6FC2091EAA400DD03BC /* XHShowNetCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2A6FB2091EAA400DD03BC /* XHShowNetCourseViewController.swift */; };
 		57A4E4FD209384C800F8BADE /* XHStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A4E4FC209384C800F8BADE /* XHStorageManager.swift */; };
+		57A4E520209479AF00F8BADE /* XHDecrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A4E51F209479AF00F8BADE /* XHDecrypt.swift */; };
 		57A62AC620887A4D00C9D5D2 /* Bundle+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62ABE20887A4D00C9D5D2 /* Bundle+XHExtension.swift */; };
 		57A62AC720887A4D00C9D5D2 /* String+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62ABF20887A4D00C9D5D2 /* String+XHExtension.swift */; };
 		57A62AC820887A4D00C9D5D2 /* UIButton+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62AC120887A4D00C9D5D2 /* UIButton+XHExtension.swift */; };
@@ -90,6 +91,7 @@
 		57A2A6D42091A77900DD03BC /* XHWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHWebViewController.swift; sourceTree = "<group>"; };
 		57A2A6FB2091EAA400DD03BC /* XHShowNetCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHShowNetCourseViewController.swift; sourceTree = "<group>"; };
 		57A4E4FC209384C800F8BADE /* XHStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHStorageManager.swift; sourceTree = "<group>"; };
+		57A4E51F209479AF00F8BADE /* XHDecrypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHDecrypt.swift; sourceTree = "<group>"; };
 		57A62ABE20887A4D00C9D5D2 /* Bundle+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+XHExtension.swift"; sourceTree = "<group>"; };
 		57A62ABF20887A4D00C9D5D2 /* String+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+XHExtension.swift"; sourceTree = "<group>"; };
 		57A62AC120887A4D00C9D5D2 /* UIButton+XHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+XHExtension.swift"; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				57A62AF520887F0300C9D5D2 /* XHAlertHUD.swift */,
+				57A4E51F209479AF00F8BADE /* XHDecrypt.swift */,
 				57A62AF7208888E400C9D5D2 /* XHRegExTool.swift */,
 				57A62AF92088983200C9D5D2 /* XHNetwork.swift */,
 				57CA59D4208B1BD8004C6393 /* XHPreferenceKey.swift */,
@@ -597,6 +600,7 @@
 				571C801D208CC12C005CD369 /* XHLoginBaseResult.swift in Sources */,
 				57CA59D5208B1BD8004C6393 /* XHPreferenceKey.swift in Sources */,
 				5763359C208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift in Sources */,
+				57A4E520209479AF00F8BADE /* XHDecrypt.swift in Sources */,
 				57A62AFC2088AD2F00C9D5D2 /* XHNetworkConstant.swift in Sources */,
 				57A62B152088B73400C9D5D2 /* XHLoginViewController.swift in Sources */,
 				57A62B1B2088B73400C9D5D2 /* XHNavigationController.swift in Sources */,

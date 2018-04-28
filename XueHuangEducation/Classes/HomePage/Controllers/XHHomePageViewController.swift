@@ -75,7 +75,7 @@ class XHHomePageViewController: XHBaseViewController {
             let indexPath = tableView.indexPath(for: cell) else {
                 return
             }
-            if indexPath.section == 1 {
+            if indexPath.section == 1 { ///< 推荐课程
                 print("\(videoUrl)")
                 let url = URL(string: videoUrl)
                 let webVc = XHShowNetCourseViewController()
@@ -84,12 +84,16 @@ class XHHomePageViewController: XHBaseViewController {
                 navigationController?.pushViewController(webVc, animated: true)
             }
             
-            if indexPath.section == 2 {            
+            if indexPath.section == 2 { ///< 热门课程
                 print("\(videoUrl)")
                 let playerVc = XHPlayNetCourseViewController()
-                playerVc.videoUrl = videoUrl
-                playerVc.hidesBottomBarWhenPushed = true
-                navigationController?.pushViewController(playerVc, animated: true)
+                XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: { (videoUrlString) in
+                    playerVc.videoUrl = videoUrlString
+                    playerVc.hidesBottomBarWhenPushed = true
+                    self.navigationController?.pushViewController(playerVc, animated: true)
+                }, failue: { (errorReason) in
+                    
+                })
             }
         }
     }

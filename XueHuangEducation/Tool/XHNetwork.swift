@@ -24,4 +24,16 @@ class XHNetwork {
             }
         }
     }
+    
+    class func GET_ResponseString(url: String, params: [String : Any]?, success: SuccessBlock?, failue: FailueBlock?) {
+        Alamofire.request((URL_BASE as NSString).appendingPathComponent(url), method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseString { (response) in
+            switch response.result {
+            case .success(let value):
+                success?(value)
+            case .failure(let error):
+                failue?(error)
+            }
+        }
+    }
 }
+

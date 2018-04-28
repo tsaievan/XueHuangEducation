@@ -16,9 +16,11 @@ class XHPlayNetCourseViewController: AVPlayerViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let videoStr = videoUrl,
-        let url = URL(string: videoStr) else {
-            return
+        guard let videoStr = videoUrl as NSString?,
+            ///< 防止转换url失败, 必须添加下面的代码
+            let newStr = videoStr.addingPercentEscapes(using: String.Encoding.utf8.rawValue),
+            let url = URL(string: newStr) else {
+                return
         }
         player = AVPlayer(url: url)
         showsPlaybackControls = true
