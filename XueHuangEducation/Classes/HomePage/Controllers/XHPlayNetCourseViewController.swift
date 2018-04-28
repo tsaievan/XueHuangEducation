@@ -8,13 +8,20 @@
 
 import UIKit
 import AVKit
+import AVFoundation
 
-class XHPlayNetCourseViewController: XHBaseViewController {
+class XHPlayNetCourseViewController: AVPlayerViewController {
     
-//    var player: AVPlayerLayer
+    var videoUrl: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        guard let videoStr = videoUrl,
+        let url = URL(string: videoStr) else {
+            return
+        }
+        player = AVPlayer(url: url)
+        showsPlaybackControls = true
+        videoGravity = AVLayerVideoGravity.resizeAspect.rawValue
     }
 }

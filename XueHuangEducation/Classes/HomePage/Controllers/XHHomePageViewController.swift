@@ -70,15 +70,27 @@ class XHHomePageViewController: XHBaseViewController {
         ///< 点击推荐课程/热门课程的按钮
         if eventName == EVENT_CLICK_COURSE_BUTTON {
             guard let model = userInfo[MODEL_CLICK_COURSE_BUTTON] as? XHNetCourse,
-            let videoUrl = model.video else {
+            let cell = userInfo[CELL_FOR_COURSE_BUTTON] as? XHNetCourseCell,
+            let videoUrl = model.video,
+            let indexPath = tableView.indexPath(for: cell) else {
                 return
             }
-            print("\(videoUrl)")
-            let url = URL(string: videoUrl)
-            let webVc = XHShowNetCourseViewController()
-            webVc.hidesBottomBarWhenPushed = true
-            webVc.videoUrl = url
-            navigationController?.pushViewController(webVc, animated: true)
+            if indexPath.section == 1 {
+                print("\(videoUrl)")
+                let url = URL(string: videoUrl)
+                let webVc = XHShowNetCourseViewController()
+                webVc.hidesBottomBarWhenPushed = true
+                webVc.videoUrl = url
+                navigationController?.pushViewController(webVc, animated: true)
+            }
+            
+            if indexPath.section == 2 {            
+                print("\(videoUrl)")
+                let playerVc = XHPlayNetCourseViewController()
+                playerVc.videoUrl = videoUrl
+                playerVc.hidesBottomBarWhenPushed = true
+                navigationController?.pushViewController(playerVc, animated: true)
+            }
         }
     }
 }

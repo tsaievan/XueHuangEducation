@@ -261,6 +261,7 @@ extension XHNetCourseCell: XHNetCourseButtonsContainterViewDelegate {
         guard let models = catalogs else {
             return
         }
-        router(withEventName: EVENT_CLICK_COURSE_BUTTON, userInfo: [MODEL_CLICK_COURSE_BUTTON : models[sender.tag]])
+        router(withEventName: EVENT_CLICK_COURSE_BUTTON, userInfo: [MODEL_CLICK_COURSE_BUTTON : models[sender.tag],
+                                                                    CELL_FOR_COURSE_BUTTON: self])
     }
 }
