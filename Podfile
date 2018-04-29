@@ -10,5 +10,6 @@ pod 'ObjectMapper'
 pod 'SDWebImage'
 pod 'MJRefresh'
 pod 'Cache'
+pod 'ZFPlayer'
 
 end

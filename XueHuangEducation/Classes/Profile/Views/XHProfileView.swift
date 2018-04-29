@@ -140,7 +140,6 @@ extension XHProfileView {
         buttonContainerView.snp.makeConstraints { (make) in
             make.top.equalTo(bannerView.snp.bottom)
             make.left.right.equalTo(self)
-//            make.height.equalTo(200)
             make.bottom.equalTo(myTeachButton).offset(MARGIN_GLOBAL_30).priority(.low)
         }
         
