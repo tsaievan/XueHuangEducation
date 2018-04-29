@@ -31,7 +31,7 @@ class XHLoginView: UIView {
     ///< 选择账号登录还是手机登录的segment
     lazy var segmentView: XHLoginSegmentView = {
         let s = XHLoginSegmentView(frame: CGRect.zero)
-        s.delegate = self
+        s.xh_delegate = self
         return s
     }()
     
@@ -55,19 +55,19 @@ class XHLoginView: UIView {
     ///< 账号登录的view
     lazy var accountLoginView: XHLoginDetailView = {
        let av = XHLoginDetailView(loginType: .accountLogin)
-        av.delegate = self
+        av.xh_delegate = self
         return av
     }()
     
     ///< 手机登录的view
     lazy var phoneLoginView: XHLoginDetailView = {
         let pv = XHLoginDetailView(loginType: .phoneLogin)
-        pv.delegate = self
+        pv.xh_delegate = self
         return pv
     }()
     
     ///< loginView的代理
-    weak var delegate: XHLoginViewDelegate?
+    weak var xh_delegate: XHLoginViewDelegate?
     
     ///< 登录类型
     var loginType: XHLoginViewType?
@@ -170,25 +170,25 @@ extension XHLoginView: XHLoginDetailViewDelegate {
     func loginDetailViewDidClickLoginButton(loginDetailView: XHLoginDetailView, sender: UIButton) {
         loginType = loginDetailView.viewType
         info = loginDetailView.info
-        delegate?.loginViewDidLogin?(loginView: self)
+        xh_delegate?.loginViewDidLogin?(loginView: self)
     }
     
     func loginDetailViewDidClickGetAuthButton(loginDetailView: XHLoginDetailView, sender: UIButton) {
         loginType = loginDetailView.viewType
         info = loginDetailView.info
-        delegate?.loginViewDidGetAuthCode?(loginView: self)
+        xh_delegate?.loginViewDidGetAuthCode?(loginView: self)
     }
     
     func loginDetailViewDidClickRegistButton(loginDetailView: XHLoginDetailView, sender: UIButton) {
         loginType = loginDetailView.viewType
         info = loginDetailView.info
-        delegate?.loginViewDidRegist?(loginView: self)
+        xh_delegate?.loginViewDidRegist?(loginView: self)
     }
     
     func loginDetailViewDidClickResetPwdButton(loginDetailView: XHLoginDetailView, sender: UIButton) {
         loginType = loginDetailView.viewType
         info = loginDetailView.info
-        delegate?.loginViewDidRestPassword?(loginView: self)
+        xh_delegate?.loginViewDidRestPassword?(loginView: self)
     }
 }
 

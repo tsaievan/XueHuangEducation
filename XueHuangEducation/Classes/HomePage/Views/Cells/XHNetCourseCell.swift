@@ -99,7 +99,7 @@ protocol XHNetCourseButtonsContainterViewDelegate: NSObjectProtocol {
 ///< 首页课程分类的button的容器
 class XHNetCourseButtonsContainterView: UIView {
     
-    var delegate: XHNetCourseButtonsContainterViewDelegate?
+    var xh_delegate: XHNetCourseButtonsContainterViewDelegate?
     
     lazy var tipView: UIView = {
         let t = UIView()
@@ -181,7 +181,7 @@ class XHNetCourseButtonsContainterView: UIView {
 extension XHNetCourseButtonsContainterView {
     @objc
     fileprivate func didNetCourseCatalogButtonAction(sender: UIControl) {
-        delegate?.netCourseButtonsContainterViewDidNetCourseButton(containterView: self, sender: sender)
+        xh_delegate?.netCourseButtonsContainterViewDidNetCourseButton(containterView: self, sender: sender)
     }
 }
 
@@ -212,7 +212,7 @@ class XHNetCourseCell: UITableViewCell {
     
     lazy var buttonsView: XHNetCourseButtonsContainterView = {
         let cv = XHNetCourseButtonsContainterView()
-        cv.delegate = self
+        cv.xh_delegate = self
         cv.layer.cornerRadius = 5
         cv.layer.masksToBounds = true
         cv.backgroundColor = .white

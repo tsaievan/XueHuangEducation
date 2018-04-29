@@ -136,7 +136,7 @@ class XHRegistView: UIView {
         return false
     }
     
-    weak var delegate: XHRegistViewDelegate?
+    weak var xh_delegate: XHRegistViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -268,7 +268,7 @@ extension XHRegistView {
     
     ///< 点击`去登录`label
     @objc fileprivate func didTaphaveAccountLabelAction(sender: UITapGestureRecognizer) {
-        delegate?.registViewDidTaphaveAccountLabel?(registView: self, sender: sender)
+        xh_delegate?.registViewDidTaphaveAccountLabel?(registView: self, sender: sender)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

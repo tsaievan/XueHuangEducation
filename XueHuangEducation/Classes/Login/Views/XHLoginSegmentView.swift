@@ -15,7 +15,7 @@ protocol XHLoginSegmentViewDelegate: NSObjectProtocol {
 
 class XHLoginSegmentView: UIView {
     ///< SegmentView的代理
-    weak var delegate: XHLoginSegmentViewDelegate?
+    weak var xh_delegate: XHLoginSegmentViewDelegate?
     
     ///< 账号登录选择按钮
     lazy var accountButton: UIButton = {
@@ -135,7 +135,7 @@ extension XHLoginSegmentView {
         UIView.animate(withDuration: 0.2) {
             self.layoutIfNeeded()
         }
-        delegate?.loginSegmentViewDidClick(sender: sender, segmentView: self)
+        xh_delegate?.loginSegmentViewDidClick(sender: sender, segmentView: self)
     }
 }
 

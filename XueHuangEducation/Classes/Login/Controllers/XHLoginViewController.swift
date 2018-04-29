@@ -13,7 +13,7 @@ class XHLoginViewController: XHBaseViewController {
     ///< 大的登录页面
     lazy var loginView: XHLoginView = {
         let view = XHLoginView()
-        view.delegate = self
+        view.xh_delegate = self
         return view
     }()
     

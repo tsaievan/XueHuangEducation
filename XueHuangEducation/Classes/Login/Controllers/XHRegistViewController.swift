@@ -12,7 +12,7 @@ class XHRegistViewController: XHBaseViewController {
     
     lazy var registView: XHRegistView = {
         let rv = XHRegistView()
-        rv.delegate = self
+        rv.xh_delegate = self
         return rv
     }()
 

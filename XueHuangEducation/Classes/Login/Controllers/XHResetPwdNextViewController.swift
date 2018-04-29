@@ -14,7 +14,7 @@ class XHResetPwdNextViewController: XHBaseViewController {
     lazy var resetPwdView: XHLoginDetailView = {
         let view = XHLoginDetailView(loginType: .reinput)
         view.backgroundColor = .white
-        view.delegate = self
+        view.xh_delegate = self
         return view
     }()
     

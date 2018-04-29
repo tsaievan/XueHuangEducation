@@ -34,7 +34,7 @@ protocol XHCourseCatalogButtonsContainterViewDelegate: NSObjectProtocol {
 class XHCourseCatalogButtonsContainterView: UIView {
     
     ///< 代理
-    var delegate: XHCourseCatalogButtonsContainterViewDelegate?
+    var xh_delegate: XHCourseCatalogButtonsContainterViewDelegate?
     ///< 最后一个按钮
     var lastButton: XHCourseCatalogButton?
     
@@ -94,7 +94,7 @@ class XHCourseCatalogButtonsContainterView: UIView {
 extension XHCourseCatalogButtonsContainterView {
     @objc
     fileprivate func didClickCourseCatalogButtonAction(sender: UIButton) {
-        delegate?.courseCatalogButtonsContainterViewDidClickCatalogButton(containterView: self, sender: sender)
+        xh_delegate?.courseCatalogButtonsContainterViewDidClickCatalogButton(containterView: self, sender: sender)
     }
 }
 
@@ -104,7 +104,7 @@ class XHCourseCatalogCell: UITableViewCell {
     lazy var buttonsView: XHCourseCatalogButtonsContainterView = {
         let cv = XHCourseCatalogButtonsContainterView()
         cv.backgroundColor = COLOR_HOMEPAGE_BACKGROUND
-        cv.delegate = self
+        cv.xh_delegate = self
         return cv
     }()
     

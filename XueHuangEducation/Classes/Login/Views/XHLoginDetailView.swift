@@ -103,7 +103,7 @@ class XHLoginDetailView: UIView {
     weak var countDownTimer: Timer?
     
     ///< 代理
-    weak var delegate: XHLoginDetailViewDelegate?
+    weak var xh_delegate: XHLoginDetailViewDelegate?
     
     ///< 再次发送验证码剩余时间
     var remainTime: Int = 60
@@ -315,12 +315,12 @@ extension XHLoginDetailView {
 extension XHLoginDetailView {
     ///< 点击了注册按钮
     @objc fileprivate func didClickRegistButtonAction(sender: UIButton) {
-        delegate?.loginDetailViewDidClickRegistButton?(loginDetailView: self, sender: sender)
+        xh_delegate?.loginDetailViewDidClickRegistButton?(loginDetailView: self, sender: sender)
     }
     
     ///< 点击了找回账号按钮
     @objc fileprivate func didClickFindPwdButtonAction(sender: UIButton) {
-        delegate?.loginDetailViewDidClickResetPwdButton?(loginDetailView: self, sender: sender)
+        xh_delegate?.loginDetailViewDidClickResetPwdButton?(loginDetailView: self, sender: sender)
     }
     
     ///< 点击了发送验证码按钮
@@ -336,7 +336,7 @@ extension XHLoginDetailView {
         ///< 不给连续点击的机会
         sender.isEnabled = false
         info = (userAccountTextField.text!, nil)
-        delegate?.loginDetailViewDidClickGetAuthButton?(loginDetailView: self, sender: sender)
+        xh_delegate?.loginDetailViewDidClickGetAuthButton?(loginDetailView: self, sender: sender)
     }
     
     ///< 点击了登录按钮
@@ -360,7 +360,7 @@ extension XHLoginDetailView {
             }
         }
         info = (userAccountTextField.text!, passwordTextField.text!)
-        delegate?.loginDetailViewDidClickLoginButton?(loginDetailView: self, sender: sender)
+        xh_delegate?.loginDetailViewDidClickLoginButton?(loginDetailView: self, sender: sender)
     }
 }
 
