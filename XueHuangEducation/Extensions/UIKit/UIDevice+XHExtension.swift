@@ -23,4 +23,32 @@ extension UIDevice {
         }
         return false
     }
+    
+    class var iPhone8: Bool {
+        if UIScreen.main.bounds.height == 667 {
+            return true
+        }
+        return false
+    }
+    
+    class var iPhone8Plus: Bool {
+        if UIScreen.main.bounds.height == 736 {
+            return true
+        }
+        return false
+    }
+    
+    class var horizontalScale: CGFloat {
+        if iPhoneSE {
+            return 1.0
+        }else if iPhone8 {
+            return 375 / 320
+        }else if iPhone8Plus {
+            return 414 / 320
+        }else if iPhoneX {
+            return 375 / 320
+        }else {
+            return 1.0
+        }
+    }
 }

@@ -22,6 +22,8 @@ let COLOR_CATALOG_BUTTON_TITLE_COLOR: UIColor = UIColor(hexColor: "#333333")
 let COLOR_HOMEPAGE_TIP_LABEL_COLOR: UIColor = UIColor(hexColor: "#555555")
 let COLOR_HOMEPAGE_COURSE_ICON_BLUE: UIColor = UIColor(hexColor: "#27C1F4")
 
+let COLOR_PROFILE_BUTTON_TITLE_COLOR: UIColor = UIColor(hexColor: "#333333")
+
 
 ///< 全局的数字
 let FONT_SIZE_13: CGFloat = 13.0
@@ -34,12 +36,16 @@ let CELL_IDENTIFIER_HOMEPAGE_NETCOURSE = "CELL_IDENTIFIER_HOMEPAGE_NETCOURSE"
 
 ///< 一些魔法数字, 边距等
 ///< 全局
+let MARGIN_GLOBAL_5: CGFloat = 5
 let MARGIN_GLOBAL_10: CGFloat = 10
 let MARGIN_GLOBAL_14: CGFloat = 14
 let MARGIN_GLOBAL_15: CGFloat = 15
 let MARGIN_GLOBAL_20: CGFloat = 20
 let MARGIN_GLOBAL_25: CGFloat = 25
+let MARGIN_GLOBAL_30: CGFloat = 30
+let MARGIN_GLOBAL_44: CGFloat = 44 ///< 一般navigationBar的高度
 let MARGIN_GLOBAL_60: CGFloat = 60
+
 
 ///< 首页
 let SEPERATOR_LINE_HEIGHT: CGFloat = 1.5 ///< 分割线高度
