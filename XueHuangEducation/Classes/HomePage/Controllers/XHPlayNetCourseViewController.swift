@@ -9,52 +9,84 @@
 import UIKit
 import AVKit
 import AVFoundation
+import ZFPlayer
 
-extension AppDelegate {
-    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        guard let allow = allowRotation else {
-            return .portrait
-        }
-        return allow ? .landscape : .portrait
-    }
-}
-
-class XHPlayNetCourseViewController: AVPlayerViewController {
+class XHPlayNetCourseViewController: XHBaseViewController {
     
-    var videoUrl: String?
+    lazy var imageView: UIImageView = {
+        let imageV = UIImageView()
+        imageV.image = UIImage(named: "image_video_background")
+        imageV.contentMode = .scaleAspectFill
+        return imageV
+    }()
+    
+    var model: XHNetCourse? {
+        didSet {
+            XHAlertHUD.dismiss()
+            imageView.isHidden = true
+            guard let videoModel = model,
+                let videoString = videoModel.video,
+                ///< 防止转换url失败, 必须添加下面的代码
+                let newStr = (videoString as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue),
+                let url = URL(string: newStr) else {
+                    return
+            }
+            
+            let title = (model?.netCourseName ?? "") + " " + (model?.courseTeacher ?? "")
+            self.navigationItem.title = model?.netCourseName ?? "展示视频"
+            playerModel.title = title
+            playerModel.videoURL = url
+            playerModel.placeholderImage = UIImage(named: "image_video_background")
+            playerView.playerControlView(controlView, playerModel: playerModel)
+            playerView.autoPlayTheVideo()
+        }
+    }
+    
+    lazy var playerView: ZFPlayerView = {
+        let pl = ZFPlayerView()
+        return pl
+    }()
+    
+    lazy var controlView: ZFPlayerControlView = {
+        let ctrl = ZFPlayerControlView()
+        return ctrl
+    }()
+    
+    lazy var playerModel: ZFPlayerModel = {
+        let model = ZFPlayerModel()
+        model.fatherView = view
+        return model
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "全屏", style: UIBarButtonItemStyle.plain, target: self, action: #selector(didClickFullScreenBarButton))
-        
-
-
-        guard let videoStr = videoUrl as NSString?,
-            ///< 防止转换url失败, 必须添加下面的代码
-            let newStr = videoStr.addingPercentEscapes(using: String.Encoding.utf8.rawValue),
-            let url = URL(string: newStr) else {
-                return
-        }
-        player = AVPlayer(url: url)
-        showsPlaybackControls = true
-        videoGravity = AVLayerVideoGravity.resizeAspect.rawValue
-    }
-    
-    override var shouldAutorotate: Bool {
-        return true
+        setupUI()
     }
 }
 
+
+// MARK: - 设置UI
 extension XHPlayNetCourseViewController {
-    @objc
-    fileprivate func didClickFullScreenBarButton(sender: UIBarButtonItem) {
-        if let appdelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            appdelegate.allowRotation = true
-        }
-        sender.title = ""
+    fileprivate func setupUI() {
+        XHAlertHUD.showWhite(timeInterval: 0, title: "正在加载视频")
+        view.backgroundColor = .darkGray
+        view.addSubview(playerView)
+        view.addSubview(imageView)
     }
     
+    fileprivate func makeConstaints() {
+        playerView.snp.makeConstraints { (make) in
+            make.top.equalTo(view).offset(20);
+            make.left.right.equalTo(view);
+            make.height.equalTo(playerView.snp.width).multipliedBy(9.0/16.0)
+        }
+        
+        imageView.snp.makeConstraints { (make) in
+            make.edges.equalTo(view)
+        }
+    }
 }
+
+
 
 

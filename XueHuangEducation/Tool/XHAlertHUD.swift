@@ -36,6 +36,20 @@ class XHAlertHUD {
         SVProgressHUD.dismiss(withDelay: timeInterval)
     }
     
+    class func showWhite(timeInterval: TimeInterval, title: String?) {
+        if let string = title {
+            SVProgressHUD.show(withStatus: string)
+        }else {
+            SVProgressHUD.show()
+        }
+        SVProgressHUD.setBackgroundColor(UIColor.white.withAlphaComponent(0.85))
+        SVProgressHUD.setForegroundColor(UIColor.darkGray)
+        if timeInterval <= 0 {
+            return
+        }
+        SVProgressHUD.dismiss(withDelay: timeInterval)
+    }
+    
     class func isVisible() -> Bool {
         return SVProgressHUD.isVisible()
     }

@@ -98,11 +98,12 @@ class XHHomePageViewController: XHBaseViewController {
             if indexPath.section == 2 { ///< 热门课程
                 print("\(videoUrl)")
                 let playerVc = XHPlayNetCourseViewController()
+                playerVc.hidesBottomBarWhenPushed = true
+                navigationController?.pushViewController(playerVc, animated: true)
                 // FIXME: - 这里要先跳转, 而不是请求成功后跳转
                 XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: { (videoUrlString) in
-                    playerVc.videoUrl = videoUrlString
-                    playerVc.hidesBottomBarWhenPushed = true
-                    self.navigationController?.pushViewController(playerVc, animated: true)
+                    model.video = videoUrlString
+                    playerVc.model = model
                 }, failue: { (errorReason) in
                     XHAlertHUD.showError(withStatus: errorReason)
                 })
