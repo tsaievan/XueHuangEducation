@@ -10,7 +10,7 @@ import UIKit
 
 typealias XHGetHomePageListSuccess = ([[Any]]) -> ()
 typealias XHGetHomePageListFailue = (String) -> ()
-typealias XHGetTeachCourseListSuccess = ([[Any]]) -> ()
+typealias XHGetTeachCourseListSuccess = (XHThemeList) -> ()
 typealias XHGetTeachCourseListFailue = (String) -> ()
 
 class XHHomePage {
@@ -24,8 +24,8 @@ class XHHomePage {
         
         XHNetwork.GET(url: URL_HOMEPAGE_LIST, params: nil, success: { (response) in
             guard let json = response as? [String : Any],
-            let model = XHHomePageList(JSON: json) else {
-                return
+                let model = XHHomePageList(JSON: json) else {
+                    return
             }
             ///< 转成模型之后开始处理数据
             var mtArray = [[Any]]()
@@ -110,8 +110,11 @@ class XHHomePage {
             "courseClassId" : courseId
         ]
         XHNetwork.GET(url: URL_TO_MOBILE_NET_COURSE, params: params, success: { (response) in
-            
-            
+            guard let responseJson = response as? [String : Any],
+                let model = XHThemeList(JSON: responseJson) else {
+                    return
+            }
+            success?(model)
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {

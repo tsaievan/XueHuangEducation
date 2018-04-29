@@ -68,7 +68,7 @@ class XHHomePageViewController: XHBaseViewController {
                 return
             }
             XHHomePage.getTeachCourseList(withCourseName: courseName, courseId: courseId, success: { (response) in
-                
+                print("\(response)")
             }, failue: { (error) in
                 XHAlertHUD.showError(withStatus: error)
             })

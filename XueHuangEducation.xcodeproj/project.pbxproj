@@ -10,6 +10,7 @@
 		266AEA3266FE904F74331219 /* Pods_XueHuangEducation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24AEB8EE5EBF7EF9D075D04 /* Pods_XueHuangEducation.framework */; };
 		57098817208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57098816208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift */; };
 		570D3A7120958A72005E03FF /* XHThemeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570D3A7020958A72005E03FF /* XHThemeList.swift */; };
+		570D3A7620959587005E03FF /* XHProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570D3A7520959587005E03FF /* XHProfileView.swift */; };
 		571C801D208CC12C005CD369 /* XHLoginBaseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C801C208CC12C005CD369 /* XHLoginBaseResult.swift */; };
 		571C801F208CC1E5005CD369 /* XHLoginMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C801E208CC1E5005CD369 /* XHLoginMember.swift */; };
 		571C8021208CC488005CD369 /* XHAccountLoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C8020208CC488005CD369 /* XHAccountLoginResult.swift */; };
@@ -73,6 +74,7 @@
 		2E63452E6AB35C4E372E7C60 /* Pods-XueHuangEducation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XueHuangEducation.release.xcconfig"; path = "Pods/Target Support Files/Pods-XueHuangEducation/Pods-XueHuangEducation.release.xcconfig"; sourceTree = "<group>"; };
 		57098816208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalogSectionFooterView.swift; sourceTree = "<group>"; };
 		570D3A7020958A72005E03FF /* XHThemeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHThemeList.swift; sourceTree = "<group>"; };
+		570D3A7520959587005E03FF /* XHProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHProfileView.swift; sourceTree = "<group>"; };
 		571C801C208CC12C005CD369 /* XHLoginBaseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHLoginBaseResult.swift; sourceTree = "<group>"; };
 		571C801E208CC1E5005CD369 /* XHLoginMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHLoginMember.swift; sourceTree = "<group>"; };
 		571C8020208CC488005CD369 /* XHAccountLoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHAccountLoginResult.swift; sourceTree = "<group>"; };
@@ -152,6 +154,29 @@
 				E24AEB8EE5EBF7EF9D075D04 /* Pods_XueHuangEducation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		570D3A722095941B005E03FF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57A62B132088B73400C9D5D2 /* XHProfileViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		570D3A732095941B005E03FF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		570D3A742095941B005E03FF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				570D3A7520959587005E03FF /* XHProfileView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		57633596208EBBD4009DAF86 /* Cells */ = {
@@ -362,7 +387,9 @@
 		57A62B122088B73400C9D5D2 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				57A62B132088B73400C9D5D2 /* XHProfileViewController.swift */,
+				570D3A722095941B005E03FF /* Controllers */,
+				570D3A732095941B005E03FF /* Models */,
+				570D3A742095941B005E03FF /* Views */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -601,6 +628,7 @@
 				57A62AC720887A4D00C9D5D2 /* String+XHExtension.swift in Sources */,
 				57A62B1A2088B73400C9D5D2 /* XHBaseViewController.swift in Sources */,
 				57A62AC620887A4D00C9D5D2 /* Bundle+XHExtension.swift in Sources */,
+				570D3A7620959587005E03FF /* XHProfileView.swift in Sources */,
 				571C801D208CC12C005CD369 /* XHLoginBaseResult.swift in Sources */,
 				57CA59D5208B1BD8004C6393 /* XHPreferenceKey.swift in Sources */,
 				5763359C208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift in Sources */,
