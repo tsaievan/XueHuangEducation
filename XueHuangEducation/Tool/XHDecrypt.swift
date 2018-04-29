@@ -14,7 +14,6 @@ typealias XHGetDecryptedPlayerUrlFailue = (String) -> ()
 ///< 解密播放/下载视频链接
 class XHDecrypt {
 
-    
     class func getDecryptedPlayerUrl(withOriginalUrl originalUrl: String, success: XHGetDecryptedPlayerUrlSuccess?, failue: XHGetDecryptedPlayerUrlFailue?) {
         var params: [String: Any]
         params = [
@@ -30,9 +29,8 @@ class XHDecrypt {
             if err.code == -1009 {
                 failue?("网络连接失败")
             }else {
-                failue?("发送验证码失败")
+                failue?("获取加密视频链接失败")
             }
         }
     }
-
 }

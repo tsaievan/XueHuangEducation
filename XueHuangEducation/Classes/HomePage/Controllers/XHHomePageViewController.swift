@@ -62,9 +62,16 @@ class XHHomePageViewController: XHBaseViewController {
     override func router(withEventName eventName: String, userInfo: [String : Any]) {
         ///< 点击了分类的按钮
         if eventName == EVENT_CLICK_CATALOG_BUTTON {
-            guard let model = userInfo[MODEL_CLICK_CATALOG_BUTTON] as? XHCourseCatalog else {
+            guard let model = userInfo[MODEL_CLICK_CATALOG_BUTTON] as? XHCourseCatalog,
+            let courseName = model.courseClassName,
+            let courseId = model.id else {
                 return
             }
+            XHHomePage.getTeachCourseList(withCourseName: courseName, courseId: courseId, success: { (response) in
+                
+            }, failue: { (error) in
+                XHAlertHUD.showError(withStatus: error)
+            })
         }
         
         ///< 点击推荐课程/热门课程的按钮
@@ -87,12 +94,13 @@ class XHHomePageViewController: XHBaseViewController {
             if indexPath.section == 2 { ///< 热门课程
                 print("\(videoUrl)")
                 let playerVc = XHPlayNetCourseViewController()
+                // FIXME: - 这里要先跳转, 而不是请求成功后跳转
                 XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: { (videoUrlString) in
                     playerVc.videoUrl = videoUrlString
                     playerVc.hidesBottomBarWhenPushed = true
                     self.navigationController?.pushViewController(playerVc, animated: true)
                 }, failue: { (errorReason) in
-                    
+                    XHAlertHUD.showError(withStatus: errorReason)
                 })
             }
         }

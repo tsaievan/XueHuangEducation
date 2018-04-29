@@ -10,6 +10,8 @@ import UIKit
 
 typealias XHGetHomePageListSuccess = ([[Any]]) -> ()
 typealias XHGetHomePageListFailue = (String) -> ()
+typealias XHGetTeachCourseListSuccess = ([[Any]]) -> ()
+typealias XHGetTeachCourseListFailue = (String) -> ()
 
 class XHHomePage {
     
@@ -20,7 +22,6 @@ class XHHomePage {
     ///   - failue: 获取首页数据失败的回调
     class func getHomePageList(success: XHGetHomePageListSuccess?, failue: XHGetHomePageListFailue?) {
         
-        ///< 先从缓存里面取, 然后再发起网络请求
         XHNetwork.GET(url: URL_HOMEPAGE_LIST, params: nil, success: { (response) in
             guard let json = response as? [String : Any],
             let model = XHHomePageList(JSON: json) else {
@@ -86,6 +87,31 @@ class XHHomePage {
                 }
             }
             success?(mtArray)
+        }) { (error) in
+            let err = error as NSError
+            if err.code == -1009 {
+                failue?("网络连接失败")
+            }else {
+                failue?("数据加载失败")
+            }
+        }
+    }
+    
+    /// 获取讲题页面的数据
+    ///
+    /// - Parameters:
+    ///   - withCourseName: 课程名称
+    ///   - courseId: 课程Id
+    ///   - success: 获取数据成功的回调
+    ///   - failue: 获取数据失败的回调
+    class func getTeachCourseList(withCourseName: String, courseId: String, success: XHGetTeachCourseListSuccess?, failue: XHGetTeachCourseListFailue?) {
+        let params = [
+            "courseClassName" : withCourseName,
+            "courseClassId" : courseId
+        ]
+        XHNetwork.GET(url: URL_TO_MOBILE_NET_COURSE, params: params, success: { (response) in
+            
+            
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {
