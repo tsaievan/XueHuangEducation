@@ -100,7 +100,6 @@ class XHHomePageViewController: XHBaseViewController {
                 let playerVc = XHPlayNetCourseViewController()
                 playerVc.hidesBottomBarWhenPushed = true
                 navigationController?.pushViewController(playerVc, animated: true)
-                // FIXME: - 这里要先跳转, 而不是请求成功后跳转
                 XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: { (videoUrlString) in
                     model.video = videoUrlString
                     playerVc.model = model

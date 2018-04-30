@@ -36,7 +36,6 @@ class XHPlayNetCourseViewController: XHBaseViewController {
             self.navigationItem.title = model?.netCourseName ?? "展示视频"
             playerModel.title = title
             playerModel.videoURL = url
-            playerModel.placeholderImage = UIImage(named: "image_video_background")
             playerView.playerControlView(controlView, playerModel: playerModel)
             playerView.autoPlayTheVideo()
         }
@@ -61,6 +60,7 @@ class XHPlayNetCourseViewController: XHBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        XHAlertHUD.showStatus(status: "正在加载视频", timeInterval: 0)
     }
 }
 
@@ -68,8 +68,8 @@ class XHPlayNetCourseViewController: XHBaseViewController {
 // MARK: - 设置UI
 extension XHPlayNetCourseViewController {
     fileprivate func setupUI() {
-        XHAlertHUD.showWhite(timeInterval: 0, title: "正在加载视频")
-        view.backgroundColor = .darkGray
+        
+        view.backgroundColor = .black
         view.addSubview(playerView)
         view.addSubview(imageView)
     }
