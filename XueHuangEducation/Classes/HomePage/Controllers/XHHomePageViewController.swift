@@ -54,11 +54,6 @@ class XHHomePageViewController: XHBaseViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
-    
     override func router(withEventName eventName: String, userInfo: [String : Any]) {
         ///< 点击了分类的按钮
         if eventName == EVENT_CLICK_CATALOG_BUTTON {

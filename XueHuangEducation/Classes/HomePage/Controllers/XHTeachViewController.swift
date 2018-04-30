@@ -40,12 +40,7 @@ class XHTeachViewController: XHTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.register(XHNetCourseDetailCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_NETCOURSE_DETAIL)
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,15 +69,26 @@ class XHTeachViewController: XHTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        
-        
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_NETCOURSE_DETAIL, for: indexPath)
+        guard let newCell = cell as? XHNetCourseDetailCell,
+        let datas = dataSource else {
+            return UITableViewCell()
+        }
+        let sectionModel = datas[indexPath.section]
+        guard let models = sectionModel.simpleNetCourses else {
+            return UITableViewCell()
+        }
+        newCell.info = (models[indexPath.row], sectionModel.iconAddr)
+        return newCell
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
+    
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        return nil
+//    }
 }
 
 extension XHTeachViewController: SDCycleScrollViewDelegate {

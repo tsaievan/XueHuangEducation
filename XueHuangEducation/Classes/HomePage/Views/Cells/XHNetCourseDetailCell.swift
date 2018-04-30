@@ -7,10 +7,22 @@
 //
 
 import UIKit
+import SDWebImage
 
 class XHNetCourseDetailCell: UITableViewCell {
     
-    
+    var info: (model: XHSimpleNetCourse, iconArr: String?)? {
+        didSet {
+//            iconImageView.sd_setImage(with: URL(string: info?.iconArr ?? ""), placeholderImage: nil, options: , completed: nil)
+            guard let imageArr = info?.iconArr,
+            let newStr = (imageArr as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue) else {
+                return
+            }
+            
+            iconImageView.sd_setImage(with: URL(string: newStr), placeholderImage: nil, options: SDWebImageOptions.retryFailed, completed: nil)
+            
+        }
+    }
     
     lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
