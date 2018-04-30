@@ -7,23 +7,31 @@
 //
 
 import UIKit
+import pop
 
 class XHCatalogListSegmentView: UIView {
     
+    ///< 水平方向的缩放系数
     let horizontalScale = UIDevice.horizontalScale
+    
+    ///< 上一个被点击的button
+    var lastButton: XHButton?
     
     lazy var myTeachButton: XHButton = {
         let btn = XHButton(withButtonImage: "image_profile_myTeach", title: "网校讲题", titleFont: FONT_SIZE_13, gap: 0)
+        btn.addTarget(self, action: #selector(didClickSegmentViewButtonAction), for: .touchUpInside)
         return btn
     }()
     
     lazy var myThemeButton: XHButton = {
         let btn = XHButton(withButtonImage: "image_profile_myTheme", title: "在线做题", titleFont: FONT_SIZE_13, gap: 0)
+        btn.addTarget(self, action: #selector(didClickSegmentViewButtonAction), for: .touchUpInside)
         return btn
     }()
     
     lazy var myQuestionButton: XHButton = {
         let btn = XHButton(withButtonImage: "image_profile_myQuestion", title: "在线问答", titleFont: FONT_SIZE_13, gap: 0)
+        btn.addTarget(self, action: #selector(didClickSegmentViewButtonAction), for: .touchUpInside)
         return btn
     }()
     
@@ -45,6 +53,7 @@ extension XHCatalogListSegmentView {
         addSubview(myThemeButton)
         addSubview(myQuestionButton)
         makeConstraints()
+        didClickSegmentViewButtonAction(sender: myTeachButton)
     }
     
     fileprivate func makeConstraints() {
@@ -62,6 +71,25 @@ extension XHCatalogListSegmentView {
         myQuestionButton.snp.makeConstraints { (make) in
             make.left.equalTo(myThemeButton.snp.right).offset(MARGIN_GLOBAL_44 * horizontalScale)
             make.top.width.equalTo(myThemeButton)
+        }
+    }
+}
+
+extension XHCatalogListSegmentView {
+    @objc
+    fileprivate func didClickSegmentViewButtonAction(sender: XHButton) {
+        guard let bundleName = Bundle.bundleName,
+        let kls = NSClassFromString(bundleName + "." + "XHButton") else {
+            return
+        }
+        for button in subviews {
+            if button.isKind(of: kls) {
+                let scaleAnim: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPViewScaleXY)
+                let scale = (sender == button) ? 1 : 0.8
+                scaleAnim.toValue = NSValue(cgPoint: CGPoint(x: scale, y: scale))
+                scaleAnim.duration = 0.2
+                button.pop_add(scaleAnim, forKey: nil)
+            }
         }
     }
 }

@@ -11,5 +11,6 @@ pod 'SDWebImage'
 pod 'MJRefresh'
 pod 'Cache'
 pod 'ZFPlayer'
+pod 'pop'
 
 end
