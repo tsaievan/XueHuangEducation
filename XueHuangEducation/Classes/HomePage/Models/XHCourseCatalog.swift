@@ -43,26 +43,29 @@ class XHCourseCatalog: NSObject, Mappable, NSCoding {
     ///< 自定义名称
     var customName: String?
     
+    var simpleNetCourses: [XHSimpleNetCourse]?
+    
     required init?(map: Map) {
     }
     
     func mapping(map: Map) {
-        courseClassCode           <- map["courseClassCode"]
-        courseClassLevel          <- map["courseClassLevel"]
-        courseClassName           <- map["courseClassName"]
-        courseClassOrder          <- map["courseClassOrder"]
-        createBy                  <- map["createBy"]
-        createDate                <- map["createDate"]
-        createName                <- map["createName"]
-        delDate                   <- map["delDate"]
-        delflag                   <- map["delflag"]
-        iconAddr                  <- map["iconAddr"]
-        id                        <- map["id"]
-        pId                       <- map["pId"]
-        updateBy                  <- map["updateBy"]
-        updateDate                <- map["updateDate"]
-        updateName                <- map["updateName"]
-        customName                <- map["customName"]
+        courseClassCode                 <- map["courseClassCode"]
+        courseClassLevel                <- map["courseClassLevel"]
+        courseClassName                 <- map["courseClassName"]
+        courseClassOrder                <- map["courseClassOrder"]
+        createBy                        <- map["createBy"]
+        createDate                      <- map["createDate"]
+        createName                      <- map["createName"]
+        delDate                         <- map["delDate"]
+        delflag                         <- map["delflag"]
+        iconAddr                        <- map["iconAddr"]
+        id                              <- map["id"]
+        pId                             <- map["pId"]
+        updateBy                        <- map["updateBy"]
+        updateDate                      <- map["updateDate"]
+        updateName                      <- map["updateName"]
+        customName                      <- map["customName"]
+        simpleNetCourses                <- map["simpleNetCourses"]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -82,6 +85,7 @@ class XHCourseCatalog: NSObject, Mappable, NSCoding {
         updateDate = aDecoder.decodeObject(forKey: "updateDate") as? XHCreatTime
         updateName = aDecoder.decodeObject(forKey: "updateName") as? String
         customName = aDecoder.decodeObject(forKey: "customName") as? String
+        simpleNetCourses = aDecoder.decodeObject(forKey: "simpleNetCourses") as? [XHSimpleNetCourse]
     }
     
     func encode(with aCoder: NSCoder) {
@@ -101,5 +105,6 @@ class XHCourseCatalog: NSObject, Mappable, NSCoding {
         aCoder.encode(updateDate, forKey: "updateDate")
         aCoder.encode(updateName, forKey: "updateName")
         aCoder.encode(customName, forKey: "customName")
+        aCoder.encode(simpleNetCourses, forKey: "simpleNetCourses")
     }
 }

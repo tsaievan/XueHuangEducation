@@ -10,7 +10,7 @@ import UIKit
 
 typealias XHGetHomePageListSuccess = ([[Any]]) -> ()
 typealias XHGetHomePageListFailue = (String) -> ()
-typealias XHGetTeachCourseListSuccess = (XHThemeList) -> ()
+typealias XHGetTeachCourseListSuccess = ([XHCourseCatalog], String?) -> ()
 typealias XHGetTeachCourseListFailue = (String) -> ()
 
 class XHHomePage {
@@ -114,7 +114,31 @@ class XHHomePage {
                 let model = XHThemeList(JSON: responseJson) else {
                     return
             }
-            success?(model)
+            
+            ///< 在这里进行数据处理
+            guard let catalogs = model.courseCatalogs,
+            let netCourses = model.netCourses else {
+                return
+            }
+            var fatherArray = [XHCourseCatalog]()
+            for catalog in catalogs {
+                guard let name = catalog.courseClassName else {
+                    continue
+                }
+                var sonArray = [XHSimpleNetCourse]()
+                for net in netCourses {
+                    guard let netName = net.courseClassName else {
+                        continue
+                    }
+                    if netName == name {
+                        sonArray.append(net)
+                    }
+                }
+                catalog.simpleNetCourses = sonArray
+                fatherArray.append(catalog)
+            }
+            
+            success?(fatherArray, model.imgAddr)
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {

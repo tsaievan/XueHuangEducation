@@ -52,9 +52,10 @@ class XHCatalogListViewController: XHBaseViewController {
                 let courseId = courseModel.id else {
                 return
             }
-            XHHomePage.getTeachCourseList(withCourseName: courseName, courseId: courseId, success: { (response) in
+            XHHomePage.getTeachCourseList(withCourseName: courseName, courseId: courseId, success: { (response, imageArr) in
                 print("\(response)")
-                self.teachVc.image = response.imgAddr
+                self.teachVc.imageArr = imageArr
+                
             }, failue: { (error) in
                 XHAlertHUD.showError(withStatus: error)
             })

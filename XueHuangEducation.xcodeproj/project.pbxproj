@@ -23,6 +23,7 @@
 		573427032096E9F600108D1E /* XHTeachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573427022096E9F600108D1E /* XHTeachViewController.swift */; };
 		573427052096EA0900108D1E /* XHThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573427042096EA0900108D1E /* XHThemeViewController.swift */; };
 		573427072096EA1900108D1E /* XHQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573427062096EA1900108D1E /* XHQuestionViewController.swift */; };
+		5734270920973AE600108D1E /* XHSimpleNetCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734270820973AE600108D1E /* XHSimpleNetCourse.swift */; };
 		574E5A1A2089B4F8009EAF93 /* XHRegistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574E5A192089B4F8009EAF93 /* XHRegistView.swift */; };
 		574E5A1C2089CEE2009EAF93 /* XHGetPasswordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574E5A1B2089CEE2009EAF93 /* XHGetPasswordResult.swift */; };
 		57633598208EBC0E009DAF86 /* XHCourseCatalogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57633597208EBC0E009DAF86 /* XHCourseCatalogCell.swift */; };
@@ -94,6 +95,7 @@
 		573427022096E9F600108D1E /* XHTeachViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTeachViewController.swift; sourceTree = "<group>"; };
 		573427042096EA0900108D1E /* XHThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHThemeViewController.swift; sourceTree = "<group>"; };
 		573427062096EA1900108D1E /* XHQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHQuestionViewController.swift; sourceTree = "<group>"; };
+		5734270820973AE600108D1E /* XHSimpleNetCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHSimpleNetCourse.swift; sourceTree = "<group>"; };
 		574E5A192089B4F8009EAF93 /* XHRegistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHRegistView.swift; sourceTree = "<group>"; };
 		574E5A1B2089CEE2009EAF93 /* XHGetPasswordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHGetPasswordResult.swift; sourceTree = "<group>"; };
 		57633597208EBC0E009DAF86 /* XHCourseCatalogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalogCell.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				572B8CA4208E0F2C005EC6CD /* XHHomePageList.swift */,
 				572B8C9E208E0944005EC6CD /* XHCourseCatalog.swift */,
 				572B8CA2208E098C005EC6CD /* XHNetCourse.swift */,
+				5734270820973AE600108D1E /* XHSimpleNetCourse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -674,6 +677,7 @@
 				57A62B1B2088B73400C9D5D2 /* XHNavigationController.swift in Sources */,
 				57A62AEF20887B5600C9D5D2 /* XHCommon.swift in Sources */,
 				57A62ACA20887A4D00C9D5D2 /* UIImage+XHExtension.swift in Sources */,
+				5734270920973AE600108D1E /* XHSimpleNetCourse.swift in Sources */,
 				57A4E4FD209384C800F8BADE /* XHStorageManager.swift in Sources */,
 				57A62AEB20887B5600C9D5D2 /* AppDelegate.swift in Sources */,
 				57A62B142088B73400C9D5D2 /* XHHomePageViewController.swift in Sources */,

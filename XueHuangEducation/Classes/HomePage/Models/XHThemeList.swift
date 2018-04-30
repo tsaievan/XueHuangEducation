@@ -13,7 +13,7 @@ class XHThemeList: NSObject, Mappable, NSCoding {
     var courseClassName: String?
     var courseClassId: String?
     var imgAddr: String?
-    var netCourses: [XHNetCourse]?
+    var netCourses: [XHSimpleNetCourse]?
     var courseCatalogs: [XHCourseCatalog]?
     
     
@@ -32,7 +32,7 @@ class XHThemeList: NSObject, Mappable, NSCoding {
         courseClassName = aDecoder.decodeObject(forKey: "courseClassName") as? String
         courseClassId = aDecoder.decodeObject(forKey: "courseClassId") as? String
         imgAddr = aDecoder.decodeObject(forKey: "imgAddr") as? String
-        netCourses = aDecoder.decodeObject(forKey: "netCourses") as? [XHNetCourse]
+        netCourses = aDecoder.decodeObject(forKey: "netCourses") as? [XHSimpleNetCourse]
         courseCatalogs = aDecoder.decodeObject(forKey: "courseCatalogs") as? [XHCourseCatalog]
     }
     
