@@ -20,11 +20,13 @@ class XHCatalogListViewController: XHBaseViewController {
     lazy var segmentView: XHCatalogListSegmentView = {
         let s = XHCatalogListSegmentView()
         s.backgroundColor = .white
+        s.xh_delegate = self
         return s
     }()
     
     lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
+        sv.delegate = self
         sv.backgroundColor = .yellow
         sv.contentSize = CGSize(width: SCREEN_WIDTH * 3, height: 0)
         sv.showsVerticalScrollIndicator = false
@@ -101,8 +103,25 @@ extension XHCatalogListViewController {
     }
 }
 
+// MARK: - UIScrollView的代理
 extension XHCatalogListViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView.isEqual(self.scrollView) {
+            let offsetX = scrollView.contentOffset.x
+            if offsetX > SCREEN_WIDTH + SCREEN_WIDTH * 0.6 {
+                segmentView.selectedPage = 2
+            }else if offsetX > SCREEN_WIDTH * 0.6 && offsetX <= SCREEN_WIDTH + SCREEN_WIDTH * 0.6 {
+                segmentView.selectedPage = 1
+            }else {
+                segmentView.selectedPage = 0
+            }
+        }
+    }
+}
+
+// MARK: - XHCatalogListSegmentView的代理
+extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
+    func catalogListSegmentViewDidClickSegmentButton(segmentView: XHCatalogListSegmentView, sender: XHButton) {
+        scrollView.setContentOffset(CGPoint(x: CGFloat(sender.tag) * SCREEN_WIDTH, y: 0), animated: false)
     }
 }

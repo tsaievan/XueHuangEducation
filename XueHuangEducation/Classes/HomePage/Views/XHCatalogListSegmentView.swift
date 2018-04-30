@@ -9,7 +9,13 @@
 import UIKit
 import pop
 
+protocol XHCatalogListSegmentViewDelegate: NSObjectProtocol {
+    func catalogListSegmentViewDidClickSegmentButton(segmentView: XHCatalogListSegmentView, sender: XHButton)
+}
+
 class XHCatalogListSegmentView: UIView {
+    
+    weak var xh_delegate: XHCatalogListSegmentViewDelegate?
     
     ///< 水平方向的缩放系数
     let horizontalScale = UIDevice.horizontalScale
@@ -19,21 +25,36 @@ class XHCatalogListSegmentView: UIView {
     
     lazy var myTeachButton: XHButton = {
         let btn = XHButton(withButtonImage: "image_profile_myTeach", title: "网校讲题", titleFont: FONT_SIZE_13, gap: 0)
+        btn.tag = 0
         btn.addTarget(self, action: #selector(didClickSegmentViewButtonAction), for: .touchUpInside)
         return btn
     }()
     
     lazy var myThemeButton: XHButton = {
         let btn = XHButton(withButtonImage: "image_profile_myTheme", title: "在线做题", titleFont: FONT_SIZE_13, gap: 0)
+        btn.tag = 1
         btn.addTarget(self, action: #selector(didClickSegmentViewButtonAction), for: .touchUpInside)
         return btn
     }()
     
     lazy var myQuestionButton: XHButton = {
         let btn = XHButton(withButtonImage: "image_profile_myQuestion", title: "在线问答", titleFont: FONT_SIZE_13, gap: 0)
+        btn.tag = 2
         btn.addTarget(self, action: #selector(didClickSegmentViewButtonAction), for: .touchUpInside)
         return btn
     }()
+    
+    var selectedPage: Int = 1 {
+        didSet {
+            if selectedPage == 0 {
+                didClickSegmentViewButtonAction(sender: myTeachButton)
+            }else if selectedPage == 1 {
+                didClickSegmentViewButtonAction(sender: myThemeButton)
+            }else {
+                didClickSegmentViewButtonAction(sender: myQuestionButton)
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -91,5 +112,6 @@ extension XHCatalogListSegmentView {
                 button.pop_add(scaleAnim, forKey: nil)
             }
         }
+        xh_delegate?.catalogListSegmentViewDidClickSegmentButton(segmentView: self, sender: sender)
     }
 }
