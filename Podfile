@@ -12,5 +12,6 @@ pod 'MJRefresh'
 pod 'Cache'
 pod 'ZFPlayer'
 pod 'pop'
+pod 'SDCycleScrollView'
 
 end
