@@ -54,10 +54,6 @@ class XHHomePageViewController: XHBaseViewController {
         }
     }
     
-    override var shouldAutorotate: Bool {
-        return false
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -76,6 +72,8 @@ class XHHomePageViewController: XHBaseViewController {
             }, failue: { (error) in
                 XHAlertHUD.showError(withStatus: error)
             })
+            let catalogVc = XHCatalogListViewController()
+            navigationController?.pushViewController(catalogVc, animated: true)
         }
         
         ///< 点击推荐课程/热门课程的按钮
