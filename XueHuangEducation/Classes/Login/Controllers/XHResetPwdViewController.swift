@@ -34,7 +34,7 @@ extension XHResetPwdViewController {
     
     fileprivate func makeConstraints() {
         resetPwdView.snp.makeConstraints { (make) in
-            make.top.equalTo(view).offset(UIDevice.iPhoneX ? 84 : 64)
+            make.top.equalTo(view).offset(TOP_EDGE_AJUSTED)
             make.left.bottom.right.equalTo(view)
         }
     }

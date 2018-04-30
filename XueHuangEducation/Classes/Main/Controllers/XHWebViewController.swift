@@ -65,7 +65,7 @@ extension XHWebViewController {
             make.width.equalTo(SCREEN_WIDTH)
             make.height.equalTo(2)
             make.left.equalTo(view)
-            make.top.equalTo(view).offset(UIDevice.iPhoneX ? 84 : 64)
+            make.top.equalTo(view).offset(TOP_EDGE_AJUSTED)
         }
     }
 }

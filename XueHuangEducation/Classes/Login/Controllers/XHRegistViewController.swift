@@ -31,7 +31,7 @@ extension XHRegistViewController {
     
     fileprivate func makeConstraints() {
         registView.snp.makeConstraints { (make) in
-            make.top.equalTo(view).offset(UIDevice.iPhoneX ? 84 : 64)
+            make.top.equalTo(view).offset(TOP_EDGE_AJUSTED)
             make.left.bottom.right.equalTo(view)
         }
     }

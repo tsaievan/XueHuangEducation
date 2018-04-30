@@ -46,6 +46,8 @@ let MARGIN_GLOBAL_30: CGFloat = 30
 let MARGIN_GLOBAL_44: CGFloat = 44 ///< 一般navigationBar的高度
 let MARGIN_GLOBAL_60: CGFloat = 60
 
+let TOP_EDGE_AJUSTED: CGFloat = UIDevice.iPhoneX ? 84 : 64
+
 
 ///< 首页
 let SEPERATOR_LINE_HEIGHT: CGFloat = 1.5 ///< 分割线高度

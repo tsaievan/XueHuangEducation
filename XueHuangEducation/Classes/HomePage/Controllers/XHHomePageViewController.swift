@@ -73,6 +73,7 @@ class XHHomePageViewController: XHBaseViewController {
                 XHAlertHUD.showError(withStatus: error)
             })
             let catalogVc = XHCatalogListViewController()
+            catalogVc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(catalogVc, animated: true)
         }
         
@@ -221,6 +222,7 @@ extension XHHomePageViewController {
     
     @objc
     fileprivate func downloadHomePageDataFailue(notification: Notification) {
+        XHAlertHUD.dismiss()
         guard let info = notification.userInfo,
             let errorReason = info[KEY_DOWNLOAD_HOME_PAGE_FAILUE_DATA] as? String else {
                 return
