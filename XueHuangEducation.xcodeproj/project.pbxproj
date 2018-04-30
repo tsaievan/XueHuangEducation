@@ -19,6 +19,10 @@
 		572B8CA3208E098C005EC6CD /* XHNetCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572B8CA2208E098C005EC6CD /* XHNetCourse.swift */; };
 		572B8CA5208E0F2C005EC6CD /* XHHomePageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572B8CA4208E0F2C005EC6CD /* XHHomePageList.swift */; };
 		572E48442095B053006E518D /* XHButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E48432095B053006E518D /* XHButton.swift */; };
+		573427012096E9C400108D1E /* XHTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573427002096E9C400108D1E /* XHTableViewController.swift */; };
+		573427032096E9F600108D1E /* XHTeachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573427022096E9F600108D1E /* XHTeachViewController.swift */; };
+		573427052096EA0900108D1E /* XHThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573427042096EA0900108D1E /* XHThemeViewController.swift */; };
+		573427072096EA1900108D1E /* XHQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573427062096EA1900108D1E /* XHQuestionViewController.swift */; };
 		574E5A1A2089B4F8009EAF93 /* XHRegistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574E5A192089B4F8009EAF93 /* XHRegistView.swift */; };
 		574E5A1C2089CEE2009EAF93 /* XHGetPasswordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574E5A1B2089CEE2009EAF93 /* XHGetPasswordResult.swift */; };
 		57633598208EBC0E009DAF86 /* XHCourseCatalogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57633597208EBC0E009DAF86 /* XHCourseCatalogCell.swift */; };
@@ -86,6 +90,10 @@
 		572B8CA2208E098C005EC6CD /* XHNetCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourse.swift; sourceTree = "<group>"; };
 		572B8CA4208E0F2C005EC6CD /* XHHomePageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHHomePageList.swift; sourceTree = "<group>"; };
 		572E48432095B053006E518D /* XHButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHButton.swift; sourceTree = "<group>"; };
+		573427002096E9C400108D1E /* XHTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTableViewController.swift; sourceTree = "<group>"; };
+		573427022096E9F600108D1E /* XHTeachViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTeachViewController.swift; sourceTree = "<group>"; };
+		573427042096EA0900108D1E /* XHThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHThemeViewController.swift; sourceTree = "<group>"; };
+		573427062096EA1900108D1E /* XHQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHQuestionViewController.swift; sourceTree = "<group>"; };
 		574E5A192089B4F8009EAF93 /* XHRegistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHRegistView.swift; sourceTree = "<group>"; };
 		574E5A1B2089CEE2009EAF93 /* XHGetPasswordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHGetPasswordResult.swift; sourceTree = "<group>"; };
 		57633597208EBC0E009DAF86 /* XHCourseCatalogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalogCell.swift; sourceTree = "<group>"; };
@@ -213,6 +221,9 @@
 				577500142096A8CD00DF9AC5 /* XHCatalogListViewController.swift */,
 				57A2A6FB2091EAA400DD03BC /* XHShowNetCourseViewController.swift */,
 				57978F872092B26500036159 /* XHPlayNetCourseViewController.swift */,
+				573427022096E9F600108D1E /* XHTeachViewController.swift */,
+				573427042096EA0900108D1E /* XHThemeViewController.swift */,
+				573427062096EA1900108D1E /* XHQuestionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -380,6 +391,7 @@
 				57A62B0D2088B73400C9D5D2 /* XHBaseViewController.swift */,
 				57A62B0E2088B73400C9D5D2 /* XHNavigationController.swift */,
 				57A62B0F2088B73400C9D5D2 /* XHTabBarController.swift */,
+				573427002096E9C400108D1E /* XHTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -606,6 +618,7 @@
 				57A62B172088B73400C9D5D2 /* XHLoginDetailView.swift in Sources */,
 				5763359A208ED343009DAF86 /* XHNetCourseCell.swift in Sources */,
 				57A62AF8208888E400C9D5D2 /* XHRegExTool.swift in Sources */,
+				573427052096EA0900108D1E /* XHThemeViewController.swift in Sources */,
 				571C8021208CC488005CD369 /* XHAccountLoginResult.swift in Sources */,
 				57A62B212088E6D300C9D5D2 /* XHMobileLoginResult.swift in Sources */,
 				574E5A1C2089CEE2009EAF93 /* XHGetPasswordResult.swift in Sources */,
@@ -626,6 +639,7 @@
 				572B8C9F208E0944005EC6CD /* XHCourseCatalog.swift in Sources */,
 				57A2A6D52091A77900DD03BC /* XHWebViewController.swift in Sources */,
 				57CA59D3208B05D6004C6393 /* XHResetPwdNextViewController.swift in Sources */,
+				573427072096EA1900108D1E /* XHQuestionViewController.swift in Sources */,
 				57A62B162088B73400C9D5D2 /* XHLogin.swift in Sources */,
 				57A62AF620887F0300C9D5D2 /* XHAlertHUD.swift in Sources */,
 				572B8C9D208E06F8005EC6CD /* XHHomePage.swift in Sources */,
@@ -635,6 +649,7 @@
 				57A62B192088B73400C9D5D2 /* XHLoginView.swift in Sources */,
 				57A62ACB20887A4D00C9D5D2 /* UILabel+XHExtension.swift in Sources */,
 				570D3A7120958A72005E03FF /* XHThemeList.swift in Sources */,
+				573427012096E9C400108D1E /* XHTableViewController.swift in Sources */,
 				574E5A1A2089B4F8009EAF93 /* XHRegistView.swift in Sources */,
 				572B8CA5208E0F2C005EC6CD /* XHHomePageList.swift in Sources */,
 				57A62B1D2088B73400C9D5D2 /* XHProfileViewController.swift in Sources */,
@@ -648,6 +663,7 @@
 				57A62AC720887A4D00C9D5D2 /* String+XHExtension.swift in Sources */,
 				57A62B1A2088B73400C9D5D2 /* XHBaseViewController.swift in Sources */,
 				57A62AC620887A4D00C9D5D2 /* Bundle+XHExtension.swift in Sources */,
+				573427032096E9F600108D1E /* XHTeachViewController.swift in Sources */,
 				570D3A7620959587005E03FF /* XHProfileView.swift in Sources */,
 				571C801D208CC12C005CD369 /* XHLoginBaseResult.swift in Sources */,
 				57CA59D5208B1BD8004C6393 /* XHPreferenceKey.swift in Sources */,
