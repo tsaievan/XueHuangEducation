@@ -7,13 +7,35 @@
 //
 
 import UIKit
+import SDCycleScrollView
 
 class XHTeachViewController: XHTableViewController {
+    
+    var image: String? {
+        didSet {
+            guard let imageUrl = image,
+             let cycle = cycleBanner else {
+                return
+            }
+            cycle.imageURLStringsGroup = [imageUrl, imageUrl]
+            tableView.reloadData()
+        }
+    }
+    
+    lazy var cycleBanner: SDCycleScrollView?  = {
+        guard let cycle = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_WIDTH * CYCLE_BANNER_HEIGHT_WIDTH_RATIO), delegate: self, placeholderImage: nil) else {
+            return nil
+        }
+        cycle.autoScroll = false
+        cycle.showPageControl = false
+        tableView.tableHeaderView = cycle
+        return cycle
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -37,6 +59,8 @@ class XHTeachViewController: XHTableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
+    
+    
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,4 +117,8 @@ class XHTeachViewController: XHTableViewController {
     }
     */
 
+}
+
+extension XHTeachViewController: SDCycleScrollViewDelegate {
+    
 }

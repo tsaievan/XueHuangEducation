@@ -62,17 +62,11 @@ class XHHomePageViewController: XHBaseViewController {
     override func router(withEventName eventName: String, userInfo: [String : Any]) {
         ///< 点击了分类的按钮
         if eventName == EVENT_CLICK_CATALOG_BUTTON {
-            guard let model = userInfo[MODEL_CLICK_CATALOG_BUTTON] as? XHCourseCatalog,
-            let courseName = model.courseClassName,
-            let courseId = model.id else {
+            guard let model = userInfo[MODEL_CLICK_CATALOG_BUTTON] as? XHCourseCatalog else {
                 return
             }
-            XHHomePage.getTeachCourseList(withCourseName: courseName, courseId: courseId, success: { (response) in
-                print("\(response)")
-            }, failue: { (error) in
-                XHAlertHUD.showError(withStatus: error)
-            })
             let catalogVc = XHCatalogListViewController()
+            catalogVc.model = model
             catalogVc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(catalogVc, animated: true)
         }

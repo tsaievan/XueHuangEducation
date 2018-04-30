@@ -27,6 +27,7 @@ class XHCatalogListViewController: XHBaseViewController {
     lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.delegate = self
+//        sv.isScrollEnabled = false
         sv.backgroundColor = .yellow
         sv.contentSize = CGSize(width: SCREEN_WIDTH * 3, height: 0)
         sv.showsVerticalScrollIndicator = false
@@ -44,6 +45,22 @@ class XHCatalogListViewController: XHBaseViewController {
         cv.addSubview(questionVc.view)
         return cv
     }()
+    
+    var model: XHCourseCatalog? {
+        didSet {
+            guard let courseModel = model,
+                let courseName = courseModel.courseClassName,
+                let courseId = courseModel.id else {
+                return
+            }
+            XHHomePage.getTeachCourseList(withCourseName: courseName, courseId: courseId, success: { (response) in
+                print("\(response)")
+                self.teachVc.image = response.imgAddr
+            }, failue: { (error) in
+                XHAlertHUD.showError(withStatus: error)
+            })
+        }
+    }
     
     
     ///< 生命周期
