@@ -39,8 +39,8 @@ class XHTeachViewController: XHTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
         tableView.register(XHNetCourseDetailCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_NETCOURSE_DETAIL)
+        tableView.tableFooterView = UIView()
     }
     
     override func didReceiveMemoryWarning() {
