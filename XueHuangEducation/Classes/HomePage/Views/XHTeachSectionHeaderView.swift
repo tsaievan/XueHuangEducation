@@ -79,12 +79,6 @@ extension XHTeachSectionHeaderView {
     
     @objc
     fileprivate func didTapTeachSectionHeaderView(sender: UITapGestureRecognizer) {
-//        guard let m = model,
-//            let isFold = m.isFold,
-//        let sectionView = sender.view as? XHTeachSectionHeaderView  else {
-//                return
-//        }
-//            sectionView.button.transform = (sectionView.button.transform == CGAffineTransform.identity) ? CGAffineTransform(rotationAngle: CGFloat(Double.pi * 0.5)) :  CGAffineTransform.identity
         tapSectionClosure?()
     }
 }

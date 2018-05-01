@@ -18,8 +18,14 @@ class XHTeachViewController: XHTableViewController {
             guard let modelInfo = info,
                 let imageUrl = modelInfo.imageArr,
                 let cycle = cycleBanner else {
-                    cycleBanner?.isHidden = true
                     return
+            }
+            if imageUrl == "" {
+                tableView.tableHeaderView = UIView(frame: .zero)
+                ///< 这里需要设置一下contentInset的缩进, 不然很丑
+                tableView.contentInset = UIEdgeInsetsMake(-30, 0, 0, 0)
+            }else {
+                tableView.tableHeaderView = cycle
             }
             dataSource = modelInfo.response
             cycle.imageURLStringsGroup = [imageUrl, imageUrl]
@@ -39,9 +45,9 @@ class XHTeachViewController: XHTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.register(XHNetCourseDetailCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_NETCOURSE_DETAIL)
         tableView.register(XHTeachSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: HEADERVIEW_IDENTIFIER_TEACH_TABLEVIEW)
+        tableView.register(XHSectionTitleHeaderView.self, forHeaderFooterViewReuseIdentifier: HEADER_TITLE_VIEW_IDENTIFIER_TEACH_TABLEVIEW)
         
         ///< 这两句代码是使得section之间的view不再有缝隙
         tableView.sectionFooterHeight = 0.01
@@ -95,6 +101,9 @@ class XHTeachViewController: XHTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 100
+        }
         return 50
     }
     
@@ -103,15 +112,28 @@ class XHTeachViewController: XHTableViewController {
             return nil
         }
         let sectionModel = datas[section]
-        guard let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HEADERVIEW_IDENTIFIER_TEACH_TABLEVIEW) as? XHTeachSectionHeaderView else {
-            return nil
+        if section == 0 {
+            guard let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HEADER_TITLE_VIEW_IDENTIFIER_TEACH_TABLEVIEW) as? XHSectionTitleHeaderView else {
+                return nil
+            }
+            sectionView.model = sectionModel
+            sectionView.tapSectionClosure = {
+                sectionModel.isFold = !sectionModel.isFold!
+                self.tableView.reloadData()
+            }
+            return sectionView
+            
+        }else {
+            guard let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HEADERVIEW_IDENTIFIER_TEACH_TABLEVIEW) as? XHTeachSectionHeaderView else {
+                return nil
+            }
+            sectionView.model = sectionModel
+            sectionView.tapSectionClosure = {
+                sectionModel.isFold = !sectionModel.isFold!
+                self.tableView.reloadData()
+            }
+            return sectionView
         }
-        sectionView.model = sectionModel
-        sectionView.tapSectionClosure = {
-            sectionModel.isFold = !sectionModel.isFold!
-            self.tableView.reloadData()
-        }
-        return sectionView
     }
 }
 
