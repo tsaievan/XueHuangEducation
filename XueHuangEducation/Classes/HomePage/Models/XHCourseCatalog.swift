@@ -28,6 +28,8 @@ class XHCourseCatalog: XHRoutine {
     var customName: String?
     ///< 分组是否展开
     var isFold: Bool? = true
+    ///< 轮播图的url. 其实轮播图只有一张
+    var imgAddr: String?
     
     var simpleNetCourses: [XHSimpleNetCourse]?
     
@@ -47,6 +49,7 @@ class XHCourseCatalog: XHRoutine {
         customName                      <- map["customName"]
         simpleNetCourses                <- map["simpleNetCourses"]
         isFold                          <- map["isFold"]
+        imgAddr                         <- map["imgAddr"]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -61,6 +64,7 @@ class XHCourseCatalog: XHRoutine {
         customName = aDecoder.decodeObject(forKey: "customName") as? String
         simpleNetCourses = aDecoder.decodeObject(forKey: "simpleNetCourses") as? [XHSimpleNetCourse]
         isFold = aDecoder.decodeObject(forKey: "isFold") as? Bool
+        imgAddr = aDecoder.decodeObject(forKey: "imgAddr") as? String
     }
     
     override func encode(with aCoder: NSCoder) {
@@ -75,5 +79,6 @@ class XHCourseCatalog: XHRoutine {
         aCoder.encode(customName, forKey: "customName")
         aCoder.encode(simpleNetCourses, forKey: "simpleNetCourses")
         aCoder.encode(isFold, forKey: "isFold")
+        aCoder.encode(imgAddr, forKey: "imgAddr")
     }
 }

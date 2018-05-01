@@ -11,38 +11,46 @@ import ObjectMapper
 
 class XHPaperList: NSObject, Mappable, NSCoding {
     
-    var courseClassName: String?
+    var sCourseCatalogs: [XHCourseCatalog]?
     var courseClassId: String?
-    var imgAddr: String?
-    var netCourses: [XHSimpleNetCourse]?
-    var courseCatalogs: [XHCourseCatalog]?
+    var courseClassName: String?
+    var sfCouresCatalog: XHCourseCatalog?
+    var tCourseCatalogs: [XHCourseCatalog]?
+    var paperTypes: [XHPaperType]?
+    var paperLists: [XHPaper]?
     
     
     required init?(map: Map) {
     }
     
     func mapping(map: Map) {
-        courseClassName          <- map["courseClassName"]
-        courseClassId            <- map["courseClassId"]
-        imgAddr                  <- map["imgAddr"]
-        netCourses               <- map["netCourses"]
-        courseCatalogs           <- map["courseCatalogs"]
+        sCourseCatalogs                  <- map["sCourseCatalogs"]
+        courseClassId                    <- map["courseClassId"]
+        courseClassName                  <- map["courseClassName"]
+        sfCouresCatalog                  <- map["sfCouresCatalog"]
+        tCourseCatalogs                  <- map["tCourseCatalogs"]
+        paperTypes                       <- map["paperTypes"]
+        paperLists                       <- map["paperLists"]
     }
     
     required init?(coder aDecoder: NSCoder) {
-        courseClassName = aDecoder.decodeObject(forKey: "courseClassName") as? String
+        sCourseCatalogs = aDecoder.decodeObject(forKey: "sCourseCatalogs") as? [XHCourseCatalog]
         courseClassId = aDecoder.decodeObject(forKey: "courseClassId") as? String
-        imgAddr = aDecoder.decodeObject(forKey: "imgAddr") as? String
-        netCourses = aDecoder.decodeObject(forKey: "netCourses") as? [XHSimpleNetCourse]
-        courseCatalogs = aDecoder.decodeObject(forKey: "courseCatalogs") as? [XHCourseCatalog]
+        courseClassName = aDecoder.decodeObject(forKey: "courseClassName") as? String
+        sfCouresCatalog = aDecoder.decodeObject(forKey: "sfCouresCatalog") as? XHCourseCatalog
+        tCourseCatalogs = aDecoder.decodeObject(forKey: "tCourseCatalogs") as? [XHCourseCatalog]
+        paperTypes = aDecoder.decodeObject(forKey: "paperTypes") as? [XHPaperType]
+        paperLists = aDecoder.decodeObject(forKey: "paperLists") as? [XHPaper]
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(courseClassName, forKey: "courseClassName")
+        aCoder.encode(sCourseCatalogs, forKey: "sCourseCatalogs")
         aCoder.encode(courseClassId, forKey: "courseClassId")
-        aCoder.encode(imgAddr, forKey: "imgAddr")
-        aCoder.encode(netCourses, forKey: "netCourses")
-        aCoder.encode(courseCatalogs, forKey: "courseCatalogs")
+        aCoder.encode(courseClassName, forKey: "courseClassName")
+        aCoder.encode(sfCouresCatalog, forKey: "sfCouresCatalog")
+        aCoder.encode(tCourseCatalogs, forKey: "tCourseCatalogs")
+        aCoder.encode(paperTypes, forKey: "paperTypes")
+        aCoder.encode(paperLists, forKey: "paperLists")
     }
 
 }
