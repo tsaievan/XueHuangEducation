@@ -109,7 +109,7 @@ class XHTeachViewController: XHTableViewController {
         sectionView.model = sectionModel
         sectionView.tapSectionClosure = {
             sectionModel.isFold = !sectionModel.isFold!
-            self.tableView.reloadSections(IndexSet(integer: section), with: UITableViewRowAnimation.automatic)
+            self.tableView.reloadData()
         }
         return sectionView
     }

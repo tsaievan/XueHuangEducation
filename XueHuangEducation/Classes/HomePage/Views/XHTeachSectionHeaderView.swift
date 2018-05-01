@@ -26,10 +26,12 @@ class XHTeachSectionHeaderView: UITableViewHeaderFooterView {
     
     var model: XHCourseCatalog? {
         didSet {
-            guard let m = model else {
+            guard let m = model,
+            let isFold = m.isFold else {
                 return
             }
             titleLabel.text = m.courseClassName
+            button.transform = isFold ? CGAffineTransform.identity : CGAffineTransform(rotationAngle: CGFloat(-Double.pi * 0.5))
         }
     }
     
@@ -76,7 +78,13 @@ extension XHTeachSectionHeaderView {
     }
     
     @objc
-    fileprivate func didTapTeachSectionHeaderView() {
+    fileprivate func didTapTeachSectionHeaderView(sender: UITapGestureRecognizer) {
+//        guard let m = model,
+//            let isFold = m.isFold,
+//        let sectionView = sender.view as? XHTeachSectionHeaderView  else {
+//                return
+//        }
+//            sectionView.button.transform = (sectionView.button.transform == CGAffineTransform.identity) ? CGAffineTransform(rotationAngle: CGFloat(Double.pi * 0.5)) :  CGAffineTransform.identity
         tapSectionClosure?()
     }
 }
