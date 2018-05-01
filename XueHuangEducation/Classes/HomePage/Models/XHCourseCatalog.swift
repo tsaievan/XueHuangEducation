@@ -42,6 +42,8 @@ class XHCourseCatalog: NSObject, Mappable, NSCoding {
     var updateName: String?
     ///< 自定义名称
     var customName: String?
+    ///< 分组是否展开
+    var isFold: Bool? = true
     
     var simpleNetCourses: [XHSimpleNetCourse]?
     
@@ -66,6 +68,7 @@ class XHCourseCatalog: NSObject, Mappable, NSCoding {
         updateName                      <- map["updateName"]
         customName                      <- map["customName"]
         simpleNetCourses                <- map["simpleNetCourses"]
+        isFold                          <- map["isFold"]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -86,6 +89,7 @@ class XHCourseCatalog: NSObject, Mappable, NSCoding {
         updateName = aDecoder.decodeObject(forKey: "updateName") as? String
         customName = aDecoder.decodeObject(forKey: "customName") as? String
         simpleNetCourses = aDecoder.decodeObject(forKey: "simpleNetCourses") as? [XHSimpleNetCourse]
+        isFold = aDecoder.decodeObject(forKey: "isFold") as? Bool
     }
     
     func encode(with aCoder: NSCoder) {
@@ -106,5 +110,6 @@ class XHCourseCatalog: NSObject, Mappable, NSCoding {
         aCoder.encode(updateName, forKey: "updateName")
         aCoder.encode(customName, forKey: "customName")
         aCoder.encode(simpleNetCourses, forKey: "simpleNetCourses")
+        aCoder.encode(isFold, forKey: "isFold")
     }
 }

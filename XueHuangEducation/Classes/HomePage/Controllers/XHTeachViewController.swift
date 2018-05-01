@@ -73,7 +73,7 @@ class XHTeachViewController: XHTableViewController {
         guard let count = sectionModel.simpleNetCourses?.count else {
             return 0
         }
-        return count
+        return sectionModel.isFold! ? count : 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -107,6 +107,10 @@ class XHTeachViewController: XHTableViewController {
             return nil
         }
         sectionView.model = sectionModel
+        sectionView.tapSectionClosure = {
+            sectionModel.isFold = !sectionModel.isFold!
+            self.tableView.reloadSections(IndexSet(integer: section), with: UITableViewRowAnimation.automatic)
+        }
         return sectionView
     }
 }

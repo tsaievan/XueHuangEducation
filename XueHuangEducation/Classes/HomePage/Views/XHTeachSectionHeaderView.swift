@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias XHTapTeachSectionHeaderView = () -> ()
+
 class XHTeachSectionHeaderView: UITableViewHeaderFooterView {
     
     lazy var titleLabel: UILabel = {
@@ -31,9 +33,12 @@ class XHTeachSectionHeaderView: UITableViewHeaderFooterView {
         }
     }
     
+    var tapSectionClosure: XHTapTeachSectionHeaderView?
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         setupUI()
+        addGestures()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,5 +65,18 @@ extension XHTeachSectionHeaderView {
             make.centerY.equalTo(self)
             make.right.equalTo(self).offset(-MARGIN_GLOBAL_15)
         }
+    }
+}
+
+// MARK: - 设置点击事件
+extension XHTeachSectionHeaderView {
+    fileprivate func addGestures() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapTeachSectionHeaderView))
+        addGestureRecognizer(tap)
+    }
+    
+    @objc
+    fileprivate func didTapTeachSectionHeaderView() {
+        tapSectionClosure?()
     }
 }
