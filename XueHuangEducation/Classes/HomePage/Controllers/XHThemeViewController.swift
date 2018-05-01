@@ -9,6 +9,12 @@
 import UIKit
 
 class XHThemeViewController: XHTableViewController {
+    
+    var model: [XHCourseCatalog]? {
+        didSet {
+            
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

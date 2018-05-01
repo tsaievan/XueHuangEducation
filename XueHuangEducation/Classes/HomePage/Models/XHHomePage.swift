@@ -12,6 +12,8 @@ typealias XHGetHomePageListSuccess = ([[Any]]) -> ()
 typealias XHGetHomePageListFailue = (String) -> ()
 typealias XHGetTeachCourseListSuccess = ([XHCourseCatalog], String?) -> ()
 typealias XHGetTeachCourseListFailue = (String) -> ()
+typealias XHGetPaperListSuccess = ([Any], String?) -> ()
+typealias XHGetPaperListFailue = (String) -> ()
 
 class XHHomePage {
     
@@ -139,6 +141,28 @@ class XHHomePage {
             }
             
             success?(fatherArray, model.imgAddr)
+        }) { (error) in
+            let err = error as NSError
+            if err.code == -1009 {
+                failue?("网络连接失败")
+            }else {
+                failue?("数据加载失败")
+            }
+        }
+    }
+
+    /// 获取考卷列表数据
+    ///
+    /// - Parameters:
+    ///   - courseId: 课程id
+    ///   - success: 获取考卷列表成功的回调
+    ///   - failue: 获取考卷列表失败的回调
+    class func getPaperList(withCourseClassId courseId: String, success: XHGetPaperListSuccess?, failue: XHGetPaperListFailue?) {
+        let params = [
+            "curCourseClassId" : courseId
+        ]
+        XHNetwork.GET(url: URL_TO_MOBILE_PAPER_LIST, params: params, success: { (response) in
+            
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {
