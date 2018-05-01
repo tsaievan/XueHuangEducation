@@ -141,5 +141,16 @@ extension XHCatalogListViewController: UIScrollViewDelegate {
 extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
     func catalogListSegmentViewDidClickSegmentButton(segmentView: XHCatalogListSegmentView, sender: XHButton) {
         scrollView.setContentOffset(CGPoint(x: CGFloat(sender.tag) * SCREEN_WIDTH, y: 0), animated: false)
+        if sender.tag == 1 {
+            guard let courseModel = model,
+                let courseId = courseModel.id else {
+                    return
+            }
+            XHHomePage.getPaperList(withCourseClassId: courseId, success: { (response, string) in
+                
+            }, failue: { (errorReason) in
+                XHAlertHUD.showError(withStatus: errorReason)
+            })
+        }
     }
 }

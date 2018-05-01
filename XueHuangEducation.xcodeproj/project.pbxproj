@@ -28,6 +28,7 @@
 		5734270D2097490900108D1E /* XHNetCourseDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734270C2097490900108D1E /* XHNetCourseDetailCell.swift */; };
 		57369A2D2098518E00E2E0F9 /* XHTeachSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57369A2C2098518E00E2E0F9 /* XHTeachSectionHeaderView.swift */; };
 		57369A2F2098866C00E2E0F9 /* XHSectionTitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57369A2E2098866C00E2E0F9 /* XHSectionTitleHeaderView.swift */; };
+		57369A312098AF8C00E2E0F9 /* XHPaperList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57369A302098AF8C00E2E0F9 /* XHPaperList.swift */; };
 		574E5A1A2089B4F8009EAF93 /* XHRegistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574E5A192089B4F8009EAF93 /* XHRegistView.swift */; };
 		574E5A1C2089CEE2009EAF93 /* XHGetPasswordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574E5A1B2089CEE2009EAF93 /* XHGetPasswordResult.swift */; };
 		57633598208EBC0E009DAF86 /* XHCourseCatalogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57633597208EBC0E009DAF86 /* XHCourseCatalogCell.swift */; };
@@ -104,6 +105,7 @@
 		5734270C2097490900108D1E /* XHNetCourseDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourseDetailCell.swift; sourceTree = "<group>"; };
 		57369A2C2098518E00E2E0F9 /* XHTeachSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTeachSectionHeaderView.swift; sourceTree = "<group>"; };
 		57369A2E2098866C00E2E0F9 /* XHSectionTitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHSectionTitleHeaderView.swift; sourceTree = "<group>"; };
+		57369A302098AF8C00E2E0F9 /* XHPaperList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHPaperList.swift; sourceTree = "<group>"; };
 		574E5A192089B4F8009EAF93 /* XHRegistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHRegistView.swift; sourceTree = "<group>"; };
 		574E5A1B2089CEE2009EAF93 /* XHGetPasswordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHGetPasswordResult.swift; sourceTree = "<group>"; };
 		57633597208EBC0E009DAF86 /* XHCourseCatalogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalogCell.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			children = (
 				572B8C9C208E06F8005EC6CD /* XHHomePage.swift */,
 				570D3A7020958A72005E03FF /* XHThemeList.swift */,
+				57369A302098AF8C00E2E0F9 /* XHPaperList.swift */,
 				572B8CA4208E0F2C005EC6CD /* XHHomePageList.swift */,
 				572B8C9E208E0944005EC6CD /* XHCourseCatalog.swift */,
 				572B8CA2208E098C005EC6CD /* XHNetCourse.swift */,
@@ -642,6 +645,7 @@
 				57A2A6FC2091EAA400DD03BC /* XHShowNetCourseViewController.swift in Sources */,
 				57D5010920897BB100DD0DBD /* XHResetPwdViewController.swift in Sources */,
 				57A62AC920887A4D00C9D5D2 /* UIColor+XHExtension.swift in Sources */,
+				57369A312098AF8C00E2E0F9 /* XHPaperList.swift in Sources */,
 				57A62ACC20887A4D00C9D5D2 /* UIView+XHExtension.swift in Sources */,
 				57978F882092B26500036159 /* XHPlayNetCourseViewController.swift in Sources */,
 				57CA59D9208B7511004C6393 /* XHRegistViewController.swift in Sources */,
