@@ -39,7 +39,15 @@ class XHTeachViewController: XHTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.register(XHNetCourseDetailCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_NETCOURSE_DETAIL)
+        tableView.register(XHTeachSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: HEADERVIEW_IDENTIFIER_TEACH_TABLEVIEW)
+        
+        ///< 这两句代码是使得section之间的view不再有缝隙
+        tableView.sectionFooterHeight = 0.01
+        tableView.sectionHeaderHeight = 0.01
+        
+        ///< 去除分割线
         tableView.tableFooterView = UIView()
     }
     
@@ -86,9 +94,21 @@ class XHTeachViewController: XHTableViewController {
         return 80
     }
     
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return nil
-//    }
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let datas = dataSource else {
+            return nil
+        }
+        let sectionModel = datas[section]
+        guard let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HEADERVIEW_IDENTIFIER_TEACH_TABLEVIEW) as? XHTeachSectionHeaderView else {
+            return nil
+        }
+        sectionView.model = sectionModel
+        return sectionView
+    }
 }
 
 extension XHTeachViewController: SDCycleScrollViewDelegate {

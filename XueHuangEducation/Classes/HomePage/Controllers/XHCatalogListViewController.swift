@@ -11,11 +11,11 @@ import UIKit
 ///< 这里的逻辑有点多, 直接将view写在控制器里, 方便调用各个方法, 免得产生太多的胶水代码
 class XHCatalogListViewController: XHBaseViewController {
     
-    var teachVc: XHTeachViewController = XHTeachViewController()
+    var teachVc: XHTeachViewController = XHTeachViewController(style: .grouped)
     
-    var themeVc: XHThemeViewController = XHThemeViewController()
+    var themeVc: XHThemeViewController = XHThemeViewController(style: .grouped)
     
-    var questionVc: XHQuestionViewController = XHQuestionViewController()
+    var questionVc: XHQuestionViewController = XHQuestionViewController(style: .grouped)
     
     lazy var segmentView: XHCatalogListSegmentView = {
         let s = XHCatalogListSegmentView()
