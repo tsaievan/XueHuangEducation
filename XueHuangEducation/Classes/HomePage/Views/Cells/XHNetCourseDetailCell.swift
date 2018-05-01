@@ -27,7 +27,8 @@ class XHNetCourseDetailCell: UITableViewCell {
     lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.sizeToFit()
+        imageView.layer.cornerRadius = 5
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     
@@ -37,9 +38,10 @@ class XHNetCourseDetailCell: UITableViewCell {
         return lbl
     }()
     
-    lazy var listenButton: UIButton = {
-        let btn = UIButton(type: .custom)
-        btn.setImage(UIImage(named: "catalogList_listen_button"), for: .normal)
+    lazy var listenButton: XHButton = {
+        let btn = XHButton(withButtonImage: "catalogList_listen_button", title: "试听", titleColor: COLOR_GLOBAL_BLUE, titleFont: FONT_SIZE_12, gap: 0)
+        
+        
         return btn
     }()
     
@@ -72,7 +74,6 @@ extension XHNetCourseDetailCell {
         listenButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(iconImageView)
             make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_15)
-            make.width.height.equalTo(30)
         }
         
         titleLabel.snp.makeConstraints { (make) in

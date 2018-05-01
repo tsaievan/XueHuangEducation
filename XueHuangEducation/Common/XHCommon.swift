@@ -25,6 +25,7 @@ let COLOR_PROFILE_BUTTON_TITLE_COLOR: UIColor = UIColor(hexColor: "#333333")
 
 
 ///< 全局的数字
+let FONT_SIZE_12: CGFloat = 12.0
 let FONT_SIZE_13: CGFloat = 13.0
 let FONT_SIZE_14: CGFloat = 14.0
 let FONT_SIZE_16: CGFloat = 16.0
