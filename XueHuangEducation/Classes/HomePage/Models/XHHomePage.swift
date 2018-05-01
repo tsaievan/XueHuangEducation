@@ -12,7 +12,7 @@ typealias XHGetHomePageListSuccess = ([[Any]]) -> ()
 typealias XHGetHomePageListFailue = (String) -> ()
 typealias XHGetTeachCourseListSuccess = ([XHCourseCatalog], String?) -> ()
 typealias XHGetTeachCourseListFailue = (String) -> ()
-typealias XHGetPaperListSuccess = ([Any], String?) -> ()
+typealias XHGetPaperListSuccess = ([XHCourseCatalog], String?) -> ()
 typealias XHGetPaperListFailue = (String) -> ()
 
 class XHHomePage {
@@ -119,8 +119,8 @@ class XHHomePage {
             
             ///< 在这里进行数据处理
             guard let catalogs = model.courseCatalogs,
-            let netCourses = model.netCourses else {
-                return
+                let netCourses = model.netCourses else {
+                    return
             }
             var fatherArray = [XHCourseCatalog]()
             for catalog in catalogs {
@@ -150,7 +150,7 @@ class XHHomePage {
             }
         }
     }
-
+    
     /// 获取考卷列表数据
     ///
     /// - Parameters:
@@ -162,7 +162,46 @@ class XHHomePage {
             "curCourseClassId" : courseId
         ]
         XHNetwork.GET(url: URL_TO_MOBILE_PAPER_LIST, params: params, success: { (response) in
-            
+            guard let responseJson = response as? [String : Any],
+                let model = XHPaperList(JSON: responseJson) else {
+                    return
+            }
+            ///< 同样要进行数据处理(貌似更复杂)
+            guard let catalogs = model.tCourseCatalogs,
+                let paperList = model.paperLists,
+                let types = model.paperTypes else {
+                    return
+            }
+            var typeDict = [String : String]()
+            for type in types {
+                guard let name = type.paperTypeName,
+                let id = type.id else {
+                    continue
+                }
+                typeDict[id] = name
+            }
+            var fatherArray = [XHCourseCatalog]()
+            for catalog in catalogs {
+                guard let id = catalog.id else {
+                    continue
+                }
+                var sonArray = [XHPaper]()
+                for paper in paperList {
+                    guard let paperId = paper.courseClassId,
+                        let typeId = paper.paperTypeId else {
+                            continue
+                    }
+                    if paperId == id {
+                        if typeDict.keys.contains(typeId) {
+                            paper.typeName = typeDict[typeId]
+                            sonArray.append(paper)
+                        }
+                    }
+                }
+                catalog.paperLists = sonArray
+                fatherArray.append(catalog)
+            }
+            success?(fatherArray, model.courseClassName)
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {

@@ -146,7 +146,9 @@ extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
                 let courseId = courseModel.id else {
                     return
             }
-            XHHomePage.getPaperList(withCourseClassId: courseId, success: { (response, string) in
+            XHHomePage.getPaperList(withCourseClassId: courseId, success: { (response, title) in
+                print("\(response), \(title)")
+                
                 
             }, failue: { (errorReason) in
                 XHAlertHUD.showError(withStatus: errorReason)

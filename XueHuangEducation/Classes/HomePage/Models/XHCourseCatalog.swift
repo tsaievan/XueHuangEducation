@@ -30,8 +30,10 @@ class XHCourseCatalog: XHRoutine {
     var isFold: Bool? = true
     ///< 轮播图的url. 其实轮播图只有一张
     var imgAddr: String?
-    
+    ///< 课程数组
     var simpleNetCourses: [XHSimpleNetCourse]?
+    ///< 考卷数组
+    var paperLists: [XHPaper]?
     
     required init?(map: Map) {
         super.init(map: map)
@@ -50,6 +52,7 @@ class XHCourseCatalog: XHRoutine {
         simpleNetCourses                <- map["simpleNetCourses"]
         isFold                          <- map["isFold"]
         imgAddr                         <- map["imgAddr"]
+        paperLists                      <- map["paperLists"]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -65,6 +68,7 @@ class XHCourseCatalog: XHRoutine {
         simpleNetCourses = aDecoder.decodeObject(forKey: "simpleNetCourses") as? [XHSimpleNetCourse]
         isFold = aDecoder.decodeObject(forKey: "isFold") as? Bool
         imgAddr = aDecoder.decodeObject(forKey: "imgAddr") as? String
+        paperLists = aDecoder.decodeObject(forKey: "paperLists") as? [XHPaper]
     }
     
     override func encode(with aCoder: NSCoder) {
@@ -80,5 +84,6 @@ class XHCourseCatalog: XHRoutine {
         aCoder.encode(simpleNetCourses, forKey: "simpleNetCourses")
         aCoder.encode(isFold, forKey: "isFold")
         aCoder.encode(imgAddr, forKey: "imgAddr")
+        aCoder.encode(paperLists, forKey: "paperLists")
     }
 }

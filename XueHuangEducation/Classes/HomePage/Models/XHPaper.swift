@@ -15,6 +15,7 @@ class XHPaper: XHRoutine {
     var paperName: String?
     var paperTypeId: String?
     var remark: String?
+    var typeName: String?
     
     
     
@@ -24,11 +25,12 @@ class XHPaper: XHRoutine {
     
     override func mapping(map: Map) {
         super.mapping(map: map)
-        courseClassId                 <- map["courseClassId"]
-        createBy                      <- map["createBy"]
-        paperName                     <- map["paperName"]
-        paperTypeId                   <- map["paperTypeId"]
-        remark                        <- map["remark"]
+        courseClassId                   <- map["courseClassId"]
+        createBy                        <- map["createBy"]
+        paperName                       <- map["paperName"]
+        paperTypeId                     <- map["paperTypeId"]
+        remark                          <- map["remark"]
+        typeName                        <- map["typeName"]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,6 +40,7 @@ class XHPaper: XHRoutine {
         paperName = aDecoder.decodeObject(forKey: "paperName") as? String
         paperTypeId = aDecoder.decodeObject(forKey: "paperTypeId") as? String
         remark = aDecoder.decodeObject(forKey: "remark") as? String
+        typeName = aDecoder.decodeObject(forKey: "typeName") as? String
     }
     
     override func encode(with aCoder: NSCoder) {
@@ -47,6 +50,7 @@ class XHPaper: XHRoutine {
         aCoder.encode(paperName, forKey: "paperName")
         aCoder.encode(paperTypeId, forKey: "paperTypeId")
         aCoder.encode(remark, forKey: "remark")
+        aCoder.encode(typeName, forKey: "typeName")
     }
 
 }
