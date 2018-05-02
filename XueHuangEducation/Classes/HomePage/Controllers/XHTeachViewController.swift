@@ -34,7 +34,7 @@ class XHTeachViewController: XHTableViewController {
     }
     
     lazy var cycleBanner: SDCycleScrollView?  = {
-        guard let cycle = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_WIDTH * CYCLE_BANNER_HEIGHT_WIDTH_RATIO), delegate: self, placeholderImage: nil) else {
+        guard let cycle = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_WIDTH * CYCLE_BANNER_HEIGHT_WIDTH_RATIO), delegate: nil, placeholderImage: nil) else {
             return nil
         }
         cycle.autoScroll = false
@@ -130,8 +130,4 @@ class XHTeachViewController: XHTableViewController {
             return sectionView
         }
     }
-}
-
-extension XHTeachViewController: SDCycleScrollViewDelegate {
-    
 }

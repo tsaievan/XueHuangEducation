@@ -17,7 +17,7 @@ class XHThemeViewController: XHTableViewController {
     var info: (response: [XHCourseCatalog], titleText: String?)? {
         didSet {
             guard let modelInfo = info else {
-                    return
+                return
             }
             mainTitle = modelInfo.titleText
             dataSource = modelInfo.response

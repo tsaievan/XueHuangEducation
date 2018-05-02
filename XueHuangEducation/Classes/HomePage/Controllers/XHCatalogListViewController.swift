@@ -53,10 +53,8 @@ class XHCatalogListViewController: XHBaseViewController {
                 return
             }
             XHHomePage.getTeachCourseList(withCourseName: courseName, courseId: courseId, success: { (response, imageArr) in
-                print("\(response)")
                 let info = (response, imageArr)
                 self.teachVc.info = info
-                
             }, failue: { (error) in
                 XHAlertHUD.showError(withStatus: error)
             })
@@ -141,14 +139,21 @@ extension XHCatalogListViewController: UIScrollViewDelegate {
 extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
     func catalogListSegmentViewDidClickSegmentButton(segmentView: XHCatalogListSegmentView, sender: XHButton) {
         scrollView.setContentOffset(CGPoint(x: CGFloat(sender.tag) * SCREEN_WIDTH, y: 0), animated: false)
-        if sender.tag == 1 {
-            guard let courseModel = model,
-                let courseId = courseModel.id else {
-                    return
-            }
+        guard let courseModel = model,
+            let courseId = courseModel.id,
+        let courseName = courseModel.courseClassName else {
+                return
+        }
+        if sender.tag == 1 { ///< 点击的是在线做题的按钮
             XHHomePage.getPaperList(withCourseClassId: courseId, success: { (response, title) in
-                print("\(response), \(title)")
                 self.themeVc.info = (response, title)
+            }, failue: { (errorReason) in
+                XHAlertHUD.showError(withStatus: errorReason)
+            })
+        }
+        
+        if sender.tag == 2 { ///< 点击的是在线问答的按钮
+            XHHomePage.getQuestionList(withEnterType: XHQuestionEnterType.answer, courseName: courseName, courseId: courseId, success: { (response) in
                 
             }, failue: { (errorReason) in
                 XHAlertHUD.showError(withStatus: errorReason)

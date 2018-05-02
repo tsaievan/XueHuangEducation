@@ -75,7 +75,6 @@ class XHHomePageViewController: XHBaseViewController {
                 return
             }
             if indexPath.section == 1 { ///< 推荐课程
-                print("\(videoUrl)")
                 let url = URL(string: videoUrl)
                 let webVc = XHShowNetCourseViewController()
                 webVc.hidesBottomBarWhenPushed = true
@@ -84,7 +83,6 @@ class XHHomePageViewController: XHBaseViewController {
             }
             
             if indexPath.section == 2 { ///< 热门课程
-                print("\(videoUrl)")
                 let playerVc = XHPlayNetCourseViewController()
                 playerVc.hidesBottomBarWhenPushed = true
                 navigationController?.pushViewController(playerVc, animated: true)

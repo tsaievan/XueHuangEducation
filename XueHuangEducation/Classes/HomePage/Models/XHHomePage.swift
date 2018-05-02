@@ -14,6 +14,16 @@ typealias XHGetTeachCourseListSuccess = ([XHCourseCatalog], String?) -> ()
 typealias XHGetTeachCourseListFailue = (String) -> ()
 typealias XHGetPaperListSuccess = ([XHCourseCatalog], String?) -> ()
 typealias XHGetPaperListFailue = (String) -> ()
+typealias XHGetQuestionListSuccess = (Any) -> ()
+typealias XHGetQuestionListFailue = (String) -> ()
+
+enum XHQuestionEnterType: String {
+    case make = "1"
+    case teach = "2"
+    case answer = "3"
+    case download = "4"
+    case broadcast = "5"
+}
 
 class XHHomePage {
     
@@ -202,6 +212,34 @@ class XHHomePage {
                 fatherArray.append(catalog)
             }
             success?(fatherArray, model.courseClassName)
+        }) { (error) in
+            let err = error as NSError
+            if err.code == -1009 {
+                failue?("网络连接失败")
+            }else {
+                failue?("数据加载失败")
+            }
+        }
+    }
+    
+    
+    /// 获取在线答疑主页面列表的方法
+    ///
+    /// - Parameters:
+    ///   - enterType: 按钮类型
+    ///   - courseName: 课程名称
+    ///   - courseId: 课程id
+    ///   - success: 成功的回调
+    ///   - failue: 失败的回调
+    class func getQuestionList(withEnterType enterType: XHQuestionEnterType, courseName: String, courseId: String, success: XHGetQuestionListSuccess?, failue: XHGetQuestionListFailue?) {
+        let params = [
+            "enterType" : enterType.rawValue,
+            "courseClassName" : courseName,
+            "courseClassId" : courseId,
+            "actionType" : "all"
+        ]
+        XHNetwork.GET(url: URL_TO_QUESTION_LIST, params: params, success: { (response) in
+            
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {

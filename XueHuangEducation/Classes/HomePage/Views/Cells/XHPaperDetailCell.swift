@@ -78,7 +78,7 @@ extension XHPaperDetailCellContentView {
         seperatorView.snp.makeConstraints { (make) in
             make.top.equalTo(practiceButton.snp.bottom).offset(MARGIN_GLOBAL_5)
             make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
-            make.right.equalTo(self)
+            make.right.equalTo(self).offset(-MARGIN_GLOBAL_15)
             make.height.equalTo(0.5)
         }
         

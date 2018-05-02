@@ -181,6 +181,12 @@ class XHLogin {
         }
     }
     
+    /// 重新输入密码的接口
+    ///
+    /// - Parameters:
+    ///   - password: 密码
+    ///   - success: 成功的回调
+    ///   - failue: 失败的回调
     class func reinputPassword(password: String, success: XHModifyPwdSuccess?, failue: XHModifyPwdFailue?) {
         guard let result = XHPreferences[.USERDEFAULT_GET_PASSWORD_RESULT_KEY],
         let userID = result.userid else {
