@@ -10,31 +10,48 @@ import UIKit
 
 class XHNetCourseWareController: UITableViewController {
     
-    var dataSouce: [XHNetCourseWare]? {
+    var dataSouce: [XHNetCourseWare]?
+    
+    var models: [XHNetCourseWare]? {
         didSet {
+            guard let infos = models else {
+                return
+            }
+            dataSouce = infos
             tableView.reloadData()
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        tableView.register(XHNetCourseWareCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_NETCOURSE_WARE)
+        ///< 去除多余的分割线
+        tableView.tableFooterView = UIView()
     }
-
+    
     // MARK: - Table view 数据源方法和代理方法
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let datas = dataSouce else {
             return 0
         }
         return datas.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_NETCOURSE_WARE, for: indexPath) as? XHNetCourseWareCell,
+            let datas = dataSouce else {
+                return UITableViewCell()
+        }
+        cell.model = datas[indexPath.row]
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 }

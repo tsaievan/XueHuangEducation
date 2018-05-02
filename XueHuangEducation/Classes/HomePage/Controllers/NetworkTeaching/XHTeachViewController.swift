@@ -144,7 +144,7 @@ class XHTeachViewController: XHTableViewController {
         netVc.navigationItem.title = courseName
         navigationController?.pushViewController(netVc, animated: true)
         XHTeach.getNetcourseware(withCourseName: courseName, courseId: courseId, success: { (response) in
-            
+            netVc.models = response
         }) { (errorReason) in
             
         }

@@ -40,6 +40,7 @@
 		574E5A1C2089CEE2009EAF93 /* XHGetPasswordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574E5A1B2089CEE2009EAF93 /* XHGetPasswordResult.swift */; };
 		57614F2B2099EB6200D9EDE5 /* XHNetCourseWareList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57614F2A2099EB6200D9EDE5 /* XHNetCourseWareList.swift */; };
 		57614F2D2099EB8500D9EDE5 /* XHNetCourseWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57614F2C2099EB8500D9EDE5 /* XHNetCourseWare.swift */; };
+		57614F2F2099F43A00D9EDE5 /* XHNetCourseWareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57614F2E2099F43A00D9EDE5 /* XHNetCourseWareCell.swift */; };
 		57633598208EBC0E009DAF86 /* XHCourseCatalogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57633597208EBC0E009DAF86 /* XHCourseCatalogCell.swift */; };
 		5763359A208ED343009DAF86 /* XHNetCourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57633599208ED343009DAF86 /* XHNetCourseCell.swift */; };
 		5763359C208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763359B208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift */; };
@@ -128,6 +129,7 @@
 		574E5A1B2089CEE2009EAF93 /* XHGetPasswordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHGetPasswordResult.swift; sourceTree = "<group>"; };
 		57614F2A2099EB6200D9EDE5 /* XHNetCourseWareList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourseWareList.swift; sourceTree = "<group>"; };
 		57614F2C2099EB8500D9EDE5 /* XHNetCourseWare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourseWare.swift; sourceTree = "<group>"; };
+		57614F2E2099F43A00D9EDE5 /* XHNetCourseWareCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourseWareCell.swift; sourceTree = "<group>"; };
 		57633597208EBC0E009DAF86 /* XHCourseCatalogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalogCell.swift; sourceTree = "<group>"; };
 		57633599208ED343009DAF86 /* XHNetCourseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourseCell.swift; sourceTree = "<group>"; };
 		5763359B208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalogSectionHeaderView.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				5734270C2097490900108D1E /* XHNetCourseDetailCell.swift */,
+				57614F2E2099F43A00D9EDE5 /* XHNetCourseWareCell.swift */,
 			);
 			path = NetworkTeaching;
 			sourceTree = "<group>";
@@ -837,6 +840,7 @@
 				57A62ACA20887A4D00C9D5D2 /* UIImage+XHExtension.swift in Sources */,
 				57369A372098B5B000E2E0F9 /* XHPaper.swift in Sources */,
 				573C61852099A08A00B9F6DC /* XHQuestionList.swift in Sources */,
+				57614F2F2099F43A00D9EDE5 /* XHNetCourseWareCell.swift in Sources */,
 				5734270920973AE600108D1E /* XHSimpleNetCourse.swift in Sources */,
 				57A4E4FD209384C800F8BADE /* XHStorageManager.swift in Sources */,
 				57A62AEB20887B5600C9D5D2 /* AppDelegate.swift in Sources */,
