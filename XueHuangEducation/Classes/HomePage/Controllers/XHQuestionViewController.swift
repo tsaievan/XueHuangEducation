@@ -30,6 +30,10 @@ class XHQuestionViewController: XHTableViewController {
     
     // MARK: - Table view data source
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = dataSource?.count else {
             return 0
@@ -45,6 +49,10 @@ class XHQuestionViewController: XHTableViewController {
         }
         cell.model = datas[indexPath.row]
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     
     

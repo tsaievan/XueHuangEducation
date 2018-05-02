@@ -10,8 +10,17 @@ import UIKit
 
 class XHQuestionListCell: UITableViewCell {
     
+    lazy var countView: UIView = {
+        let tv = UIView()
+        tv.layer.cornerRadius = 2
+        tv.layer.masksToBounds = true
+        tv.backgroundColor = COLOR_QUESTION_COUNT_LABEL_LIGHT_GRAY
+        return tv
+    }()
+    
     lazy var titleLabel: UILabel = {
         let lbl = UILabel(text: "", textColor: nil, fontSize: 16)
+        lbl.textAlignment = .center
         return lbl
     }()
     
@@ -22,14 +31,20 @@ class XHQuestionListCell: UITableViewCell {
         return btn
     }()
     
+    lazy var countLabel: UILabel = {
+        let lbl = UILabel(text: "", textColor: .white, fontSize: 13)
+        lbl.textColor = .white
+        return lbl
+    }()
+    
     var model: XHCourseCatalog? {
         didSet {
             guard let m = model,
-                let isFold = m.isFold else {
+                let count = m.queCount else {
                     return
             }
             titleLabel.text = m.courseClassName
-            button.transform = isFold ? CGAffineTransform.identity : CGAffineTransform(rotationAngle: CGFloat(-Double.pi * 0.5))
+            countLabel.text = "\(count)"
         }
     }
     
@@ -47,15 +62,31 @@ class XHQuestionListCell: UITableViewCell {
 extension XHQuestionListCell {
     fileprivate func setupUI() {
         backgroundColor = .white
+        countView.addSubview(countLabel)
         contentView.addSubview(titleLabel)
         contentView.addSubview(button)
+        contentView.addSubview(countView)
         makeConstraints()
     }
     
     fileprivate func makeConstraints() {
+
+        countView.snp.makeConstraints { (make) in
+            make.centerY.equalTo(contentView)
+            make.left.equalTo(titleLabel.snp.right).offset(MARGIN_GLOBAL_10)
+            make.top.equalTo(countLabel).offset(-MARGIN_GLOBAL_2).priority(.low)
+            make.left.equalTo(countLabel).offset(-MARGIN_GLOBAL_5).priority(.low)
+            make.bottom.equalTo(countLabel).offset(MARGIN_GLOBAL_2).priority(.low)
+            make.right.equalTo(countLabel).offset(MARGIN_GLOBAL_5).priority(.low)
+        }
+        
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(contentView)
             make.left.equalTo(contentView).offset(MARGIN_GLOBAL_25)
+        }
+        
+        countLabel.snp.makeConstraints { (make) in
+            make.center.equalTo(countView)
         }
         
         button.snp.makeConstraints { (make) in
