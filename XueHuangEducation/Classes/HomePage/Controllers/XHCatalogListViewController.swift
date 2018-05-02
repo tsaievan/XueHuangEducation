@@ -52,6 +52,7 @@ class XHCatalogListViewController: XHBaseViewController {
                 let courseId = courseModel.id else {
                 return
             }
+            navigationItem.title = courseName + "." + "网校讲题"
             XHHomePage.getTeachCourseList(withCourseName: courseName, courseId: courseId, success: { (response, imageArr) in
                 let info = (response, imageArr)
                 self.teachVc.info = info
@@ -144,7 +145,12 @@ extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
         let courseName = courseModel.courseClassName else {
                 return
         }
+        if sender.tag == 0 { ///< 点击的是网校讲题的按钮
+            navigationItem.title = (model?.courseClassName ?? "") + "." + "网校讲题"
+        }
+        
         if sender.tag == 1 { ///< 点击的是在线做题的按钮
+            navigationItem.title = "在线做题"
             XHHomePage.getPaperList(withCourseClassId: courseId, success: { (response, title) in
                 self.themeVc.info = (response, title)
             }, failue: { (errorReason) in
@@ -153,6 +159,7 @@ extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
         }
         
         if sender.tag == 2 { ///< 点击的是在线问答的按钮
+            navigationItem.title = "在线问答"
             XHHomePage.getQuestionList(withEnterType: XHQuestionEnterType.answer, courseName: courseName, courseId: courseId, success: { (response) in
                 self.questionVc.info = response
             }, failue: { (errorReason) in
