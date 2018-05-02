@@ -57,8 +57,7 @@ class XHTeachViewController: XHTableViewController {
         tableView.tableFooterView = UIView()
     }
     
-    // MARK: - Table view data source
-    
+    // MARK: - Table view 的数据源和代理方法
     override func numberOfSections(in tableView: UITableView) -> Int {
         guard let count = dataSource?.count else {
             return 0
@@ -129,5 +128,11 @@ class XHTeachViewController: XHTableViewController {
             }
             return sectionView
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let netVc = XHNetCourseWareController()
+        navigationController?.pushViewController(netVc, animated: true)
+        
     }
 }
