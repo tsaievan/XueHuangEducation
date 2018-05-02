@@ -26,12 +26,10 @@ class XHTeach {
             "courseClassName" : courseName,
         ]
         XHNetwork.GET(url: URL_TO_NET_COURSE_WARE, params: params, success: { (response) in
-//            guard let responseJson = response as? [String : Any],
-//                let model = XHQuestionList(JSON: responseJson),
-//                let total = model.sfCouresCatalog,
-//                let questions = model.items else {
-//                    return
-//            }
+            guard let responseJson = response as? [String : Any],
+                let model = XHNetCourseWareList(JSON: responseJson) else {
+                    return
+            }
 //            total.queCount = model.totalCount
 //            var array = questions
 //            array.insert(total, at: 0)

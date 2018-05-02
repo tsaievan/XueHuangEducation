@@ -38,6 +38,8 @@
 		573E73032099E60E00DD41B2 /* XHTeach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573E73022099E60E00DD41B2 /* XHTeach.swift */; };
 		574E5A1A2089B4F8009EAF93 /* XHRegistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574E5A192089B4F8009EAF93 /* XHRegistView.swift */; };
 		574E5A1C2089CEE2009EAF93 /* XHGetPasswordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574E5A1B2089CEE2009EAF93 /* XHGetPasswordResult.swift */; };
+		57614F2B2099EB6200D9EDE5 /* XHNetCourseWareList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57614F2A2099EB6200D9EDE5 /* XHNetCourseWareList.swift */; };
+		57614F2D2099EB8500D9EDE5 /* XHNetCourseWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57614F2C2099EB8500D9EDE5 /* XHNetCourseWare.swift */; };
 		57633598208EBC0E009DAF86 /* XHCourseCatalogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57633597208EBC0E009DAF86 /* XHCourseCatalogCell.swift */; };
 		5763359A208ED343009DAF86 /* XHNetCourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57633599208ED343009DAF86 /* XHNetCourseCell.swift */; };
 		5763359C208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763359B208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift */; };
@@ -124,6 +126,8 @@
 		573E73022099E60E00DD41B2 /* XHTeach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTeach.swift; sourceTree = "<group>"; };
 		574E5A192089B4F8009EAF93 /* XHRegistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHRegistView.swift; sourceTree = "<group>"; };
 		574E5A1B2089CEE2009EAF93 /* XHGetPasswordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHGetPasswordResult.swift; sourceTree = "<group>"; };
+		57614F2A2099EB6200D9EDE5 /* XHNetCourseWareList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourseWareList.swift; sourceTree = "<group>"; };
+		57614F2C2099EB8500D9EDE5 /* XHNetCourseWare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourseWare.swift; sourceTree = "<group>"; };
 		57633597208EBC0E009DAF86 /* XHCourseCatalogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalogCell.swift; sourceTree = "<group>"; };
 		57633599208ED343009DAF86 /* XHNetCourseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourseCell.swift; sourceTree = "<group>"; };
 		5763359B208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalogSectionHeaderView.swift; sourceTree = "<group>"; };
@@ -254,6 +258,8 @@
 				573E73022099E60E00DD41B2 /* XHTeach.swift */,
 				570D3A7020958A72005E03FF /* XHThemeList.swift */,
 				5734270820973AE600108D1E /* XHSimpleNetCourse.swift */,
+				57614F2A2099EB6200D9EDE5 /* XHNetCourseWareList.swift */,
+				57614F2C2099EB8500D9EDE5 /* XHNetCourseWare.swift */,
 			);
 			path = NetworkTeaching;
 			sourceTree = "<group>";
@@ -788,6 +794,7 @@
 				57A62B162088B73400C9D5D2 /* XHLogin.swift in Sources */,
 				573C61872099B14D00B9F6DC /* XHQuestionListCell.swift in Sources */,
 				57A62AF620887F0300C9D5D2 /* XHAlertHUD.swift in Sources */,
+				57614F2D2099EB8500D9EDE5 /* XHNetCourseWare.swift in Sources */,
 				572B8C9D208E06F8005EC6CD /* XHHomePage.swift in Sources */,
 				57D5010B2089A92F00DD0DBD /* UIDevice+XHExtension.swift in Sources */,
 				57A62B1F2088B7BE00C9D5D2 /* XHGetAuthCodeResult.swift in Sources */,
@@ -811,6 +818,7 @@
 				57A62AC720887A4D00C9D5D2 /* String+XHExtension.swift in Sources */,
 				57369A2D2098518E00E2E0F9 /* XHTeachSectionHeaderView.swift in Sources */,
 				57A62B1A2088B73400C9D5D2 /* XHBaseViewController.swift in Sources */,
+				57614F2B2099EB6200D9EDE5 /* XHNetCourseWareList.swift in Sources */,
 				57A62AC620887A4D00C9D5D2 /* Bundle+XHExtension.swift in Sources */,
 				573427032096E9F600108D1E /* XHTeachViewController.swift in Sources */,
 				570D3A7620959587005E03FF /* XHProfileView.swift in Sources */,

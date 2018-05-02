@@ -79,8 +79,8 @@ class XHTeachViewController: XHTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_NETCOURSE_DETAIL, for: indexPath)
         guard let newCell = cell as? XHNetCourseDetailCell,
-        let datas = dataSource else {
-            return UITableViewCell()
+            let datas = dataSource else {
+                return UITableViewCell()
         }
         let sectionModel = datas[indexPath.section]
         guard let models = sectionModel.simpleNetCourses else {
@@ -138,9 +138,9 @@ class XHTeachViewController: XHTableViewController {
         }
         let sectionModel = datas[indexPath.section]
         guard let models = sectionModel.simpleNetCourses,
-        let courseName = models[indexPath.row].courseClassName,
-        let courseId = models[indexPath.row].courseClassId else {
-            return
+            let courseName = models[indexPath.row].netCourseName,
+            let courseId = models[indexPath.row].netCourseId else {
+                return
         }
         XHTeach.getNetcourseware(withCourseName: courseName, courseId: courseId, success: { (response) in
             
