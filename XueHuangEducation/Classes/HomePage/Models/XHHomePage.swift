@@ -14,7 +14,7 @@ typealias XHGetTeachCourseListSuccess = ([XHCourseCatalog], String?) -> ()
 typealias XHGetTeachCourseListFailue = (String) -> ()
 typealias XHGetPaperListSuccess = ([XHCourseCatalog], String?) -> ()
 typealias XHGetPaperListFailue = (String) -> ()
-typealias XHGetQuestionListSuccess = (Any) -> ()
+typealias XHGetQuestionListSuccess = ([XHCourseCatalog]) -> ()
 typealias XHGetQuestionListFailue = (String) -> ()
 
 enum XHQuestionEnterType: String {
@@ -185,8 +185,8 @@ class XHHomePage {
             var typeDict = [String : String]()
             for type in types {
                 guard let name = type.paperTypeName,
-                let id = type.id else {
-                    continue
+                    let id = type.id else {
+                        continue
                 }
                 typeDict[id] = name
             }
@@ -222,7 +222,6 @@ class XHHomePage {
         }
     }
     
-    
     /// 获取在线答疑主页面列表的方法
     ///
     /// - Parameters:
@@ -240,10 +239,15 @@ class XHHomePage {
         ]
         XHNetwork.GET(url: URL_TO_QUESTION_LIST, params: params, success: { (response) in
             guard let responseJson = response as? [String : Any],
-                let model = XHQuestionList(JSON: responseJson) else {
+                let model = XHQuestionList(JSON: responseJson),
+                let total = model.sfCouresCatalog,
+                let questions = model.items else {
                     return
             }
-            
+            total.queCount = model.totalCount
+            var array = questions
+            array.insert(total, at: 0)
+            success?(array)
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {

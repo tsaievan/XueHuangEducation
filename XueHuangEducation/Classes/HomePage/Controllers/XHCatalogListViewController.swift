@@ -154,7 +154,7 @@ extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
         
         if sender.tag == 2 { ///< 点击的是在线问答的按钮
             XHHomePage.getQuestionList(withEnterType: XHQuestionEnterType.answer, courseName: courseName, courseId: courseId, success: { (response) in
-                
+                self.questionVc.info = response
             }, failue: { (errorReason) in
                 XHAlertHUD.showError(withStatus: errorReason)
             })

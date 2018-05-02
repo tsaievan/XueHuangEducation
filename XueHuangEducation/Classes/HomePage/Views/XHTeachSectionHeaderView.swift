@@ -19,7 +19,7 @@ class XHTeachSectionHeaderView: UITableViewHeaderFooterView {
     
     lazy var button: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.setImage(UIImage(named: "image_homepage_rightArrow"), for: .normal)
+        btn.setImage(UIImage(named: "image_homepage_downArrow"), for: .normal)
         btn.sizeToFit()
         return btn
     }()

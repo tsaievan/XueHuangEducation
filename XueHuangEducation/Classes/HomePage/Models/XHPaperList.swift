@@ -18,6 +18,7 @@ class XHPaperList: NSObject, Mappable, NSCoding {
     var tCourseCatalogs: [XHCourseCatalog]?
     var paperTypes: [XHPaperType]?
     var paperLists: [XHPaper]?
+
     
     
     required init?(map: Map) {

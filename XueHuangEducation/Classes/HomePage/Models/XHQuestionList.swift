@@ -18,7 +18,7 @@ class XHQuestionList: NSObject, Mappable, NSCoding {
     var courseClassId: String?
     var enterType: String?
     var actionType: String?
-    
+    var totalCount: Int?
     
     required init?(map: Map) {
     }
@@ -31,6 +31,7 @@ class XHQuestionList: NSObject, Mappable, NSCoding {
         items                            <- map["items"]
         enterType                        <- map["enterType"]
         actionType                       <- map["actionType"]
+        totalCount                       <- map["totalCount"]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,6 +42,7 @@ class XHQuestionList: NSObject, Mappable, NSCoding {
         items = aDecoder.decodeObject(forKey: "items") as? [XHCourseCatalog]
         enterType = aDecoder.decodeObject(forKey: "enterType") as? String
         actionType = aDecoder.decodeObject(forKey: "actionType") as? String
+        totalCount = aDecoder.decodeObject(forKey: "totalCount") as? Int
     }
     
     func encode(with aCoder: NSCoder) {
@@ -51,6 +53,7 @@ class XHQuestionList: NSObject, Mappable, NSCoding {
         aCoder.encode(items, forKey: "items")
         aCoder.encode(enterType, forKey: "enterType")
         aCoder.encode(actionType, forKey: "actionType")
+        aCoder.encode(totalCount, forKey: "totalCount")
     }
 
 }
