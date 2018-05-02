@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias XHGetNetcoursewareSuccess = (Any) -> ()
+typealias XHGetNetcoursewareSuccess = ([XHNetCourseWare]) -> ()
 typealias XHNetcoursewareFailue = (String) -> ()
 
 class XHTeach {
@@ -27,13 +27,11 @@ class XHTeach {
         ]
         XHNetwork.GET(url: URL_TO_NET_COURSE_WARE, params: params, success: { (response) in
             guard let responseJson = response as? [String : Any],
-                let model = XHNetCourseWareList(JSON: responseJson) else {
+                let model = XHNetCourseWareList(JSON: responseJson),
+            let courses = model.netCoursewares else {
                     return
             }
-//            total.queCount = model.totalCount
-//            var array = questions
-//            array.insert(total, at: 0)
-//            success?(array)
+            success?(courses)
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {
