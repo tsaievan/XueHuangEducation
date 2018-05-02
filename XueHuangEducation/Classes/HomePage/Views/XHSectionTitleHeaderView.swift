@@ -13,8 +13,9 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
     lazy var titleButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(named: "catalogList_listen_small_button"), for: .normal)
-        btn.setTitle("讲题列表", for: .normal)
-        btn.setTitleColor(COLOR_GLOBAL_DARK_GRAY, for: .normal)
+        btn.setTitle(" 讲题列表", for: .normal)
+        btn.setTitleColor(COLOR_PAPAER_TYPE_BUTTON_TITLE, for: .normal)
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: FONT_SIZE_16)
         btn.sizeToFit()
         return btn
     }()

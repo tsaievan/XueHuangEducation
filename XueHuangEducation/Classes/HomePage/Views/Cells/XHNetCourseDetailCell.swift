@@ -72,6 +72,7 @@ extension XHNetCourseDetailCell {
         listenButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(iconImageView)
             make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_15)
+            make.width.equalTo(28)
         }
         
         titleLabel.snp.makeConstraints { (make) in
