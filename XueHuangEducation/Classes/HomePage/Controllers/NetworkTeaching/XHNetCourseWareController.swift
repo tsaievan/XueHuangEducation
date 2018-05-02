@@ -54,4 +54,29 @@ class XHNetCourseWareController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let datas = dataSouce else {
+            return
+        }
+        let model = datas[indexPath.row]
+        guard let type = model.state else {
+            return
+        }
+        if type == XHNetCourseWareState.free.rawValue { ///< 表明是试听课程
+            guard let videoUrl = model.video else {
+                return
+            }
+            let playerVc = XHPlayNetCourseViewController()
+            navigationController?.pushViewController(playerVc, animated: true)
+            XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: { (videoUrlString) in
+                model.video = videoUrlString
+                playerVc.netwareModel = model
+            }, failue: { (errorReason) in
+                XHAlertHUD.showError(withStatus: errorReason)
+            })
+        }else { ///< 表明是收费课程, 要先判断是否登录, 没有登录的话要先弹出登录框
+            
+        }
+    }
 }

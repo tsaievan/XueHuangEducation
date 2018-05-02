@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum XHNetCourseWareState: Int{
+    case free = 0
+    case charge = 2
+}
+
 class XHNetCourseWareCell: UITableViewCell {
     var model: XHNetCourseWare? {
         didSet {
@@ -18,6 +23,13 @@ class XHNetCourseWareCell: UITableViewCell {
             }
             titleLabel.text = titleText
             teacherLabel.text = "老师: \(teacherName)"
+            if let state = modelInfo.state {
+                if state == XHNetCourseWareState.free.rawValue {
+                    listenButton.titleLabel?.text = "试听"
+                }else {
+                    listenButton.titleLabel?.text = "付费"
+                }
+            }
         }
     }
     

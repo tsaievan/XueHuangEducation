@@ -13,17 +13,30 @@ import ZFPlayer
 
 class XHPlayNetCourseViewController: XHBaseViewController {
     
-    lazy var imageView: UIImageView = {
-        let imageV = UIImageView()
-        imageV.image = UIImage(named: "image_video_background")
-        imageV.contentMode = .scaleAspectFill
-        return imageV
-    }()
+    var netwareModel: XHNetCourseWare? {
+        didSet {
+            XHAlertHUD.dismiss()
+            guard let videoModel = netwareModel,
+                let videoString = videoModel.video,
+                ///< 防止转换url失败, 必须添加下面的代码
+                let newStr = (videoString as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue),
+                let url = URL(string: newStr) else {
+                    return
+            }
+            
+            let title = (videoModel.netCoursewareName ?? "") + " " + (videoModel.teacher ?? "")
+            self.navigationItem.title = "展示视频"
+            playerModel.title = title
+            playerModel.videoURL = url
+            playerView.playerControlView(controlView, playerModel: playerModel)
+            playerView.autoPlayTheVideo()
+        }
+    }
+    
     
     var model: XHNetCourse? {
         didSet {
             XHAlertHUD.dismiss()
-            imageView.isHidden = true
             guard let videoModel = model,
                 let videoString = videoModel.video,
                 ///< 防止转换url失败, 必须添加下面的代码
@@ -68,10 +81,8 @@ class XHPlayNetCourseViewController: XHBaseViewController {
 // MARK: - 设置UI
 extension XHPlayNetCourseViewController {
     fileprivate func setupUI() {
-        
         view.backgroundColor = .black
         view.addSubview(playerView)
-        view.addSubview(imageView)
     }
     
     fileprivate func makeConstaints() {
@@ -79,10 +90,6 @@ extension XHPlayNetCourseViewController {
             make.top.equalTo(view).offset(20);
             make.left.right.equalTo(view);
             make.height.equalTo(playerView.snp.width).multipliedBy(9.0/16.0)
-        }
-        
-        imageView.snp.makeConstraints { (make) in
-            make.edges.equalTo(view)
         }
     }
 }
