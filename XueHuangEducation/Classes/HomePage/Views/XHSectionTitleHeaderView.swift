@@ -77,7 +77,7 @@ extension XHSectionTitleHeaderView {
         headerView.snp.makeConstraints { (make) in
             make.top.equalTo(seperatorView.snp.bottom)
             make.left.right.equalTo(contentView)
-            make.height.equalTo(50)
+            make.height.equalTo(50).priority(.low)
         }
     }
 }

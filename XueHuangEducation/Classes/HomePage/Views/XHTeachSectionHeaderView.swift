@@ -51,7 +51,7 @@ class XHTeachSectionHeaderView: UITableViewHeaderFooterView {
 // MARK: - 设置UI
 extension XHTeachSectionHeaderView {
     fileprivate func setupUI() {
-        backgroundColor = .white
+        backgroundView?.backgroundColor = .white
         addSubview(titleLabel)
         addSubview(button)
         makeConstraints()
