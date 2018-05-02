@@ -76,6 +76,7 @@
 		57A62B1F2088B7BE00C9D5D2 /* XHGetAuthCodeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62B1E2088B7BE00C9D5D2 /* XHGetAuthCodeResult.swift */; };
 		57A62B212088E6D300C9D5D2 /* XHMobileLoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62B202088E6D300C9D5D2 /* XHMobileLoginResult.swift */; };
 		57A8AF372099522A001FE55B /* XHPaperDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A8AF362099522A001FE55B /* XHPaperDetailCell.swift */; };
+		57A8AF3920996A51001FE55B /* XHPaperSectionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A8AF3820996A51001FE55B /* XHPaperSectionTitleView.swift */; };
 		57B8F766207E2FC20092E3E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57B8F765207E2FC20092E3E3 /* Assets.xcassets */; };
 		57B8F769207E2FC20092E3E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57B8F767207E2FC20092E3E3 /* LaunchScreen.storyboard */; };
 		57CA59D3208B05D6004C6393 /* XHResetPwdNextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA59D2208B05D6004C6393 /* XHResetPwdNextViewController.swift */; };
@@ -158,6 +159,7 @@
 		57A62B1E2088B7BE00C9D5D2 /* XHGetAuthCodeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHGetAuthCodeResult.swift; sourceTree = "<group>"; };
 		57A62B202088E6D300C9D5D2 /* XHMobileLoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHMobileLoginResult.swift; sourceTree = "<group>"; };
 		57A8AF362099522A001FE55B /* XHPaperDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHPaperDetailCell.swift; sourceTree = "<group>"; };
+		57A8AF3820996A51001FE55B /* XHPaperSectionTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHPaperSectionTitleView.swift; sourceTree = "<group>"; };
 		57B8F75B207E2FC20092E3E3 /* XueHuangEducation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XueHuangEducation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57B8F765207E2FC20092E3E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57B8F768207E2FC20092E3E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				577500162096AB6C00DF9AC5 /* XHCatalogListSegmentView.swift */,
 				57369A2C2098518E00E2E0F9 /* XHTeachSectionHeaderView.swift */,
 				57369A2E2098866C00E2E0F9 /* XHSectionTitleHeaderView.swift */,
+				57A8AF3820996A51001FE55B /* XHPaperSectionTitleView.swift */,
 				57633596208EBBD4009DAF86 /* Cells */,
 			);
 			path = Views;
@@ -667,6 +670,7 @@
 				5734270B2097489C00108D1E /* XHNetCourseHeaderView.swift in Sources */,
 				5795B459208D7D8D00ECD58F /* XHResult.swift in Sources */,
 				57A8AF372099522A001FE55B /* XHPaperDetailCell.swift in Sources */,
+				57A8AF3920996A51001FE55B /* XHPaperSectionTitleView.swift in Sources */,
 				57779809209177D400BE74AE /* UIResponder+XHExtension.swift in Sources */,
 				57A62B182088B73400C9D5D2 /* XHLoginSegmentView.swift in Sources */,
 				572B8C9F208E0944005EC6CD /* XHCourseCatalog.swift in Sources */,

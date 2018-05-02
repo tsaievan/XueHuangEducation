@@ -1,21 +1,23 @@
 //
-//  XHSectionTitleHeaderView.swift
+//  XHPaperSectionTitleView.swift
 //  XueHuangEducation
 //
-//  Created by tsaievan on 1/5/18.
+//  Created by tsaievan on 2/5/18.
 //  Copyright © 2018年 tsaievan. All rights reserved.
 //
 
 import UIKit
 
-class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
+class XHPaperSectionTitleView: UITableViewHeaderFooterView {
+    lazy var titleLabel: UILabel = {
+        let lbl = UILabel(text: "", textColor: COLOR_PAPAER_TYPE_BUTTON_TITLE, fontSize: FONT_SIZE_16)
+        lbl.font = UIFont.boldSystemFont(ofSize: FONT_SIZE_16)
+        return lbl
+    }()
     
-    lazy var titleButton: UIButton = {
+    lazy var moreButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.setImage(UIImage(named: "catalogList_listen_small_button"), for: .normal)
-        btn.setTitle("讲题列表", for: .normal)
-        btn.setTitleColor(COLOR_GLOBAL_DARK_GRAY, for: .normal)
-        btn.sizeToFit()
+        btn.setImage(UIImage(named: "button_paperList_more"), for: .normal)
         return btn
     }()
     
@@ -30,9 +32,13 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
         return header
     }()
     
-    var model: XHCourseCatalog? {
+    var info: (model: XHCourseCatalog, text: String?)?{
         didSet {
-            headerView.model = model
+            guard let modelInfo = info else {
+                return
+            }
+            headerView.model = modelInfo.model
+            titleLabel.text = modelInfo.text
         }
     }
     
@@ -52,25 +58,31 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
     }
 }
 
-extension XHSectionTitleHeaderView {
+extension XHPaperSectionTitleView {
     fileprivate func setupUI() {
-        contentView.addSubview(titleButton)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(moreButton)
         contentView.addSubview(seperatorView)
         contentView.addSubview(headerView)
         makeConstraints()
     }
     
     fileprivate func makeConstraints() {
-        titleButton.snp.makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(contentView).offset(MARGIN_GLOBAL_10)
             make.left.equalTo(contentView).offset(MARGIN_GLOBAL_15)
+        }
+        
+        moreButton.snp.makeConstraints { (make) in
+            make.centerY.equalTo(titleLabel)
+            make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_15)
         }
         
         seperatorView.snp.makeConstraints { (make) in
             make.width.equalTo(contentView)
             make.height.equalTo(0.5)
             make.leading.trailing.equalTo(contentView)
-            make.top.equalTo(titleButton.snp.bottom).offset(MARGIN_GLOBAL_10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(MARGIN_GLOBAL_10)
         }
         
         headerView.snp.makeConstraints { (make) in
@@ -80,3 +92,4 @@ extension XHSectionTitleHeaderView {
         }
     }
 }
+

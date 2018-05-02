@@ -12,19 +12,14 @@ class XHThemeViewController: XHTableViewController {
     
     var dataSource: [XHCourseCatalog]?
     
+    var mainTitle: String?
+    
     var info: (response: [XHCourseCatalog], titleText: String?)? {
         didSet {
-            guard let modelInfo = info,
-                let titleString = modelInfo.titleText else {
+            guard let modelInfo = info else {
                     return
             }
-//            if imageUrl == "" {
-//                tableView.tableHeaderView = UIView(frame: .zero)
-//                ///< 这里需要设置一下contentInset的缩进, 不然很丑
-//                tableView.contentInset = UIEdgeInsetsMake(-30, 0, 0, 0)
-//            }else {
-//                tableView.tableHeaderView = cycle
-//            }
+            mainTitle = modelInfo.titleText
             dataSource = modelInfo.response
             tableView.reloadData()
         }
@@ -33,9 +28,10 @@ class XHThemeViewController: XHTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .cyan
+        tableView.separatorStyle = .none
         tableView.register(XHPaperDetailCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_PAPER_DETAIL)
         tableView.register(XHTeachSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: HEADERVIEW_IDENTIFIER_TEACH_TABLEVIEW)
-        tableView.register(XHSectionTitleHeaderView.self, forHeaderFooterViewReuseIdentifier: HEADER_TITLE_VIEW_IDENTIFIER_TEACH_TABLEVIEW)
+        tableView.register(XHPaperSectionTitleView.self, forHeaderFooterViewReuseIdentifier: HEADER_TITLE_VIEW_IDENTIFIER_PAPER_TABLEVIEW)
         ///< 这两句代码是使得section之间的view不再有缝隙
         tableView.sectionFooterHeight = 0.01
         tableView.sectionHeaderHeight = 0.01
@@ -83,7 +79,7 @@ class XHThemeViewController: XHTableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 100
+            return 90
         }
         return 50
     }
@@ -94,10 +90,10 @@ class XHThemeViewController: XHTableViewController {
         }
         let sectionModel = datas[section]
         if section == 0 {
-            guard let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HEADER_TITLE_VIEW_IDENTIFIER_TEACH_TABLEVIEW) as? XHSectionTitleHeaderView else {
+            guard let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HEADER_TITLE_VIEW_IDENTIFIER_PAPER_TABLEVIEW) as? XHPaperSectionTitleView else {
                 return nil
             }
-            sectionView.model = sectionModel
+            sectionView.info = (sectionModel, mainTitle)
             sectionView.tapSectionClosure = {
                 sectionModel.isFold = !sectionModel.isFold!
                 self.tableView.reloadData()

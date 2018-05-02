@@ -8,21 +8,7 @@
 
 import UIKit
 
-class XHPaperDetailCell: UITableViewCell {
-    
-    var info: XHPaper? {
-        didSet {
-            guard let model = info,
-                let buttonTitle = model.typeName,
-                let labelText = model.paperName else {
-                    return
-            }
-            practiceButton.setTitle(buttonTitle, for: .normal)
-            practiceButton.setTitleColor(COLOR_PAPAER_TYPE_BUTTON_TITLE, for: .normal)
-            titleLabel.text = labelText
-        }
-    }
-    
+class XHPaperDetailCellContentView: UIView {
     lazy var practiceButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(named: "button_paperList_practice"), for: .normal)
@@ -50,6 +36,80 @@ class XHPaperDetailCell: UITableViewCell {
         return lbl
     }()
     
+    var info: XHPaper? {
+        didSet {
+            guard let model = info,
+                let buttonTitle = model.typeName,
+                let labelText = model.paperName else {
+                    return
+            }
+            practiceButton.setTitle(buttonTitle, for: .normal)
+            practiceButton.setTitleColor(COLOR_PAPAER_TYPE_BUTTON_TITLE, for: .normal)
+            titleLabel.text = labelText
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension XHPaperDetailCellContentView {
+    fileprivate func setupUI() {
+        backgroundColor = COLOR_PAPER_CELL_LIGHT_GRAY
+        addSubview(practiceButton)
+        addSubview(seperatorView)
+        addSubview(iconImageView)
+        addSubview(titleLabel)
+        makeConstraints()
+    }
+    
+    fileprivate func makeConstraints() {
+        practiceButton.snp.makeConstraints { (make) in
+            make.top.equalTo(self).offset(MARGIN_GLOBAL_5)
+            make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
+        }
+        
+        seperatorView.snp.makeConstraints { (make) in
+            make.top.equalTo(practiceButton.snp.bottom).offset(MARGIN_GLOBAL_5)
+            make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
+            make.right.equalTo(self)
+            make.height.equalTo(0.5)
+        }
+        
+        iconImageView.snp.makeConstraints { (make) in
+            make.top.equalTo(seperatorView.snp.bottom).offset(MARGIN_GLOBAL_5)
+            make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
+            make.bottom.equalTo(self).offset(-MARGIN_GLOBAL_10)
+        }
+        
+        titleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(iconImageView).offset(MARGIN_GLOBAL_10)
+            make.left.equalTo(iconImageView.snp.right).offset(MARGIN_GLOBAL_10)
+        }
+    }
+}
+
+class XHPaperDetailCell: UITableViewCell {
+    
+    lazy var container: XHPaperDetailCellContentView = {
+        let cv = XHPaperDetailCellContentView()
+        cv.layer.cornerRadius = 5
+        cv.layer.masksToBounds = true
+        return cv
+    }()
+    
+    var info: XHPaper? {
+        didSet {
+            container.info = info
+        }
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -62,35 +122,16 @@ class XHPaperDetailCell: UITableViewCell {
 
 extension XHPaperDetailCell {
     fileprivate func setupUI() {
-        contentView.addSubview(practiceButton)
-        contentView.addSubview(seperatorView)
-        contentView.addSubview(iconImageView)
-        contentView.addSubview(titleLabel)
+        contentView.addSubview(container)
         makeConstraints()
     }
     
     fileprivate func makeConstraints() {
-        practiceButton.snp.makeConstraints { (make) in
+        container.snp.makeConstraints { (make) in
             make.top.equalTo(contentView).offset(MARGIN_GLOBAL_5)
-            make.left.equalTo(contentView).offset(MARGIN_GLOBAL_15)
-        }
-        
-        seperatorView.snp.makeConstraints { (make) in
-            make.top.equalTo(practiceButton.snp.bottom).offset(MARGIN_GLOBAL_5)
-            make.left.equalTo(contentView).offset(MARGIN_GLOBAL_15)
-            make.right.equalTo(contentView)
-            make.height.equalTo(0.5)
-        }
-        
-        iconImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(seperatorView.snp.bottom).offset(MARGIN_GLOBAL_5)
-            make.left.equalTo(contentView).offset(MARGIN_GLOBAL_15)
-            make.bottom.equalTo(contentView).offset(-MARGIN_GLOBAL_10)
-        }
-        
-        titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(iconImageView).offset(MARGIN_GLOBAL_10)
-            make.left.equalTo(iconImageView.snp.right).offset(MARGIN_GLOBAL_10)
+            make.left.equalTo(contentView).offset(MARGIN_GLOBAL_10)
+            make.bottom.equalTo(contentView).offset(-MARGIN_GLOBAL_5)
+            make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_10)
         }
     }
 }
