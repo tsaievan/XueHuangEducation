@@ -148,7 +148,7 @@ extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
             }
             XHHomePage.getPaperList(withCourseClassId: courseId, success: { (response, title) in
                 print("\(response), \(title)")
-                
+                self.themeVc.info = (response, title)
                 
             }, failue: { (errorReason) in
                 XHAlertHUD.showError(withStatus: errorReason)

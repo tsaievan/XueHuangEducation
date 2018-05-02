@@ -75,6 +75,7 @@
 		57A62B1D2088B73400C9D5D2 /* XHProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62B132088B73400C9D5D2 /* XHProfileViewController.swift */; };
 		57A62B1F2088B7BE00C9D5D2 /* XHGetAuthCodeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62B1E2088B7BE00C9D5D2 /* XHGetAuthCodeResult.swift */; };
 		57A62B212088E6D300C9D5D2 /* XHMobileLoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A62B202088E6D300C9D5D2 /* XHMobileLoginResult.swift */; };
+		57A8AF372099522A001FE55B /* XHPaperDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A8AF362099522A001FE55B /* XHPaperDetailCell.swift */; };
 		57B8F766207E2FC20092E3E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57B8F765207E2FC20092E3E3 /* Assets.xcassets */; };
 		57B8F769207E2FC20092E3E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57B8F767207E2FC20092E3E3 /* LaunchScreen.storyboard */; };
 		57CA59D3208B05D6004C6393 /* XHResetPwdNextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA59D2208B05D6004C6393 /* XHResetPwdNextViewController.swift */; };
@@ -156,6 +157,7 @@
 		57A62B132088B73400C9D5D2 /* XHProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XHProfileViewController.swift; sourceTree = "<group>"; };
 		57A62B1E2088B7BE00C9D5D2 /* XHGetAuthCodeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHGetAuthCodeResult.swift; sourceTree = "<group>"; };
 		57A62B202088E6D300C9D5D2 /* XHMobileLoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHMobileLoginResult.swift; sourceTree = "<group>"; };
+		57A8AF362099522A001FE55B /* XHPaperDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHPaperDetailCell.swift; sourceTree = "<group>"; };
 		57B8F75B207E2FC20092E3E3 /* XueHuangEducation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XueHuangEducation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57B8F765207E2FC20092E3E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57B8F768207E2FC20092E3E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				57633597208EBC0E009DAF86 /* XHCourseCatalogCell.swift */,
 				57633599208ED343009DAF86 /* XHNetCourseCell.swift */,
 				5734270C2097490900108D1E /* XHNetCourseDetailCell.swift */,
+				57A8AF362099522A001FE55B /* XHPaperDetailCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 				572B8CA3208E098C005EC6CD /* XHNetCourse.swift in Sources */,
 				5734270B2097489C00108D1E /* XHNetCourseHeaderView.swift in Sources */,
 				5795B459208D7D8D00ECD58F /* XHResult.swift in Sources */,
+				57A8AF372099522A001FE55B /* XHPaperDetailCell.swift in Sources */,
 				57779809209177D400BE74AE /* UIResponder+XHExtension.swift in Sources */,
 				57A62B182088B73400C9D5D2 /* XHLoginSegmentView.swift in Sources */,
 				572B8C9F208E0944005EC6CD /* XHCourseCatalog.swift in Sources */,
