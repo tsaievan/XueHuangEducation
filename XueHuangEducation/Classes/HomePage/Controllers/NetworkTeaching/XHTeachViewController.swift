@@ -133,6 +133,19 @@ class XHTeachViewController: XHTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let netVc = XHNetCourseWareController()
         navigationController?.pushViewController(netVc, animated: true)
-        
+        guard let datas = dataSource else {
+            return
+        }
+        let sectionModel = datas[indexPath.section]
+        guard let models = sectionModel.simpleNetCourses,
+        let courseName = models[indexPath.row].courseClassName,
+        let courseId = models[indexPath.row].courseClassId else {
+            return
+        }
+        XHTeach.getNetcourseware(withCourseName: courseName, courseId: courseId, success: { (response) in
+            
+        }) { (errorReason) in
+            
+        }
     }
 }
