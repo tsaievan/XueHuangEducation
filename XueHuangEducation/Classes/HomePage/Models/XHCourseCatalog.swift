@@ -34,6 +34,8 @@ class XHCourseCatalog: XHRoutine {
     var simpleNetCourses: [XHSimpleNetCourse]?
     ///< 考卷数组
     var paperLists: [XHPaper]?
+    ///< 问答的条数
+    var queCount: Int?
     
     required init?(map: Map) {
         super.init(map: map)
@@ -53,6 +55,7 @@ class XHCourseCatalog: XHRoutine {
         isFold                          <- map["isFold"]
         imgAddr                         <- map["imgAddr"]
         paperLists                      <- map["paperLists"]
+        queCount                        <- map["queCount"]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -69,6 +72,7 @@ class XHCourseCatalog: XHRoutine {
         isFold = aDecoder.decodeObject(forKey: "isFold") as? Bool
         imgAddr = aDecoder.decodeObject(forKey: "imgAddr") as? String
         paperLists = aDecoder.decodeObject(forKey: "paperLists") as? [XHPaper]
+        queCount = aDecoder.decodeObject(forKey: "queCount") as? Int
     }
     
     override func encode(with aCoder: NSCoder) {
@@ -85,5 +89,6 @@ class XHCourseCatalog: XHRoutine {
         aCoder.encode(isFold, forKey: "isFold")
         aCoder.encode(imgAddr, forKey: "imgAddr")
         aCoder.encode(paperLists, forKey: "paperLists")
+        aCoder.encode(queCount, forKey: "queCount")
     }
 }

@@ -1,23 +1,23 @@
 //
-//  XHPaperList.swift
+//  XHQuestionList.swift
 //  XueHuangEducation
 //
-//  Created by tsaievan on 1/5/18.
+//  Created by tsaievan on 2/5/18.
 //  Copyright © 2018年 tsaievan. All rights reserved.
 //
 
 import UIKit
 import ObjectMapper
 
-class XHPaperList: NSObject, Mappable, NSCoding {
+class XHQuestionList: NSObject, Mappable, NSCoding {
     
     var sCourseCatalogs: [XHCourseCatalog]?
-    var courseClassId: String?
-    var courseClassName: String?
     var sfCouresCatalog: XHCourseCatalog?
-    var tCourseCatalogs: [XHCourseCatalog]?
-    var paperTypes: [XHPaperType]?
-    var paperLists: [XHPaper]?
+    var items: [XHCourseCatalog]?
+    var courseClassName: String?
+    var courseClassId: String?
+    var enterType: String?
+    var actionType: String?
     
     
     required init?(map: Map) {
@@ -28,9 +28,9 @@ class XHPaperList: NSObject, Mappable, NSCoding {
         courseClassId                    <- map["courseClassId"]
         courseClassName                  <- map["courseClassName"]
         sfCouresCatalog                  <- map["sfCouresCatalog"]
-        tCourseCatalogs                  <- map["tCourseCatalogs"]
-        paperTypes                       <- map["paperTypes"]
-        paperLists                       <- map["paperLists"]
+        items                            <- map["items"]
+        enterType                        <- map["enterType"]
+        actionType                       <- map["actionType"]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,9 +38,9 @@ class XHPaperList: NSObject, Mappable, NSCoding {
         courseClassId = aDecoder.decodeObject(forKey: "courseClassId") as? String
         courseClassName = aDecoder.decodeObject(forKey: "courseClassName") as? String
         sfCouresCatalog = aDecoder.decodeObject(forKey: "sfCouresCatalog") as? XHCourseCatalog
-        tCourseCatalogs = aDecoder.decodeObject(forKey: "tCourseCatalogs") as? [XHCourseCatalog]
-        paperTypes = aDecoder.decodeObject(forKey: "paperTypes") as? [XHPaperType]
-        paperLists = aDecoder.decodeObject(forKey: "paperLists") as? [XHPaper]
+        items = aDecoder.decodeObject(forKey: "items") as? [XHCourseCatalog]
+        enterType = aDecoder.decodeObject(forKey: "enterType") as? String
+        actionType = aDecoder.decodeObject(forKey: "actionType") as? String
     }
     
     func encode(with aCoder: NSCoder) {
@@ -48,8 +48,9 @@ class XHPaperList: NSObject, Mappable, NSCoding {
         aCoder.encode(courseClassId, forKey: "courseClassId")
         aCoder.encode(courseClassName, forKey: "courseClassName")
         aCoder.encode(sfCouresCatalog, forKey: "sfCouresCatalog")
-        aCoder.encode(tCourseCatalogs, forKey: "tCourseCatalogs")
-        aCoder.encode(paperTypes, forKey: "paperTypes")
-        aCoder.encode(paperLists, forKey: "paperLists")
+        aCoder.encode(items, forKey: "items")
+        aCoder.encode(enterType, forKey: "enterType")
+        aCoder.encode(actionType, forKey: "actionType")
     }
+
 }

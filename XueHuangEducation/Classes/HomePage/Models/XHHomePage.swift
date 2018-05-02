@@ -239,6 +239,10 @@ class XHHomePage {
             "actionType" : "all"
         ]
         XHNetwork.GET(url: URL_TO_QUESTION_LIST, params: params, success: { (response) in
+            guard let responseJson = response as? [String : Any],
+                let model = XHQuestionList(JSON: responseJson) else {
+                    return
+            }
             
         }) { (error) in
             let err = error as NSError
