@@ -9,6 +9,21 @@
 import UIKit
 
 class XHNetCourseHeaderView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+}
 
 
+// MARK: - 设置UI
+extension XHNetCourseHeaderView {
+    fileprivate func setupUI() {
+        
+        makeConstraints()
+    }
+    
+    fileprivate func makeConstraints() {
+        
+    }
 }
