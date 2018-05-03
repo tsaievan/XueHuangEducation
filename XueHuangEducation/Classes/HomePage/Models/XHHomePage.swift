@@ -14,7 +14,7 @@ typealias XHGetTeachCourseListSuccess = ([XHCourseCatalog], String?) -> ()
 typealias XHGetTeachCourseListFailue = (String) -> ()
 typealias XHGetPaperListSuccess = ([XHCourseCatalog], String?) -> ()
 typealias XHGetPaperListFailue = (String) -> ()
-typealias XHGetQuestionListSuccess = ([XHCourseCatalog]) -> ()
+typealias XHGetQuestionListSuccess = ([XHCourseCatalog], String?) -> ()
 typealias XHGetQuestionListFailue = (String) -> ()
 
 enum XHQuestionEnterType: String {
@@ -245,9 +245,11 @@ class XHHomePage {
                     return
             }
             total.queCount = model.totalCount
+            let originalName = total.courseClassName
+            total.courseClassName = "全部"
             var array = questions
             array.insert(total, at: 0)
-            success?(array)
+            success?(array, originalName)
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {

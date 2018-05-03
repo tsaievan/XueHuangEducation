@@ -12,12 +12,18 @@ class XHQuestionViewController: XHTableViewController {
     
     var dataSource: [XHCourseCatalog]?
     
-    var info: [XHCourseCatalog]? {
+    lazy var headerView: XHQuestionHeaderView = {
+        let header = XHQuestionHeaderView()
+        return header
+    }()
+    
+    var info: (response: [XHCourseCatalog], titleText: String?)? {
         didSet {
             guard let modelInfo = info else {
                 return
             }
-            dataSource = modelInfo
+            dataSource = modelInfo.response
+            headerView.title = modelInfo.titleText
             tableView.reloadData()
         }
     }
@@ -26,10 +32,10 @@ class XHQuestionViewController: XHTableViewController {
         super.viewDidLoad()
         view.backgroundColor = .green
         tableView.register(XHQuestionListCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_QUESTION_LIST)
+        tableView.tableHeaderView = headerView
     }
     
-    // MARK: - Table view data source
-    
+    // MARK: - Table view 数据源和代理方法    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -54,51 +60,4 @@ class XHQuestionViewController: XHTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
-    
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

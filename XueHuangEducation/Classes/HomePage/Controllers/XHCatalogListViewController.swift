@@ -166,8 +166,9 @@ extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
         
         if sender.tag == XHButtonType.answer.rawValue { ///< 点击的是在线问答的按钮
             navigationItem.title = "在线问答"
-            XHHomePage.getQuestionList(withEnterType: XHQuestionEnterType.answer, courseName: courseName, courseId: courseId, success: { (response) in
-                self.questionVc.info = response
+            
+            XHHomePage.getQuestionList(withEnterType: XHQuestionEnterType.answer, courseName: courseName, courseId: courseId, success: { (response, title) in
+                self.questionVc.info = (response, title)
             }, failue: { (errorReason) in
                 XHAlertHUD.showError(withStatus: errorReason)
             })
