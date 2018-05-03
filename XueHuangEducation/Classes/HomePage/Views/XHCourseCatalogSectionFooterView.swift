@@ -90,6 +90,8 @@ extension XHCourseCatalogSectionFooterView {
             make.leading.trailing.equalTo(chTitileImageView)
         }
         
+        
+        
         sloganImageView.snp.makeConstraints { (make) in
             make.leading.equalTo(logoImageView).offset(MARGIN_GLOBAL_20)
             make.trailing.equalTo(enTitleImageView).offset(-MARGIN_GLOBAL_20)

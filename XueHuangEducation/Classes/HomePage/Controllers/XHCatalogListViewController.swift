@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum XHButtonType: Int {
+    case teach = 0
+    case theme = 1
+    case answer = 2
+}
+
 ///< 这里的逻辑有点多, 直接将view写在控制器里, 方便调用各个方法, 免得产生太多的胶水代码
 class XHCatalogListViewController: XHBaseViewController {
     
@@ -145,11 +151,11 @@ extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
         let courseName = courseModel.courseClassName else {
                 return
         }
-        if sender.tag == 0 { ///< 点击的是网校讲题的按钮
+        if sender.tag == XHButtonType.teach.rawValue { ///< 点击的是网校讲题的按钮
             navigationItem.title = (model?.courseClassName ?? "") + "." + "网校讲题"
         }
         
-        if sender.tag == 1 { ///< 点击的是在线做题的按钮
+        if sender.tag == XHButtonType.theme.rawValue { ///< 点击的是在线做题的按钮
             navigationItem.title = "在线做题"
             XHHomePage.getPaperList(withCourseClassId: courseId, success: { (response, title) in
                 self.themeVc.info = (response, title)
@@ -158,7 +164,7 @@ extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
             })
         }
         
-        if sender.tag == 2 { ///< 点击的是在线问答的按钮
+        if sender.tag == XHButtonType.answer.rawValue { ///< 点击的是在线问答的按钮
             navigationItem.title = "在线问答"
             XHHomePage.getQuestionList(withEnterType: XHQuestionEnterType.answer, courseName: courseName, courseId: courseId, success: { (response) in
                 self.questionVc.info = response
