@@ -23,7 +23,6 @@ class XHPlayNetCourseViewController: XHBaseViewController {
                 let url = URL(string: newStr) else {
                     return
             }
-            
             let title = (videoModel.netCoursewareName ?? "") + " " + (videoModel.teacher ?? "")
             self.navigationItem.title = "展示视频"
             playerModel.title = title

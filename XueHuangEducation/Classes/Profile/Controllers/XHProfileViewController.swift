@@ -17,7 +17,6 @@ class XHProfileViewController: XHBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.backgroundColor = COLOR_HOMEPAGE_BACKGROUND
         setupUI()
     }
 }

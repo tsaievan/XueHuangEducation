@@ -22,6 +22,22 @@ class XHLoginViewController: XHBaseViewController {
         super.viewDidLoad()
         setupUI()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if presentingViewController == nil {
+            loginView.snp.remakeConstraints { (make) in
+                make.edges.equalTo(view)
+            }
+        }else {
+            navigationItem.title = "登录"
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: UIBarButtonItemStyle.plain, target: self, action: #selector(dismissLoginViewController))
+            loginView.snp.remakeConstraints { (make) in
+                make.top.equalTo(view).offset(UIDevice.iPhoneX ? 84 : 64)
+                make.left.bottom.right.equalTo(view)
+            }
+        }
+    }
 }
 
 
@@ -39,6 +55,7 @@ extension XHLoginViewController {
     }
 }
 
+// MARK: - LoginView的一些代理
 extension XHLoginViewController: XHLoginViewDelegate {
     func loginViewDidLogin(loginView: XHLoginView) {
         guard let info = loginView.info else {
@@ -47,6 +64,8 @@ extension XHLoginViewController: XHLoginViewDelegate {
         XHAlertHUD.show(timeInterval: 0)
         ///< 在控制器中写一些重要的逻辑
         if loginView.loginType == .accountLogin {
+            
+            ///< 账号登录
             XHLogin.accountLogin(withAccount: info.account!, password: info.password!, success: {
                 (response) in
                 ///< completion的闭包中要写一些登录成功的逻辑
@@ -59,8 +78,18 @@ extension XHLoginViewController: XHLoginViewDelegate {
                     if let mobile = response.phonebind {
                         XHPreferences[.USERDEFAULT_LOGIN_MOBILE] = mobile
                     }
-                    let tabBarController = XHTabBarController()
-                    UIApplication.shared.keyWindow?.rootViewController = tabBarController
+                    if self.presentingViewController == nil {
+                        let tabBarController = XHTabBarController()
+                        UIApplication.shared.keyWindow?.rootViewController = tabBarController
+                    }else {
+                        guard let tabVc = UIApplication.shared.keyWindow?.rootViewController as? XHTabBarController,
+                            let viewControllers = tabVc.viewControllers,
+                            let nav = viewControllers[1] as? XHNavigationController else {
+                                return
+                        }
+                        nav.viewControllers.first?.title = "退出登录"
+                        self.dismissLoginViewController()
+                    }
                 })
             }, failue: { (errorReason) in
                 XHAlertHUD.showError(withStatus: errorReason)
@@ -111,6 +140,13 @@ extension XHLoginViewController: XHLoginViewDelegate {
         let registVc = XHRegistViewController()
         registVc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(registVc, animated: true)
+    }
+}
+
+extension XHLoginViewController {
+    @objc
+    fileprivate func dismissLoginViewController() {
+        dismiss(animated: true, completion: nil)
     }
 }
 

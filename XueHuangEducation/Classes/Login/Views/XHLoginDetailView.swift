@@ -341,6 +341,12 @@ extension XHLoginDetailView {
     
     ///< 点击了登录按钮
     @objc fileprivate func didClickLoginButtonAction(sender: UIButton) {
+        if passwordTextField.isFirstResponder {
+            passwordTextField.resignFirstResponder()
+        }
+        if userAccountTextField.isFirstResponder {
+            userAccountTextField.resignFirstResponder()
+        }
         if accountIsNull {
             return
         }
