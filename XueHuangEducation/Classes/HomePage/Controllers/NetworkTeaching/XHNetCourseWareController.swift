@@ -89,12 +89,16 @@ class XHNetCourseWareController: UITableViewController {
                 })
                 alertVc.addAction(action)
                 alertVc.addAction(confirm)
-                
                 present(alertVc, animated: true, completion: nil)
                 return
             }
-            
-            
+            let alertVc = UIAlertController(title: "信息", message: "您好, 此课件为付费项目, 请联系客服购买 !", preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
+            ///< 弹出登录界面
+            let confirm = UIAlertAction(title: "确定", style: UIAlertActionStyle.default, handler:nil)
+            alertVc.addAction(action)
+            alertVc.addAction(confirm)
+            present(alertVc, animated: true, completion: nil)
         }
     }
 }
