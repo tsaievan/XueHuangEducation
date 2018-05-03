@@ -22,6 +22,9 @@ let URL_TO_NET_COURSE_WARE = "xhweb/appController.do?toNetCourseware"
 ///< 5. 获取考卷列表数据
 let URL_TO_MOBILE_PAPER_LIST = "xhweb/appController.do?toMobilePaperList"
 
+///< 6. 考卷类型页面数据
+let URL_MOBILE_PAPER_CATALOG = "xhweb/appController.do?mobilePaperCatalog"
+
 ///< 13. 获取在线应答页面数据
 let URL_TO_QUESTION_LIST = "xhweb/appController.do?toCourseCatalog"
 

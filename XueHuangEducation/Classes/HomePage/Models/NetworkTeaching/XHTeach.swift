@@ -9,7 +9,7 @@
 import UIKit
 
 typealias XHGetNetcoursewareSuccess = ([XHNetCourseWare]) -> ()
-typealias XHNetcoursewareFailue = (String) -> ()
+typealias XHGetNetcoursewareFailue = (String) -> ()
 
 class XHTeach {
     
@@ -20,7 +20,7 @@ class XHTeach {
     ///   - courseId: 课程id
     ///   - success: 成功的回调
     ///   - failue: 失败的回调
-    class func getNetcourseware(withCourseName courseName: String, courseId: String, success: XHGetNetcoursewareSuccess?, failue: XHNetcoursewareFailue?) {
+    class func getNetcourseware(withCourseName courseName: String, courseId: String, success: XHGetNetcoursewareSuccess?, failue: XHGetNetcoursewareFailue?) {
         let params = [
             "netCourseId" : courseId,
             "courseClassName" : courseName,

@@ -39,8 +39,7 @@ class XHThemeViewController: XHTableViewController {
         tableView.tableFooterView = UIView()
     }
 
-    // MARK: - Table view data source
-    
+    // MARK: - Table view 数据源和代理方法
     override func numberOfSections(in tableView: UITableView) -> Int {
         guard let count = dataSource?.count else {
             return 0
@@ -110,6 +109,30 @@ class XHThemeViewController: XHTableViewController {
                 self.tableView.reloadData()
             }
             return sectionView
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        let themeListVc = XHThemeListController(style: .plain)
+        navigationController?.pushViewController(themeListVc, animated: true)
+        ///< 这里开始请求数据
+        guard let datas = dataSource else {
+            return
+        }
+        let sectionModel = datas[indexPath.section]
+        guard let models = sectionModel.paperLists else {
+            return
+        }
+        let info = models[indexPath.row]
+        guard let paperId = info.id,
+        let courseId = info.courseClassId else {
+            return
+        }
+        XHMobilePaper.getMobilePaperCatalog(withPaperId: paperId, courseId: courseId, success: { (response) in
+            
+        }) { (errorReason) in
+            XHAlertHUD.showError(withStatus: errorReason)
         }
     }
 }
