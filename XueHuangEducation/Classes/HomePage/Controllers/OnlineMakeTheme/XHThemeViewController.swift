@@ -125,12 +125,11 @@ class XHThemeViewController: XHTableViewController {
             return
         }
         let info = models[indexPath.row]
-        guard let paperId = info.id,
-        let courseId = info.courseClassId else {
+        guard let paperId = info.id else {
             return
         }
-        XHMobilePaper.getMobilePaperCatalog(withPaperId: paperId, courseId: courseId, success: { (response) in
-            
+        XHMobilePaper.getMobilePaperCatalog(withPaperId: paperId, success: { (response) in
+            themeListVc.models = response
         }) { (errorReason) in
             XHAlertHUD.showError(withStatus: errorReason)
         }

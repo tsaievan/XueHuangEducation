@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias XHGetMobilePaperCatalogSuccess = (Any) -> ()
+typealias XHGetMobilePaperCatalogSuccess = ([XHPaperDetail]) -> ()
 typealias XHGetMobilePaperCatalogFailue = (String) -> ()
 
 class XHMobilePaper {
@@ -20,18 +20,23 @@ class XHMobilePaper {
     ///   - courseId: 课程id
     ///   - success: 成功的回调
     ///   - failue: 失败的回调
-    class func getMobilePaperCatalog(withPaperId paperId: String, courseId: String, success: XHGetMobilePaperCatalogSuccess?, failue: XHGetMobilePaperCatalogFailue?) {
+    class func getMobilePaperCatalog(withPaperId paperId: String, success: XHGetMobilePaperCatalogSuccess?, failue: XHGetMobilePaperCatalogFailue?) {
         let params = [
             "paperId" : paperId,
-            "courseCatalogId" : courseId,
+            "isFree" : "",
             ]
-        XHNetwork.GET(url: URL_MOBILE_PAPER_CATALOG, params: params, success: { (response) in
-//            guard let responseJson = response as? [String : Any],
-//                let model = XHNetCourseWareList(JSON: responseJson),
-//                let courses = model.netCoursewares else {
-//                    return
-//            }
-//            success?(courses)
+        XHNetwork.GET(url: URL_MOBILE_PAPER_CATALOG_NEW, params: params, success: { (response) in
+            guard let responseJson = response as? [[String : Any]] else {
+                return
+            }
+            var array = [XHPaperDetail]()
+            for dict in responseJson {
+                guard let model = XHPaperDetail(JSON: dict) else {
+                    continue
+                }
+                array.append(model)
+            }
+            success?(array)
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {
