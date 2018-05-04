@@ -24,8 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -41,8 +40,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
+    ///< 在app即将退出的时候, 将当前的cookie保存下来
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        let cookieJar = HTTPCookieStorage.shared
+        guard let cookies = cookieJar.cookies else {
+            return
+        }
+        for cookie in cookies {
+            var properties = cookie.properties
+            properties?.removeValue(forKey: HTTPCookiePropertyKey.discard)
+            let date = Date(timeIntervalSinceNow: 3600 * 24 * 30 * 12)
+            properties?[HTTPCookiePropertyKey.expires] = date
+            guard let pros = properties,
+            let newCookie = HTTPCookie(properties: pros) else {
+                continue
+            }
+            cookieJar.setCookie(newCookie)
+        }
     }
 }
 

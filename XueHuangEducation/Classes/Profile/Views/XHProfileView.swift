@@ -64,11 +64,11 @@ class XHProfileView: UIView {
     
     lazy var welcomeLabel: UILabel = {
         var text: String = ""
-        if let info = profileInfo?.accounts {
-            text = "您好, \(info) !"
-        }else {
-            text = "您好 !"
-        }
+//        if let info = profileInfo?.accounts {
+//            text = "您好, \(info) !"
+//        }else {
+//            text = "您好 !"
+//        }
         let lbl = UILabel(text: text, textColor: COLOR_PROFILE_BUTTON_TITLE_COLOR)
         lbl.font = UIFont.boldSystemFont(ofSize: FONT_SIZE_16)
         return lbl
@@ -174,6 +174,11 @@ extension XHProfileView {
 extension XHProfileView {
     @objc
     fileprivate func didClickProfileViewThreeButtonsAction(sender: XHButton) {
-        XHProfile.getMobile()
+        XHProfile.getMobile(success: { (response) in
+            let userName = response["userName"] as? String
+            self.welcomeLabel.text = userName ?? "" + "哈哈哈"
+        }) { (errorReason) in
+            XHAlertHUD.showError(withStatus: errorReason)
+        }
     }
 }
