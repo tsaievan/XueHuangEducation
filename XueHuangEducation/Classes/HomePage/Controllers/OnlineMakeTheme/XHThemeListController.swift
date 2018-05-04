@@ -57,4 +57,33 @@ class XHThemeListController: XHTableViewController {
         cell.model = datas[indexPath.row]
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        ///< 要先判断是否登录, 没有登录的话要先弹出登录框
+        guard let _ = XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] else {
+            let alertVc = UIAlertController(title: "信息", message: "您好, 请先登录系统 !", preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
+            ///< 弹出登录界面
+            let confirm = UIAlertAction(title: "确定", style: UIAlertActionStyle.default, handler: { (action) in
+                let loginVc = XHLoginViewController()
+                let loginNav = XHNavigationController(rootViewController: loginVc)
+                self.navigationController?.present(loginNav, animated: true, completion: nil)
+            })
+            alertVc.addAction(action)
+            alertVc.addAction(confirm)
+            present(alertVc, animated: true, completion: nil)
+            return
+        }
+        guard let datas = dataSource else {
+            return
+        }
+        let model = datas[indexPath.row]
+        // FIXME: - 这个字段貌似有问题, 从不返回false
+        print("\(model.open)") ///< 这个字段貌似有问题, 从不返回false
+    }
 }
