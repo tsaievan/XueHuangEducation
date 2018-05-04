@@ -23,16 +23,19 @@ class XHProfileView: UIView {
     
     lazy var myTeachButton: XHButton = {
         let btn = XHButton(withButtonImage: "image_profile_myTeach", title: "我的讲题", titleFont: FONT_SIZE_14)
+        btn.addTarget(self, action: #selector(didClickProfileViewThreeButtonsAction), for: .touchUpInside)
         return btn
     }()
     
     lazy var myThemeButton: XHButton = {
         let btn = XHButton(withButtonImage: "image_profile_myTheme", title: "我的题库", titleFont: FONT_SIZE_14)
+        btn.addTarget(self, action: #selector(didClickProfileViewThreeButtonsAction), for: .touchUpInside)
         return btn
     }()
     
     lazy var myQuestionButton: XHButton = {
         let btn = XHButton(withButtonImage: "image_profile_myQuestion", title: "我的答疑", titleFont: FONT_SIZE_14)
+        btn.addTarget(self, action: #selector(didClickProfileViewThreeButtonsAction), for: .touchUpInside)
         return btn
     }()
     
@@ -164,5 +167,13 @@ extension XHProfileView {
             make.left.right.equalTo(self)
             make.height.equalTo(200)
         }
+    }
+}
+
+// MARK: - 按钮的点击事件
+extension XHProfileView {
+    @objc
+    fileprivate func didClickProfileViewThreeButtonsAction(sender: XHButton) {
+        XHProfile.getMobile()
     }
 }

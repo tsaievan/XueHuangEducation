@@ -18,6 +18,8 @@ typealias XHGetPwdSuccess = (XHGetPasswordResult) -> ()
 typealias XHGetPwdFailue = (String) -> ()
 typealias XHModifyPwdSuccess = () -> ()
 typealias XHModifyPwdFailue = (String) -> ()
+typealias XHLoginOutSuccess = () -> ()
+typealias XHLoginOutFailue = (String) -> ()
 
 class XHLogin {
     
@@ -213,6 +215,24 @@ class XHLogin {
                 failue?("网络连接失败")
             }else {
                 failue?("修改密码失败")
+            }
+        }
+    }
+    
+    /// 退出的接口
+    ///
+    /// - Parameters:
+    ///   - success: 退出成功的回调
+    ///   - failue: 退出失败的回调
+    class func loginOut(success:XHLoginOutSuccess?, failue: XHLoginOutFailue?) {
+        XHNetwork.GET(url: URL_LOGIN_OUT, params: nil, success: { (response) in
+            success?()
+        }) { (error) in
+            let err = error as NSError
+            if err.code == -1009 {
+                failue?("网络连接失败")
+            }else {
+                failue?("退出失败")
             }
         }
     }

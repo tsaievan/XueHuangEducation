@@ -94,11 +94,25 @@ extension XHTabBarController: UITabBarControllerDelegate {
                 let alert = UIAlertController(title: "确定要退出登录吗?", message: nil, preferredStyle: .alert)
                 ///< 退出登录后清空用户数据
                 let action = UIAlertAction(title: "确定", style: .destructive, handler: { (action) in
-                    XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
-                    let tabBarController = XHTabBarController()
-                    UIApplication.shared.keyWindow?.rootViewController = tabBarController
-                    ///< 默认选中登录页面
-                    tabBarController.selectedIndex = XHViewControllers.login.rawValue
+//                    XHLogin.loginOut(success: {
+//                        XHAlertHUD.showSuccess(withStatus: "退出成功", completion: {
+//                            XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
+//                            let tabBarController = XHTabBarController()
+//                            UIApplication.shared.keyWindow?.rootViewController = tabBarController
+//                            ///< 默认选中登录页面
+//                            tabBarController.selectedIndex = XHViewControllers.login.rawValue
+//                        })
+//                    }, failue: { (errorReason) in
+//                        XHAlertHUD.showError(withStatus: errorReason)
+//                    })
+                    XHAlertHUD.showSuccess(withStatus: "退出成功", completion: {
+                        HTTPCookieStorage.shared.removeCookies(since: Date(timeIntervalSince1970: 0))
+                        XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
+                        let tabBarController = XHTabBarController()
+                        UIApplication.shared.keyWindow?.rootViewController = tabBarController
+                        ///< 默认选中登录页面
+                        tabBarController.selectedIndex = XHViewControllers.login.rawValue
+                    })
                 })
                 let cancel = UIAlertAction(title: "取消", style: .default, handler: nil)
                 alert.addAction(action)

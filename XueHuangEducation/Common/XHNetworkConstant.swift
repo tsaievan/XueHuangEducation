@@ -19,14 +19,20 @@ let URL_TO_MOBILE_NET_COURSE = "xhweb/appController.do?toMobileNetCourse"
 ///< 3. 获取网校讲题课件页面数据
 let URL_TO_NET_COURSE_WARE = "xhweb/appController.do?toNetCourseware"
 
+///< 4. 退出登录
+let URL_LOGIN_OUT = "xhweb/appController.do?loginOut"
+
 ///< 5. 获取考卷列表数据
 let URL_TO_MOBILE_PAPER_LIST = "xhweb/appController.do?toMobilePaperList"
 
 ///< 6. 考卷类型页面数据
 let URL_MOBILE_PAPER_CATALOG = "xhweb/appController.do?mobilePaperCatalog"
 
-///< 7.
+///< 7. 加载考卷分类
 let URL_MOBILE_PAPER_CATALOG_NEW = "xhweb/appController.do?getTree"
+
+///<
+let URL_TO_MOBILE_PERSON = "xhweb/appController.do?toMobilePerson"
 
 ///< 13. 获取在线应答页面数据
 let URL_TO_QUESTION_LIST = "xhweb/appController.do?toCourseCatalog"
