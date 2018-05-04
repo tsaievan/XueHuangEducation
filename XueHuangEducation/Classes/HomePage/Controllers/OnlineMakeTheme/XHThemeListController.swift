@@ -79,11 +79,34 @@ class XHThemeListController: XHTableViewController {
             present(alertVc, animated: true, completion: nil)
             return
         }
+        
+        ///< 这里要判断是否有做题的权限
         guard let datas = dataSource else {
             return
         }
         let model = datas[indexPath.row]
-        // FIXME: - 这个字段貌似有问题, 从不返回false
-        print("\(model.open)") ///< 这个字段貌似有问题, 从不返回false
+        guard let paperId = model.paperId,
+         let paperCatalogId = model.id else {
+            return
+        }
+        XHMobilePaper.isAllowedAnswerQuestion(forPaperId: paperId, paperCatalogId: paperCatalogId, success: { (isAllowedAnswer) in
+            guard let success = isAllowedAnswer.success else {
+                return
+            }
+            if success == true { ///< 这个是有答题权限的
+                
+            }else {
+                let message = isAllowedAnswer.msg ?? "获取答题权限失败"
+                let alertVc = UIAlertController(title: "信息", message: message, preferredStyle: UIAlertControllerStyle.alert)
+                let action = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
+                ///< 弹出登录界面
+                let confirm = UIAlertAction(title: "确定", style: UIAlertActionStyle.default, handler: nil)
+                alertVc.addAction(action)
+                alertVc.addAction(confirm)
+                self.present(alertVc, animated: true, completion: nil)
+            }
+        }) { (errorReason) in
+            XHAlertHUD.showError(withStatus: errorReason)
+        }
     }
 }

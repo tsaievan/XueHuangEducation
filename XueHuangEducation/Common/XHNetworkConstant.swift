@@ -55,3 +55,6 @@ let URL_APP_LOGIN_ALTER_PASSWORD = "xhweb/appLogin.do?alterPassword"
 ///< 29. 解密播放视频链接
 let URL_APP_DECRYPT_VIDEO_PLAYER_URL = "xhweb/appController.do?getDecryptPlayMp4Url"
 
+///< 35. 判断用户是否有做题权限
+let URL_IS_ALLOWED_ANSWER_QUESTION = "xhweb/paperCatalogController.do?isPriviAnsQuestion"
+

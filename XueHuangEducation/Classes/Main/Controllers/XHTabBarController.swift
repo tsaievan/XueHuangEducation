@@ -106,6 +106,7 @@ extension XHTabBarController: UITabBarControllerDelegate {
 //                        XHAlertHUD.showError(withStatus: errorReason)
 //                    })
                     XHAlertHUD.showSuccess(withStatus: "退出成功", completion: {
+                        ///< 退出登录的时候要把cookie清空
                         HTTPCookieStorage.shared.removeCookies(since: Date(timeIntervalSince1970: 0))
                         XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
                         let tabBarController = XHTabBarController()

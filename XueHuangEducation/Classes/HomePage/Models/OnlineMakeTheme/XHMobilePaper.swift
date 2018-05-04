@@ -10,6 +10,8 @@ import UIKit
 
 typealias XHGetMobilePaperCatalogSuccess = ([XHPaperDetail]) -> ()
 typealias XHGetMobilePaperCatalogFailue = (String) -> ()
+typealias XHIsAllowedAnswerQuestionSuccess = (XHIsAllowedAnswer) -> ()
+typealias XHIsAllowedAnswerQuestionFailue = (String) -> ()
 
 class XHMobilePaper {
 
@@ -37,6 +39,27 @@ class XHMobilePaper {
                 array.append(model)
             }
             success?(array)
+        }) { (error) in
+            let err = error as NSError
+            if err.code == -1009 {
+                failue?("网络连接失败")
+            }else {
+                failue?("数据加载失败")
+            }
+        }
+    }
+    ///< URL_IS_ALLOWED_ANSWER_QUESTION
+    class func isAllowedAnswerQuestion(forPaperId: String, paperCatalogId: String, success: XHIsAllowedAnswerQuestionSuccess?, failue: XHIsAllowedAnswerQuestionFailue?) {
+        let params = [
+            "paperId" : forPaperId,
+            "paperCatalogId" : paperCatalogId
+        ]
+        XHNetwork.GET(url: URL_IS_ALLOWED_ANSWER_QUESTION, params: params, success: { (response) in
+            guard let responseJson = response as? [String : Any],
+            let model = XHIsAllowedAnswer(JSON: responseJson) else {
+                return
+            }
+            success?(model)
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {
