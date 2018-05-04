@@ -10,7 +10,7 @@ import UIKit
 
 typealias XHGetAuthCodeSuccess = () -> ()
 typealias XHGetAuthCodeFailue = (String) -> ()
-typealias XHMobileLoginSuccess = () -> ()
+typealias XHMobileLoginSuccess = (XHLoginMember) -> ()
 typealias XHMobileLoginFailue = (String) -> ()
 typealias XHAccountLoginSuccess = (XHLoginMember) -> ()
 typealias XHAccountLoginFailue = (String) -> ()
@@ -86,7 +86,11 @@ class XHLogin {
                     return
             }
             if code == "ok" {
-                success?()
+                guard let member = result.member else {
+                    failue?("登录失败")
+                    return
+                }
+                success?(member)
             }else if code == "error" {
                 failue?("登录失败")
             }else {
@@ -218,6 +222,8 @@ class XHLogin {
             }
         }
     }
+    
+    ///< 登出的接口貌似有问题
     
     /// 退出的接口
     ///

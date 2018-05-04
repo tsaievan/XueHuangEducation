@@ -96,9 +96,30 @@ extension XHLoginViewController: XHLoginViewDelegate {
             })
         }
         if loginView.loginType == .phoneLogin {
-            XHLogin.mobileLogin(withMobile: info.account!, authCode: info.password!, success: {
+            XHLogin.mobileLogin(withMobile: info.account!, authCode: info.password!, success: { (member) in
+                ///< 这里写登录成功的逻辑, 跟账号登录一样
                 XHAlertHUD.showSuccess(withStatus: "登录成功", completion: {
-                    print("登录成功")
+                    ///< 将member数据保存到用户偏好设置里面去
+                    XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = member
+                    if let username = member.accounts {
+                        XHPreferences[.USERDEFAULT_LOGIN_ACCOUNT] = username
+                    }
+                    if let mobile = member.phonebind {
+                        XHPreferences[.USERDEFAULT_LOGIN_MOBILE] = mobile
+                    }
+                    if self.presentingViewController == nil {
+                        let tabBarController = XHTabBarController()
+                        UIApplication.shared.keyWindow?.rootViewController = tabBarController
+                    }else {
+                        guard let tabVc = UIApplication.shared.keyWindow?.rootViewController as? XHTabBarController,
+                            let viewControllers = tabVc.viewControllers,
+                            let nav = viewControllers[1] as? XHNavigationController else {
+                                return
+                        }
+                        nav.viewControllers.first?.title = "退出登录"
+                        self.dismissLoginViewController()
+                    }
+                    
                 })
             }) { (errorReason) in
                 XHAlertHUD.showError(withStatus: errorReason)

@@ -13,6 +13,8 @@ class XHMobileLoginResult: XHResult{
     ///< 失败时, 该字段有值
     var message: String?
     
+    var member: XHLoginMember?
+    
     required init?(map: Map) {
         super.init(map: map)
     }
@@ -24,5 +26,6 @@ class XHMobileLoginResult: XHResult{
     override func mapping(map: Map) {
         super.mapping(map: map)
         message     <- map["message"]
+        member      <- map["member"]
     }
 }
