@@ -129,7 +129,7 @@ class XHThemeViewController: XHTableViewController {
             return
         }
         XHMobilePaper.getMobilePaperCatalog(withPaperId: paperId, success: { (response) in
-            themeListVc.models = response
+            themeListVc.info = (response, self.mainTitle)
         }) { (errorReason) in
             XHAlertHUD.showError(withStatus: errorReason)
         }

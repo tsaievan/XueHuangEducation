@@ -10,25 +10,33 @@ import UIKit
 
 class XHThemeListController: XHTableViewController {
     
+    lazy var headerView: XHPaperListHeaderView = {
+        let header = XHPaperListHeaderView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 40))
+        return header
+    }()
+    
     var dataSource: [XHPaperDetail]?
     
-    var models: [XHPaperDetail]? {
+    var info:(models: [XHPaperDetail], titleText: String?)? {
         didSet {
-            guard let infos = models else {
+            guard let infos = info?.models else {
                 return
             }
             dataSource = infos
+            headerView.titleText = info?.titleText
             tableView.reloadData()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        navigationItem.title = "考卷分类"
+        tableView.register(XHPaperListCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_PAPER_LIST)
+        tableView.separatorStyle = .none
+        tableView.tableHeaderView = headerView
     }
 
     // MARK: - Table view 的数据源方法和代理方法
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -42,11 +50,11 @@ class XHThemeListController: XHTableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        guard let datas = dataSource else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_PAPER_LIST, for: indexPath) as? XHPaperListCell,
+        let datas = dataSource else {
             return UITableViewCell()
         }
-        cell.textLabel?.text = datas[indexPath.row].name
+        cell.model = datas[indexPath.row]
         return cell
     }
 }

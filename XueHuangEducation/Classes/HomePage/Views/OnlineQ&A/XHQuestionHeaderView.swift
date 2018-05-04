@@ -35,7 +35,7 @@ class XHQuestionHeaderView: UIView {
     }()
     
     override init(frame: CGRect) {
-        super.init(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 40))
+        super.init(frame: frame)
         setupUI()
     }
     
