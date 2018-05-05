@@ -34,6 +34,7 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
     lazy var moreButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(named: "button_paperList_more"), for: .normal)
+        btn.addTarget(self, action: #selector(didClickMoreButtonAction), for: .touchUpInside)
         btn.isHidden = true
         return btn
     }()
@@ -103,5 +104,13 @@ extension XHSectionTitleHeaderView {
             make.centerY.equalTo(titleButton)
             make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_15)
         }
+    }
+}
+
+// MARK: - 按钮点击事件
+extension XHSectionTitleHeaderView {
+    @objc
+    fileprivate func didClickMoreButtonAction() {
+        
     }
 }
