@@ -31,9 +31,27 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
         return header
     }()
     
-    var model: XHCourseCatalog? {
+    lazy var moreButton: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.setImage(UIImage(named: "button_paperList_more"), for: .normal)
+        btn.isHidden = true
+        return btn
+    }()
+    
+    var info: (catalogs: XHCourseCatalog?, themeList: XHThemeList?)? {
         didSet {
-            headerView.model = model
+            guard let modelInfo = info else {
+                return
+            }
+            headerView.model = modelInfo.catalogs
+            if let titleText = modelInfo.themeList?.courseClassName {
+                titleButton.setTitle(" \(titleText)", for: .normal)
+            }
+            if let themeL = modelInfo.themeList {
+                moreButton.isHidden = false
+            }else {
+                moreButton.isHidden = true
+            }
         }
     }
     
@@ -56,6 +74,7 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
 extension XHSectionTitleHeaderView {
     fileprivate func setupUI() {
         contentView.addSubview(titleButton)
+        contentView.addSubview(moreButton)
         contentView.addSubview(seperatorView)
         contentView.addSubview(headerView)
         makeConstraints()
@@ -78,6 +97,11 @@ extension XHSectionTitleHeaderView {
             make.top.equalTo(seperatorView.snp.bottom)
             make.left.right.equalTo(contentView)
             make.height.equalTo(50).priority(.low)
+        }
+        
+        moreButton.snp.makeConstraints { (make) in
+            make.centerY.equalTo(titleButton)
+            make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_15)
         }
     }
 }

@@ -11,7 +11,7 @@ import SDCycleScrollView
 
 class XHTeachViewController: XHTableViewController {
     
-    var dataSource: [XHCourseCatalog]?
+    var dataSource: (catalogs: [XHCourseCatalog], themeList: XHThemeList?)?
     
     var info: (response: [XHCourseCatalog], imageArr: String?)? {
         didSet {
@@ -27,9 +27,23 @@ class XHTeachViewController: XHTableViewController {
             }else {
                 tableView.tableHeaderView = cycle
             }
-            dataSource = modelInfo.response
+            dataSource = (modelInfo.response, nil)
             cycle.imageURLStringsGroup = [imageUrl, imageUrl]
             tableView.reloadData()
+        }
+    }
+    
+    var newInfo: (response: [XHCourseCatalog], themeList: XHThemeList)? {
+        didSet {
+            tableView.tableHeaderView = UIView(frame: .zero)
+            ///< 这里需要设置一下contentInset的缩进, 不然很丑
+            tableView.contentInset = UIEdgeInsetsMake(-30, 0, 0, 0)
+            guard let modelInfo = newInfo else {
+                return
+            }
+            dataSource = (modelInfo.response, modelInfo.themeList)
+            tableView.reloadData()
+            
         }
     }
     
@@ -59,14 +73,14 @@ class XHTeachViewController: XHTableViewController {
     
     // MARK: - Table view 的数据源和代理方法
     override func numberOfSections(in tableView: UITableView) -> Int {
-        guard let count = dataSource?.count else {
+        guard let datas = dataSource?.catalogs else {
             return 0
         }
-        return count
+        return datas.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let datas = dataSource else {
+        guard let datas = dataSource?.catalogs else {
             return 0
         }
         let sectionModel = datas[section]
@@ -79,7 +93,7 @@ class XHTeachViewController: XHTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_NETCOURSE_DETAIL, for: indexPath)
         guard let newCell = cell as? XHNetCourseDetailCell,
-            let datas = dataSource else {
+            let datas = dataSource?.catalogs else {
                 return UITableViewCell()
         }
         let sectionModel = datas[indexPath.section]
@@ -105,12 +119,12 @@ class XHTeachViewController: XHTableViewController {
         guard let datas = dataSource else {
             return nil
         }
-        let sectionModel = datas[section]
+        let sectionModel = datas.catalogs[section]
         if section == 0 {
             guard let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HEADER_TITLE_VIEW_IDENTIFIER_TEACH_TABLEVIEW) as? XHSectionTitleHeaderView else {
                 return nil
             }
-            sectionView.model = sectionModel
+            sectionView.info = (sectionModel, datas.themeList)
             sectionView.tapSectionClosure = {
                 sectionModel.isFold = !sectionModel.isFold!
                 self.tableView.reloadData()
@@ -131,7 +145,7 @@ class XHTeachViewController: XHTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let datas = dataSource else {
+        guard let datas = dataSource?.catalogs else {
             return
         }
         let sectionModel = datas[indexPath.section]

@@ -149,7 +149,6 @@ class XHHomePage {
                 catalog.netCourses = sonArray
                 fatherArray.append(catalog)
             }
-            
             success?(fatherArray, model.imgAddr)
         }) { (error) in
             let err = error as NSError

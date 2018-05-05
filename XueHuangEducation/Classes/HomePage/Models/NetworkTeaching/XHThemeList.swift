@@ -15,6 +15,7 @@ class XHThemeList: NSObject, Mappable, NSCoding {
     var imgAddr: String?
     var netCourses: [XHSimpleNetCourse]?
     var courseCatalogs: [XHCourseCatalog]?
+    var sCourseCatalogs: [XHCourseCatalog]?
     
     
     required init?(map: Map) {
@@ -26,6 +27,7 @@ class XHThemeList: NSObject, Mappable, NSCoding {
         imgAddr                  <- map["imgAddr"]
         netCourses               <- map["netCourses"]
         courseCatalogs           <- map["courseCatalogs"]
+        sCourseCatalogs          <- map["sCourseCatalogs"]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -34,6 +36,7 @@ class XHThemeList: NSObject, Mappable, NSCoding {
         imgAddr = aDecoder.decodeObject(forKey: "imgAddr") as? String
         netCourses = aDecoder.decodeObject(forKey: "netCourses") as? [XHSimpleNetCourse]
         courseCatalogs = aDecoder.decodeObject(forKey: "courseCatalogs") as? [XHCourseCatalog]
+        sCourseCatalogs = aDecoder.decodeObject(forKey: "sCourseCatalogs") as? [XHCourseCatalog]
     }
     
     func encode(with aCoder: NSCoder) {
@@ -42,5 +45,6 @@ class XHThemeList: NSObject, Mappable, NSCoding {
         aCoder.encode(imgAddr, forKey: "imgAddr")
         aCoder.encode(netCourses, forKey: "netCourses")
         aCoder.encode(courseCatalogs, forKey: "courseCatalogs")
+        aCoder.encode(sCourseCatalogs, forKey: "sCourseCatalogs")
     }
 }

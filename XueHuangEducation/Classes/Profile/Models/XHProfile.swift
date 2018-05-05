@@ -10,7 +10,7 @@ import UIKit
 
 typealias XHGetUserNameSuccess = ([String : Any]) -> ()
 typealias XHGetUserNameFailue = (String) -> ()
-typealias XHGetMyMobileNetCourseSuccess = ([XHCourseCatalog]) -> ()
+typealias XHGetMyMobileNetCourseSuccess = ([XHCourseCatalog], XHThemeList) -> ()
 typealias XHGetMyMobileNetCourseFailue = (String) -> ()
 
 class XHProfile {
@@ -42,17 +42,35 @@ class XHProfile {
         ]
         XHNetwork.GET(url: URL_TO_MY_MOBILE_NET_COURSE, params: params, success: { (response) in
             guard let responseJson = response as? [String : Any],
-            let array = responseJson["courseCatalogs"] as? [[String : Any]] else {
-                return
+                let model = XHThemeList(JSON: responseJson) else {
+                    return
             }
-            var tempArr = [XHCourseCatalog]()
-            for catalogDict in array {
-                guard let model = XHCourseCatalog(JSON: catalogDict) else {
+            
+            ///< 在这里进行数据处理
+            guard let catalogs = model.courseCatalogs,
+                let netCourses = model.netCourses else {
+                    return
+            }
+            var fatherArray = [XHCourseCatalog]()
+            for catalog in catalogs {
+                guard let name = catalog.courseClassName else {
                     continue
                 }
-                tempArr.append(model)
+                var sonArray = [XHSimpleNetCourse]()
+                for net in netCourses {
+                    guard let netName = net.courseClassName else {
+                        continue
+                    }
+                    if netName == name {
+                        sonArray.append(net)
+                    }
+                }
+                catalog.netCourses = sonArray
+                fatherArray.append(catalog)
             }
-            success?(tempArr)
+            // FIXME: - 数据还需处理
+            ///< 这个地方貌似还要传一个courseClassName
+            success?(fatherArray, model)
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {

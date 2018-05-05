@@ -45,8 +45,8 @@ extension XHProfileViewController: XHProfileViewDelegate {
         navigationController?.pushViewController(teachVc, animated: true)
         
         ///< 调用这个接口
-        XHProfile.getMyMobileNetCourse(withCourseClassId: "", success: { (response) in
-            teachVc.info = (response, "")
+        XHProfile.getMyMobileNetCourse(withCourseClassId: "", success: { (catalogs, themeModel) in
+            teachVc.newInfo = (catalogs, themeModel)
         }) { (error) in
             
         }
