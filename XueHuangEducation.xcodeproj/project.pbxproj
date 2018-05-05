@@ -36,6 +36,7 @@
 		573C61872099B14D00B9F6DC /* XHQuestionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573C61862099B14D00B9F6DC /* XHQuestionListCell.swift */; };
 		573E72F52099E2B500DD41B2 /* XHNetCourseWareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573E72F42099E2B500DD41B2 /* XHNetCourseWareController.swift */; };
 		573E73032099E60E00DD41B2 /* XHTeach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573E73022099E60E00DD41B2 /* XHTeach.swift */; };
+		5740F468209DE53500757347 /* XHPopMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5740F467209DE53500757347 /* XHPopMenu.swift */; };
 		57418EB7209B47E300DC2939 /* XHThemeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57418EB6209B47E300DC2939 /* XHThemeListController.swift */; };
 		57418EB9209B490F00DC2939 /* XHMobilePaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57418EB8209B490F00DC2939 /* XHMobilePaper.swift */; };
 		57418EBB209B512800DC2939 /* XHPaperDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57418EBA209B512800DC2939 /* XHPaperDetail.swift */; };
@@ -133,6 +134,7 @@
 		573C61862099B14D00B9F6DC /* XHQuestionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHQuestionListCell.swift; sourceTree = "<group>"; };
 		573E72F42099E2B500DD41B2 /* XHNetCourseWareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourseWareController.swift; sourceTree = "<group>"; };
 		573E73022099E60E00DD41B2 /* XHTeach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTeach.swift; sourceTree = "<group>"; };
+		5740F467209DE53500757347 /* XHPopMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHPopMenu.swift; sourceTree = "<group>"; };
 		57418EB6209B47E300DC2939 /* XHThemeListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHThemeListController.swift; sourceTree = "<group>"; };
 		57418EB8209B490F00DC2939 /* XHMobilePaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHMobilePaper.swift; sourceTree = "<group>"; };
 		57418EBA209B512800DC2939 /* XHPaperDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHPaperDetail.swift; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 			children = (
 				579A1E74208DDE70004D4A11 /* XHTableView.swift */,
 				572E48432095B053006E518D /* XHButton.swift */,
+				5740F467209DE53500757347 /* XHPopMenu.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -862,6 +865,7 @@
 				571C801D208CC12C005CD369 /* XHLoginBaseResult.swift in Sources */,
 				57CA59D5208B1BD8004C6393 /* XHPreferenceKey.swift in Sources */,
 				575915E5209C9D030073A517 /* XHIsAllowedAnswer.swift in Sources */,
+				5740F468209DE53500757347 /* XHPopMenu.swift in Sources */,
 				5734270D2097490900108D1E /* XHNetCourseDetailCell.swift in Sources */,
 				573E72F52099E2B500DD41B2 /* XHNetCourseWareController.swift in Sources */,
 				5763359C208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift in Sources */,

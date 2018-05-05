@@ -163,4 +163,13 @@ class XHTeachViewController: XHTableViewController {
             
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        if section == 0 {
+            guard let headerView = view as? XHSectionTitleHeaderView else {
+                return
+            }
+            headerView.dismissPopMenuView()
+        }
+    }
 }

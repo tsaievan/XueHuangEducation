@@ -31,6 +31,21 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
         return header
     }()
     
+    lazy var popView: XHPopMenu? = {
+        guard let models = buttonModels else {
+            return nil
+        }
+        var tempArray = [String]()
+        for model in models {
+            guard let name = model.courseClassName else {
+                continue
+            }
+            tempArray.append(name)
+        }
+        let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: 40, textSize: 13)
+        return pop
+    }()
+    
     lazy var moreButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(named: "button_paperList_more"), for: .normal)
@@ -38,6 +53,8 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
         btn.isHidden = true
         return btn
     }()
+    
+    var buttonModels: [XHCourseCatalog]?
     
     var info: (catalogs: XHCourseCatalog?, themeList: XHThemeList?)? {
         didSet {
@@ -49,6 +66,7 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
                 titleButton.setTitle(" \(titleText)", for: .normal)
             }
             if let themeL = modelInfo.themeList {
+                buttonModels = themeL.sCourseCatalogs
                 moreButton.isHidden = false
             }else {
                 moreButton.isHidden = true
@@ -70,6 +88,8 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
 }
 
 extension XHSectionTitleHeaderView {
@@ -110,7 +130,21 @@ extension XHSectionTitleHeaderView {
 // MARK: - 按钮点击事件
 extension XHSectionTitleHeaderView {
     @objc
-    fileprivate func didClickMoreButtonAction() {
-        
+    fileprivate func didClickMoreButtonAction(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        let point = convert(moreButton.center, to: superview)
+        guard let pView = popView else {
+            return
+        }
+        sender.isSelected ? pView.showRight(onView: superview!, atPoint: point) : pView.dismiss()
+    }
+}
+
+extension XHSectionTitleHeaderView {
+    func dismissPopMenuView() {
+        guard let pView = popView else {
+            return
+        }
+        pView.removeFromSuperview()
     }
 }
