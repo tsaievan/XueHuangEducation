@@ -31,11 +31,14 @@ let URL_MOBILE_PAPER_CATALOG = "xhweb/appController.do?mobilePaperCatalog"
 ///< 7. 加载考卷分类
 let URL_MOBILE_PAPER_CATALOG_NEW = "xhweb/appController.do?getTree"
 
-///<
-let URL_TO_MOBILE_PERSON = "xhweb/appController.do?toMobilePerson"
-
 ///< 13. 获取在线应答页面数据
 let URL_TO_QUESTION_LIST = "xhweb/appController.do?toCourseCatalog"
+
+///< 18. 获取个人中心的数据
+let URL_TO_MOBILE_PERSON = "xhweb/appController.do?toMobilePerson"
+
+///< 19. 获取个人讲题页面数据
+let URL_TO_MY_MOBILE_NET_COURSE = "xhweb/appController.do?toMyMobileNetCourse"
 
 ///< 21. 手机快捷登录
 let URL_APP_REGIST_PHONE_LOGIN = "xhweb/appRegist.do?phoneLogin"

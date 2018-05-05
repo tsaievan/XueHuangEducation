@@ -70,7 +70,7 @@ class XHTeachViewController: XHTableViewController {
             return 0
         }
         let sectionModel = datas[section]
-        guard let count = sectionModel.simpleNetCourses?.count else {
+        guard let count = sectionModel.netCourses?.count else {
             return 0
         }
         return sectionModel.isFold! ? count : 0
@@ -83,7 +83,7 @@ class XHTeachViewController: XHTableViewController {
                 return UITableViewCell()
         }
         let sectionModel = datas[indexPath.section]
-        guard let models = sectionModel.simpleNetCourses else {
+        guard let models = sectionModel.netCourses else {
             return UITableViewCell()
         }
         newCell.info = (models[indexPath.row], sectionModel.iconAddr)
@@ -135,7 +135,7 @@ class XHTeachViewController: XHTableViewController {
             return
         }
         let sectionModel = datas[indexPath.section]
-        guard let models = sectionModel.simpleNetCourses,
+        guard let models = sectionModel.netCourses,
             let courseName = models[indexPath.row].netCourseName,
             let courseId = models[indexPath.row].netCourseId else {
                 return

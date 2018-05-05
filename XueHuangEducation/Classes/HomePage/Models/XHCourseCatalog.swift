@@ -31,7 +31,7 @@ class XHCourseCatalog: XHRoutine {
     ///< 轮播图的url. 其实轮播图只有一张
     var imgAddr: String?
     ///< 课程数组
-    var simpleNetCourses: [XHSimpleNetCourse]?
+    var netCourses: [XHSimpleNetCourse]?
     ///< 考卷数组
     var paperLists: [XHPaper]?
     ///< 问答的条数
@@ -51,7 +51,7 @@ class XHCourseCatalog: XHRoutine {
         iconAddr                        <- map["iconAddr"]
         pId                             <- map["pId"]
         customName                      <- map["customName"]
-        simpleNetCourses                <- map["simpleNetCourses"]
+        netCourses                      <- map["netCourses"]
         isFold                          <- map["isFold"]
         imgAddr                         <- map["imgAddr"]
         paperLists                      <- map["paperLists"]
@@ -68,7 +68,7 @@ class XHCourseCatalog: XHRoutine {
         iconAddr = aDecoder.decodeObject(forKey: "iconAddr") as? String
         pId = aDecoder.decodeObject(forKey: "pId") as? String
         customName = aDecoder.decodeObject(forKey: "customName") as? String
-        simpleNetCourses = aDecoder.decodeObject(forKey: "simpleNetCourses") as? [XHSimpleNetCourse]
+        netCourses = aDecoder.decodeObject(forKey: "netCourses") as? [XHSimpleNetCourse]
         isFold = aDecoder.decodeObject(forKey: "isFold") as? Bool
         imgAddr = aDecoder.decodeObject(forKey: "imgAddr") as? String
         paperLists = aDecoder.decodeObject(forKey: "paperLists") as? [XHPaper]
@@ -85,7 +85,7 @@ class XHCourseCatalog: XHRoutine {
         aCoder.encode(iconAddr, forKey: "iconAddr")
         aCoder.encode(pId, forKey: "pId")
         aCoder.encode(customName, forKey: "customName")
-        aCoder.encode(simpleNetCourses, forKey: "simpleNetCourses")
+        aCoder.encode(netCourses, forKey: "netCourses")
         aCoder.encode(isFold, forKey: "isFold")
         aCoder.encode(imgAddr, forKey: "imgAddr")
         aCoder.encode(paperLists, forKey: "paperLists")

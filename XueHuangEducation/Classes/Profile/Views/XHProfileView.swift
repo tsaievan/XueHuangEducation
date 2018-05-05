@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol XHProfileViewDelegate: NSObjectProtocol {
+    func profileViewdidClickThreeButtons(profileView: XHProfileView, sender: XHButton)
+}
+
 class XHProfileView: UIView {
+    
+    var xh_delegate: XHProfileViewDelegate?
 
     let horizontalScale = UIDevice.horizontalScale
     
@@ -174,11 +180,8 @@ extension XHProfileView {
 extension XHProfileView {
     @objc
     fileprivate func didClickProfileViewThreeButtonsAction(sender: XHButton) {
-        XHProfile.getMobile(success: { (response) in
-            let userName = response["userName"] as? String
-            self.welcomeLabel.text = userName ?? "" + "哈哈哈"
-        }) { (errorReason) in
-            XHAlertHUD.showError(withStatus: errorReason)
-        }
+        ///< 我的界面的三个按钮的点击事件
+        ///< 通过代理将事件传递出去
+        xh_delegate?.profileViewdidClickThreeButtons(profileView: self, sender: sender)
     }
 }

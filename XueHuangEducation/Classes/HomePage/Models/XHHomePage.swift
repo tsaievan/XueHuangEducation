@@ -146,7 +146,7 @@ class XHHomePage {
                         sonArray.append(net)
                     }
                 }
-                catalog.simpleNetCourses = sonArray
+                catalog.netCourses = sonArray
                 fatherArray.append(catalog)
             }
             
