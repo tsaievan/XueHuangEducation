@@ -102,8 +102,10 @@ class XHThemeViewController: XHTableViewController {
             guard let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HEADER_TITLE_VIEW_IDENTIFIER_PAPER_TABLEVIEW) as? XHPaperSectionTitleView else {
                 return nil
             }
-//            sectionView.info = (sectionModel, mainTitle)
             sectionView.newInfo = (sectionModel, datas.paperList)
+            if datas.paperList == nil {
+                sectionView.sectionTitle = mainTitle
+            }
             sectionView.tapSectionClosure = {
                 sectionModel.isFold = !sectionModel.isFold!
                 self.tableView.reloadData()

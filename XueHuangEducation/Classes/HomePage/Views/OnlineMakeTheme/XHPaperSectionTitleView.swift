@@ -75,12 +75,24 @@ class XHPaperSectionTitleView: UITableViewHeaderFooterView {
                 return
             }
             headerView.model = modelInfo.catalogs
-            if let titleText = modelInfo.paperList?.courseClassName {
+            guard let paperL = modelInfo.paperList else {
+                return
+            }
+            if let titleText = paperL.courseClassName {
                 titleLabel.text = titleText
             }
             if let paperL = modelInfo.paperList {
                 buttonModels = paperL.sCourseCatalogs
             }
+        }
+    }
+    
+    var sectionTitle: String? {
+        didSet {
+            guard let text = sectionTitle else {
+                return
+            }
+            titleLabel.text = text
         }
     }
     
