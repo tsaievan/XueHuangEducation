@@ -28,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        ///< 这一句很重要
+        UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -41,6 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     ///< 在app即将退出的时候, 将当前的cookie保存下来
+    ///< Note: 这个方法是不主动执行的, 必须要在 `applicationDidEnterBackground` 这个代理方法中
+    ///< 写上`UIApplication.shared.beginBackgroundTask(expirationHandler: nil)`这一句才可以
+    ///< 进入程序即将退出这个代理方法
     func applicationWillTerminate(_ application: UIApplication) {
         let cookieJar = HTTPCookieStorage.shared
         guard let cookies = cookieJar.cookies else {
