@@ -14,6 +14,8 @@ typealias XHGetMyMobileNetCourseSuccess = ([XHCourseCatalog], XHThemeList) -> ()
 typealias XHGetMyMobileNetCourseFailue = (String) -> ()
 typealias XHGetMyMobilePaperListSuccess = ([XHCourseCatalog], XHPaperList) -> ()
 typealias XHGetMyMobilePaperListFailue = (String) -> ()
+typealias XHGetMyMobieQuestionListSuccess = ([XHCourseCatalog], XHQuestionList) -> ()
+typealias XHGetMyMobieQuestionListFailue = (String) -> ()
 
 class XHProfile {
     
@@ -89,6 +91,12 @@ class XHProfile {
         }
     }
     
+    /// 获取考卷列表的接口
+    ///
+    /// - Parameters:
+    ///   - courseClassId: 课程id
+    ///   - success: 请求成功的回调
+    ///   - failue: 请求失败的回调
     class func getMyMobiePaperList(withCourseClassId courseClassId: String, success: XHGetMyMobilePaperListSuccess?, failue: XHGetMyMobilePaperListFailue?) {
         let params = [
             "courseClassId" : courseClassId
@@ -134,6 +142,37 @@ class XHProfile {
                 fatherArray.append(catalog)
             }
             success?(fatherArray, model)
+        }) { (error) in
+            let err = error as NSError
+            if err.code == -1009 {
+                failue?("网络连接失败")
+            }else {
+                failue?("获取我的题库列表数据失败")
+            }
+        }
+    }
+    
+    
+    class func getMyMobieQuestionList(withEnterType enterType: XHQuestionEnterType, courseClassId: String, success: XHGetMyMobieQuestionListSuccess?, failue: XHGetMyMobieQuestionListFailue?) {
+        let params = [
+            "enterType" : enterType.rawValue,
+            "courseClassId" : courseClassId,
+            "actionType" : "my"
+        ]
+        XHNetwork.GET(url: URL_TO_MY_QUESTION_LIST, params: params, success: { (response) in
+            guard let responseJson = response as? [String : Any],
+                let model = XHQuestionList(JSON: responseJson),
+                let questions = model.items else {
+                    return
+            }
+            guard let total = XHCourseCatalog(JSON: responseJson) else {
+                return
+            }
+            total.queCount = model.totalCount
+            total.courseClassName = "全部"
+            var array = questions
+            array.insert(total, at: 0)
+            success?(array, model)
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {

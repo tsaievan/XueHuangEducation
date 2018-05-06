@@ -43,6 +43,9 @@ let URL_TO_MY_MOBILE_NET_COURSE = "xhweb/appController.do?toMyMobileNetCourse"
 ///< 20. 获取个人题库的数据
 let URL_TO_MY_MOBIE_PAPER_LIST = "xhweb/appController.do?toMemMobilePaperList"
 
+///< 21. 获取个人在线答疑数据
+let URL_TO_MY_QUESTION_LIST = "xhweb/appController.do?toMyCourseCatalog"
+
 ///< 21. 手机快捷登录
 let URL_APP_REGIST_PHONE_LOGIN = "xhweb/appRegist.do?phoneLogin"
 

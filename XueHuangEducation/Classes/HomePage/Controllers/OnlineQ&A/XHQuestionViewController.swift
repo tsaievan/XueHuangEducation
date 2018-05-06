@@ -14,6 +14,7 @@ class XHQuestionViewController: XHTableViewController {
     
     lazy var headerView: XHQuestionHeaderView = {
         let header = XHQuestionHeaderView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 40))
+        header.xh_delegate = self
         return header
     }()
     
@@ -24,6 +25,17 @@ class XHQuestionViewController: XHTableViewController {
             }
             dataSource = modelInfo.response
             headerView.title = modelInfo.titleText
+            tableView.reloadData()
+        }
+    }
+    
+    var newInfo: (response: [XHCourseCatalog], questionList: XHQuestionList)? {
+        didSet {
+            guard let modelInfo = newInfo else {
+                return
+            }
+            dataSource = modelInfo.response
+            headerView.newInfo = modelInfo.questionList
             tableView.reloadData()
         }
     }
@@ -59,5 +71,27 @@ class XHQuestionViewController: XHTableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath == IndexPath(row: 0, section: 0) {
+            ///< 当第一个cell消失的时候, popMenuView跟着消失
+            headerView.dismissPopMenuView()
+        }
+    }
+}
+
+extension XHQuestionViewController: XHQuestionHeaderViewDelegate {
+    func questionHeaderViewDidClickButtonList(sectionView: XHQuestionHeaderView, sender: UIButton) {
+        guard let questionList = newInfo?.questionList,
+            let catalogs = questionList.sCourseCatalogs else {
+                return
+        }
+        let catalog = catalogs[sender.tag]
+        XHProfile.getMyMobieQuestionList(withEnterType: XHQuestionEnterType.answer, courseClassId: catalog.id ?? "", success: { (catalogs, questionModel) in
+            self.newInfo = (catalogs, questionModel)
+        }) { (errorReason) in
+            XHAlertHUD.showError(withStatus: errorReason)
+        }
     }
 }

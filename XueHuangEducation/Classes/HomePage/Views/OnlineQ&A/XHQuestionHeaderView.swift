@@ -8,13 +8,47 @@
 
 import UIKit
 
+protocol XHQuestionHeaderViewDelegate: NSObjectProtocol {
+    func questionHeaderViewDidClickButtonList(sectionView: XHQuestionHeaderView, sender: UIButton)
+}
+
 class XHQuestionHeaderView: UIView {
+    
+    weak var xh_delegate: XHQuestionHeaderViewDelegate?
     
     var title: String? {
         didSet {
             titleLabel.text = title
         }
     }
+    
+    var newInfo: XHQuestionList? {
+        didSet {
+            guard let info = newInfo else {
+                return
+            }
+            buttonModels = info.sCourseCatalogs
+            titleLabel.text = info.courseClassName
+        }
+    }
+    
+    var buttonModels: [XHCourseCatalog]?
+    
+    lazy var popView: XHPopMenu? = {
+        guard let models = buttonModels else {
+            return nil
+        }
+        var tempArray = [String]()
+        for model in models {
+            guard let name = model.courseClassName else {
+                continue
+            }
+            tempArray.append(name)
+        }
+        let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: 40, textSize: 13)
+        pop.xh_delegate = self
+        return pop
+    }()
     
     lazy var titleLabel: UILabel = {
         let lbl = UILabel(text: "", textColor: COLOR_PAPAER_TYPE_BUTTON_TITLE, fontSize: FONT_SIZE_16)
@@ -25,6 +59,7 @@ class XHQuestionHeaderView: UIView {
     lazy var moreButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(named: "button_paperList_more"), for: .normal)
+        btn.addTarget(self, action: #selector(didClickMoreButtonAction), for: .touchUpInside)
         return btn
     }()
     
@@ -61,6 +96,35 @@ extension XHQuestionHeaderView {
             make.centerY.equalTo(titleLabel)
             make.right.equalTo(self).offset(-MARGIN_GLOBAL_15)
         }
+    }
+}
+
+// MARK: - 按钮的点击事件
+extension XHQuestionHeaderView {
+    ///< 更多按钮的点击事件
+    @objc
+    fileprivate func didClickMoreButtonAction(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        let point = convert(moreButton.center, to: superview)
+        guard let pView = popView else {
+            return
+        }
+        sender.isSelected ? pView.showRight(onView: superview!, atPoint: point) : pView.dismiss()
+    }
+}
+
+// MARK: - popMenuView的代理方法
+extension XHQuestionHeaderView: XHPopMenuDelegate {
+    func popMenuViewDidClickButton(menu: XHPopMenu, sender: UIButton) {
+        xh_delegate?.questionHeaderViewDidClickButtonList(sectionView: self, sender: sender)
+    }
+}
+
+
+extension XHQuestionHeaderView {
+    func dismissPopMenuView() {
+        moreButton.isSelected = false
+        popView?.dismiss()
     }
 }
 

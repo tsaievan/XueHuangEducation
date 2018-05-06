@@ -70,7 +70,16 @@ extension XHProfileViewController: XHProfileViewDelegate {
         }
         
         if sender.tag == XHButtonType.answer.rawValue { ///< 点击我的问答按钮
-            
+            let questionVc = XHQuestionViewController(style: .grouped)
+            questionVc.navigationItem.title = "考卷列表"
+            questionVc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(questionVc, animated: true)
+            ///< 调用我的问答列表接口
+            XHProfile.getMyMobieQuestionList(withEnterType: XHQuestionEnterType.answer, courseClassId: "", success: { (response, questionList) in
+                questionVc.newInfo = (response, questionList)
+            }, failue: { (errorReason) in
+                XHAlertHUD.showError(withStatus: errorReason)
+            })
         }
     }
 }

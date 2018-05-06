@@ -43,7 +43,6 @@ class XHTeachViewController: XHTableViewController {
             }
             dataSource = (modelInfo.response, modelInfo.themeList)
             tableView.reloadData()
-            
         }
     }
     
