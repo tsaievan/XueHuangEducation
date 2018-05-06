@@ -8,7 +8,30 @@
 
 import UIKit
 
+protocol XHPaperSectionTitleViewDelegate: NSObjectProtocol {
+    func paperSectionTitleViewDidClickButtonList(sectionView: XHPaperSectionTitleView, sender: UIButton)
+}
+
 class XHPaperSectionTitleView: UITableViewHeaderFooterView {
+    
+    weak var xh_delegate: XHPaperSectionTitleViewDelegate?
+    
+    lazy var popView: XHPopMenu? = {
+        guard let models = buttonModels else {
+            return nil
+        }
+        var tempArray = [String]()
+        for model in models {
+            guard let name = model.courseClassName else {
+                continue
+            }
+            tempArray.append(name)
+        }
+        let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: 40, textSize: 13)
+        pop.xh_delegate = self
+        return pop
+    }()
+    
     lazy var titleLabel: UILabel = {
         let lbl = UILabel(text: "", textColor: COLOR_PAPAER_TYPE_BUTTON_TITLE, fontSize: FONT_SIZE_16)
         lbl.font = UIFont.boldSystemFont(ofSize: FONT_SIZE_16)
@@ -18,6 +41,7 @@ class XHPaperSectionTitleView: UITableViewHeaderFooterView {
     lazy var moreButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(named: "button_paperList_more"), for: .normal)
+        btn.addTarget(self, action: #selector(didClickMoreButtonAction), for: .touchUpInside)
         return btn
     }()
     
@@ -32,6 +56,7 @@ class XHPaperSectionTitleView: UITableViewHeaderFooterView {
         return header
     }()
     
+    ///< 这里的数据赋值表示是从首页进来的
     var info: (model: XHCourseCatalog, text: String?)?{
         didSet {
             guard let modelInfo = info else {
@@ -39,8 +64,31 @@ class XHPaperSectionTitleView: UITableViewHeaderFooterView {
             }
             headerView.model = modelInfo.model
             titleLabel.text = modelInfo.text
+            ///< 这里禁用更多按钮
+            moreButton.isEnabled = false
         }
     }
+    
+    var buttonModels: [XHCourseCatalog]?
+    
+    var newInfo: (catalogs: XHCourseCatalog?, paperList: XHPaperList?)? {
+        didSet {
+            guard let modelInfo = newInfo else {
+                return
+            }
+            headerView.model = modelInfo.catalogs
+            if let titleText = modelInfo.paperList?.courseClassName {
+                titleLabel.text = titleText
+            }
+            if let paperL = modelInfo.paperList {
+                buttonModels = paperL.sCourseCatalogs
+                moreButton.isHidden = false
+            }else {
+                moreButton.isHidden = true
+            }
+        }
+    }
+    
     
     var tapSectionClosure: XHTapTeachSectionHeaderView? {
         didSet {
@@ -90,6 +138,27 @@ extension XHPaperSectionTitleView {
             make.left.right.equalTo(contentView)
             make.height.equalTo(50).priority(.low)
         }
+    }
+}
+
+
+// MARK: - 更多按钮点击事件
+extension XHPaperSectionTitleView {
+    @objc
+    fileprivate func didClickMoreButtonAction(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        let point = convert(moreButton.center, to: superview)
+        guard let pView = popView else {
+            return
+        }
+        sender.isSelected ? pView.showRight(onView: superview!, atPoint: point) : pView.dismiss()
+    }
+}
+
+// MARK: - popMenu的代理方法
+extension XHPaperSectionTitleView: XHPopMenuDelegate {
+    func popMenuViewDidClickButton(menu: XHPopMenu, sender: UIButton) {
+        xh_delegate?.paperSectionTitleViewDidClickButtonList(sectionView: self, sender: sender)
     }
 }
 

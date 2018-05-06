@@ -40,17 +40,36 @@ extension XHProfileViewController {
 // MARK: - profileView的代理
 extension XHProfileViewController: XHProfileViewDelegate {
     func profileViewdidClickThreeButtons(profileView: XHProfileView, sender: XHButton) {
-        ///< 1. 先弹出讲题列表控制器, 这个地方可以复用
-        let teachVc = XHTeachViewController(style: .grouped)
-        teachVc.navigationItem.title = "网校讲题"
-        teachVc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(teachVc, animated: true)
+        if sender.tag == XHButtonType.teach.rawValue {
+            ///< 先弹出讲题列表控制器, 这个地方可以复用
+            let teachVc = XHTeachViewController(style: .grouped)
+            teachVc.navigationItem.title = "网校讲题"
+            teachVc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(teachVc, animated: true)
+            ///< 调用获取个人讲题列表的接口
+            XHProfile.getMyMobileNetCourse(withCourseClassId: "", success: { (catalogs, themeModel) in
+                teachVc.newInfo = (catalogs, themeModel)
+            }) { (errorReason) in
+                XHAlertHUD.showError(withStatus: errorReason)
+            }
+        }
         
-        ///< 调用这个接口
-        XHProfile.getMyMobileNetCourse(withCourseClassId: "", success: { (catalogs, themeModel) in
-            teachVc.newInfo = (catalogs, themeModel)
-        }) { (error) in
-            XHAlertHUD.showError(withStatus: error)
+        if sender.tag == XHButtonType.theme.rawValue {
+            ///< 先弹出题库列表控制器, 这个地方可以复用
+            let themeVc = XHThemeViewController(style: .grouped)
+            themeVc.navigationItem.title = "考卷列表"
+            themeVc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(themeVc, animated: true)
+            ///< 调用获取题库列表的接口
+            XHProfile.getMyMobiePaperList(withCourseClassId: "", success: { (catalogs, paperList) in
+                themeVc.newInfo = (catalogs, paperList)
+            }, failue: { (errorReason) in
+                XHAlertHUD.showError(withStatus: errorReason)
+            })
+        }
+        
+        if sender.tag == XHButtonType.answer.rawValue {
+            
         }
     }
 }

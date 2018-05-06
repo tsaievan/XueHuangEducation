@@ -10,7 +10,7 @@ import UIKit
 
 class XHThemeViewController: XHTableViewController {
     
-    var dataSource: [XHCourseCatalog]?
+    var dataSource: (catalogs: [XHCourseCatalog], paperList: XHPaperList?)?
     
     var mainTitle: String?
     
@@ -20,7 +20,17 @@ class XHThemeViewController: XHTableViewController {
                 return
             }
             mainTitle = modelInfo.titleText
-            dataSource = modelInfo.response
+            dataSource = (modelInfo.response, nil)
+            tableView.reloadData()
+        }
+    }
+    
+    var newInfo: (response: [XHCourseCatalog], paperList: XHPaperList)? {
+        didSet {
+            guard let modelInfo = newInfo else {
+                return
+            }
+            dataSource = (modelInfo.response, modelInfo.paperList)
             tableView.reloadData()
         }
     }
@@ -41,7 +51,7 @@ class XHThemeViewController: XHTableViewController {
 
     // MARK: - Table view 数据源和代理方法
     override func numberOfSections(in tableView: UITableView) -> Int {
-        guard let count = dataSource?.count else {
+        guard let count = dataSource?.catalogs.count else {
             return 0
         }
         return count
@@ -51,7 +61,7 @@ class XHThemeViewController: XHTableViewController {
         guard let datas = dataSource else {
             return 0
         }
-        let sectionModel = datas[section]
+        let sectionModel = datas.catalogs[section]
         guard let count = sectionModel.paperLists?.count else {
             return 0
         }
@@ -64,7 +74,7 @@ class XHThemeViewController: XHTableViewController {
             let datas = dataSource else {
                 return UITableViewCell()
         }
-        let sectionModel = datas[indexPath.section]
+        let sectionModel = datas.catalogs[indexPath.section]
         guard let models = sectionModel.paperLists else {
             return UITableViewCell()
         }
@@ -87,7 +97,7 @@ class XHThemeViewController: XHTableViewController {
         guard let datas = dataSource else {
             return nil
         }
-        let sectionModel = datas[section]
+        let sectionModel = datas.catalogs[section]
         if section == 0 {
             guard let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HEADER_TITLE_VIEW_IDENTIFIER_PAPER_TABLEVIEW) as? XHPaperSectionTitleView else {
                 return nil
@@ -97,6 +107,7 @@ class XHThemeViewController: XHTableViewController {
                 sectionModel.isFold = !sectionModel.isFold!
                 self.tableView.reloadData()
             }
+            sectionView.xh_delegate = self
             return sectionView
             
         }else {
@@ -120,7 +131,7 @@ class XHThemeViewController: XHTableViewController {
         guard let datas = dataSource else {
             return
         }
-        let sectionModel = datas[indexPath.section]
+        let sectionModel = datas.catalogs[indexPath.section]
         guard let models = sectionModel.paperLists else {
             return
         }
@@ -130,6 +141,21 @@ class XHThemeViewController: XHTableViewController {
         }
         XHMobilePaper.getMobilePaperCatalog(withPaperId: paperId, success: { (response) in
             themeListVc.info = (response, info.paperName)
+        }) { (errorReason) in
+            XHAlertHUD.showError(withStatus: errorReason)
+        }
+    }
+}
+
+extension XHThemeViewController: XHPaperSectionTitleViewDelegate {
+    func paperSectionTitleViewDidClickButtonList(sectionView: XHPaperSectionTitleView, sender: UIButton) {
+        guard let paperList = newInfo?.paperList,
+            let catalogs = paperList.sCourseCatalogs else {
+                return
+        }
+        let catalog = catalogs[sender.tag]
+        XHProfile.getMyMobiePaperList(withCourseClassId: catalog.id ?? "", success: { (catalogs, paperModel) in
+            self.newInfo = (catalogs, paperModel)
         }) { (errorReason) in
             XHAlertHUD.showError(withStatus: errorReason)
         }
