@@ -102,7 +102,8 @@ class XHThemeViewController: XHTableViewController {
             guard let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HEADER_TITLE_VIEW_IDENTIFIER_PAPER_TABLEVIEW) as? XHPaperSectionTitleView else {
                 return nil
             }
-            sectionView.info = (sectionModel, mainTitle)
+//            sectionView.info = (sectionModel, mainTitle)
+            sectionView.newInfo = (sectionModel, datas.paperList)
             sectionView.tapSectionClosure = {
                 sectionModel.isFold = !sectionModel.isFold!
                 self.tableView.reloadData()
@@ -143,6 +144,15 @@ class XHThemeViewController: XHTableViewController {
             themeListVc.info = (response, info.paperName)
         }) { (errorReason) in
             XHAlertHUD.showError(withStatus: errorReason)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        if section == 0 {
+            guard let headerView = view as? XHPaperSectionTitleView else {
+                return
+            }
+            
         }
     }
 }

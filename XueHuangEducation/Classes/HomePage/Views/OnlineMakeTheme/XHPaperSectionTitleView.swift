@@ -65,7 +65,7 @@ class XHPaperSectionTitleView: UITableViewHeaderFooterView {
             headerView.model = modelInfo.model
             titleLabel.text = modelInfo.text
             ///< 这里禁用更多按钮
-            moreButton.isEnabled = false
+//            moreButton.isEnabled = false
         }
     }
     
@@ -82,9 +82,9 @@ class XHPaperSectionTitleView: UITableViewHeaderFooterView {
             }
             if let paperL = modelInfo.paperList {
                 buttonModels = paperL.sCourseCatalogs
-                moreButton.isHidden = false
+//                moreButton.isEnabled = true
             }else {
-                moreButton.isHidden = true
+//                moreButton.isHidden = false
             }
         }
     }
@@ -159,6 +159,13 @@ extension XHPaperSectionTitleView {
 extension XHPaperSectionTitleView: XHPopMenuDelegate {
     func popMenuViewDidClickButton(menu: XHPopMenu, sender: UIButton) {
         xh_delegate?.paperSectionTitleViewDidClickButtonList(sectionView: self, sender: sender)
+    }
+}
+
+// MARK: - 其他事件
+extension XHPaperSectionTitleView {
+    func dismissPopMenuView() {
+        popView?.dismiss()
     }
 }
 

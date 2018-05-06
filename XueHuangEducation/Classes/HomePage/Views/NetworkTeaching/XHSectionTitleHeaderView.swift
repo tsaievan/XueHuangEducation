@@ -149,10 +149,7 @@ extension XHSectionTitleHeaderView {
 
 extension XHSectionTitleHeaderView {
     func dismissPopMenuView() {
-        guard let pView = popView else {
-            return
-        }
-        pView.removeFromSuperview()
+        popView?.dismiss()
     }
 }
 

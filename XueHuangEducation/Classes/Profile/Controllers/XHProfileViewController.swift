@@ -40,7 +40,8 @@ extension XHProfileViewController {
 // MARK: - profileView的代理
 extension XHProfileViewController: XHProfileViewDelegate {
     func profileViewdidClickThreeButtons(profileView: XHProfileView, sender: XHButton) {
-        if sender.tag == XHButtonType.teach.rawValue {
+        
+        if sender.tag == XHButtonType.teach.rawValue { ///< 点击我的讲题按钮
             ///< 先弹出讲题列表控制器, 这个地方可以复用
             let teachVc = XHTeachViewController(style: .grouped)
             teachVc.navigationItem.title = "网校讲题"
@@ -54,7 +55,7 @@ extension XHProfileViewController: XHProfileViewDelegate {
             }
         }
         
-        if sender.tag == XHButtonType.theme.rawValue {
+        if sender.tag == XHButtonType.theme.rawValue { ///< 点击答题列表按钮
             ///< 先弹出题库列表控制器, 这个地方可以复用
             let themeVc = XHThemeViewController(style: .grouped)
             themeVc.navigationItem.title = "考卷列表"
@@ -68,7 +69,7 @@ extension XHProfileViewController: XHProfileViewDelegate {
             })
         }
         
-        if sender.tag == XHButtonType.answer.rawValue {
+        if sender.tag == XHButtonType.answer.rawValue { ///< 点击我的问答按钮
             
         }
     }
