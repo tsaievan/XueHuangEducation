@@ -154,7 +154,7 @@ class XHThemeViewController: XHTableViewController {
             guard let headerView = view as? XHPaperSectionTitleView else {
                 return
             }
-            
+            headerView.dismissPopMenuView()
         }
     }
 }
