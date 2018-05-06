@@ -49,7 +49,10 @@ let URL_TO_MY_QUESTION_LIST = "xhweb/appController.do?toMyCourseCatalog"
 ///< 21. 手机快捷登录
 let URL_APP_REGIST_PHONE_LOGIN = "xhweb/appRegist.do?phoneLogin"
 
-///< 23. 获取手机验证码
+///< 23. 手机注册
+let URL_DO_REGIST = "xhweb/appRegist.do?doRegist"
+
+///< 24. 获取手机验证码
 let URL_APP_REGIST_GET_CODE = "xhweb/appRegist.do?getCode"
 
 ///< 26. 密码验证登录

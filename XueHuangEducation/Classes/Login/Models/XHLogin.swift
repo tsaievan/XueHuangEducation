@@ -20,6 +20,8 @@ typealias XHModifyPwdSuccess = () -> ()
 typealias XHModifyPwdFailue = (String) -> ()
 typealias XHLoginOutSuccess = () -> ()
 typealias XHLoginOutFailue = (String) -> ()
+typealias XHRegistSuccess = () -> ()
+typealias XHRegistFailue = (String) -> ()
 
 class XHLogin {
     
@@ -55,7 +57,11 @@ class XHLogin {
                     success?()
                 }
             }else {
-                failue?("发送验证码失败")
+                if let msg = result.msg {
+                    failue?(msg)
+                }else {
+                    failue?("发送验证码失败")
+                }
             }
         }) { (error) in
             let err = error as NSError
@@ -239,6 +245,38 @@ class XHLogin {
                 failue?("网络连接失败")
             }else {
                 failue?("退出失败")
+            }
+        }
+    }
+    
+    class func regist(withAccount account: String, password: String, mobile: String, authCode: String, success: XHRegistSuccess?, failue: XHRegistFailue?) {
+        let params = [
+            "account" : account,
+            "loginPassword" : password,
+            "phonebind" : mobile,
+            "code" : authCode
+        ]
+        XHNetwork.GET(url: URL_DO_REGIST, params: params, success: { (response) in
+            guard let responseJson = response as? [String : Any] else {
+                failue?("注册失败")
+                return
+            }
+            guard let registModel = XHRegistResult(JSON: responseJson),
+                let result = registModel.result else {
+                    failue?("注册失败")
+                    return
+            }
+            if result == "ok" { ///< 注册成功
+                success?()
+            }else {
+                failue?("注册失败")
+            }
+        }) { (error) in
+            let err = error as NSError
+            if err.code == -1009 {
+                failue?("网络连接失败")
+            }else {
+                failue?("注册失败")
             }
         }
     }

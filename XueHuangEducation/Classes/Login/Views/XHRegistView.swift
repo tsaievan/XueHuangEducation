@@ -11,10 +11,17 @@ import UIKit
 @objc
 protocol XHRegistViewDelegate: NSObjectProtocol {
     @objc optional
-    func registViewDidTaphaveAccountLabel(registView: XHRegistView, sender: UITapGestureRecognizer)
+    func registViewDidTapHaveAccountLabel(registView: XHRegistView, sender: UITapGestureRecognizer)
+    
+    @objc optional
+    func registViewDidClickGetAuthButton(registView: XHRegistView, sender: UIButton)
+    
+    @objc optional
+    func registViewDidClickRegistButton(registView: XHRegistView, sender: UIButton)
 }
 
 class XHRegistView: UIView {
+    
     ///< 手机号输入框
     lazy fileprivate var mobieTextField: UITextField = {
         let textField = UITextField()
@@ -136,6 +143,65 @@ class XHRegistView: UIView {
         return false
     }
     
+    var mobileNumber: String?
+    
+    ///< 发送验证码之后的倒计时器
+    weak var countDownTimer: Timer?
+    
+    ///< 再次发送验证码剩余时间
+    var remainTime: Int = 60
+    
+    var accountIsNull: Bool {
+        ///< 验证用户名是否为空
+        if userAccountTextField.text == nil {
+            XHAlertHUD.showError(withStatus: "用户名不能为空")
+            return true
+        }
+        if userAccountTextField.text! == "" {
+            XHAlertHUD.showError(withStatus: "用户名不能为空")
+            return true
+        }
+        return false
+    }
+    
+    ///< 密码是否为空
+    var passwordIsNull: Bool {
+        ///< 验证密码是否为空
+        if passwordTextField.text == nil {
+            XHAlertHUD.showError(withStatus: "密码不能为空")
+            return true
+        }
+        if passwordTextField.text! == "" {
+            XHAlertHUD.showError(withStatus: "密码不能为空")
+            return true
+        }
+        return false
+    }
+    
+    var authCodeIsNull: Bool {
+        if authCodeTextField.text == nil {
+            XHAlertHUD.showError(withStatus: "验证码不能为空")
+            return true
+        }
+        if authCodeTextField.text == "" {
+            XHAlertHUD.showError(withStatus: "验证码不能为空")
+            return true
+        }
+        return false
+    }
+    
+    var info: (account: String, password: String, mobile: String, authCode: String)?
+    
+    ///< 获取验证码的按钮是否禁用
+    var getAuthButtonEnable: Bool? {
+        didSet {
+            guard let enable = getAuthButtonEnable else {
+                return
+            }
+            getAuthButton.isEnabled = enable
+        }
+    }
+    
     weak var xh_delegate: XHRegistViewDelegate?
     
     override init(frame: CGRect) {
@@ -238,7 +304,45 @@ extension XHRegistView {
     
     ///< 点击注册按钮
     @objc fileprivate func didClickRegistButtonAction(sender: UIButton) {
+        if passwordTextField.isFirstResponder {
+            passwordTextField.resignFirstResponder()
+        }
+        if userAccountTextField.isFirstResponder {
+            userAccountTextField.resignFirstResponder()
+        }
+        if mobieTextField.isFirstResponder {
+            mobieTextField.resignFirstResponder()
+        }
+        if authCodeTextField.isFirstResponder {
+            authCodeTextField.resignFirstResponder()
+        }
+        if accountIsNull {
+            return
+        }
+        if passwordIsNull {
+            return
+        }
         
+        if mobileIsNull {
+            return
+        }
+        if authCodeIsNull {
+            return
+        }
+        if xhProtocolButton.isSelected != true {
+            XHAlertHUD.showError(withStatus: "请阅读并同意《学煌教育服务协议》")
+            xhProtocolButton.isSelected = true
+            return            
+        }
+        if !XHRegExTool.isPhoneNumber(phoneNumber: mobieTextField.text!) {
+            XHAlertHUD.showError(withStatus: "手机号码格式不正确")
+            return
+        }
+        if authCodeTextField.text?.count != 6 {
+            XHAlertHUD.showError(withStatus: "验证码不正确")
+        }
+        info = (account: userAccountTextField.text!, password: passwordTextField.text!, mobile: mobieTextField.text!, authCode: authCodeTextField.text!)
+        xh_delegate?.registViewDidClickRegistButton?(registView: self, sender: sender)
     }
     
     ///< 点击获取验证码按钮
@@ -253,7 +357,8 @@ extension XHRegistView {
         }
         ///< 不给连续点击的机会
         sender.isEnabled = false
-//        delegate?.loginDetailViewDidClickGetAuthButton?(loginDetailView: self, sender: sender)
+        mobileNumber = mobieTextField.text!
+        xh_delegate?.registViewDidClickGetAuthButton?(registView: self, sender: sender)
     }
     
     ///< 勾选了同意服务协议按钮
@@ -268,7 +373,7 @@ extension XHRegistView {
     
     ///< 点击`去登录`label
     @objc fileprivate func didTaphaveAccountLabelAction(sender: UITapGestureRecognizer) {
-        xh_delegate?.registViewDidTaphaveAccountLabel?(registView: self, sender: sender)
+        xh_delegate?.registViewDidTapHaveAccountLabel?(registView: self, sender: sender)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -284,5 +389,28 @@ extension XHRegistView {
         if passwordTextField.isFirstResponder {
             passwordTextField.resignFirstResponder()
         }
+    }
+}
+
+extension XHRegistView {
+    func startCountingDown() {
+        let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCountingDownAction), userInfo: nil, repeats: true)
+        self.countDownTimer = timer
+        RunLoop.current.add(self.countDownTimer!, forMode: .commonModes)
+    }
+    
+    @objc fileprivate func timerCountingDownAction() {
+        if remainTime <= 1 {
+            countDownTimer?.invalidate()
+            countDownTimer = nil
+            remainTime = 60
+            getAuthButton.isEnabled = true
+            return
+        }
+        remainTime -= 1
+        let title = "重新发送(\(remainTime))"
+        getAuthButton.isEnabled = false
+        getAuthButton.setTitle(title, for: .disabled)
+        getAuthButton.setTitleColor(COLOR_CLOBAL_LIGHT_GRAY, for: .disabled)
     }
 }
