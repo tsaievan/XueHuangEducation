@@ -149,6 +149,7 @@ extension XHSectionTitleHeaderView {
 
 extension XHSectionTitleHeaderView {
     func dismissPopMenuView() {
+        moreButton.isSelected = false
         popView?.dismiss()
     }
 }

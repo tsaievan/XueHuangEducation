@@ -165,6 +165,7 @@ extension XHPaperSectionTitleView: XHPopMenuDelegate {
 // MARK: - 其他事件
 extension XHPaperSectionTitleView {
     func dismissPopMenuView() {
+        moreButton.isSelected = false
         popView?.dismiss()
     }
 }
