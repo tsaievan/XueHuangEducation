@@ -168,8 +168,13 @@ extension XHThemeViewController: XHPaperSectionTitleViewDelegate {
         let catalog = catalogs[sender.tag]
         XHProfile.getMyMobiePaperList(withCourseClassId: catalog.id ?? "", success: { (catalogs, paperModel) in
             self.newInfo = (catalogs, paperModel)
-        }) { (errorReason) in
-            XHAlertHUD.showError(withStatus: errorReason)
+        }) { (error) in
+            if error.code == -1 { ///< 表示没有数据
+            }else if error.code == -1009 { ///< 网络连接失败
+                XHAlertHUD.showError(withStatus: "网络连接失败")
+            }else { ///< 获取列表失败
+                XHAlertHUD.showError(withStatus: "获取我的答题列表失败")
+            }
         }
     }
 }

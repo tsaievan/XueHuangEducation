@@ -185,7 +185,12 @@ extension XHTeachViewController: XHSectionTitleHeaderViewDelegate {
         XHProfile.getMyMobileNetCourse(withCourseClassId: catalog.id ?? "", success: { (catalogs, themeModel) in
             self.newInfo = (catalogs, themeModel)
         }) { (error) in
-            XHAlertHUD.showError(withStatus: error)
+            if error.code == -1 { ///< 表示没有数据
+            }else if error.code == -1009 { ///< 网络连接失败
+                XHAlertHUD.showError(withStatus: "网络连接失败")
+            }else { ///< 获取列表失败
+                XHAlertHUD.showError(withStatus: "获取我的讲题列表失败")
+            }
         }
     }
 }

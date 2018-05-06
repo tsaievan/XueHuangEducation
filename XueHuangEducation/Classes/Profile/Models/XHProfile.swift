@@ -11,11 +11,11 @@ import UIKit
 typealias XHGetUserNameSuccess = ([String : Any]) -> ()
 typealias XHGetUserNameFailue = (String) -> ()
 typealias XHGetMyMobileNetCourseSuccess = ([XHCourseCatalog], XHThemeList) -> ()
-typealias XHGetMyMobileNetCourseFailue = (String) -> ()
+typealias XHGetMyMobileNetCourseFailue = (NSError) -> ()
 typealias XHGetMyMobilePaperListSuccess = ([XHCourseCatalog], XHPaperList) -> ()
-typealias XHGetMyMobilePaperListFailue = (String) -> ()
+typealias XHGetMyMobilePaperListFailue = (NSError) -> ()
 typealias XHGetMyMobieQuestionListSuccess = ([XHCourseCatalog], XHQuestionList) -> ()
-typealias XHGetMyMobieQuestionListFailue = (String) -> ()
+typealias XHGetMyMobieQuestionListFailue = (NSError) -> ()
 
 class XHProfile {
     
@@ -59,6 +59,8 @@ class XHProfile {
             ///< 在这里进行数据处理
             guard let catalogs = model.courseCatalogs,
                 let netCourses = model.netCourses else {
+                    let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey : "暂无我的讲题列表相关数据"])
+                    failue?(error)
                     return
             }
             var fatherArray = [XHCourseCatalog]()
@@ -83,11 +85,7 @@ class XHProfile {
             success?(fatherArray, model)
         }) { (error) in
             let err = error as NSError
-            if err.code == -1009 {
-                failue?("网络连接失败")
-            }else {
-                failue?("获取我的讲题列表数据失败")
-            }
+            failue?(err)
         }
     }
     
@@ -110,6 +108,8 @@ class XHProfile {
             guard let catalogs = model.tCourseCatalogs,
                 let paperList = model.paperLists,
                 let types = model.paperTypes else {
+                    let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey : "暂无我的答题列表相关数据"])
+                    failue?(error)
                     return
             }
             var typeDict = [String : String]()
@@ -144,11 +144,7 @@ class XHProfile {
             success?(fatherArray, model)
         }) { (error) in
             let err = error as NSError
-            if err.code == -1009 {
-                failue?("网络连接失败")
-            }else {
-                failue?("获取我的题库列表数据失败")
-            }
+            failue?(err)
         }
     }
     
@@ -163,6 +159,8 @@ class XHProfile {
             guard let responseJson = response as? [String : Any],
                 let model = XHQuestionList(JSON: responseJson),
                 let questions = model.items else {
+                    let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey : "暂无我的问答列表相关数据"])
+                    failue?(error)
                     return
             }
             guard let total = XHCourseCatalog(JSON: responseJson) else {
@@ -175,11 +173,7 @@ class XHProfile {
             success?(array, model)
         }) { (error) in
             let err = error as NSError
-            if err.code == -1009 {
-                failue?("网络连接失败")
-            }else {
-                failue?("获取我的题库列表数据失败")
-            }
+            failue?(err)
         }
     }
 }

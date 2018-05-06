@@ -50,8 +50,21 @@ extension XHProfileViewController: XHProfileViewDelegate {
             ///< 调用获取个人讲题列表的接口
             XHProfile.getMyMobileNetCourse(withCourseClassId: "", success: { (catalogs, themeModel) in
                 teachVc.newInfo = (catalogs, themeModel)
-            }) { (errorReason) in
-                XHAlertHUD.showError(withStatus: errorReason)
+            }) { (error) in
+                if error.code == -1 { ///< 表示没有数据
+                    let alertVc = UIAlertController(title: "信息", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                    let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
+                    let back = UIAlertAction(title: "返回", style: UIAlertActionStyle.cancel, handler: { (action) in
+                        teachVc.navigationController?.popViewController(animated: true)
+                    })
+                    alertVc.addAction(cancel)
+                    alertVc.addAction(back)
+                    teachVc.present(alertVc, animated: true, completion: nil)
+                }else if error.code == -1009 { ///< 网络连接失败
+                    XHAlertHUD.showError(withStatus: "网络连接失败")
+                }else { ///< 获取列表失败
+                    XHAlertHUD.showError(withStatus: "获取讲题列表失败")
+                }
             }
         }
         
@@ -64,21 +77,47 @@ extension XHProfileViewController: XHProfileViewDelegate {
             ///< 调用获取题库列表的接口
             XHProfile.getMyMobiePaperList(withCourseClassId: "", success: { (catalogs, paperList) in
                 themeVc.newInfo = (catalogs, paperList)
-            }, failue: { (errorReason) in
-                XHAlertHUD.showError(withStatus: errorReason)
+            }, failue: { (error) in
+                if error.code == -1 { ///< 表示没有数据
+                    let alertVc = UIAlertController(title: "信息", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                    let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
+                    let back = UIAlertAction(title: "返回", style: UIAlertActionStyle.cancel, handler: { (action) in
+                        themeVc.navigationController?.popViewController(animated: true)
+                    })
+                    alertVc.addAction(cancel)
+                    alertVc.addAction(back)
+                    themeVc.present(alertVc, animated: true, completion: nil)
+                }else if error.code == -1009 { ///< 网络连接失败
+                    XHAlertHUD.showError(withStatus: "网络连接失败")
+                }else { ///< 获取列表失败
+                    XHAlertHUD.showError(withStatus: "获取考卷列表失败")
+                }
             })
         }
         
         if sender.tag == XHButtonType.answer.rawValue { ///< 点击我的问答按钮
             let questionVc = XHQuestionViewController(style: .grouped)
-            questionVc.navigationItem.title = "考卷列表"
+            questionVc.navigationItem.title = "答疑列表"
             questionVc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(questionVc, animated: true)
             ///< 调用我的问答列表接口
             XHProfile.getMyMobieQuestionList(withEnterType: XHQuestionEnterType.answer, courseClassId: "", success: { (response, questionList) in
                 questionVc.newInfo = (response, questionList)
-            }, failue: { (errorReason) in
-                XHAlertHUD.showError(withStatus: errorReason)
+            }, failue: { (error) in
+                if error.code == -1 { ///< 表示没有数据
+                    let alertVc = UIAlertController(title: "信息", message: "暂无答疑列表相关数据", preferredStyle: UIAlertControllerStyle.alert)
+                    let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
+                    let back = UIAlertAction(title: "返回", style: UIAlertActionStyle.cancel, handler: { (action) in
+                        questionVc.navigationController?.popViewController(animated: true)
+                    })
+                    alertVc.addAction(cancel)
+                    alertVc.addAction(back)
+                    questionVc.present(alertVc, animated: true, completion: nil)
+                }else if error.code == -1009 { ///< 网络连接失败
+                    XHAlertHUD.showError(withStatus: "网络连接失败")
+                }else { ///< 获取答疑列表失败
+                    XHAlertHUD.showError(withStatus: "获取答疑列表失败")
+                }
             })
         }
     }

@@ -90,8 +90,13 @@ extension XHQuestionViewController: XHQuestionHeaderViewDelegate {
         let catalog = catalogs[sender.tag]
         XHProfile.getMyMobieQuestionList(withEnterType: XHQuestionEnterType.answer, courseClassId: catalog.id ?? "", success: { (catalogs, questionModel) in
             self.newInfo = (catalogs, questionModel)
-        }) { (errorReason) in
-            XHAlertHUD.showError(withStatus: errorReason)
+        }) { (error) in
+            if error.code == -1 { ///< 表示没有数据
+            }else if error.code == -1009 { ///< 网络连接失败
+                XHAlertHUD.showError(withStatus: "网络连接失败")
+            }else { ///< 获取答疑列表失败
+                XHAlertHUD.showError(withStatus: "获取我的答疑列表失败")
+            }
         }
     }
 }

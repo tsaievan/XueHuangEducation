@@ -19,6 +19,11 @@ class XHQuestionHeaderView: UIView {
     var title: String? {
         didSet {
             titleLabel.text = title
+            if title == "" || title == nil {
+                moreButton.isHidden = true
+            }else {
+                moreButton.isHidden = false
+            }
         }
     }
     
@@ -29,6 +34,15 @@ class XHQuestionHeaderView: UIView {
             }
             buttonModels = info.sCourseCatalogs
             titleLabel.text = info.courseClassName
+            guard let text = titleLabel.text else {
+                moreButton.isHidden = true
+                return
+            }
+            if text == "" {
+                moreButton.isHidden = true
+            }else {
+                moreButton.isHidden = false
+            }
         }
     }
     
@@ -60,6 +74,7 @@ class XHQuestionHeaderView: UIView {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(named: "button_paperList_more"), for: .normal)
         btn.addTarget(self, action: #selector(didClickMoreButtonAction), for: .touchUpInside)
+        btn.isHidden = true
         return btn
     }()
     
