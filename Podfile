@@ -13,6 +13,5 @@ pod 'Cache'
 pod 'ZFPlayer'
 pod 'pop'
 pod 'SDCycleScrollView'
-pod 'CMPopTipView'
 
 end

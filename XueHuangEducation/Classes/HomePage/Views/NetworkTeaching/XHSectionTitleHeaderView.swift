@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol XHSectionTitleHeaderViewDelegate: NSObjectProtocol {
+    func sectionTitleHeaderViewDidClickButtonList(headerView: XHSectionTitleHeaderView, sender: UIButton)
+}
+
 class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
+    
+    weak var xh_delegate: XHSectionTitleHeaderViewDelegate?
     
     lazy var titleButton: UIButton = {
         let btn = UIButton(type: .custom)
@@ -43,6 +49,7 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
             tempArray.append(name)
         }
         let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: 40, textSize: 13)
+        pop.xh_delegate = self
         return pop
     }()
     
@@ -146,5 +153,11 @@ extension XHSectionTitleHeaderView {
             return
         }
         pView.removeFromSuperview()
+    }
+}
+
+extension XHSectionTitleHeaderView: XHPopMenuDelegate {
+    func popMenuViewDidClickButton(menu: XHPopMenu, sender: UIButton) {
+        xh_delegate?.sectionTitleHeaderViewDidClickButtonList(headerView: self, sender: sender)
     }
 }

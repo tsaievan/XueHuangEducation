@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol XHPopMenuDelegate: NSObjectProtocol {
+    func popMenuViewDidClickButton(menu: XHPopMenu, sender: UIButton)
+}
+
 class XHPopMenu: UIView {
     
     var lastButton: UIButton?
+    
+    weak var xh_delegate: XHPopMenuDelegate?
     
     init(withButtonTitles titles: [String], tintColor: UIColor, textColor: UIColor, buttonHeight: CGFloat, textSize: CGFloat) {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: CGFloat(titles.count) * buttonHeight))
@@ -73,22 +79,10 @@ extension XHPopMenu {
     }
 }
 
-extension XHPopMenu {
-    fileprivate func setupUI() {
-        
-        makeConstraints()
-    }
-    
-    fileprivate func makeConstraints() {
-        
-    }
-}
-
-
 // MARK: - 按钮的点击事件
 extension XHPopMenu {
     @objc
     fileprivate func didClickPopMenuButton(sender: UIButton) {
-        
+        xh_delegate?.popMenuViewDidClickButton(menu: self, sender: sender)
     }
 }

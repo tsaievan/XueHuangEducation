@@ -25,6 +25,7 @@ class XHProfileViewController: XHBaseViewController {
 // MARK: - 设置UI
 extension XHProfileViewController {
     fileprivate func setupUI() {
+        navigationItem.title = "个人中心"
         view.addSubview(profileView)
         makeConstraints()
     }
@@ -41,6 +42,7 @@ extension XHProfileViewController: XHProfileViewDelegate {
     func profileViewdidClickThreeButtons(profileView: XHProfileView, sender: XHButton) {
         ///< 1. 先弹出讲题列表控制器, 这个地方可以复用
         let teachVc = XHTeachViewController(style: .grouped)
+        teachVc.navigationItem.title = "网校讲题"
         teachVc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(teachVc, animated: true)
         
@@ -48,7 +50,7 @@ extension XHProfileViewController: XHProfileViewDelegate {
         XHProfile.getMyMobileNetCourse(withCourseClassId: "", success: { (catalogs, themeModel) in
             teachVc.newInfo = (catalogs, themeModel)
         }) { (error) in
-            
+            XHAlertHUD.showError(withStatus: error)
         }
     }
 }

@@ -129,6 +129,7 @@ class XHTeachViewController: XHTableViewController {
                 sectionModel.isFold = !sectionModel.isFold!
                 self.tableView.reloadData()
             }
+            sectionView.xh_delegate = self
             return sectionView
             
         }else {
@@ -170,6 +171,22 @@ class XHTeachViewController: XHTableViewController {
                 return
             }
             headerView.dismissPopMenuView()
+        }
+    }
+}
+
+// MARK: - sectionTitleHeaderView的代理方法
+extension XHTeachViewController: XHSectionTitleHeaderViewDelegate {
+    func sectionTitleHeaderViewDidClickButtonList(headerView: XHSectionTitleHeaderView, sender: UIButton) {
+        guard let themeList = newInfo?.themeList,
+        let catalogs = themeList.sCourseCatalogs else {
+            return
+        }
+        let catalog = catalogs[sender.tag]
+        XHProfile.getMyMobileNetCourse(withCourseClassId: catalog.id ?? "", success: { (catalogs, themeModel) in
+            self.newInfo = (catalogs, themeModel)
+        }) { (error) in
+            XHAlertHUD.showError(withStatus: error)
         }
     }
 }
