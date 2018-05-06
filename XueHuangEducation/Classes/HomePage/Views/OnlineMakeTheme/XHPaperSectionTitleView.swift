@@ -64,8 +64,6 @@ class XHPaperSectionTitleView: UITableViewHeaderFooterView {
             }
             headerView.model = modelInfo.model
             titleLabel.text = modelInfo.text
-            ///< 这里禁用更多按钮
-//            moreButton.isEnabled = false
         }
     }
     
@@ -82,9 +80,6 @@ class XHPaperSectionTitleView: UITableViewHeaderFooterView {
             }
             if let paperL = modelInfo.paperList {
                 buttonModels = paperL.sCourseCatalogs
-//                moreButton.isEnabled = true
-            }else {
-//                moreButton.isHidden = false
             }
         }
     }

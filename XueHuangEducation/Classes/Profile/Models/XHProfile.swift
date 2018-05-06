@@ -107,7 +107,7 @@ class XHProfile {
             var typeDict = [String : String]()
             for type in types {
                 guard let name = type.paperTypeName,
-                    let id = type.id else {
+                    let id = type.paperTypeId else {
                         continue
                 }
                 typeDict[id] = name

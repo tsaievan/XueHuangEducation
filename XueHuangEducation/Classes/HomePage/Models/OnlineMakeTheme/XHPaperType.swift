@@ -13,6 +13,7 @@ class XHPaperType: XHRoutine {
     var createBy: String?
     var paperTypeName: String?
     var remark: String?
+    var paperTypeId: String?
     
     
     required init?(map: Map) {
@@ -24,6 +25,7 @@ class XHPaperType: XHRoutine {
         createBy                 <- map["createBy"]
         paperTypeName            <- map["paperTypeName"]
         remark                   <- map["remark"]
+        paperTypeId              <- map["paperTypeId"]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,6 +33,7 @@ class XHPaperType: XHRoutine {
         createBy = aDecoder.decodeObject(forKey: "createBy") as? String
         paperTypeName = aDecoder.decodeObject(forKey: "paperTypeName") as? String
         remark = aDecoder.decodeObject(forKey: "remark") as? String
+        paperTypeId = aDecoder.decodeObject(forKey: "paperTypeId") as? String
     }
     
     override func encode(with aCoder: NSCoder) {
@@ -38,5 +41,6 @@ class XHPaperType: XHRoutine {
         aCoder.encode(createBy, forKey: "createBy")
         aCoder.encode(paperTypeName, forKey: "paperTypeName")
         aCoder.encode(remark, forKey: "remark")
+        aCoder.encode(paperTypeId, forKey: "paperTypeId")
     }
 }
