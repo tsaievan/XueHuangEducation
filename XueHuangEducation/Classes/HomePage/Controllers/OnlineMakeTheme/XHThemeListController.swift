@@ -98,55 +98,16 @@ class XHThemeListController: XHTableViewController {
                 ///< 要校验是否有答题记录
                 XHMobilePaper.hasQuestionLog(forPaperId: paperId, paperCatalogId: paperCatalogId, success: { (hasQuestionLog) in
                     if hasQuestionLog { ///< 有做题记录
-                        
+                        self.showMoreAlertController(withPaperId: paperId, paperCatalogId: paperCatalogId, title: model.name)
                     }else { ///< 没有做题记录
                         ///< 这个只弹出普通的弹框(没有做题记录)
                         ///< 开始做题, 查看解析, 我的收藏, 取消
-                        let alertVc = UIAlertController(title: "信息", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
-                        let start = UIAlertAction(title: "开始做题", style: UIAlertActionStyle.default, handler: { (action) in
-                            let params = [
-                                "paperCatalogId" : paperCatalogId,
-                                "paperId" : paperId,
-                                "isJj" : 0,
-                                "isViewAnswer" : 0,
-                                ] as [String : Any]
-                            let url = XHNetwork.getWebUrl(withUrl: URL_MOBILE_PAPER_QUESTION, params: params)
-                            let webVc = XHShowThemeWebController()
-                            webVc.webUrl = url
-                            self.navigationController?.pushViewController(webVc, animated: true)
-                        })
-                        let check = UIAlertAction(title: "查看解析", style: UIAlertActionStyle.default, handler: { (action) in
-                            
-                        })
-                        let collection = UIAlertAction(title: "我的收藏", style: UIAlertActionStyle.default, handler: { (action) in
-                            
-                        })
-                        let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
-                        alertVc.addAction(start)
-                        alertVc.addAction(check)
-                        alertVc.addAction(collection)
-                        alertVc.addAction(cancel)
-                        self.present(alertVc, animated: true, completion: nil)
+                        self.showAlertController(withPaperId: paperId, paperCatalogId: paperCatalogId, title: model.name)
                     }
                 }, failue: { (error) in
                     ///< 这个只弹出普通的弹框(没有做题记录)
                     ///< 开始做题, 查看解析, 我的收藏, 取消
-                    let alertVc = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
-                    let start = UIAlertAction(title: "开始做题", style: UIAlertActionStyle.default, handler: { (action) in
-
-                    })
-                    let check = UIAlertAction(title: "查看解析", style: UIAlertActionStyle.default, handler: { (action) in
-                        
-                    })
-                    let collection = UIAlertAction(title: "我的收藏", style: UIAlertActionStyle.default, handler: { (action) in
-                        
-                    })
-                    let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
-                    alertVc.addAction(start)
-                    alertVc.addAction(check)
-                    alertVc.addAction(collection)
-                    alertVc.addAction(cancel)
-                    self.present(alertVc, animated: true, completion: nil)
+                    self.showAlertController(withPaperId: paperId, paperCatalogId: paperCatalogId, title: model.name)
                 })
             }else {
                 let message = isAllowedAnswer.msg ?? "获取答题权限失败"
@@ -161,5 +122,96 @@ class XHThemeListController: XHTableViewController {
         }) { (errorReason) in
             XHAlertHUD.showError(withStatus: errorReason)
         }
+    }
+}
+
+extension XHThemeListController {
+    fileprivate func showAlertController(withPaperId paperId: String, paperCatalogId: String, title: String?) {
+        let alertVc = UIAlertController(title: "信息", message: title, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let start = UIAlertAction(title: "开始做题", style: UIAlertActionStyle.default, handler: { (action) in
+            let params = [
+                "paperCatalogId" : paperCatalogId,
+                "paperId" : paperId,
+                "isJj" : 0,
+                "isViewAnswer" : 0,
+                ] as [String : Any]
+            let url = XHNetwork.getWebUrl(withUrl: URL_MOBILE_PAPER_QUESTION, params: params)
+            let webVc = XHShowThemeWebController()
+            webVc.webUrl = url
+            self.navigationController?.pushViewController(webVc, animated: true)
+        })
+        let check = UIAlertAction(title: "查看解析", style: UIAlertActionStyle.default, handler: { (action) in
+            
+        })
+        let collection = UIAlertAction(title: "我的收藏", style: UIAlertActionStyle.default, handler: { (action) in
+            
+        })
+        let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
+        alertVc.addAction(start)
+        alertVc.addAction(check)
+        alertVc.addAction(collection)
+        alertVc.addAction(cancel)
+        self.present(alertVc, animated: true, completion: nil)
+    }
+    
+    fileprivate func showMoreAlertController(withPaperId paperId: String, paperCatalogId: String, title: String?) {
+        let alertVc = UIAlertController(title: "信息", message: title, preferredStyle: UIAlertControllerStyle.actionSheet)
+
+        let resume = UIAlertAction(title: "继续做题", style: UIAlertActionStyle.default) { (action) in
+            let params = [
+                "paperCatalogId" : paperCatalogId,
+                "paperId" : paperId,
+                "isJj" : 0,
+                "isViewAnswer" : 0,
+                ] as [String : Any]
+            let url = XHNetwork.getWebUrl(withUrl: URL_MOBILE_PAPER_QUESTION, params: params)
+            let webVc = XHShowThemeWebController()
+            webVc.webUrl = url
+            self.navigationController?.pushViewController(webVc, animated: true)
+        }
+        
+        let restart = UIAlertAction(title: "重新做题", style: UIAlertActionStyle.default) { (action) in
+            let params = [
+                "paperCatalogId" : paperCatalogId,
+                "paperId" : paperId,
+                "isJj" : 0,
+                "isViewAnswer" : 0,
+                ] as [String : Any]
+            let url = XHNetwork.getWebUrl(withUrl: URL_MOBILE_PAPER_QUESTION, params: params)
+            let webVc = XHShowThemeWebController()
+            webVc.webUrl = url
+            self.navigationController?.pushViewController(webVc, animated: true)
+        }
+        
+        let check = UIAlertAction(title: "查看解析", style: UIAlertActionStyle.default, handler: { (action) in
+            let params = [
+                "paperCatalogId" : paperCatalogId,
+                "paperId" : paperId,
+                "isJj" : 1,
+                "isViewAnswer" : 1,
+                "viewType" : 1,
+                "forwardQueNum" : 1
+                ] as [String : Any]
+            let url = XHNetwork.getWebUrl(withUrl: URL_CHECK_ANALYSIS_CONTENT, params: params)
+            let webVc = XHShowThemeWebController()
+            webVc.webUrl = url
+            self.navigationController?.pushViewController(webVc, animated: true)
+        })
+        
+        let wrong = UIAlertAction(title: "我的错题", style: UIAlertActionStyle.default) { (action) in
+            
+        }
+        
+        let collection = UIAlertAction(title: "我的收藏", style: UIAlertActionStyle.default, handler: { (action) in
+            
+        })
+        let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
+        alertVc.addAction(resume)
+        alertVc.addAction(restart)
+        alertVc.addAction(check)
+        alertVc.addAction(wrong)
+        alertVc.addAction(collection)
+        alertVc.addAction(cancel)
+        self.present(alertVc, animated: true, completion: nil)
     }
 }

@@ -71,13 +71,10 @@ class XHUIWebViewController: XHBaseViewController {
 //        }
         var cookieDict = [String : String]()
         let cookieJar =  HTTPCookieStorage.shared
-        cookieJar.cookieAcceptPolicy = .always
+//        cookieJar.cookieAcceptPolicy = .never
         var cookieHeader = [String : String]()
         if let cookies = cookieJar.cookies {
             for cookie in cookies {
-                if cookie.domain != "120.77.242.84" {
-                    continue
-                }
                 cookieDict[cookie.name] = cookie.value
             }
             var cookieString = ""

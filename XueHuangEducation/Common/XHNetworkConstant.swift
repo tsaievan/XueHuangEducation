@@ -34,6 +34,9 @@ let URL_MOBILE_PAPER_CATALOG_NEW = "xhweb/appController.do?getTree"
 ///< 8. 获取做题页面数据
 let URL_MOBILE_PAPER_QUESTION = "/xhweb/mobileController.do?mobilePaperQuestion"
 
+///< 11. 查询解析内容
+let URL_CHECK_ANALYSIS_CONTENT = "/xhweb/mobileController.do?viewJx"
+
 ///< 13. 判断用户是否有做题记录
 let URL_HAS_QUESTION_LOG = "xhweb/appController.do?isQuestionLog"
 
