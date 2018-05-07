@@ -80,5 +80,15 @@ class XHNetwork {
             }
         }
     }
+    
+    class func getWebUrl(withUrl url: String, params: [String : Any]) -> URL? {
+        let baseUrl = "http://www.xuehuang.cn/"
+        var urlString = (baseUrl as NSString).appendingPathComponent(url)
+        for (k, v) in params {
+            let string = "&" + "\(k)=\(v)"
+            urlString = urlString.appending(string)
+        }
+        return URL(string: urlString)
+    }
 }
 

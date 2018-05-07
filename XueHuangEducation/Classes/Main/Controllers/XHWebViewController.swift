@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 
+///< 这个控制器中的webView是WKWebView
 class XHWebViewController: XHBaseViewController {
     
     lazy var progressView: UIProgressView = {

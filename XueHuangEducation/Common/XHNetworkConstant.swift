@@ -31,6 +31,12 @@ let URL_MOBILE_PAPER_CATALOG = "xhweb/appController.do?mobilePaperCatalog"
 ///< 7. 加载考卷分类
 let URL_MOBILE_PAPER_CATALOG_NEW = "xhweb/appController.do?getTree"
 
+///< 8. 获取做题页面数据
+let URL_MOBILE_PAPER_QUESTION = "mobileController.do?mobilePaperQuestion"
+
+///< 13. 判断用户是否有做题记录
+let URL_HAS_QUESTION_LOG = "xhweb/appController.do?isQuestionLog"
+
 ///< 13. 获取在线应答页面数据
 let URL_TO_QUESTION_LIST = "xhweb/appController.do?toCourseCatalog"
 

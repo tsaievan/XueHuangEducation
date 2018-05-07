@@ -18,6 +18,8 @@
 		572B8C9F208E0944005EC6CD /* XHCourseCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572B8C9E208E0944005EC6CD /* XHCourseCatalog.swift */; };
 		572B8CA3208E098C005EC6CD /* XHNetCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572B8CA2208E098C005EC6CD /* XHNetCourse.swift */; };
 		572B8CA5208E0F2C005EC6CD /* XHHomePageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572B8CA4208E0F2C005EC6CD /* XHHomePageList.swift */; };
+		572D1B7220A0375400B1F0BC /* XHUIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572D1B7120A0375400B1F0BC /* XHUIWebViewController.swift */; };
+		572D1B7420A0401600B1F0BC /* XHShowThemeWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572D1B7320A0401600B1F0BC /* XHShowThemeWebController.swift */; };
 		572E48442095B053006E518D /* XHButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E48432095B053006E518D /* XHButton.swift */; };
 		573427012096E9C400108D1E /* XHTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573427002096E9C400108D1E /* XHTableViewController.swift */; };
 		573427032096E9F600108D1E /* XHTeachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573427022096E9F600108D1E /* XHTeachViewController.swift */; };
@@ -117,6 +119,8 @@
 		572B8C9E208E0944005EC6CD /* XHCourseCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalog.swift; sourceTree = "<group>"; };
 		572B8CA2208E098C005EC6CD /* XHNetCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourse.swift; sourceTree = "<group>"; };
 		572B8CA4208E0F2C005EC6CD /* XHHomePageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHHomePageList.swift; sourceTree = "<group>"; };
+		572D1B7120A0375400B1F0BC /* XHUIWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHUIWebViewController.swift; sourceTree = "<group>"; };
+		572D1B7320A0401600B1F0BC /* XHShowThemeWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHShowThemeWebController.swift; sourceTree = "<group>"; };
 		572E48432095B053006E518D /* XHButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHButton.swift; sourceTree = "<group>"; };
 		573427002096E9C400108D1E /* XHTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTableViewController.swift; sourceTree = "<group>"; };
 		573427022096E9F600108D1E /* XHTeachViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTeachViewController.swift; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 			children = (
 				573427042096EA0900108D1E /* XHThemeViewController.swift */,
 				57418EB6209B47E300DC2939 /* XHThemeListController.swift */,
+				572D1B7320A0401600B1F0BC /* XHShowThemeWebController.swift */,
 			);
 			path = OnlineMakeTheme;
 			sourceTree = "<group>";
@@ -567,6 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				57A2A6D42091A77900DD03BC /* XHWebViewController.swift */,
+				572D1B7120A0375400B1F0BC /* XHUIWebViewController.swift */,
 				57A62B0D2088B73400C9D5D2 /* XHBaseViewController.swift */,
 				57A62B0E2088B73400C9D5D2 /* XHNavigationController.swift */,
 				57A62B0F2088B73400C9D5D2 /* XHTabBarController.swift */,
@@ -798,6 +804,7 @@
 				57A62B172088B73400C9D5D2 /* XHLoginDetailView.swift in Sources */,
 				5763359A208ED343009DAF86 /* XHNetCourseCell.swift in Sources */,
 				57A62AF8208888E400C9D5D2 /* XHRegExTool.swift in Sources */,
+				572D1B7420A0401600B1F0BC /* XHShowThemeWebController.swift in Sources */,
 				573427052096EA0900108D1E /* XHThemeViewController.swift in Sources */,
 				571C8021208CC488005CD369 /* XHAccountLoginResult.swift in Sources */,
 				57A62B212088E6D300C9D5D2 /* XHMobileLoginResult.swift in Sources */,
@@ -834,6 +841,7 @@
 				57A62AF620887F0300C9D5D2 /* XHAlertHUD.swift in Sources */,
 				57614F2D2099EB8500D9EDE5 /* XHNetCourseWare.swift in Sources */,
 				572B8C9D208E06F8005EC6CD /* XHHomePage.swift in Sources */,
+				572D1B7220A0375400B1F0BC /* XHUIWebViewController.swift in Sources */,
 				57D5010B2089A92F00DD0DBD /* UIDevice+XHExtension.swift in Sources */,
 				57A62B1F2088B7BE00C9D5D2 /* XHGetAuthCodeResult.swift in Sources */,
 				57418EBF209BFBF000DC2939 /* XHPaperListHeaderView.swift in Sources */,

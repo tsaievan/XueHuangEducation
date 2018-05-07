@@ -12,6 +12,8 @@ typealias XHGetMobilePaperCatalogSuccess = ([XHPaperDetail]) -> ()
 typealias XHGetMobilePaperCatalogFailue = (String) -> ()
 typealias XHIsAllowedAnswerQuestionSuccess = (XHIsAllowedAnswer) -> ()
 typealias XHIsAllowedAnswerQuestionFailue = (String) -> ()
+typealias XHhasQuestionLogSuccess = (Bool) -> ()
+typealias XHhasQuestionLogFailue = (String) -> ()
 
 class XHMobilePaper {
 
@@ -48,7 +50,14 @@ class XHMobilePaper {
             }
         }
     }
-    ///< URL_IS_ALLOWED_ANSWER_QUESTION
+    
+    /// 是否有做题资格的接口
+    ///
+    /// - Parameters:
+    ///   - forPaperId: 考卷id
+    ///   - paperCatalogId: 考卷的分类id
+    ///   - success: 调用成功的回调
+    ///   - failue: 调用失败的回调
     class func isAllowedAnswerQuestion(forPaperId: String, paperCatalogId: String, success: XHIsAllowedAnswerQuestionSuccess?, failue: XHIsAllowedAnswerQuestionFailue?) {
         let params = [
             "paperId" : forPaperId,
@@ -60,6 +69,27 @@ class XHMobilePaper {
                 return
             }
             success?(model)
+        }) { (error) in
+            let err = error as NSError
+            if err.code == -1009 {
+                failue?("网络连接失败")
+            }else {
+                failue?("数据加载失败")
+            }
+        }
+    }
+    ///< URL_HAS_QUESTION_LOG
+    class func hasQuestionLog(forPaperId: String, paperCatalogId: String, success: XHhasQuestionLogSuccess?, failue: XHhasQuestionLogFailue?) {
+        let params = [
+            "paperId" : forPaperId,
+            "paperCatalogId" : paperCatalogId
+        ]
+        XHNetwork.GET(url: URL_HAS_QUESTION_LOG, params: params, success: { (response) in
+            guard let responseJson = response as? [String : Any],
+                let hasQuestionLog = responseJson["success"] as? Bool else {
+                    return
+            }
+            success?(hasQuestionLog)
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {
