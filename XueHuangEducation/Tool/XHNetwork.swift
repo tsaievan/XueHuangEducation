@@ -29,6 +29,9 @@ class XHNetwork {
         var cookieHeader = HTTPHeaders()
         if let cookies = cookieJar.cookies {
             for cookie in cookies {
+                if cookie.domain != "120.77.242.84" {
+                    continue
+                }
                 cookieDict[cookie.name] = cookie.value
             }
             var cookieString = ""
@@ -82,8 +85,8 @@ class XHNetwork {
     }
     
     class func getWebUrl(withUrl url: String, params: [String : Any]) -> URL? {
-        let baseUrl = "http://www.xuehuang.cn/"
-        var urlString = (baseUrl as NSString).appendingPathComponent(url)
+        let baseUrl = URL_BASE
+        var urlString = (baseUrl as NSString).appending(url)
         for (k, v) in params {
             let string = "&" + "\(k)=\(v)"
             urlString = urlString.appending(string)

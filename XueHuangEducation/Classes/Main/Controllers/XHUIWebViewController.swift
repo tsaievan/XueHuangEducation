@@ -11,6 +11,9 @@ import UIKit
 ///< 这个控制器中的webView是UIWebView
 ///< 因为这个这个请求是要传cookie的, wk貌似要手动传cookie, 想来会有点麻烦, 这里先用UIWebView
 class XHUIWebViewController: XHBaseViewController {
+    
+    var webUrl: URL?
+    
     lazy var webView: UIWebView = {
         let wb = UIWebView()
         wb.backgroundColor = .yellow
@@ -21,6 +24,71 @@ class XHUIWebViewController: XHBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        guard let url = webUrl else {
+            return
+        }
+        var request = URLRequest(url: url)
+//        var cookieDict = [HTTPCookiePropertyKey : Any]()
+//        let cookieJar =  HTTPCookieStorage.shared
+//        if let cookies = cookieJar.cookies {
+//            for cookie in cookies {
+//                if cookie.domain != "120.77.242.84" {
+//                    continue
+//                }
+//                cookieDict[HTTPCookiePropertyKey.name] = cookie.name
+//                cookieDict[HTTPCookiePropertyKey.value] = cookie.value
+//                cookieDict[HTTPCookiePropertyKey.domain] = request.url?.host
+//                cookieDict[HTTPCookiePropertyKey.originURL] = request.url?.host
+//                cookieDict[HTTPCookiePropertyKey.path] = cookie.path
+//                cookieDict[HTTPCookiePropertyKey.version] = cookie.version
+//                cookieDict[HTTPCookiePropertyKey.expires] = cookie.expiresDate
+//            }
+//            let newCookie = HTTPCookie(properties: cookieDict)
+//            HTTPCookieStorage.shared.setCookie(newCookie!)
+//        }
+//        let cookieJar = HTTPCookieStorage.shared
+//        cookieJar.cookieAcceptPolicy = .always
+//        guard let cookies = cookieJar.cookies else {
+//            return
+//        }
+//        for cookie in cookies {
+//            if cookie.domain != "120.77.242.84" {
+//                continue
+//            }
+//            var properties = cookie.properties
+//            properties?.removeValue(forKey: HTTPCookiePropertyKey.discard)
+//            let date = Date(timeIntervalSinceNow: 3600 * 24 * 30 * 12)
+//            properties?[HTTPCookiePropertyKey.expires] = date
+//            guard let url = webUrl else {
+//                continue
+//            }
+//            properties?[HTTPCookiePropertyKey.domain] = url.host
+//            guard let pros = properties,
+//                let newCookie = HTTPCookie(properties: pros) else {
+//                    continue
+//            }
+//            cookieJar.setCookie(newCookie)
+//        }
+        var cookieDict = [String : String]()
+        let cookieJar =  HTTPCookieStorage.shared
+        cookieJar.cookieAcceptPolicy = .always
+        var cookieHeader = [String : String]()
+        if let cookies = cookieJar.cookies {
+            for cookie in cookies {
+                if cookie.domain != "120.77.242.84" {
+                    continue
+                }
+                cookieDict[cookie.name] = cookie.value
+            }
+            var cookieString = ""
+            for (k, v) in cookieDict {
+                let string = String(format: "%@=%@;", k, v)
+                cookieString = cookieString.appending(string)
+            }
+            cookieHeader["Cookie"] = cookieString
+        }
+        request.allHTTPHeaderFields = cookieHeader
+        webView.loadRequest(request)
     }
 }
 
@@ -41,6 +109,12 @@ extension XHUIWebViewController {
 // MARK: - UIWebView的代理
 extension XHUIWebViewController: UIWebViewDelegate {
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        guard let url = request.url else {
+            return false
+        }
+        if (url.absoluteString as NSString).contains("mobilePaperCatalog") {
+            return false
+        }
         return true
     }
     

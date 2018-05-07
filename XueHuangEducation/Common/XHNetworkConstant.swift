@@ -32,7 +32,7 @@ let URL_MOBILE_PAPER_CATALOG = "xhweb/appController.do?mobilePaperCatalog"
 let URL_MOBILE_PAPER_CATALOG_NEW = "xhweb/appController.do?getTree"
 
 ///< 8. 获取做题页面数据
-let URL_MOBILE_PAPER_QUESTION = "mobileController.do?mobilePaperQuestion"
+let URL_MOBILE_PAPER_QUESTION = "/xhweb/mobileController.do?mobilePaperQuestion"
 
 ///< 13. 判断用户是否有做题记录
 let URL_HAS_QUESTION_LOG = "xhweb/appController.do?isQuestionLog"

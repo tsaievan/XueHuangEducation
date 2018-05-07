@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ///< 进入程序即将退出这个代理方法
     func applicationWillTerminate(_ application: UIApplication) {
         let cookieJar = HTTPCookieStorage.shared
+        cookieJar.cookieAcceptPolicy = .never
         guard let cookies = cookieJar.cookies else {
             return
         }
