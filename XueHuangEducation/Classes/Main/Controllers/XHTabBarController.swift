@@ -94,18 +94,18 @@ extension XHTabBarController: UITabBarControllerDelegate {
                 let alert = UIAlertController(title: "确定要退出登录吗?", message: nil, preferredStyle: .alert)
                 ///< 退出登录后清空用户数据
                 let action = UIAlertAction(title: "确定", style: .destructive, handler: { (action) in
-                    ///< 登出接口
-                    XHLogin.loginOut(success: {
-                        XHAlertHUD.showSuccess(withStatus: "退出成功", completion: {
-                            XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
-                            let tabBarController = XHTabBarController()
-                            UIApplication.shared.keyWindow?.rootViewController = tabBarController
-                            ///< 默认选中登录页面
-                            tabBarController.selectedIndex = XHViewControllers.login.rawValue
-                        })
-                    }, failue: { (errorReason) in
-                        XHAlertHUD.showError(withStatus: errorReason)
-                    })
+                    ///< 登出接口, 暂时不通, 报500
+//                    XHLogin.loginOut(success: {
+//                        XHAlertHUD.showSuccess(withStatus: "退出成功", completion: {
+//                            XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
+//                            let tabBarController = XHTabBarController()
+//                            UIApplication.shared.keyWindow?.rootViewController = tabBarController
+//                            ///< 默认选中登录页面
+//                            tabBarController.selectedIndex = XHViewControllers.login.rawValue
+//                        })
+//                    }, failue: { (errorReason) in
+//                        XHAlertHUD.showError(withStatus: errorReason)
+//                    })
                     XHAlertHUD.showSuccess(withStatus: "退出成功", completion: {
                         ///< 退出登录的时候要把cookie清空
                         HTTPCookieStorage.shared.removeCookies(since: Date(timeIntervalSince1970: 0))

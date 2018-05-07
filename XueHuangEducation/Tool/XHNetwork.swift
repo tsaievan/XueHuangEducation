@@ -29,9 +29,6 @@ class XHNetwork {
         var cookieHeader = HTTPHeaders()
         if let cookies = cookieJar.cookies {
             for cookie in cookies {
-                if cookie.domain != "120.77.242.84" {
-                    continue
-                }
                 cookieDict[cookie.name] = cookie.value
             }
             var cookieString = ""
