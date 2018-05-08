@@ -9,17 +9,5 @@
 import UIKit
 import ObjectMapper
 
-class XHIsAllowedAnswer: Mappable {
-    
-    var success: Bool?
-    var msg: String?
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        success                <- map["success"]
-        msg                    <- map["msg"]
-    }
+class XHIsAllowedAnswer: XHIsAllowedCommon {
 }

@@ -10,6 +10,19 @@ import UIKit
 
 typealias XHGetNetcoursewareSuccess = ([XHNetCourseWare]) -> ()
 typealias XHGetNetcoursewareFailue = (String) -> ()
+typealias XHIsAllowedWatchVideoSuccess = (XHIsAllowedWatch) -> ()
+typealias XHIsAllowedWatchVideoFailue = (String) -> ()
+
+/// 附件的类型
+///
+/// - file: 文件
+/// - table: 图标
+/// - video: 视频
+enum XHAttchmentType: Int {
+    case file = 0
+    case table = 1
+    case video = 2
+}
 
 class XHTeach {
     
@@ -24,14 +37,36 @@ class XHTeach {
         let params = [
             "netCourseId" : courseId,
             "courseClassName" : courseName,
-        ]
+            ]
         XHNetwork.GET(url: URL_TO_NET_COURSE_WARE, params: params, success: { (response) in
             guard let responseJson = response as? [String : Any],
                 let model = XHNetCourseWareList(JSON: responseJson),
-            let courses = model.netCoursewares else {
+                let courses = model.netCoursewares else {
                     return
             }
             success?(courses)
+        }) { (error) in
+            let err = error as NSError
+            if err.code == -1009 {
+                failue?("网络连接失败")
+            }else {
+                failue?("数据加载失败")
+            }
+        }
+    }
+    
+    class func isAllowedWatchVideo(withCourseId courseId: String, success: XHIsAllowedWatchVideoSuccess?, failue: XHIsAllowedWatchVideoFailue?) {
+        let params = [
+            "id" : courseId,
+            "attrType" : XHAttchmentType.table.rawValue
+            ] as [String : Any]
+        XHNetwork.GET(url: URL_IS_ALLOWED_WATCH_VIDEO, params: params, success: { (response) in
+            guard let responseJson = response as? [String : Any],
+                let model = XHIsAllowedWatch(JSON: responseJson) else {
+                    return
+            }
+            
+            success?(model)
         }) { (error) in
             let err = error as NSError
             if err.code == -1009 {

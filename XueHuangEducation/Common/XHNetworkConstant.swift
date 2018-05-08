@@ -82,3 +82,6 @@ let URL_APP_DECRYPT_VIDEO_PLAYER_URL = "xhweb/appController.do?getDecryptPlayMp4
 ///< 35. 判断用户是否有做题权限
 let URL_IS_ALLOWED_ANSWER_QUESTION = "xhweb/paperCatalogController.do?isPriviAnsQuestion"
 
+///< 41. 判断用户是否有看视频权限
+let URL_IS_ALLOWED_WATCH_VIDEO = "xhweb/netCourseController.do?queAttrIsHave"
+

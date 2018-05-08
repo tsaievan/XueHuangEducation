@@ -71,10 +71,13 @@ class XHNetCourseWareController: UITableViewController {
             }
             let playerVc = XHPlayNetCourseViewController()
             navigationController?.pushViewController(playerVc, animated: true)
+            XHGlobalLoading.startLoading()
             XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: { (videoUrlString) in
+                XHGlobalLoading.stopLoading()
                 model.video = videoUrlString
                 playerVc.netwareModel = model
             }, failue: { (errorReason) in
+                XHGlobalLoading.stopLoading()
                 XHAlertHUD.showError(withStatus: errorReason)
             })
         }else { ///< 表明是收费课程
@@ -93,13 +96,44 @@ class XHNetCourseWareController: UITableViewController {
                 present(alertVc, animated: true, completion: nil)
                 return
             }
-            let alertVc = UIAlertController(title: "信息", message: "您好, 此课件为付费项目, 请联系客服购买 !", preferredStyle: UIAlertControllerStyle.alert)
-            let action = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
-            ///< 弹出登录界面
-            let confirm = UIAlertAction(title: "确定", style: UIAlertActionStyle.default, handler:nil)
-            alertVc.addAction(action)
-            alertVc.addAction(confirm)
-            present(alertVc, animated: true, completion: nil)
+            // FIXME: - 这里还要调一个判断接口
+            
+            guard let netCoursewareId = model.netCoursewareId else {
+                return
+            }
+            
+            XHTeach.isAllowedWatchVideo(withCourseId: netCoursewareId, success: { (isAllowedWatch) in
+                guard let success = isAllowedWatch.success else {
+                    return
+                }
+                if success == true { ///< 这个是有看视频的权限的
+                    guard let videoUrl = model.video else {
+                        return
+                    }
+                    let playerVc = XHPlayNetCourseViewController()
+                    self.navigationController?.pushViewController(playerVc, animated: true)
+                    XHGlobalLoading.startLoading()
+                    XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: { (videoUrlString) in
+                        XHGlobalLoading.stopLoading()
+                        model.video = videoUrlString
+                        playerVc.netwareModel = model
+                    }, failue: { (errorReason) in
+                        XHGlobalLoading.stopLoading()
+                        XHAlertHUD.showError(withStatus: errorReason)
+                    })
+                }else {
+                    let message = isAllowedWatch.msg ?? "获取观看视频权限失败"
+                    let alertVc = UIAlertController(title: "信息", message: message, preferredStyle: UIAlertControllerStyle.alert)
+                    let action = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
+                    ///< 弹出登录界面
+                    let confirm = UIAlertAction(title: "确定", style: UIAlertActionStyle.default, handler: nil)
+                    alertVc.addAction(action)
+                    alertVc.addAction(confirm)
+                    self.present(alertVc, animated: true, completion: nil)
+                }
+            }, failue: { (errorReason) in
+                XHAlertHUD.showError(withStatus: errorReason)
+            })
         }
     }
 }

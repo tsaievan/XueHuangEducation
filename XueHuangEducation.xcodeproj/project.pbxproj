@@ -106,6 +106,8 @@
 		57D5010B2089A92F00DD0DBD /* UIDevice+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5010A2089A92F00DD0DBD /* UIDevice+XHExtension.swift */; };
 		57F32A7F20A174BF00AEC633 /* XHLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A7E20A174BF00AEC633 /* XHLoadingView.swift */; };
 		57F32A8120A1B66E00AEC633 /* XHShowQuestionWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A8020A1B66E00AEC633 /* XHShowQuestionWebController.swift */; };
+		57F32A8720A1EB2700AEC633 /* XHIsAllowedWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A8620A1EB2700AEC633 /* XHIsAllowedWatch.swift */; };
+		57F32A8920A1EB4E00AEC633 /* XHIsAllowedCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A8820A1EB4E00AEC633 /* XHIsAllowedCommon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -211,6 +213,8 @@
 		57D5010A2089A92F00DD0DBD /* UIDevice+XHExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+XHExtension.swift"; sourceTree = "<group>"; };
 		57F32A7E20A174BF00AEC633 /* XHLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHLoadingView.swift; sourceTree = "<group>"; };
 		57F32A8020A1B66E00AEC633 /* XHShowQuestionWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHShowQuestionWebController.swift; sourceTree = "<group>"; };
+		57F32A8620A1EB2700AEC633 /* XHIsAllowedWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHIsAllowedWatch.swift; sourceTree = "<group>"; };
+		57F32A8820A1EB4E00AEC633 /* XHIsAllowedCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHIsAllowedCommon.swift; sourceTree = "<group>"; };
 		E24AEB8EE5EBF7EF9D075D04 /* Pods_XueHuangEducation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XueHuangEducation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -294,6 +298,7 @@
 				5734270820973AE600108D1E /* XHSimpleNetCourse.swift */,
 				57614F2A2099EB6200D9EDE5 /* XHNetCourseWareList.swift */,
 				57614F2C2099EB8500D9EDE5 /* XHNetCourseWare.swift */,
+				57F32A8620A1EB2700AEC633 /* XHIsAllowedWatch.swift */,
 			);
 			path = NetworkTeaching;
 			sourceTree = "<group>";
@@ -393,7 +398,6 @@
 				572B8CA4208E0F2C005EC6CD /* XHHomePageList.swift */,
 				572B8C9E208E0944005EC6CD /* XHCourseCatalog.swift */,
 				572B8CA2208E098C005EC6CD /* XHNetCourse.swift */,
-				57369A322098B0D700E2E0F9 /* XHRoutine.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -430,6 +434,9 @@
 		57A4E51E20946D8500F8BADE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5795B458208D7D8D00ECD58F /* XHResult.swift */,
+				57369A322098B0D700E2E0F9 /* XHRoutine.swift */,
+				57F32A8820A1EB4E00AEC633 /* XHIsAllowedCommon.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -540,7 +547,6 @@
 			isa = PBXGroup;
 			children = (
 				57A62B062088B73400C9D5D2 /* XHLogin.swift */,
-				5795B458208D7D8D00ECD58F /* XHResult.swift */,
 				571C801C208CC12C005CD369 /* XHLoginBaseResult.swift */,
 				571C801E208CC1E5005CD369 /* XHLoginMember.swift */,
 				571C8020208CC488005CD369 /* XHAccountLoginResult.swift */,
@@ -834,6 +840,7 @@
 				5795B459208D7D8D00ECD58F /* XHResult.swift in Sources */,
 				57A8AF372099522A001FE55B /* XHPaperDetailCell.swift in Sources */,
 				57A8AF3920996A51001FE55B /* XHPaperSectionTitleView.swift in Sources */,
+				57F32A8720A1EB2700AEC633 /* XHIsAllowedWatch.swift in Sources */,
 				57779809209177D400BE74AE /* UIResponder+XHExtension.swift in Sources */,
 				57A62B182088B73400C9D5D2 /* XHLoginSegmentView.swift in Sources */,
 				57418EC1209C02D300DC2939 /* XHPaperListCell.swift in Sources */,
@@ -901,6 +908,7 @@
 				57A4E4FD209384C800F8BADE /* XHStorageManager.swift in Sources */,
 				57A62AEB20887B5600C9D5D2 /* AppDelegate.swift in Sources */,
 				57A62B142088B73400C9D5D2 /* XHHomePageViewController.swift in Sources */,
+				57F32A8920A1EB4E00AEC633 /* XHIsAllowedCommon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
