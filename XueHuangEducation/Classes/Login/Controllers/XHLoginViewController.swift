@@ -33,7 +33,7 @@ class XHLoginViewController: XHBaseViewController {
             navigationItem.title = "登录"
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: UIBarButtonItemStyle.plain, target: self, action: #selector(dismissLoginViewController))
             loginView.snp.remakeConstraints { (make) in
-                make.top.equalTo(view).offset(UIDevice.iPhoneX ? 84 : 64)
+                make.top.equalTo(view).offset(TOP_EDGE_AJUSTED)
                 make.left.bottom.right.equalTo(view)
             }
         }

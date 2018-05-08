@@ -7,6 +7,7 @@
 //
 import UIKit
 
+///< 屏幕的尺寸
 let SCREEN_BOUNDS = UIScreen.main.bounds
 let SCREEN_WIDTH = UIScreen.main.bounds.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.height
@@ -26,8 +27,16 @@ let COLOR_PAPAER_TYPE_BUTTON_TITLE: UIColor = UIColor(hexColor: "#777777")
 let COLOR_PAPER_CELL_LIGHT_GRAY: UIColor = UIColor(hexColor: "#F9F9F9")
 let COLOR_QUESTION_COUNT_LABEL_LIGHT_GRAY: UIColor = UIColor(hexColor: "#999999")
 
+///< 控件的颜色
+let COLOR_BUTTON_BORDER_GETAUTH_DARKGRAY = UIColor(hexColor: "#D2D2D2")
+
 
 ///< 全局的数字
+
+///< 经常用的数字0
+let GLOBAL_ZERO: CGFloat = 0.0
+
+///< 字体大小
 let FONT_SIZE_12: CGFloat = 12.0
 let FONT_SIZE_13: CGFloat = 13.0
 let FONT_SIZE_14: CGFloat = 14.0
@@ -69,14 +78,15 @@ let TOP_EDGE_AJUSTED: CGFloat = UIDevice.iPhoneX ? 84 : 64
 ///< 首页
 let SEPERATOR_LINE_HEIGHT: CGFloat = 1.5 ///< 分割线高度
 
+///< 全局的XHLoadingView的宽高
+let HEIGHT_GLOBAL_LOADING_VIEW: CGFloat = 22.0
+let WIDTH_GLOBAL_LOADING_VIEW: CGFloat = 22.0
+
 
 
 ///< 首页
 let HEIGHT_HOMEPAGE_CATALOG_BUTTON: CGFloat = 30
 let RADIUS_HOMEPAGE_CATALOG_BUTTON: CGFloat = 15
-
-///< 控件的颜色
-let COLOR_BUTTON_BORDER_GETAUTH_DARKGRAY = UIColor(hexColor: "#D2D2D2")
 
 ///< 获取验证码的最大时间 (10min)
 let TIME_INTERVAL_MAX_GET_AUTH_CODE: TimeInterval = Double(MAXFLOAT)
@@ -88,14 +98,6 @@ let MODEL_CLICK_CATALOG_BUTTON = "MODEL_CLICK_CATALOG_BUTTON"
 let MODEL_CLICK_COURSE_BUTTON = "MODEL_CLICK_COURSE_BUTTON"
 let CELL_FOR_COURSE_BUTTON = "CELL_FOR_COURSE_BUTTON"
 
-extension Notification.Name {
-    ///< 下载首页数据成功/失败的通知
-    public struct XHDownloadHomePageData {
-        static let success = Notification.Name(rawValue: "XHDownloadHomePageDataSuccess")
-        static let failue = Notification.Name(rawValue: "XHDownloadHomePageDataFailue")
-    }
-}
-
 let KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA = "KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA"
 let KEY_DOWNLOAD_HOME_PAGE_FAILUE_DATA = "KEY_DOWNLOAD_HOME_PAGE_FAILUE_DATA"
 
@@ -104,3 +106,11 @@ let XH_DEFAULT_DISK_CACHE = "XH_DEFAULT_DISK_CACHE"
 let KEY_DOWNLOAD_HOME_PAGE_DATA_FOR_YYCACHE = "KEY_DOWNLOAD_HOME_PAGE_DATA_FOR_YYCACHE"
 
 
+// MARK: - 通知名的分类
+extension Notification.Name {
+    ///< 下载首页数据成功/失败的通知
+    public struct XHDownloadHomePageData {
+        static let success = Notification.Name(rawValue: "XHDownloadHomePageDataSuccess")
+        static let failue = Notification.Name(rawValue: "XHDownloadHomePageDataFailue")
+    }
+}

@@ -13,7 +13,7 @@ import MJRefresh
 extension AppDelegate {
     ///< 在app刚启动时就开始隐式加载数据
     func downloadHomepageData() {
-        XHAlertHUD.show(timeInterval: 0)
+        XHGlobalLoading.startLoading()
         XHHomePage.getHomePageList(success: { (data) in
             XHPreferences[.HOMEPAGE_TOTAL_DATA_KEY] = data
             NotificationCenter.default.post(name: NSNotification.Name.XHDownloadHomePageData.success, object: self, userInfo: [KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA : data])
@@ -198,7 +198,7 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
 extension XHHomePageViewController {
     @objc
     fileprivate func downloadHomePageDataSuccess(notification: Notification) {
-        XHAlertHUD.dismiss()
+        XHGlobalLoading.stopLoading()
         guard let info = notification.userInfo,
         let data = info[KEY_DOWNLOAD_HOME_PAGE_SUCCESS_DATA] as? [[Any]] else {
             return
@@ -209,7 +209,7 @@ extension XHHomePageViewController {
     
     @objc
     fileprivate func downloadHomePageDataFailue(notification: Notification) {
-        XHAlertHUD.dismiss()
+        XHGlobalLoading.stopLoading()
         guard let info = notification.userInfo,
             let errorReason = info[KEY_DOWNLOAD_HOME_PAGE_FAILUE_DATA] as? String else {
                 return

@@ -8,7 +8,71 @@
 
 import UIKit
 
-class XHLoadingView: UIView {
+let XHGlobalLoading = XHLoadingView.sharedView
 
+class XHLoadingView: UIView {
     
+    static let sharedView = XHLoadingView()
+    
+    lazy var loadingImageView: UIImageView = {
+        let loading = UIImageView()
+        loading.image = UIImage(named: "image_loading_global")
+        loading.sizeToFit()
+        loading.center = center
+        return loading
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: CGRect(x: GLOBAL_ZERO, y: GLOBAL_ZERO, width: WIDTH_GLOBAL_LOADING_VIEW, height: HEIGHT_GLOBAL_LOADING_VIEW))
+        addSubview(loadingImageView)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension XHLoadingView {
+    fileprivate func startAnimation() {
+        loadingImageView.isHidden = false
+        let animation = CABasicAnimation(keyPath: "transform.rotation")
+        animation.fromValue = 0.0
+        animation.toValue = Double.pi * 2.0
+        animation.duration = 1.0
+        animation.repeatCount = MAXFLOAT
+        animation.isRemovedOnCompletion = false
+        loadingImageView.layer.add(animation, forKey: nil)
+    }
+    
+    fileprivate func stopAnimation() {
+        loadingImageView.isHidden = true
+        loadingImageView.layer.removeAllAnimations()
+    }
+}
+
+// MARK: - 提供两个类方法供外界调用
+extension XHLoadingView {
+    func startLoading() {
+        ///< 防止子线程调用, 强行切到主线程来
+        DispatchQueue.main.async {
+            self.backgroundColor = .clear
+            let backgroudView = UIView(frame: SCREEN_BOUNDS)
+            self.center = backgroudView.center
+            backgroudView.addSubview(self)
+            guard let delegate = UIApplication.shared.delegate,
+                let window = delegate.window else {
+                    return
+            }
+            window?.addSubview(backgroudView)
+            self.startAnimation()
+        }
+    }
+    
+    func stopLoading() {
+        ///< 防止子线程调用, 强行切到主线程来
+        DispatchQueue.main.async {
+            self.stopAnimation()
+            self.superview?.removeFromSuperview()
+        }
+    }
 }
