@@ -78,7 +78,7 @@ class XHHomePageViewController: XHBaseViewController {
                 let url = URL(string: videoUrl)
                 let webVc = XHShowNetCourseViewController()
                 webVc.hidesBottomBarWhenPushed = true
-                webVc.videoUrl = url
+                webVc.webUrl = url
                 navigationController?.pushViewController(webVc, animated: true)
             }
             

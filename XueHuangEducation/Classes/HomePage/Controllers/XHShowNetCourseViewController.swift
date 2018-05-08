@@ -8,16 +8,8 @@
 
 import UIKit
 
-class XHShowNetCourseViewController: XHWebViewController {
-    
-    var videoUrl: URL?
-    
+class XHShowNetCourseViewController: XHUIWebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let url = videoUrl else {
-            return
-        }
-        let request = URLRequest(url: url)
-        webView.load(request)
     }
 }

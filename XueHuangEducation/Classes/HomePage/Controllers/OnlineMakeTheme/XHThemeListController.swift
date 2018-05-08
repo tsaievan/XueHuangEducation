@@ -8,6 +8,39 @@
 
 import UIKit
 
+/// 点击题目cell弹出的actionSheet的一些选项
+///
+/// - start: 开始做题
+/// - pageAnalysis: 分页分析
+/// - wrong: 查看错题
+/// - collection: 查看收藏
+/// - cardAnalysis: 题卡分析
+enum XHPaperActionSheet: Int {
+    case start = 0
+    case pageAnalysis = 1
+    case wrong = 2
+    case collection = 3
+    case cardAnalysis = 4
+}
+
+/// 是否交卷
+///
+/// - cancel: 取消
+/// - summit: 交卷
+enum XHSummitType: Int {
+    case cancel = 0
+    case summit = 1
+}
+
+/// 是否显示解析
+///
+/// - hidden: 不显示
+/// - show: 显示
+enum XHShowAnalysisType: Int {
+    case hidden = 0
+    case show = 1
+}
+
 class XHThemeListController: XHTableViewController {
     
     lazy var headerView: XHPaperListHeaderView = {
@@ -125,6 +158,7 @@ class XHThemeListController: XHTableViewController {
     }
 }
 
+// MARK: - 显示提示框
 extension XHThemeListController {
     fileprivate func showAlertController(withPaperId paperId: String, paperCatalogId: String, title: String?) {
         let alertVc = UIAlertController(title: "信息", message: title, preferredStyle: UIAlertControllerStyle.actionSheet)
@@ -132,8 +166,8 @@ extension XHThemeListController {
             let params = [
                 "paperCatalogId" : paperCatalogId,
                 "paperId" : paperId,
-                "isJj" : 0,
-                "isViewAnswer" : 0,
+                "isJj" : XHSummitType.cancel.rawValue,
+                "isViewAnswer" : XHShowAnalysisType.hidden.rawValue,
                 ] as [String : Any]
             let url = XHNetwork.getWebUrl(withUrl: URL_MOBILE_PAPER_QUESTION, params: params)
             let webVc = XHShowThemeWebController()
@@ -141,10 +175,26 @@ extension XHThemeListController {
             self.navigationController?.pushViewController(webVc, animated: true)
         })
         let check = UIAlertAction(title: "查看解析", style: UIAlertActionStyle.default, handler: { (action) in
-            
+            let params = [
+                "paperCatalogId" : paperCatalogId,
+                "paperId" : paperId,
+                "isJj" : XHSummitType.summit,
+                "isViewAnswer" : XHShowAnalysisType.show.rawValue,
+                "viewType" : XHPaperActionSheet.pageAnalysis.rawValue,
+                "forwardQueNum" : 1
+                ] as [String : Any]
+            self.pushWebViewController(withUrl: URL_CHECK_ANALYSIS_CONTENT, parameters: params)
         })
         let collection = UIAlertAction(title: "我的收藏", style: UIAlertActionStyle.default, handler: { (action) in
-            
+            let params = [
+                "paperCatalogId" : paperCatalogId,
+                "paperId" : paperId,
+                "isJj" : XHSummitType.summit,
+                "isViewAnswer" : XHShowAnalysisType.show.rawValue,
+                "viewType" : XHPaperActionSheet.collection.rawValue,
+                "forwardQueNum" : 1
+                ] as [String : Any]
+            self.pushWebViewController(withUrl: URL_CHECK_ANALYSIS_CONTENT, parameters: params)
         })
         let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
         alertVc.addAction(start)
@@ -161,49 +211,56 @@ extension XHThemeListController {
             let params = [
                 "paperCatalogId" : paperCatalogId,
                 "paperId" : paperId,
-                "isJj" : 0,
-                "isViewAnswer" : 0,
+                "isJj" : XHSummitType.cancel.rawValue,
+                "isViewAnswer" : XHShowAnalysisType.hidden.rawValue,
                 ] as [String : Any]
-            let url = XHNetwork.getWebUrl(withUrl: URL_MOBILE_PAPER_QUESTION, params: params)
-            let webVc = XHShowThemeWebController()
-            webVc.webUrl = url
-            self.navigationController?.pushViewController(webVc, animated: true)
+            self.pushWebViewController(withUrl: URL_MOBILE_PAPER_QUESTION, parameters: params)
         }
         
         let restart = UIAlertAction(title: "重新做题", style: UIAlertActionStyle.default) { (action) in
             let params = [
                 "paperCatalogId" : paperCatalogId,
                 "paperId" : paperId,
-                "isJj" : 0,
-                "isViewAnswer" : 0,
+                "isJj" : XHSummitType.cancel.rawValue,
+                "isViewAnswer" : XHShowAnalysisType.hidden.rawValue,
                 ] as [String : Any]
-            let url = XHNetwork.getWebUrl(withUrl: URL_MOBILE_PAPER_QUESTION, params: params)
-            let webVc = XHShowThemeWebController()
-            webVc.webUrl = url
-            self.navigationController?.pushViewController(webVc, animated: true)
+            self.pushWebViewController(withUrl: URL_MOBILE_PAPER_QUESTION, parameters: params)
         }
         
         let check = UIAlertAction(title: "查看解析", style: UIAlertActionStyle.default, handler: { (action) in
             let params = [
                 "paperCatalogId" : paperCatalogId,
                 "paperId" : paperId,
-                "isJj" : 1,
-                "isViewAnswer" : 1,
-                "viewType" : 1,
+                "isJj" : XHSummitType.summit.rawValue,
+                "isViewAnswer" : XHShowAnalysisType.show.rawValue,
+                "viewType" : XHPaperActionSheet.pageAnalysis.rawValue,
                 "forwardQueNum" : 1
                 ] as [String : Any]
-            let url = XHNetwork.getWebUrl(withUrl: URL_CHECK_ANALYSIS_CONTENT, params: params)
-            let webVc = XHShowThemeWebController()
-            webVc.webUrl = url
-            self.navigationController?.pushViewController(webVc, animated: true)
+            self.pushWebViewController(withUrl: URL_CHECK_ANALYSIS_CONTENT, parameters: params)
         })
         
         let wrong = UIAlertAction(title: "我的错题", style: UIAlertActionStyle.default) { (action) in
-            
+            let params = [
+                "paperCatalogId" : paperCatalogId,
+                "paperId" : paperId,
+                "isJj" : XHSummitType.summit.rawValue,
+                "isViewAnswer" : XHShowAnalysisType.show.rawValue,
+                "viewType" : XHPaperActionSheet.wrong.rawValue,
+                "forwardQueNum" : 1
+                ] as [String : Any]
+            self.pushWebViewController(withUrl: URL_CHECK_ANALYSIS_CONTENT, parameters: params)
         }
         
         let collection = UIAlertAction(title: "我的收藏", style: UIAlertActionStyle.default, handler: { (action) in
-            
+            let params = [
+                "paperCatalogId" : paperCatalogId,
+                "paperId" : paperId,
+                "isJj" : XHSummitType.summit.rawValue,
+                "isViewAnswer" : XHShowAnalysisType.show.rawValue,
+                "viewType" : XHPaperActionSheet.collection.rawValue,
+                "forwardQueNum" : 1
+                ] as [String : Any]
+            self.pushWebViewController(withUrl: URL_CHECK_ANALYSIS_CONTENT, parameters: params)
         })
         let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
         alertVc.addAction(resume)
@@ -215,3 +272,15 @@ extension XHThemeListController {
         self.present(alertVc, animated: true, completion: nil)
     }
 }
+
+// MARK: - 一些私有方法
+extension XHThemeListController {
+    fileprivate func pushWebViewController(withUrl url: String, parameters: [String : Any]) {
+        let url = XHNetwork.getWebUrl(withUrl: url, params: parameters)
+        let webVc = XHShowThemeWebController()
+        webVc.webUrl = url
+        self.navigationController?.pushViewController(webVc, animated: true)
+    }
+}
+
+
