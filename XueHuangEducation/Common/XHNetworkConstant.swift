@@ -46,10 +46,6 @@ let URL_TO_QUESTION_LIST = "xhweb/appController.do?toCourseCatalog"
 ///< 15. 获取本课程问答列表及查询问答
 let URL_GET_QUESTION_LIST = "/xhweb/mobileController.do?toQuestionList"
 
-/**
-courseClassId=${courseClassId}&pCCName=${pCCName}&pCCId=${pCCId}&actionType=${actionType}
- */
-
 ///< 18. 获取个人中心的数据
 let URL_TO_MOBILE_PERSON = "xhweb/appController.do?toMobilePerson"
 
