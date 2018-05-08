@@ -104,6 +104,7 @@
 		57CA59D9208B7511004C6393 /* XHRegistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA59D8208B7511004C6393 /* XHRegistViewController.swift */; };
 		57D5010920897BB100DD0DBD /* XHResetPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5010820897BB100DD0DBD /* XHResetPwdViewController.swift */; };
 		57D5010B2089A92F00DD0DBD /* UIDevice+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5010A2089A92F00DD0DBD /* UIDevice+XHExtension.swift */; };
+		57F32A7F20A174BF00AEC633 /* XHLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A7E20A174BF00AEC633 /* XHLoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,6 +208,7 @@
 		57CA59D8208B7511004C6393 /* XHRegistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHRegistViewController.swift; sourceTree = "<group>"; };
 		57D5010820897BB100DD0DBD /* XHResetPwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHResetPwdViewController.swift; sourceTree = "<group>"; };
 		57D5010A2089A92F00DD0DBD /* UIDevice+XHExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+XHExtension.swift"; sourceTree = "<group>"; };
+		57F32A7E20A174BF00AEC633 /* XHLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHLoadingView.swift; sourceTree = "<group>"; };
 		E24AEB8EE5EBF7EF9D075D04 /* Pods_XueHuangEducation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XueHuangEducation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -478,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				57A62AF520887F0300C9D5D2 /* XHAlertHUD.swift */,
+				57F32A7E20A174BF00AEC633 /* XHLoadingView.swift */,
 				57A4E51F209479AF00F8BADE /* XHDecrypt.swift */,
 				57A62AF7208888E400C9D5D2 /* XHRegExTool.swift */,
 				57A62AF92088983200C9D5D2 /* XHNetwork.swift */,
@@ -840,6 +843,7 @@
 				573C61872099B14D00B9F6DC /* XHQuestionListCell.swift in Sources */,
 				57A62AF620887F0300C9D5D2 /* XHAlertHUD.swift in Sources */,
 				57614F2D2099EB8500D9EDE5 /* XHNetCourseWare.swift in Sources */,
+				57F32A7F20A174BF00AEC633 /* XHLoadingView.swift in Sources */,
 				572B8C9D208E06F8005EC6CD /* XHHomePage.swift in Sources */,
 				572D1B7220A0375400B1F0BC /* XHUIWebViewController.swift in Sources */,
 				57D5010B2089A92F00DD0DBD /* UIDevice+XHExtension.swift in Sources */,
