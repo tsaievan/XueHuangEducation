@@ -160,18 +160,24 @@ extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
         
         if sender.tag == XHButtonType.theme.rawValue { ///< 点击的是在线做题的按钮
             navigationItem.title = "考卷列表"
+            XHGlobalLoading.startLoading()
             XHHomePage.getPaperList(withCourseClassId: courseId, success: { (response, title) in
+                XHGlobalLoading.stopLoading()
                 self.themeVc.info = (response, title)
             }, failue: { (errorReason) in
+                XHGlobalLoading.stopLoading()
                 XHAlertHUD.showError(withStatus: errorReason)
             })
         }
         
         if sender.tag == XHButtonType.answer.rawValue { ///< 点击的是在线问答的按钮
             navigationItem.title = "在线问答"
+            XHGlobalLoading.startLoading()
             XHHomePage.getQuestionList(withEnterType: XHQuestionEnterType.answer, courseName: courseName, courseId: courseId, success: { (response, title) in
+                XHGlobalLoading.stopLoading()
                 self.questionVc.info = (response, title)
             }, failue: { (errorReason) in
+                XHGlobalLoading.stopLoading()
                 XHAlertHUD.showError(withStatus: errorReason)
             })
         }

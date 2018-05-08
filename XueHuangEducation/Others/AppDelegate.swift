@@ -100,6 +100,8 @@ extension AppDelegate {
     ///< 设置SVProgressHUD的相关全局属性
     fileprivate func setAlertHudAttributes() {
         SVProgressHUD.setBackgroundColor(UIColor.black.withAlphaComponent(0.85))
+        ///< 显示hud的时候禁止用户交互
+        SVProgressHUD.setDefaultMaskType(.clear)
         SVProgressHUD.setForegroundColor(UIColor.white)
     }
 }
