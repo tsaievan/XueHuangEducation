@@ -30,6 +30,7 @@ class XHUIWebViewController: XHBaseViewController {
         var request = URLRequest(url: url)
         var cookieDict = [String : String]()
         let cookieJar =  HTTPCookieStorage.shared
+        cookieJar.cookieAcceptPolicy = .never
         var cookieHeader = [String : String]()
         if let cookies = cookieJar.cookies {
             for cookie in cookies {

@@ -32,8 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
     }
 
+    ///< app即将进入前台
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        ///< 这里要判断一下能否用当前cookie请求到账号, 如果不能, 提示用户退出
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
