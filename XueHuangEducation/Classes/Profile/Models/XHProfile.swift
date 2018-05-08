@@ -153,7 +153,7 @@ class XHProfile {
         let params = [
             "enterType" : enterType.rawValue,
             "courseClassId" : courseClassId,
-            "actionType" : "my"
+            "actionType" : XHActionType.my.rawValue
         ]
         XHNetwork.GET(url: URL_TO_MY_QUESTION_LIST, params: params, success: { (response) in
             guard let responseJson = response as? [String : Any],
@@ -168,6 +168,7 @@ class XHProfile {
             }
             total.queCount = model.totalCount
             total.courseClassName = "全部"
+            total.id = courseClassId
             var array = questions
             array.insert(total, at: 0)
             success?(array, model)

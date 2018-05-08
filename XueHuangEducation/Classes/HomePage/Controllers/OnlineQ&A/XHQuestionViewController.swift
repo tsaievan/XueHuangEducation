@@ -79,8 +79,7 @@ class XHQuestionViewController: XHTableViewController {
             return
         }
         let model = datas[indexPath.row]
-        guard let courseClassId = model.id,
-            let courseName = model.courseClassName else {
+        guard let courseClassId = model.id else {
                 return
         }
         
@@ -91,16 +90,17 @@ class XHQuestionViewController: XHTableViewController {
         }
         var params = [String : Any]()
         if viewController.isKind(of: kls) {
+            
             params = [
                 "courseClassId" : courseClassId,
-                "pCCName" : courseName,
+                "pCCName" : info?.titleText ?? "",
                 "pCCId": "",
                 "actionType" : XHActionType.all.rawValue,
                 ] as [String: Any]
         }else {
             params = [
                 "courseClassId" : courseClassId,
-                "pCCName" : courseName,
+                "pCCName" : newInfo?.questionList.courseClassName ?? "",
                 "pCCId": "",
                 "actionType" : XHActionType.my.rawValue,
             ]

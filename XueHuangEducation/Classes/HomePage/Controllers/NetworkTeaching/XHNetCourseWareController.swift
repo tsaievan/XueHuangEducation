@@ -64,6 +64,7 @@ class XHNetCourseWareController: UITableViewController {
         guard let type = model.state else {
             return
         }
+        
         if type == XHNetCourseWareState.free.rawValue { ///< 表明是试听课程
             guard let videoUrl = model.video else {
                 return
