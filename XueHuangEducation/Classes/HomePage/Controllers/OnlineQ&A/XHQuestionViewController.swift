@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum XHActionType: String {
+    case all = "all"
+    case my = "my"
+}
+
 class XHQuestionViewController: XHTableViewController {
     
     var dataSource: [XHCourseCatalog]?
@@ -67,6 +72,45 @@ class XHQuestionViewController: XHTableViewController {
         }
         cell.model = datas[indexPath.row]
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let datas = dataSource else {
+            return
+        }
+        let model = datas[indexPath.row]
+        guard let courseClassId = model.id,
+            let courseName = model.courseClassName else {
+                return
+        }
+        
+        guard let viewController = navigationController?.childViewControllers.first,
+            let bundleName = Bundle.bundleName,
+            let kls = NSClassFromString(bundleName + "." + "XHHomePageViewController") else {
+                return
+        }
+        var params = [String : Any]()
+        if viewController.isKind(of: kls) {
+            params = [
+                "courseClassId" : courseClassId,
+                "pCCName" : courseName,
+                "pCCId": "",
+                "actionType" : XHActionType.all.rawValue,
+                ] as [String: Any]
+        }else {
+            params = [
+                "courseClassId" : courseClassId,
+                "pCCName" : courseName,
+                "pCCId": "",
+                "actionType" : XHActionType.my.rawValue,
+            ]
+        }
+        
+        let url = XHNetwork.getWebUrl(withUrl: URL_GET_QUESTION_LIST, params: params)
+        let webVc = XHShowQuestionWebController()
+        webVc.webUrl = url
+        self.navigationController?.pushViewController(webVc, animated: true)
+        XHGlobalLoading.startLoading()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

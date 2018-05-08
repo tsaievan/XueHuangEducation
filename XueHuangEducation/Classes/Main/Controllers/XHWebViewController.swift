@@ -22,7 +22,7 @@ class XHWebViewController: XHBaseViewController {
     
     lazy var webView: WKWebView = {
         let wb = WKWebView()
-        wb.backgroundColor = .yellow
+        wb.backgroundColor = .white
         wb.navigationDelegate = self;
         return wb
     }()

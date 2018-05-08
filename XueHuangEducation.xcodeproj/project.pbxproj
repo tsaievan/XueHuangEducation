@@ -105,6 +105,7 @@
 		57D5010920897BB100DD0DBD /* XHResetPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5010820897BB100DD0DBD /* XHResetPwdViewController.swift */; };
 		57D5010B2089A92F00DD0DBD /* UIDevice+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5010A2089A92F00DD0DBD /* UIDevice+XHExtension.swift */; };
 		57F32A7F20A174BF00AEC633 /* XHLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A7E20A174BF00AEC633 /* XHLoadingView.swift */; };
+		57F32A8120A1B66E00AEC633 /* XHShowQuestionWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A8020A1B66E00AEC633 /* XHShowQuestionWebController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -209,6 +210,7 @@
 		57D5010820897BB100DD0DBD /* XHResetPwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHResetPwdViewController.swift; sourceTree = "<group>"; };
 		57D5010A2089A92F00DD0DBD /* UIDevice+XHExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+XHExtension.swift"; sourceTree = "<group>"; };
 		57F32A7E20A174BF00AEC633 /* XHLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHLoadingView.swift; sourceTree = "<group>"; };
+		57F32A8020A1B66E00AEC633 /* XHShowQuestionWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHShowQuestionWebController.swift; sourceTree = "<group>"; };
 		E24AEB8EE5EBF7EF9D075D04 /* Pods_XueHuangEducation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XueHuangEducation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -270,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				573427062096EA1900108D1E /* XHQuestionViewController.swift */,
+				57F32A8020A1B66E00AEC633 /* XHShowQuestionWebController.swift */,
 			);
 			path = "OnlineQ&A";
 			sourceTree = "<group>";
@@ -821,6 +824,7 @@
 				57A62AC920887A4D00C9D5D2 /* UIColor+XHExtension.swift in Sources */,
 				57369A312098AF8C00E2E0F9 /* XHPaperList.swift in Sources */,
 				57A62ACC20887A4D00C9D5D2 /* UIView+XHExtension.swift in Sources */,
+				57F32A8120A1B66E00AEC633 /* XHShowQuestionWebController.swift in Sources */,
 				57978F882092B26500036159 /* XHPlayNetCourseViewController.swift in Sources */,
 				57CA59D9208B7511004C6393 /* XHRegistViewController.swift in Sources */,
 				5795B45B208D805400ECD58F /* XHModifyPwdResult.swift in Sources */,

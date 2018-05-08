@@ -16,7 +16,7 @@ class XHUIWebViewController: XHBaseViewController {
     
     lazy var webView: UIWebView = {
         let wb = UIWebView()
-        wb.backgroundColor = .yellow
+        wb.backgroundColor = .white
         wb.delegate = self
         return wb
     }()
@@ -65,12 +65,6 @@ extension XHUIWebViewController {
 // MARK: - UIWebView的代理
 extension XHUIWebViewController: UIWebViewDelegate {
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        guard let url = request.url else {
-            return false
-        }
-        if (url.absoluteString as NSString).contains("mobilePaperCatalog") {
-            return false
-        }
         return true
     }
     

@@ -88,7 +88,10 @@ class XHNetwork {
             let string = "&" + "\(k)=\(v)"
             urlString = urlString.appending(string)
         }
-        return URL(string: urlString)
+        guard let newStr = (urlString as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue) else {
+            return nil
+        }
+        return URL(string: newStr)
     }
 }
 

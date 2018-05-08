@@ -17,4 +17,14 @@ class XHNavigationController: UINavigationController {
         self.navigationBar.tintColor = .white
         self.navigationBar.barTintColor = COLOR_GLOBAL_DARK_GRAY
     }
+    
+    override func popViewController(animated: Bool) -> UIViewController? {
+        XHGlobalLoading.stopLoading()
+        return super.popViewController(animated: animated)
+    }
+    
+    override func popToRootViewController(animated: Bool) -> [UIViewController]? {
+        XHGlobalLoading.stopLoading()
+        return super.popToRootViewController(animated: animated)
+    }
 }

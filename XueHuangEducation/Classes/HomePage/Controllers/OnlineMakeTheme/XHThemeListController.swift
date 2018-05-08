@@ -203,15 +203,16 @@ extension XHThemeListController {
     
     fileprivate func showMoreAlertController(withPaperId paperId: String, paperCatalogId: String, title: String?) {
         let alertVc = UIAlertController(title: "信息", message: title, preferredStyle: UIAlertControllerStyle.actionSheet)
-
         let resume = UIAlertAction(title: "继续做题", style: UIAlertActionStyle.default) { (action) in
             let params = [
                 "paperCatalogId" : paperCatalogId,
                 "paperId" : paperId,
                 "isJj" : XHSummitType.cancel.rawValue,
                 "isViewAnswer" : XHShowAnalysisType.hidden.rawValue,
+                "viewType" : XHPaperActionSheet.pageAnalysis.rawValue,
+                "forwardQueNum" : 1
                 ] as [String : Any]
-            self.pushWebViewController(withUrl: URL_MOBILE_PAPER_QUESTION, parameters: params)
+            self.pushWebViewController(withUrl: URL_CHECK_ANALYSIS_CONTENT, parameters: params)
         }
         
         let restart = UIAlertAction(title: "重新做题", style: UIAlertActionStyle.default) { (action) in

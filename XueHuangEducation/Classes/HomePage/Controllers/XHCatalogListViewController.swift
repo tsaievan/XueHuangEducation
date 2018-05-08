@@ -34,7 +34,7 @@ class XHCatalogListViewController: XHBaseViewController {
     lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.delegate = self
-        sv.backgroundColor = .yellow
+        sv.backgroundColor = .white
         sv.contentSize = CGSize(width: SCREEN_WIDTH * 3, height: 0)
         sv.showsVerticalScrollIndicator = false
         sv.showsHorizontalScrollIndicator = false
