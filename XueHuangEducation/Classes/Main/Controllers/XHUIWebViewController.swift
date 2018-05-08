@@ -77,6 +77,7 @@ extension XHUIWebViewController: UIWebViewDelegate {
     func webViewDidFinishLoad(_ webView: UIWebView) {
         ///< 获取网页的标题
         title = webView.stringByEvaluatingJavaScript(from: "document.title")
+        XHGlobalLoading.stopLoading()
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {

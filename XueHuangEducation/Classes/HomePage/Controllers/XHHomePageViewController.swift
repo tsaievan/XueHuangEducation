@@ -64,6 +64,7 @@ class XHHomePageViewController: XHBaseViewController {
             catalogVc.model = model
             catalogVc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(catalogVc, animated: true)
+            XHGlobalLoading.startLoading()
         }
         
         ///< 点击推荐课程/热门课程的按钮
@@ -80,12 +81,14 @@ class XHHomePageViewController: XHBaseViewController {
                 webVc.hidesBottomBarWhenPushed = true
                 webVc.webUrl = url
                 navigationController?.pushViewController(webVc, animated: true)
+                XHGlobalLoading.startLoading()
             }
             
             if indexPath.section == 2 { ///< 热门课程
                 let playerVc = XHPlayNetCourseViewController()
                 playerVc.hidesBottomBarWhenPushed = true
                 navigationController?.pushViewController(playerVc, animated: true)
+                XHGlobalLoading.startLoading()
                 XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: { (videoUrlString) in
                     model.video = videoUrlString
                     playerVc.model = model

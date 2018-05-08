@@ -15,7 +15,7 @@ class XHPlayNetCourseViewController: XHBaseViewController {
     
     var netwareModel: XHNetCourseWare? {
         didSet {
-            XHAlertHUD.dismiss()
+            XHGlobalLoading.stopLoading()
             guard let videoModel = netwareModel,
                 let videoString = videoModel.video,
                 ///< 防止转换url失败, 必须添加下面的代码
@@ -35,7 +35,7 @@ class XHPlayNetCourseViewController: XHBaseViewController {
     
     var model: XHNetCourse? {
         didSet {
-            XHAlertHUD.dismiss()
+            XHGlobalLoading.stopLoading()
             guard let videoModel = model,
                 let videoString = videoModel.video,
                 ///< 防止转换url失败, 必须添加下面的代码
@@ -72,7 +72,7 @@ class XHPlayNetCourseViewController: XHBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        XHAlertHUD.showStatus(status: "正在加载视频", timeInterval: 0)
+        XHGlobalLoading.startLoading()
     }
 }
 

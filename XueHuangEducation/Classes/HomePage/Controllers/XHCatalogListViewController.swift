@@ -61,9 +61,11 @@ class XHCatalogListViewController: XHBaseViewController {
             }
             navigationItem.title = courseName + "." + "网校讲题"
             XHHomePage.getTeachCourseList(withCourseName: courseName, courseId: courseId, success: { (response, imageArr) in
+                XHGlobalLoading.stopLoading()
                 let info = (response, imageArr)
                 self.teachVc.info = info
             }, failue: { (error) in
+                XHGlobalLoading.stopLoading()
                 XHAlertHUD.showError(withStatus: error)
             })
         }

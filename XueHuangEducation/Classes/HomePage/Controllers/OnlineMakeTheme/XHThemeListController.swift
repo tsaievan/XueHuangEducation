@@ -169,10 +169,7 @@ extension XHThemeListController {
                 "isJj" : XHSummitType.cancel.rawValue,
                 "isViewAnswer" : XHShowAnalysisType.hidden.rawValue,
                 ] as [String : Any]
-            let url = XHNetwork.getWebUrl(withUrl: URL_MOBILE_PAPER_QUESTION, params: params)
-            let webVc = XHShowThemeWebController()
-            webVc.webUrl = url
-            self.navigationController?.pushViewController(webVc, animated: true)
+            self.pushWebViewController(withUrl: URL_MOBILE_PAPER_QUESTION, parameters: params)
         })
         let check = UIAlertAction(title: "查看解析", style: UIAlertActionStyle.default, handler: { (action) in
             let params = [
@@ -280,6 +277,7 @@ extension XHThemeListController {
         let webVc = XHShowThemeWebController()
         webVc.webUrl = url
         self.navigationController?.pushViewController(webVc, animated: true)
+        XHGlobalLoading.startLoading()
     }
 }
 

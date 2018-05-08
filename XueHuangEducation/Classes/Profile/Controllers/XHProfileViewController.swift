@@ -47,10 +47,13 @@ extension XHProfileViewController: XHProfileViewDelegate {
             teachVc.navigationItem.title = "网校讲题"
             teachVc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(teachVc, animated: true)
+            XHGlobalLoading.startLoading()
             ///< 调用获取个人讲题列表的接口
             XHProfile.getMyMobileNetCourse(withCourseClassId: "", success: { (catalogs, themeModel) in
+                XHGlobalLoading.stopLoading()
                 teachVc.newInfo = (catalogs, themeModel)
             }) { (error) in
+                XHGlobalLoading.stopLoading()
                 if error.code == -1 { ///< 表示没有数据
                     let alertVc = UIAlertController(title: "信息", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
                     let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
@@ -74,10 +77,13 @@ extension XHProfileViewController: XHProfileViewDelegate {
             themeVc.navigationItem.title = "考卷列表"
             themeVc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(themeVc, animated: true)
+            XHGlobalLoading.startLoading()
             ///< 调用获取题库列表的接口
             XHProfile.getMyMobiePaperList(withCourseClassId: "", success: { (catalogs, paperList) in
+                XHGlobalLoading.stopLoading()
                 themeVc.newInfo = (catalogs, paperList)
             }, failue: { (error) in
+                XHGlobalLoading.stopLoading()
                 if error.code == -1 { ///< 表示没有数据
                     let alertVc = UIAlertController(title: "信息", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
                     let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
@@ -100,10 +106,13 @@ extension XHProfileViewController: XHProfileViewDelegate {
             questionVc.navigationItem.title = "答疑列表"
             questionVc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(questionVc, animated: true)
+            XHGlobalLoading.startLoading()
             ///< 调用我的问答列表接口
             XHProfile.getMyMobieQuestionList(withEnterType: XHQuestionEnterType.answer, courseClassId: "", success: { (response, questionList) in
+                XHGlobalLoading.stopLoading()
                 questionVc.newInfo = (response, questionList)
             }, failue: { (error) in
+                XHGlobalLoading.stopLoading()
                 if error.code == -1 { ///< 表示没有数据
                     let alertVc = UIAlertController(title: "信息", message: "暂无答疑列表相关数据", preferredStyle: UIAlertControllerStyle.alert)
                     let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)

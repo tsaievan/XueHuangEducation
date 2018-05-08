@@ -52,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             XHProfile.getMobile(success: { (response) in
                 guard let _ = response["userName"] else {
                     XHAlertHUD.dismiss()
+                    XHGlobalLoading.stopLoading()
                     let alerVc = UIAlertController(title: "信息", message: "您已经长时间未操作, 请重新登录", preferredStyle: .alert)
                     let confirm = UIAlertAction(title: "确定", style: .default, handler: { (action) in
                         ///< 退出登录的时候要把cookie清空
