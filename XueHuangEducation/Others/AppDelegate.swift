@@ -22,11 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         downloadHomepageData()
         return true
     }
-
+    
+    ///< app即将失去焦点
     func applicationWillResignActive(_ application: UIApplication) {
 
     }
-
+    
+    ///< app已经进入后台
     func applicationDidEnterBackground(_ application: UIApplication) {
         ///< 这一句很重要
         UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
@@ -34,11 +36,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     ///< app即将进入前台
     func applicationWillEnterForeground(_ application: UIApplication) {
-        ///< 这里要判断一下能否用当前cookie请求到账号, 如果不能, 提示用户退出
+        
     }
 
+    ///< app已经成为焦点
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        ///< 这里要判断一下能否用当前cookie请求到账号, 如果不能, 提示用户退出
+        guard let nav = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers[XHViewControllers.profile.rawValue] as? XHNavigationController,
+            let loginVc = nav.childViewControllers.first,
+            let bundleName = Bundle.bundleName,
+            let kls = NSClassFromString(bundleName + "." + "XHLoginViewController") else {
+                return
+        }
+        if !loginVc.isKind(of: kls) {
+            XHProfile.getMobile(success: { (response) in
+                guard let _ = response["userName"] else {
+                    XHAlertHUD.dismiss()
+                    let alerVc = UIAlertController(title: "信息", message: "您已经长时间未操作, 请重新登录", preferredStyle: .alert)
+                    let confirm = UIAlertAction(title: "确定", style: .default, handler: { (action) in
+                        ///< 退出登录的时候要把cookie清空
+                        HTTPCookieStorage.shared.removeCookies(since: Date(timeIntervalSince1970: 0))
+                        ///< 将cookie的接受改为一直
+                        HTTPCookieStorage.shared.cookieAcceptPolicy = .always
+                        XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
+                        let tabBarController = XHTabBarController()
+                        UIApplication.shared.keyWindow?.rootViewController = tabBarController
+                        ///< 默认选中登录页面
+                        tabBarController.selectedIndex = XHViewControllers.login.rawValue
+                    })
+                    alerVc.addAction(confirm)
+                    UIApplication.shared.keyWindow?.rootViewController?.present(alerVc, animated: true, completion: nil)
+                    return
+                }
+            }, failue: nil)
+        }
     }
 
     ///< 在app即将退出的时候, 将当前的cookie保存下来
