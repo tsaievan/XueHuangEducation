@@ -89,9 +89,9 @@ class XHHomePageViewController: XHBaseViewController {
                 playerVc.hidesBottomBarWhenPushed = true
                 navigationController?.pushViewController(playerVc, animated: true)
                 XHGlobalLoading.startLoading()
-                XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: { (videoUrlString) in
+                XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: {[weak playerVc] (videoUrlString) in
                     model.video = videoUrlString
-                    playerVc.model = model
+                    playerVc?.model = model
                 }, failue: { (errorReason) in
                     XHAlertHUD.showError(withStatus: errorReason)
                 })

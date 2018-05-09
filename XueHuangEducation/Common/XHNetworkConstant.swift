@@ -10,6 +10,12 @@ import UIKit
 
 struct XHURL {
     static let base = "http://120.77.242.84:8083"
+    struct mobileController {
+        ///< 8. 获取做题页面数据
+        static let getPaperQuestion = "/xhweb/mobileController.do?mobilePaperQuestion"
+        ///< 11. 查询解析内容
+        static let checkAnalysisContent = "/xhweb/mobileController.do?viewJx"
+    }
 }
 
 ///< baseURL
@@ -36,11 +42,9 @@ let URL_MOBILE_PAPER_CATALOG = "xhweb/appController.do?mobilePaperCatalog"
 ///< 7. 加载考卷分类
 let URL_MOBILE_PAPER_CATALOG_NEW = "xhweb/appController.do?getTree"
 
-///< 8. 获取做题页面数据
-let URL_MOBILE_PAPER_QUESTION = "/xhweb/mobileController.do?mobilePaperQuestion"
 
-///< 11. 查询解析内容
-let URL_CHECK_ANALYSIS_CONTENT = "/xhweb/mobileController.do?viewJx"
+
+
 
 ///< 13. 判断用户是否有做题记录
 let URL_HAS_QUESTION_LOG = "xhweb/appController.do?isQuestionLog"

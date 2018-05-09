@@ -15,6 +15,7 @@ class XHPlayNetCourseViewController: XHBaseViewController {
     
     var netwareModel: XHNetCourseWare? {
         didSet {
+            URLCredential(user: <#T##String#>, password: <#T##String#>, persistence: <#T##URLCredential.Persistence#>)
             XHGlobalLoading.stopLoading()
             guard let videoModel = netwareModel,
                 let videoString = videoModel.video,
@@ -31,8 +32,7 @@ class XHPlayNetCourseViewController: XHBaseViewController {
             playerView.autoPlayTheVideo()
         }
     }
-    
-    
+
     var model: XHNetCourse? {
         didSet {
             XHGlobalLoading.stopLoading()
@@ -73,6 +73,10 @@ class XHPlayNetCourseViewController: XHBaseViewController {
         super.viewDidLoad()
         setupUI()
         XHGlobalLoading.startLoading()
+    }
+    
+    deinit {
+        
     }
 }
 

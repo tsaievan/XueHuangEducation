@@ -70,6 +70,7 @@ class XHThemeViewController: XHTableViewController {
     }
 
     // MARK: - Table view 数据源和代理方法
+    ///< 返回组数
     override func numberOfSections(in tableView: UITableView) -> Int {
         guard let count = dataSource?.catalogs.count else {
             return noData
@@ -77,6 +78,7 @@ class XHThemeViewController: XHTableViewController {
         return count
     }
     
+    ///< 返回行数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let datas = dataSource else {
             return noData
@@ -88,6 +90,7 @@ class XHThemeViewController: XHTableViewController {
         return sectionModel.isFold! ? count : noData
     }
     
+    ///< 返回cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_PAPER_DETAIL, for: indexPath)
         guard let newCell = cell as? XHPaperDetailCell,
@@ -102,10 +105,12 @@ class XHThemeViewController: XHTableViewController {
         return newCell
     }
     
+    ///< 返回行高
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeight
     }
     
+    ///< 返回组头高度
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == firstSection {
             return firstSectionHeight
@@ -113,6 +118,7 @@ class XHThemeViewController: XHTableViewController {
         return normalSectionHeight
     }
     
+    ///< 返回组头View
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let datas = dataSource else {
             return nil
@@ -146,6 +152,7 @@ class XHThemeViewController: XHTableViewController {
         }
     }
     
+    ///< 点击cell
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         let themeListVc = XHThemeListController(style: .plain)
@@ -169,6 +176,7 @@ class XHThemeViewController: XHTableViewController {
         }
     }
     
+    ///< 结束显示某组组头
     override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         if section == firstSection {
             guard let headerView = view as? XHPaperSectionTitleView else {
@@ -180,6 +188,7 @@ class XHThemeViewController: XHTableViewController {
 }
 
 extension XHThemeViewController: XHPaperSectionTitleViewDelegate {
+    ///< 点击按钮出现menu
     func paperSectionTitleViewDidClickButtonList(sectionView: XHPaperSectionTitleView, sender: UIButton) {
         guard let paperList = newInfo?.paperList,
             let catalogs = paperList.sCourseCatalogs else {

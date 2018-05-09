@@ -95,10 +95,10 @@ extension XHNetCourseWareController {
             let playerVc = XHPlayNetCourseViewController()
             navigationController?.pushViewController(playerVc, animated: true)
             XHGlobalLoading.startLoading()
-            XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: { (videoUrlString) in
+            XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: {[weak playerVc, weak model] (videoUrlString) in
                 XHGlobalLoading.stopLoading()
-                model.video = videoUrlString
-                playerVc.netwareModel = model
+                model?.video = videoUrlString
+                playerVc?.netwareModel = model
             }, failue: { (errorReason) in
                 XHGlobalLoading.stopLoading()
                 XHAlertHUD.showError(withStatus: errorReason)
@@ -133,10 +133,10 @@ extension XHNetCourseWareController {
                     let playerVc = XHPlayNetCourseViewController()
                     self.navigationController?.pushViewController(playerVc, animated: true)
                     XHGlobalLoading.startLoading()
-                    XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: { (videoUrlString) in
+                    XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: {[weak playerVc] (videoUrlString) in
                         XHGlobalLoading.stopLoading()
                         model.video = videoUrlString
-                        playerVc.netwareModel = model
+                        playerVc?.netwareModel = model
                     }, failue: { (errorReason) in
                         XHGlobalLoading.stopLoading()
                         XHAlertHUD.showError(withStatus: errorReason)
