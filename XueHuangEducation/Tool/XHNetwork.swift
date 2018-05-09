@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 typealias SuccessBlock = (Any) -> ()
-typealias FailueBlock = (Error) -> ()
+typealias FailueBlock = (NSError) -> ()
 
 
 class XHNetwork {
@@ -49,7 +49,13 @@ class XHNetwork {
             case .success(let value):
                 success?(value)
             case .failure(let error):
-                failue?(error)
+                let err = error as NSError
+                ///< 当错误码为-999时, 表示请求取消, 这时候拦截, 直接return
+                ///< 不然会弹出提示框, 影响用户体验
+                if err.code == -999 {
+                    return
+                }
+                failue?(err)
             }
         }
     }
@@ -82,7 +88,13 @@ class XHNetwork {
             case .success(let value):
                 success?(value)
             case .failure(let error):
-                failue?(error)
+                let err = error as NSError
+                ///< 当错误码为-999时, 表示请求取消, 这时候拦截, 直接return
+                ///< 不然会弹出提示框, 影响用户体验
+                if err.code == -999 {
+                    return
+                }
+                failue?(err)
             }
         }
     }

@@ -25,8 +25,7 @@ class XHDecrypt {
             }
             success?(videoUrl)
         }) { (error) in
-            let err = error as NSError
-            if err.code == -1009 {
+            if error.code == -1009 {
                 failue?("网络连接失败")
             }else {
                 failue?("获取加密视频链接失败")

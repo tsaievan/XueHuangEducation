@@ -46,8 +46,7 @@ class XHTeach {
             }
             success?(courses)
         }) { (error) in
-            let err = error as NSError
-            if err.code == -1009 {
+            if error.code == -1009 {
                 failue?("网络连接失败")
             }else {
                 failue?("数据加载失败")
@@ -68,8 +67,7 @@ class XHTeach {
             
             success?(model)
         }) { (error) in
-            let err = error as NSError
-            if err.code == -1009 {
+            if error.code == -1009 {
                 failue?("网络连接失败")
             }else {
                 failue?("数据加载失败")

@@ -31,8 +31,7 @@ class XHProfile {
             }
             success?(res)
         }) { (error) in
-            let err = error as NSError
-            if err.code == -1009 {
+            if error.code == -1009 {
                 failue?("网络连接失败")
             }else {
                 failue?("获取用户名失败")
@@ -84,8 +83,7 @@ class XHProfile {
             ///< 这个地方貌似还要传一个courseClassName
             success?(fatherArray, model)
         }) { (error) in
-            let err = error as NSError
-            failue?(err)
+            failue?(error)
         }
     }
     
@@ -143,8 +141,7 @@ class XHProfile {
             }
             success?(fatherArray, model)
         }) { (error) in
-            let err = error as NSError
-            failue?(err)
+            failue?(error)
         }
     }
     
@@ -173,8 +170,7 @@ class XHProfile {
             array.insert(total, at: 0)
             success?(array, model)
         }) { (error) in
-            let err = error as NSError
-            failue?(err)
+            failue?(error)
         }
     }
 }

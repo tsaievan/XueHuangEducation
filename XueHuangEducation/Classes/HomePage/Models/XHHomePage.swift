@@ -100,8 +100,7 @@ class XHHomePage {
             }
             success?(mtArray)
         }) { (error) in
-            let err = error as NSError
-            if err.code == -1009 {
+            if error.code == -1009 {
                 failue?("网络连接失败")
             }else {
                 failue?("数据加载失败")
@@ -151,8 +150,7 @@ class XHHomePage {
             }
             success?(fatherArray, model.imgAddr)
         }) { (error) in
-            let err = error as NSError
-            if err.code == -1009 {
+            if error.code == -1009 {
                 failue?("网络连接失败")
             }else {
                 failue?("数据加载失败")
@@ -212,8 +210,7 @@ class XHHomePage {
             }
             success?(fatherArray, model.courseClassName)
         }) { (error) in
-            let err = error as NSError
-            if err.code == -1009 {
+            if error.code == -1009 {
                 failue?("网络连接失败")
             }else {
                 failue?("数据加载失败")
@@ -250,8 +247,7 @@ class XHHomePage {
             array.insert(total, at: 0)
             success?(array, originalName)
         }) { (error) in
-            let err = error as NSError
-            if err.code == -1009 {
+            if error.code == -1009 {
                 failue?("网络连接失败")
             }else {
                 failue?("数据加载失败")
