@@ -45,7 +45,7 @@ class XHTeachViewController: XHTableViewController {
                 let cycle = cycleBanner else {
                     return
             }
-            if imageUrl == GLOBAL_EMPTY_STRING {
+            if imageUrl == String.empty {
                 tableView.tableHeaderView = UIView(frame: .zero)
                 ///< 这里需要设置一下contentInset的缩进, 不然很丑
                 tableView.contentInset = UIEdgeInsetsMake(K_TABLEVIEW_EDGE_INSET_TOP, GLOBAL_ZERO, GLOBAL_ZERO, GLOBAL_ZERO)
@@ -223,7 +223,7 @@ extension XHTeachViewController: XHSectionTitleHeaderViewDelegate {
             return
         }
         let catalog = catalogs[sender.tag]
-        XHProfile.getMyMobileNetCourse(withCourseClassId: catalog.id ?? GLOBAL_EMPTY_STRING, success: { (catalogs, themeModel) in
+        XHProfile.getMyMobileNetCourse(withCourseClassId: catalog.id ?? String.empty, success: { (catalogs, themeModel) in
             self.newInfo = (catalogs, themeModel)
         }) { (error) in
             if error.code == XHNetworkError.Code.noData { ///< 表示没有数据

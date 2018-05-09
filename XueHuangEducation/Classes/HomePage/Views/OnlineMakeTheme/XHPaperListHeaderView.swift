@@ -8,6 +8,12 @@
 
 import UIKit
 
+extension UIColor {
+    struct PaperListHeaderView {
+        static let seperator = UIColor(hexColor: "#EEEEEE")
+    }
+}
+
 class XHPaperListHeaderView: UIView {
     
     var titleText: String? {
@@ -31,7 +37,7 @@ class XHPaperListHeaderView: UIView {
     
     lazy var seperatorView: UIView = {
         let s = UIView()
-        s.backgroundColor = COLOR_HOMEPAGE_CATALOG_SEPERATOR_COLOR
+        s.backgroundColor = UIColor.PaperListHeaderView.seperator
         return s
     }()
     

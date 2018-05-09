@@ -18,16 +18,18 @@ struct XHSCreen {
 // MARK: - 颜色的分类
 extension UIColor {
     struct Global { ///< 全局的
-        static let darkGray = UIColor(hexColor: "#393A3F")
-        static let lightGray = UIColor(hexColor: "#DEDEE2")
-        static let skyBlue = UIColor(hexColor: "#3399FF")
-        static let background = UIColor(hexColor: "#F2F2F7")
+        static let darkGray = UIColor(hexColor: "#393A3F") ///< 深灰
+        static let lightGray = UIColor(hexColor: "#DEDEE2") ///< 浅灰
+        static let skyBlue = UIColor(hexColor: "#3399FF") ///< 天蓝
+        static let background = UIColor(hexColor: "#F2F2F7") ///< 背景
     }
 }
 
+extension String {
+    static let empty = ""
+}
+
 ///< 全局的颜色
-let COLOR_HOMEPAGE_CATALOG_SEPERATOR_COLOR: UIColor = UIColor(hexColor: "#EEEEEE")
-let COLOR_CATALOG_BUTTON_BORDER_COLOR: UIColor = UIColor(hexColor: "#CCCCCC")
 let COLOR_CATALOG_BUTTON_TITLE_COLOR: UIColor = UIColor(hexColor: "#333333")
 let COLOR_HOMEPAGE_TIP_LABEL_COLOR: UIColor = UIColor(hexColor: "#555555")
 let COLOR_HOMEPAGE_COURSE_ICON_BLUE: UIColor = UIColor(hexColor: "#27C1F4")
@@ -103,8 +105,6 @@ let RADIUS_HOMEPAGE_CATALOG_BUTTON: CGFloat = 15
 ///< 获取验证码的最大时间 (10min)
 let TIME_INTERVAL_MAX_GET_AUTH_CODE: TimeInterval = Double(MAXFLOAT)
 
-///< 全局的空字符串
-let GLOBAL_EMPTY_STRING = ""
 
 ///< 事件的名称
 let EVENT_CLICK_CATALOG_BUTTON = "EVENT_CLICK_CATALOG_BUTTON"

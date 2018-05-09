@@ -9,6 +9,12 @@
 import UIKit
 import SnapKit
 
+extension UIColor {
+    struct CourseCatalogButton {
+        static let border = UIColor(hexColor: "#CCCCCC")
+    }
+}
+
 // MARK: - 首页分类的button
 class XHCourseCatalogButton: UIButton {
     override init(frame: CGRect) {
@@ -17,7 +23,7 @@ class XHCourseCatalogButton: UIButton {
         layer.cornerRadius = RADIUS_HOMEPAGE_CATALOG_BUTTON
         layer.masksToBounds = true
         layer.borderWidth = 1.5
-        layer.borderColor = COLOR_CATALOG_BUTTON_BORDER_COLOR.cgColor
+        layer.borderColor = UIColor.CourseCatalogButton.border.cgColor
     }
     
     required init?(coder aDecoder: NSCoder) {

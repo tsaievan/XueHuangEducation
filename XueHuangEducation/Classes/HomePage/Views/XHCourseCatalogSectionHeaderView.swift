@@ -8,6 +8,12 @@
 
 import UIKit
 
+extension UIColor {
+    struct CourseCatalogSectionHeaderView {
+        static let seperator = UIColor(hexColor: "#EEEEEE")
+    }
+}
+
 class XHCourseCatalogSectionHeaderView: UIView {
     
     var models: [XHCourseCatalog]? {
@@ -38,7 +44,7 @@ class XHCourseCatalogSectionHeaderView: UIView {
     
     lazy var seperatorView: UIView = {
         let s = UIView()
-        s.backgroundColor = COLOR_HOMEPAGE_CATALOG_SEPERATOR_COLOR
+        s.backgroundColor = UIColor.CourseCatalogSectionHeaderView.seperator
         return s
     }()
     
