@@ -72,11 +72,27 @@ extension XHLoadingView {
         ///< 防止子线程调用, 强行切到主线程来
         DispatchQueue.main.async {
             self.stopAnimation()
-            self.superview?.removeFromSuperview()
+            ///< 出现一个奇怪的bug, `XHLoadingBackgroundView`remove的时候, remove不掉
+            ///< 只能用下面的方法, 强行删掉`XHLoadingBackgroundView`
+            self.window?.subviews.forEach({ (view) in
+                guard let bundleName = Bundle.bundleName,
+                let kls = NSClassFromString(bundleName + "." + "XHLoadingBackgroundView") else {
+                    return
+                }
+                if view.isKind(of: kls) {
+                    view.removeFromSuperview()
+                }
+            })
         }
     }
 }
 
+extension CGRect {
+    ///< 可穿透区域的CGRect
+    struct LoadingBackgroundView {
+        static let prickRect = UIDevice.iPhoneX ? CGRect(x: 0, y: 40, width: 32, height: 32) : CGRect(x: 0, y: 20, width: 32, height: 32)
+    }
+}
 
 class XHLoadingBackgroundView: UIView {
     ///< 默认可穿透
@@ -84,7 +100,7 @@ class XHLoadingBackgroundView: UIView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if canPrick {
             ///< 包含返回按钮所处的那个点, 则返回nil, 使点击事件穿透
-            if CGRect(x: 0, y: 20, width: 32, height: 32).contains(point) && frame.height == XHSCreen.height {
+            if CGRect.LoadingBackgroundView.prickRect.contains(point) && frame.height == XHSCreen.height {
                 return nil
             }else {
                 return super.hitTest(point, with: event)
