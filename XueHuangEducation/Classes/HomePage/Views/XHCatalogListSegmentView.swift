@@ -81,7 +81,7 @@ extension XHCatalogListSegmentView {
         myTeachButton.snp.makeConstraints { (make) in
             make.top.equalTo(self)
             make.left.equalTo(self).offset(MARGIN_GLOBAL_44 * horizontalScale)
-            make.width.equalTo((SCREEN_WIDTH - 2 * (MARGIN_GLOBAL_44 * horizontalScale + MARGIN_GLOBAL_44 * horizontalScale)) / 3)
+            make.width.equalTo((XHSCreen.width - 2 * (MARGIN_GLOBAL_44 * horizontalScale + MARGIN_GLOBAL_44 * horizontalScale)) / 3)
         }
         
         myThemeButton.snp.makeConstraints { (make) in

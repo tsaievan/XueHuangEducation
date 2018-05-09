@@ -129,7 +129,7 @@ class XHNetCourseButtonsContainterView: UIView {
             }
             tipLabel.text = title
             ///< 循环创建button
-            let buttonW = (SCREEN_WIDTH - 2.0 * MARGIN_GLOBAL_25) / 2
+            let buttonW = (XHSCreen.width - 2.0 * MARGIN_GLOBAL_25) / 2
             let buttonH: CGFloat = 160
             for (index, model) in models.enumerated() {
                 let btn = XHNetCourseButton()

@@ -56,7 +56,7 @@ extension XHLoadingView {
         ///< 防止子线程调用, 强行切到主线程来
         DispatchQueue.main.async {
             self.backgroundColor = .clear
-            let backgroudView = XHLoadingBackgroundView(frame: SCREEN_BOUNDS)
+            let backgroudView = XHLoadingBackgroundView(frame: XHSCreen.bounds)
             self.center = backgroudView.center
             backgroudView.addSubview(self)
             guard let delegate = UIApplication.shared.delegate,
@@ -84,7 +84,7 @@ class XHLoadingBackgroundView: UIView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if canPrick {
             ///< 包含返回按钮所处的那个点, 则返回nil, 使点击事件穿透
-            if CGRect(x: 0, y: 20, width: 32, height: 32).contains(point) && frame.height == SCREEN_HEIGHT {
+            if CGRect(x: 0, y: 20, width: 32, height: 32).contains(point) && frame.height == XHSCreen.height {
                 return nil
             }else {
                 return super.hitTest(point, with: event)

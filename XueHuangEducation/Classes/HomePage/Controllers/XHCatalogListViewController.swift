@@ -35,7 +35,7 @@ class XHCatalogListViewController: XHBaseViewController {
         let sv = UIScrollView()
         sv.delegate = self
         sv.backgroundColor = .white
-        sv.contentSize = CGSize(width: SCREEN_WIDTH * 3, height: 0)
+        sv.contentSize = CGSize(width: XHSCreen.width * 3, height: 0)
         sv.showsVerticalScrollIndicator = false
         sv.showsHorizontalScrollIndicator = false
         sv.bounces = false
@@ -106,7 +106,7 @@ extension XHCatalogListViewController {
         
         teachVc.view.snp.makeConstraints { (make) in
             make.top.left.bottom.equalTo(contentView)
-            make.width.equalTo(SCREEN_WIDTH)
+            make.width.equalTo(XHSCreen.width)
         }
         
         themeVc.view.snp.makeConstraints { (make) in
@@ -124,7 +124,7 @@ extension XHCatalogListViewController {
             make.top.equalTo(segmentView.snp.bottom)
             make.bottom.equalTo(view)
             make.left.right.equalTo(scrollView)
-            make.width.equalTo(SCREEN_WIDTH * 3)
+            make.width.equalTo(XHSCreen.width * 3)
         }
     }
 }
@@ -134,9 +134,9 @@ extension XHCatalogListViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView.isEqual(self.scrollView) {
             let offsetX = scrollView.contentOffset.x
-            if offsetX > SCREEN_WIDTH + SCREEN_WIDTH * 0.6 {
+            if offsetX > XHSCreen.width + XHSCreen.width * 0.6 {
                 segmentView.selectedPage = 2
-            }else if offsetX > SCREEN_WIDTH * 0.6 && offsetX <= SCREEN_WIDTH + SCREEN_WIDTH * 0.6 {
+            }else if offsetX > XHSCreen.width * 0.6 && offsetX <= XHSCreen.width + XHSCreen.width * 0.6 {
                 segmentView.selectedPage = 1
             }else {
                 segmentView.selectedPage = 0
@@ -148,7 +148,7 @@ extension XHCatalogListViewController: UIScrollViewDelegate {
 // MARK: - XHCatalogListSegmentView的代理
 extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
     func catalogListSegmentViewDidClickSegmentButton(segmentView: XHCatalogListSegmentView, sender: XHButton) {
-        scrollView.setContentOffset(CGPoint(x: CGFloat(sender.tag) * SCREEN_WIDTH, y: 0), animated: false)
+        scrollView.setContentOffset(CGPoint(x: CGFloat(sender.tag) * XHSCreen.width, y: 0), animated: false)
         guard let courseModel = model,
             let courseId = courseModel.id,
         let courseName = courseModel.courseClassName else {

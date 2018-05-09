@@ -80,7 +80,7 @@ extension XHCourseCatalogSectionFooterView {
         
         chTitileImageView.snp.makeConstraints { (make) in
             make.top.equalTo(containView).offset(MARGIN_GLOBAL_20 + MARGIN_GLOBAL_14)
-            make.width.equalTo(SCREEN_WIDTH * 0.6)
+            make.width.equalTo(XHSCreen.width * 0.6)
             make.left.equalTo(logoImageView.snp.right).offset(MARGIN_GLOBAL_15)
             make.right.equalTo(containView).offset(-MARGIN_GLOBAL_20)
         }

@@ -17,6 +17,7 @@ public struct XHNetworkError {
     ///< 错误代码
     struct Code {
         static let noData: Int = -1
+        static let connetFailue: Int = NSURLErrorNotConnectedToInternet
     }
     
     ///< 错误描述
@@ -56,7 +57,7 @@ class XHNetwork {
             }
             cookieHeader["Cookie"] = cookieString
         }
-        sessionManager.request((URL_BASE as NSString).appendingPathComponent(url), method: .get, parameters: params, encoding: URLEncoding.default, headers: cookieHeader).responseJSON { (response) in
+        sessionManager.request((XHURL.base as NSString).appendingPathComponent(url), method: .get, parameters: params, encoding: URLEncoding.default, headers: cookieHeader).responseJSON { (response) in
             switch response.result {
             case .success(let value):
                 success?(value)
@@ -95,7 +96,7 @@ class XHNetwork {
             }
             cookieHeader["Cookie"] = cookieString
         }
-        sessionManager.request((URL_BASE as NSString).appendingPathComponent(url), method: .get, parameters: params, encoding: URLEncoding.default, headers: cookieHeader).responseString { (response) in
+        sessionManager.request((XHURL.base as NSString).appendingPathComponent(url), method: .get, parameters: params, encoding: URLEncoding.default, headers: cookieHeader).responseString { (response) in
             switch response.result {
             case .success(let value):
                 success?(value)
@@ -118,7 +119,7 @@ class XHNetwork {
     ///   - params: 需要拼接的参数
     /// - Returns: 返回一个特定的网页url
     class func getWebUrl(withUrl url: String, params: [String : Any]) -> URL? {
-        let baseUrl = URL_BASE
+        let baseUrl = XHURL.base
         var urlString = (baseUrl as NSString).appending(url)
         for (k, v) in params {
             let string = "&" + "\(k)=\(v)"

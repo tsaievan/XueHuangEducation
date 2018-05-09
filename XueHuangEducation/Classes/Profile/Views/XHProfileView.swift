@@ -124,7 +124,7 @@ extension XHProfileView {
     fileprivate func makeConstraints() {
         backgroundImageView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(self)
-            make.height.equalTo(SCREEN_WIDTH * 0.20)
+            make.height.equalTo(XHSCreen.width * 0.20)
         }
         
         bannerView.snp.makeConstraints { (make) in
@@ -158,7 +158,7 @@ extension XHProfileView {
         myTeachButton.snp.makeConstraints { (make) in
             make.top.equalTo(buttonContainerView).offset(MARGIN_GLOBAL_30)
             make.left.equalTo(buttonContainerView).offset(MARGIN_GLOBAL_30 * horizontalScale)
-            make.width.equalTo((SCREEN_WIDTH - 2 * (MARGIN_GLOBAL_30 * horizontalScale + MARGIN_GLOBAL_44 * horizontalScale)) / 3)
+            make.width.equalTo((XHSCreen.width - 2 * (MARGIN_GLOBAL_30 * horizontalScale + MARGIN_GLOBAL_44 * horizontalScale)) / 3)
         }
         
         myThemeButton.snp.makeConstraints { (make) in

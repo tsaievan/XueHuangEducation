@@ -75,7 +75,7 @@ class XHTeachViewController: XHTableViewController {
     // MARK: - 懒加载
     ///< 轮播图(目前只有一张图)
     lazy var cycleBanner: SDCycleScrollView?  = {
-        guard let cycle = SDCycleScrollView(frame: CGRect(x: GLOBAL_ZERO, y: GLOBAL_ZERO, width: SCREEN_WIDTH, height: SCREEN_WIDTH * CYCLE_BANNER_HEIGHT_WIDTH_RATIO), delegate: nil, placeholderImage: nil) else {
+        guard let cycle = SDCycleScrollView(frame: CGRect(x: GLOBAL_ZERO, y: GLOBAL_ZERO, width: XHSCreen.width, height: XHSCreen.width * CYCLE_BANNER_HEIGHT_WIDTH_RATIO), delegate: nil, placeholderImage: nil) else {
             return nil
         }
         cycle.autoScroll = false
@@ -227,7 +227,7 @@ extension XHTeachViewController: XHSectionTitleHeaderViewDelegate {
             self.newInfo = (catalogs, themeModel)
         }) { (error) in
             if error.code == XHNetworkError.Code.noData { ///< 表示没有数据
-            }else if error.code == NSURLErrorNotConnectedToInternet { ///< 网络连接失败
+            }else if error.code == XHNetworkError.Code.connetFailue { ///< 网络连接失败
                 XHAlertHUD.showError(withStatus: XHNetworkError.Desription.connectFailue)
             }else { ///< 获取列表失败
                 XHAlertHUD.showError(withStatus: XHNetworkError.Desription.getTeachListFailue)

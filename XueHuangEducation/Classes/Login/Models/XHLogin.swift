@@ -64,7 +64,7 @@ class XHLogin {
                 }
             }
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
+            if error.code == XHNetworkError.Code.connetFailue {
                 failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("发送验证码失败")
@@ -102,7 +102,7 @@ class XHLogin {
                 failue?("登录失败")
             }
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
+            if error.code == XHNetworkError.Code.connetFailue {
                 failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("登录失败")
@@ -146,7 +146,7 @@ class XHLogin {
                 
             }
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
+            if error.code == XHNetworkError.Code.connetFailue {
                 failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("登录失败")
@@ -181,7 +181,7 @@ class XHLogin {
                 failue?("获取验证码失败")
             }
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
+            if error.code == XHNetworkError.Code.connetFailue {
                 failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("获取验证码失败")
@@ -216,7 +216,7 @@ class XHLogin {
                 failue?("修改密码失败")
             }
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
+            if error.code == XHNetworkError.Code.connetFailue {
                 failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("修改密码失败")
@@ -235,7 +235,7 @@ class XHLogin {
         XHNetwork.GET(url: URL_LOGIN_OUT, params: nil, success: { (response) in
             success?()
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
+            if error.code == XHNetworkError.Code.connetFailue {
                 failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("退出失败")
@@ -266,7 +266,7 @@ class XHLogin {
                 failue?("注册失败")
             }
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
+            if error.code == XHNetworkError.Code.connetFailue {
                 failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("注册失败")

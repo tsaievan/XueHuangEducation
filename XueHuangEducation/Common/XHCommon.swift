@@ -7,10 +7,14 @@
 //
 import UIKit
 
+
 ///< 屏幕的尺寸
-let SCREEN_BOUNDS = UIScreen.main.bounds
-let SCREEN_WIDTH = UIScreen.main.bounds.width
-let SCREEN_HEIGHT = UIScreen.main.bounds.height
+struct XHSCreen {
+    static let bounds = UIScreen.main.bounds
+    static let width = UIScreen.main.bounds.width
+    static let height = UIScreen.main.bounds.height
+}
+
 
 ///< 全局的颜色
 let COLOR_GLOBAL_DARK_GRAY: UIColor = UIColor(hexColor: "#393A3F")

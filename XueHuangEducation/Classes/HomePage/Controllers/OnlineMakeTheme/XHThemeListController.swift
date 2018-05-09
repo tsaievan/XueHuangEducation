@@ -44,7 +44,7 @@ enum XHShowAnalysisType: Int {
 class XHThemeListController: XHTableViewController {
     
     lazy var headerView: XHPaperListHeaderView = {
-        let header = XHPaperListHeaderView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 40))
+        let header = XHPaperListHeaderView(frame: CGRect(x: 0, y: 0, width: XHSCreen.width, height: 40))
         return header
     }()
     

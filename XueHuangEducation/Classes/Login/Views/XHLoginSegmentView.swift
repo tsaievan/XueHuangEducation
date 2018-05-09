@@ -98,12 +98,12 @@ extension XHLoginSegmentView {
     fileprivate func makeConstraints() {
         accountButton.snp.makeConstraints { (make) in
             make.top.left.bottom.equalTo(self)
-            make.width.equalTo(SCREEN_WIDTH * 0.5)
+            make.width.equalTo(XHSCreen.width * 0.5)
         }
         
         phoneButton.snp.makeConstraints { (make) in
             make.top.bottom.right.equalTo(self)
-            make.width.equalTo(SCREEN_WIDTH * 0.5)
+            make.width.equalTo(XHSCreen.width * 0.5)
         }
         
         seperatorView.snp.makeConstraints { (make) in
@@ -114,7 +114,7 @@ extension XHLoginSegmentView {
         tipView.snp.makeConstraints { (make) in
             make.centerX.equalTo(accountButton.snp.centerX)
             make.bottom.equalTo(seperatorView)
-            make.width.equalTo(SCREEN_WIDTH * 0.5)
+            make.width.equalTo(XHSCreen.width * 0.5)
             make.height.equalTo(2)
         }
     }
@@ -129,7 +129,7 @@ extension XHLoginSegmentView {
         tipView.snp.remakeConstraints { (make) in
             make.centerX.equalTo(sender.snp.centerX)
             make.bottom.equalTo(self)
-            make.width.equalTo(SCREEN_WIDTH * 0.5)
+            make.width.equalTo(XHSCreen.width * 0.5)
             make.height.equalTo(2)
         }
         UIView.animate(withDuration: 0.2) {

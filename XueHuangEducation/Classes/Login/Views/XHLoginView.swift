@@ -121,19 +121,19 @@ extension XHLoginView {
             make.top.bottom.equalTo(self)
             ///< 左右与scrollView对齐, 这样就给定了scrollView的contentSize
             make.left.right.equalTo(scrollView)
-            make.width.equalTo(SCREEN_WIDTH * 2)
+            make.width.equalTo(XHSCreen.width * 2)
         }
         
         accountLoginView.snp.makeConstraints { (make) in
             make.top.equalTo(segmentView.snp.bottom)
             make.left.bottom.equalTo(contentView)
-            make.width.equalTo(SCREEN_WIDTH)
+            make.width.equalTo(XHSCreen.width)
         }
         
         phoneLoginView.snp.makeConstraints { (make) in
             make.top.equalTo(segmentView.snp.bottom)
             make.bottom.right.equalTo(contentView)
-            make.width.equalTo(SCREEN_WIDTH)
+            make.width.equalTo(XHSCreen.width)
         }
     }
 }
@@ -142,7 +142,7 @@ extension XHLoginView {
 extension XHLoginView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView.isEqual(self.scrollView) {
-            if scrollView.contentOffset.x > SCREEN_WIDTH * 0.6 { ///< 偏移量超过屏幕宽度的0.6, 就设置为第1页
+            if scrollView.contentOffset.x > XHSCreen.width * 0.6 { ///< 偏移量超过屏幕宽度的0.6, 就设置为第1页
                 segmentView.selectedPage = 1
             }else { ///< 否则返回第0页
                 segmentView.selectedPage = 0
@@ -161,7 +161,7 @@ extension XHLoginView: XHLoginSegmentViewDelegate {
         case 0:
             scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         case 1:
-            scrollView.setContentOffset(CGPoint(x: SCREEN_WIDTH, y: 0), animated: true)
+            scrollView.setContentOffset(CGPoint(x: XHSCreen.width, y: 0), animated: true)
         default:
             break
         }

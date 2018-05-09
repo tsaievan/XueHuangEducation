@@ -63,7 +63,7 @@ extension XHWebViewController {
         }
         
         progressView.snp.makeConstraints { (make) in
-            make.width.equalTo(SCREEN_WIDTH)
+            make.width.equalTo(XHSCreen.width)
             make.height.equalTo(2)
             make.left.equalTo(view)
             make.top.equalTo(view).offset(TOP_EDGE_AJUSTED)

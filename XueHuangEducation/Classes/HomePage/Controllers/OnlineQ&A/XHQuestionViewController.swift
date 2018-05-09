@@ -18,7 +18,7 @@ class XHQuestionViewController: XHTableViewController {
     var dataSource: [XHCourseCatalog]?
     
     lazy var headerView: XHQuestionHeaderView = {
-        let header = XHQuestionHeaderView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 40))
+        let header = XHQuestionHeaderView(frame: CGRect(x: 0, y: 0, width: XHSCreen.width, height: 40))
         header.xh_delegate = self
         return header
     }()

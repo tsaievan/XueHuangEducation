@@ -8,8 +8,12 @@
 
 import UIKit
 
+struct XHURL {
+    static let base = "http://120.77.242.84:8083"
+}
+
 ///< baseURL
-let URL_BASE = "http://120.77.242.84:8083"
+
 
 ///< 1. 获取主页面数据
 let URL_HOMEPAGE_LIST = "xhweb/appController.do?list"

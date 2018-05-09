@@ -47,7 +47,7 @@ class XHCourseCatalogButtonsContainterView: UIView {
                 return
             }
             ///< 循环创建button
-            let buttonW = (SCREEN_WIDTH - 4.0 * MARGIN_GLOBAL_15) / 3
+            let buttonW = (XHSCreen.width - 4.0 * MARGIN_GLOBAL_15) / 3
             let buttonH = HEIGHT_HOMEPAGE_CATALOG_BUTTON
             for (index, model) in models.enumerated() {
                 let btn = XHCourseCatalogButton(type: .custom)
