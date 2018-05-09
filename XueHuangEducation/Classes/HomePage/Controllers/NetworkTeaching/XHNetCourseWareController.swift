@@ -8,10 +8,35 @@
 
 import UIKit
 
+extension XHCellReuseIdentifier.NetCourseWareController {
+    static let netcourseWare = "CELL_IDENTIFIER_NETCOURSE_WARE"
+}
+
+extension String {
+    struct NetCourseWareController {
+        static let watchAfterLogin = "您好, 此课件需要登录后观看 !"
+        static let getPrivilegeFailue = "获取观看视频权限失败"
+    }
+}
+
+// MARK: - 存放一些一算属性
+extension XHNetCourseWareController {
+    ///< 没数据返回0组或者0行
+    private var noData: Int { return 0 }
+    
+    ///< 只返回一组
+    private var oneSection: Int { return 1 }
+    
+    ///< cell的高度
+    private var cellHeight: CGFloat { return 80.0 }
+}
+
 class XHNetCourseWareController: UITableViewController {
     
+    ///< 数据源
     var dataSouce: [XHNetCourseWare]?
     
+    ///< 模型赋值
     var models: [XHNetCourseWare]? {
         didSet {
             guard let infos = models else {
@@ -22,28 +47,35 @@ class XHNetCourseWareController: UITableViewController {
         }
     }
     
+    // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        tableView.register(XHNetCourseWareCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_NETCOURSE_WARE)
+        tableView.register(XHNetCourseWareCell.self, forCellReuseIdentifier: XHCellReuseIdentifier.NetCourseWareController.netcourseWare)
         ///< 去除多余的分割线
         tableView.tableFooterView = UIView()
     }
+}
+
+// MARK: - Table view 数据源方法和代理方法
+extension XHNetCourseWareController {
     
-    // MARK: - Table view 数据源方法和代理方法
+    ///< 返回组数
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return oneSection
     }
     
+    ///< 返回行数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let datas = dataSouce else {
-            return 0
+            return noData
         }
         return datas.count
     }
     
+    ///< 返回cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_NETCOURSE_WARE, for: indexPath) as? XHNetCourseWareCell,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: XHCellReuseIdentifier.NetCourseWareController.netcourseWare, for: indexPath) as? XHNetCourseWareCell,
             let datas = dataSouce else {
                 return UITableViewCell()
         }
@@ -51,10 +83,12 @@ class XHNetCourseWareController: UITableViewController {
         return cell
     }
     
+    ///< 返回行高
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return cellHeight
     }
     
+    ///< 点击cell
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         guard let datas = dataSouce else {
@@ -81,12 +115,12 @@ class XHNetCourseWareController: UITableViewController {
                 XHAlertHUD.showError(withStatus: errorReason)
             })
         }else { ///< 表明是收费课程
-           ///< 要先判断是否登录, 没有登录的话要先弹出登录框
+            ///< 要先判断是否登录, 没有登录的话要先弹出登录框
             guard let _ = XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] else {
-                let alertVc = UIAlertController(title: "信息", message: "您好, 此课件需要登录后观看 !", preferredStyle: UIAlertControllerStyle.alert)
-                let action = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
+                let alertVc = UIAlertController(title: String.Alert.info.rawValue, message: String.NetCourseWareController.watchAfterLogin, preferredStyle: UIAlertControllerStyle.alert)
+                let action = UIAlertAction(title: String.Alert.cancel.rawValue, style: UIAlertActionStyle.destructive, handler: nil)
                 ///< 弹出登录界面
-                let confirm = UIAlertAction(title: "确定", style: UIAlertActionStyle.default, handler: { (action) in
+                let confirm = UIAlertAction(title: String.Alert.confirm.rawValue, style: UIAlertActionStyle.default, handler: { (action) in
                     let loginVc = XHLoginViewController()
                     let loginNav = XHNavigationController(rootViewController: loginVc)
                     self.navigationController?.present(loginNav, animated: true, completion: nil)
@@ -96,12 +130,9 @@ class XHNetCourseWareController: UITableViewController {
                 present(alertVc, animated: true, completion: nil)
                 return
             }
-            // FIXME: - 这里还要调一个判断接口
-            
             guard let netCoursewareId = model.netCoursewareId else {
                 return
             }
-            
             XHTeach.isAllowedWatchVideo(withCourseId: netCoursewareId, success: { (isAllowedWatch) in
                 guard let success = isAllowedWatch.success else {
                     return
@@ -122,11 +153,11 @@ class XHNetCourseWareController: UITableViewController {
                         XHAlertHUD.showError(withStatus: errorReason)
                     })
                 }else {
-                    let message = isAllowedWatch.msg ?? "获取观看视频权限失败"
-                    let alertVc = UIAlertController(title: "信息", message: message, preferredStyle: UIAlertControllerStyle.alert)
-                    let action = UIAlertAction(title: "取消", style: UIAlertActionStyle.destructive, handler: nil)
+                    let message = isAllowedWatch.msg ?? String.NetCourseWareController.getPrivilegeFailue
+                    let alertVc = UIAlertController(title: String.Alert.info.rawValue, message: message, preferredStyle: UIAlertControllerStyle.alert)
+                    let action = UIAlertAction(title: String.Alert.cancel.rawValue, style: UIAlertActionStyle.destructive, handler: nil)
                     ///< 弹出登录界面
-                    let confirm = UIAlertAction(title: "确定", style: UIAlertActionStyle.default, handler: nil)
+                    let confirm = UIAlertAction(title: String.Alert.confirm.rawValue, style: UIAlertActionStyle.default, handler: nil)
                     alertVc.addAction(action)
                     alertVc.addAction(confirm)
                     self.present(alertVc, animated: true, completion: nil)

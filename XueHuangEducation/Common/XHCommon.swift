@@ -25,9 +25,40 @@ extension UIColor {
     }
 }
 
+// MARK: - 字符串的分类
 extension String {
-    static let empty = ""
+    static let empty = "" ///< 空字符串
+    enum Alert: String {
+        case info = "信息"
+        case cancel = "取消"
+        case confirm = "确定"
+    }
 }
+
+// MARK: - 比例
+struct XHRatio {
+    ///< 宽高比
+    struct W_H_R {
+        struct TeachViewController {}
+    }
+}
+
+// MARK: - cell重用标识
+struct XHCellReuseIdentifier {
+    struct TeachViewController {}
+    struct NetCourseWareController {}
+}
+
+// MARK: - tableView的header重用标识
+struct XHHeaderReuseIdentifier {
+    struct TeachViewController {}
+}
+
+extension CGFloat {
+    static let tableViewMinimumHeaderHeight: CGFloat = 0.01
+    static let tableViewMinimumFooterHeight: CGFloat = 0.01
+}
+
 
 ///< 全局的颜色
 let COLOR_CATALOG_BUTTON_TITLE_COLOR: UIColor = UIColor(hexColor: "#333333")
@@ -48,8 +79,8 @@ let COLOR_BUTTON_BORDER_GETAUTH_DARKGRAY = UIColor(hexColor: "#D2D2D2")
 let GLOBAL_ZERO: CGFloat = 0.0
 
 ///< tableView的全局数字
-let TABLEVIEW_MINIMUM_HEADER_HEIGHT: CGFloat = 0.01
-let TABLEVIEW_MINIMUM_FOOTER_HEIGHT: CGFloat = 0.01
+
+
 
 ///< 字体大小
 let FONT_SIZE_12: CGFloat = 12.0
