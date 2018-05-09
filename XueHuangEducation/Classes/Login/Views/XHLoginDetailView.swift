@@ -438,4 +438,13 @@ extension XHLoginDetailView {
             passwordTextField.resignFirstResponder()
         }
     }
+    
+    func resignViewEditing() {
+        if userAccountTextField.isFirstResponder {
+            userAccountTextField.resignFirstResponder()
+        }
+        if passwordTextField.isFirstResponder {
+            passwordTextField.resignFirstResponder()
+        }
+    }
 }

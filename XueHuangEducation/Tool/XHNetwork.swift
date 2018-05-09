@@ -15,6 +15,12 @@ typealias FailueBlock = (Error) -> ()
 
 class XHNetwork {
     
+    static fileprivate var sessionManager: Alamofire.SessionManager = {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 10 ///< 设置超时时长为10秒
+        return Alamofire.SessionManager(configuration: config)
+    }()
+    
     /// get请求, 得到的response是json字符串
     ///
     /// - Parameters:
@@ -38,7 +44,7 @@ class XHNetwork {
             }
             cookieHeader["Cookie"] = cookieString
         }
-        Alamofire.request((URL_BASE as NSString).appendingPathComponent(url), method: .get, parameters: params, encoding: URLEncoding.default, headers: cookieHeader).responseJSON { (response) in
+        sessionManager.request((URL_BASE as NSString).appendingPathComponent(url), method: .get, parameters: params, encoding: URLEncoding.default, headers: cookieHeader).responseJSON { (response) in
             switch response.result {
             case .success(let value):
                 success?(value)
@@ -71,7 +77,7 @@ class XHNetwork {
             }
             cookieHeader["Cookie"] = cookieString
         }
-        Alamofire.request((URL_BASE as NSString).appendingPathComponent(url), method: .get, parameters: params, encoding: URLEncoding.default, headers: cookieHeader).responseString { (response) in
+        sessionManager.request((URL_BASE as NSString).appendingPathComponent(url), method: .get, parameters: params, encoding: URLEncoding.default, headers: cookieHeader).responseString { (response) in
             switch response.result {
             case .success(let value):
                 success?(value)
@@ -81,6 +87,12 @@ class XHNetwork {
         }
     }
     
+    /// 返回一个特定的网页url
+    ///
+    /// - Parameters:
+    ///   - url: 需要拼接的urlString
+    ///   - params: 需要拼接的参数
+    /// - Returns: 返回一个特定的网页url
     class func getWebUrl(withUrl url: String, params: [String : Any]) -> URL? {
         let baseUrl = URL_BASE
         var urlString = (baseUrl as NSString).appending(url)
@@ -92,6 +104,15 @@ class XHNetwork {
             return nil
         }
         return URL(string: newStr)
+    }
+    
+    ///< 取消所有请求
+    class func cancelAllRequest() {
+        sessionManager.session.getAllTasks { (tasks) in
+            tasks.forEach({ (task) in
+                task.cancel()
+            })
+        }
     }
 }
 

@@ -154,6 +154,9 @@ extension XHLoginView: UIScrollViewDelegate {
 // MARK: - XHLoginSegmentViewDelegate代理
 extension XHLoginView: XHLoginSegmentViewDelegate {
     func loginSegmentViewDidClick(sender: UIButton, segmentView: XHLoginSegmentView) {
+        ///< 点击或者滑动停止之后强制键盘收起
+        accountLoginView.resignViewEditing()
+        phoneLoginView.resignViewEditing()
         switch sender.tag {
         case 0:
             scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)

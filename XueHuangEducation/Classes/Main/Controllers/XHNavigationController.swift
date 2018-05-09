@@ -20,11 +20,15 @@ class XHNavigationController: UINavigationController {
     
     override func popViewController(animated: Bool) -> UIViewController? {
         XHGlobalLoading.stopLoading()
+        ///< 取消所有网络请求
+        XHNetwork.cancelAllRequest()
         return super.popViewController(animated: animated)
     }
     
     override func popToRootViewController(animated: Bool) -> [UIViewController]? {
         XHGlobalLoading.stopLoading()
+        ///< 取消所有网络请求
+        XHNetwork.cancelAllRequest()
         return super.popToRootViewController(animated: animated)
     }
 }
