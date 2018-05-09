@@ -100,8 +100,8 @@ class XHHomePage {
             }
             success?(mtArray)
         }) { (error) in
-            if error.code == -1009 {
-                failue?("网络连接失败")
+            if error.code == NSURLErrorNotConnectedToInternet {
+                failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("数据加载失败")
             }
@@ -150,8 +150,8 @@ class XHHomePage {
             }
             success?(fatherArray, model.imgAddr)
         }) { (error) in
-            if error.code == -1009 {
-                failue?("网络连接失败")
+            if error.code == NSURLErrorNotConnectedToInternet {
+                failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("数据加载失败")
             }
@@ -210,8 +210,8 @@ class XHHomePage {
             }
             success?(fatherArray, model.courseClassName)
         }) { (error) in
-            if error.code == -1009 {
-                failue?("网络连接失败")
+            if error.code == NSURLErrorNotConnectedToInternet {
+                failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("数据加载失败")
             }
@@ -247,8 +247,8 @@ class XHHomePage {
             array.insert(total, at: 0)
             success?(array, originalName)
         }) { (error) in
-            if error.code == -1009 {
-                failue?("网络连接失败")
+            if error.code == NSURLErrorNotConnectedToInternet {
+                failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("数据加载失败")
             }

@@ -136,8 +136,8 @@ extension XHQuestionViewController: XHQuestionHeaderViewDelegate {
             self.newInfo = (catalogs, questionModel)
         }) { (error) in
             if error.code == -1 { ///< 表示没有数据
-            }else if error.code == -1009 { ///< 网络连接失败
-                XHAlertHUD.showError(withStatus: "网络连接失败")
+            }else if error.code == NSURLErrorNotConnectedToInternet { ///< 网络连接失败
+                XHAlertHUD.showError(withStatus: "网络连接失败, 请检查网络")
             }else { ///< 获取答疑列表失败
                 XHAlertHUD.showError(withStatus: "获取我的答疑列表失败")
             }

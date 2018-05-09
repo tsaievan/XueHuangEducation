@@ -52,7 +52,7 @@ class XHNetwork {
                 let err = error as NSError
                 ///< 当错误码为-999时, 表示请求取消, 这时候拦截, 直接return
                 ///< 不然会弹出提示框, 影响用户体验
-                if err.code == -999 {
+                if err.code == NSURLErrorCancelled {
                     return
                 }
                 failue?(err)
@@ -91,7 +91,7 @@ class XHNetwork {
                 let err = error as NSError
                 ///< 当错误码为-999时, 表示请求取消, 这时候拦截, 直接return
                 ///< 不然会弹出提示框, 影响用户体验
-                if err.code == -999 {
+                if err.code == NSURLErrorCancelled {
                     return
                 }
                 failue?(err)

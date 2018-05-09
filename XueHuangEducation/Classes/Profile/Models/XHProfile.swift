@@ -31,8 +31,8 @@ class XHProfile {
             }
             success?(res)
         }) { (error) in
-            if error.code == -1009 {
-                failue?("网络连接失败")
+            if error.code == NSURLErrorNotConnectedToInternet {
+                failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("获取用户名失败")
             }

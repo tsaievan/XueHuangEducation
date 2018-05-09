@@ -77,8 +77,8 @@ extension XHUIWebViewController: UIWebViewDelegate {
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         let err = error as NSError
         ///< 错误处理
-        if err.code == -1009 {
-            XHAlertHUD.showError(withStatus: "网络连接失败")
+        if err.code == NSURLErrorNotConnectedToInternet {
+            XHAlertHUD.showError(withStatus: "网络连接失败, 请检查网络")
         }else {
             XHAlertHUD.showError(withStatus: "加载网页失败")
         }

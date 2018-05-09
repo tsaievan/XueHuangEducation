@@ -63,8 +63,8 @@ extension XHProfileViewController: XHProfileViewDelegate {
                     alertVc.addAction(cancel)
                     alertVc.addAction(back)
                     teachVc.present(alertVc, animated: true, completion: nil)
-                }else if error.code == -1009 { ///< 网络连接失败
-                    XHAlertHUD.showError(withStatus: "网络连接失败")
+                }else if error.code == NSURLErrorNotConnectedToInternet { ///< 网络连接失败, 请检查网络
+                    XHAlertHUD.showError(withStatus: "网络连接失败, 请检查网络")
                 }else { ///< 获取列表失败
                     XHAlertHUD.showError(withStatus: "获取讲题列表失败")
                 }
@@ -93,8 +93,8 @@ extension XHProfileViewController: XHProfileViewDelegate {
                     alertVc.addAction(cancel)
                     alertVc.addAction(back)
                     themeVc.present(alertVc, animated: true, completion: nil)
-                }else if error.code == -1009 { ///< 网络连接失败
-                    XHAlertHUD.showError(withStatus: "网络连接失败")
+                }else if error.code == NSURLErrorNotConnectedToInternet { ///< 网络连接失败, 请检查网络
+                    XHAlertHUD.showError(withStatus: "网络连接失败, 请检查网络")
                 }else { ///< 获取列表失败
                     XHAlertHUD.showError(withStatus: "获取考卷列表失败")
                 }
@@ -122,8 +122,8 @@ extension XHProfileViewController: XHProfileViewDelegate {
                     alertVc.addAction(cancel)
                     alertVc.addAction(back)
                     questionVc.present(alertVc, animated: true, completion: nil)
-                }else if error.code == -1009 { ///< 网络连接失败
-                    XHAlertHUD.showError(withStatus: "网络连接失败")
+                }else if error.code == NSURLErrorNotConnectedToInternet { ///< 网络连接失败, 请检查网络
+                    XHAlertHUD.showError(withStatus: "网络连接失败, 请检查网络")
                 }else { ///< 获取答疑列表失败
                     XHAlertHUD.showError(withStatus: "获取答疑列表失败")
                 }

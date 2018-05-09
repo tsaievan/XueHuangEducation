@@ -42,8 +42,8 @@ class XHMobilePaper {
             }
             success?(array)
         }) { (error) in
-            if error.code == -1009 {
-                failue?("网络连接失败")
+            if error.code == NSURLErrorNotConnectedToInternet {
+                failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("数据加载失败")
             }
@@ -69,8 +69,8 @@ class XHMobilePaper {
             }
             success?(model)
         }) { (error) in
-            if error.code == -1009 {
-                failue?("网络连接失败")
+            if error.code == NSURLErrorNotConnectedToInternet {
+                failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("数据加载失败")
             }
@@ -89,8 +89,8 @@ class XHMobilePaper {
             }
             success?(hasQuestionLog)
         }) { (error) in
-            if error.code == -1009 {
-                failue?("网络连接失败")
+            if error.code == NSURLErrorNotConnectedToInternet {
+                failue?("网络连接失败, 请检查网络")
             }else {
                 failue?("数据加载失败")
             }
