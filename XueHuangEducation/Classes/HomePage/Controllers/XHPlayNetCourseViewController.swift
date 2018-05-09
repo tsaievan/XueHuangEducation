@@ -15,7 +15,6 @@ class XHPlayNetCourseViewController: XHBaseViewController {
     
     var netwareModel: XHNetCourseWare? {
         didSet {
-            URLCredential(user: <#T##String#>, password: <#T##String#>, persistence: <#T##URLCredential.Persistence#>)
             XHGlobalLoading.stopLoading()
             guard let videoModel = netwareModel,
                 let videoString = videoModel.video,

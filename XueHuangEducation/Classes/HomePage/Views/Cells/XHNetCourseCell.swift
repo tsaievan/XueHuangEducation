@@ -120,6 +120,9 @@ class XHNetCourseButtonsContainterView: UIView {
     ///< 上一个按钮
     var beforeButton: XHNetCourseButton?
     
+    ///< 由于这个方法会调用多次, 会造成创建多次button的bug
+    ///< 那么需要判断lastButton是否有值
+    ///< 如果有值, 就表明已经创建过了, 直接return
     var catalogs: [XHNetCourse]? {
         didSet {
             guard let models = catalogs,
@@ -128,6 +131,9 @@ class XHNetCourseButtonsContainterView: UIView {
                 return
             }
             tipLabel.text = title
+            if lastButton != nil {
+                return
+            }
             ///< 循环创建button
             let buttonW = (XHSCreen.width - 2.0 * MARGIN_GLOBAL_25) / 2
             let buttonH: CGFloat = 160
