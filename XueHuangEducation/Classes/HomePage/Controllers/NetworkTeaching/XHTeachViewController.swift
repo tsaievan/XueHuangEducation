@@ -9,10 +9,35 @@
 import UIKit
 import SDCycleScrollView
 
+///< tableView的顶部缩进 -> 30
+private let K_TABLEVIEW_EDGE_INSET_TOP: CGFloat = -30
+
+///< 获取我的讲题列表失败
+extension XHNetworkError.Desription {
+    static let getTeachListFailue: String = "获取讲题列表失败"
+}
+
 class XHTeachViewController: XHTableViewController {
     
+    ///< 第一个section
+    private var firstSection: Int { return 0 }
+
+    ///< 没数据返回0组或者0行
+    private var noData: Int { return 0 }
+    
+    ///< cell的高度
+    private var cellHeight: CGFloat { return 80.0 }
+    
+    ///< 第一个组头的高度
+    private var firstSectionHeight: CGFloat { return 90.0 }
+    
+    ///< 其余的组头高度
+    private var normalSectionHeight: CGFloat { return 50.0 }
+
+    ///< tableView的数据源
     var dataSource: (catalogs: [XHCourseCatalog], themeList: XHThemeList?)?
     
+    ///< 从首页跳转过来的数据赋值
     var info: (response: [XHCourseCatalog], imageArr: String?)? {
         didSet {
             guard let modelInfo = info,
@@ -20,10 +45,10 @@ class XHTeachViewController: XHTableViewController {
                 let cycle = cycleBanner else {
                     return
             }
-            if imageUrl == "" {
+            if imageUrl == GLOBAL_EMPTY_STRING {
                 tableView.tableHeaderView = UIView(frame: .zero)
                 ///< 这里需要设置一下contentInset的缩进, 不然很丑
-                tableView.contentInset = UIEdgeInsetsMake(-30, 0, 0, 0)
+                tableView.contentInset = UIEdgeInsetsMake(K_TABLEVIEW_EDGE_INSET_TOP, GLOBAL_ZERO, GLOBAL_ZERO, GLOBAL_ZERO)
             }else {
                 tableView.tableHeaderView = cycle
             }
@@ -33,11 +58,12 @@ class XHTeachViewController: XHTableViewController {
         }
     }
     
+    ///< 从个人中心跳转过来的数据赋值
     var newInfo: (response: [XHCourseCatalog], themeList: XHThemeList)? {
         didSet {
             tableView.tableHeaderView = UIView(frame: .zero)
             ///< 这里需要设置一下contentInset的缩进, 不然很丑
-            tableView.contentInset = UIEdgeInsetsMake(-30, 0, 0, 0)
+            tableView.contentInset = UIEdgeInsetsMake(K_TABLEVIEW_EDGE_INSET_TOP, GLOBAL_ZERO, GLOBAL_ZERO, GLOBAL_ZERO)
             guard let modelInfo = newInfo else {
                 return
             }
@@ -46,8 +72,10 @@ class XHTeachViewController: XHTableViewController {
         }
     }
     
+    // MARK: - 懒加载
+    ///< 轮播图(目前只有一张图)
     lazy var cycleBanner: SDCycleScrollView?  = {
-        guard let cycle = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_WIDTH * CYCLE_BANNER_HEIGHT_WIDTH_RATIO), delegate: nil, placeholderImage: nil) else {
+        guard let cycle = SDCycleScrollView(frame: CGRect(x: GLOBAL_ZERO, y: GLOBAL_ZERO, width: SCREEN_WIDTH, height: SCREEN_WIDTH * CYCLE_BANNER_HEIGHT_WIDTH_RATIO), delegate: nil, placeholderImage: nil) else {
             return nil
         }
         cycle.autoScroll = false
@@ -56,6 +84,8 @@ class XHTeachViewController: XHTableViewController {
         return cycle
     }()
     
+    // MARK: - 生命周期
+    ///< view已经被加载
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(XHNetCourseDetailCell.self, forCellReuseIdentifier: CELL_IDENTIFIER_NETCOURSE_DETAIL)
@@ -63,32 +93,38 @@ class XHTeachViewController: XHTableViewController {
         tableView.register(XHSectionTitleHeaderView.self, forHeaderFooterViewReuseIdentifier: HEADER_TITLE_VIEW_IDENTIFIER_TEACH_TABLEVIEW)
         
         ///< 这两句代码是使得section之间的view不再有缝隙
-        tableView.sectionFooterHeight = 0.01
-        tableView.sectionHeaderHeight = 0.01
+        tableView.sectionFooterHeight = TABLEVIEW_MINIMUM_FOOTER_HEIGHT
+        tableView.sectionHeaderHeight = TABLEVIEW_MINIMUM_HEADER_HEIGHT
         
         ///< 去除分割线
         tableView.tableFooterView = UIView()
     }
+}
+
+// MARK: - Table view 的数据源和代理方法
+extension XHTeachViewController {
     
-    // MARK: - Table view 的数据源和代理方法
+    ///< 返回组数
     override func numberOfSections(in tableView: UITableView) -> Int {
         guard let datas = dataSource?.catalogs else {
-            return 0
+            return noData
         }
         return datas.count
     }
     
+    ///< 返回行数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let datas = dataSource?.catalogs else {
-            return 0
+            return noData
         }
         let sectionModel = datas[section]
         guard let count = sectionModel.netCourses?.count else {
-            return 0
+            return noData
         }
-        return sectionModel.isFold! ? count : 0
+        return sectionModel.isFold! ? count : noData
     }
     
+    ///< 返回cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER_NETCOURSE_DETAIL, for: indexPath)
         guard let newCell = cell as? XHNetCourseDetailCell,
@@ -103,23 +139,18 @@ class XHTeachViewController: XHTableViewController {
         return newCell
     }
     
+    ///< 返回cell的高度
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return cellHeight
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 90
-        }
-        return 50
-    }
-    
+    ///< 返回组头View
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let datas = dataSource else {
             return nil
         }
         let sectionModel = datas.catalogs[section]
-        if section == 0 {
+        if section == firstSection {
             guard let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HEADER_TITLE_VIEW_IDENTIFIER_TEACH_TABLEVIEW) as? XHSectionTitleHeaderView else {
                 return nil
             }
@@ -144,6 +175,15 @@ class XHTeachViewController: XHTableViewController {
         }
     }
     
+    ///< 返回组头的高度
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == firstSection {
+            return firstSectionHeight
+        }
+        return normalSectionHeight
+    }
+    
+    ///< 选中cell
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let datas = dataSource?.catalogs else {
             return
@@ -160,12 +200,13 @@ class XHTeachViewController: XHTableViewController {
         XHTeach.getNetcourseware(withCourseName: courseName, courseId: courseId, success: { (response) in
             netVc.models = response
         }) { (errorReason) in
-            
+            XHAlertHUD.showError(withStatus: errorReason)
         }
     }
     
+    ///< 即将结束显示某组组头View
     override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        if section == 0 {
+        if section == firstSection {
             guard let headerView = view as? XHSectionTitleHeaderView else {
                 return
             }
@@ -182,14 +223,14 @@ extension XHTeachViewController: XHSectionTitleHeaderViewDelegate {
             return
         }
         let catalog = catalogs[sender.tag]
-        XHProfile.getMyMobileNetCourse(withCourseClassId: catalog.id ?? "", success: { (catalogs, themeModel) in
+        XHProfile.getMyMobileNetCourse(withCourseClassId: catalog.id ?? GLOBAL_EMPTY_STRING, success: { (catalogs, themeModel) in
             self.newInfo = (catalogs, themeModel)
         }) { (error) in
-            if error.code == -1 { ///< 表示没有数据
+            if error.code == XHNetworkError.Code.noData { ///< 表示没有数据
             }else if error.code == NSURLErrorNotConnectedToInternet { ///< 网络连接失败
-                XHAlertHUD.showError(withStatus: "网络连接失败, 请检查网络")
+                XHAlertHUD.showError(withStatus: XHNetworkError.Desription.connectFailue)
             }else { ///< 获取列表失败
-                XHAlertHUD.showError(withStatus: "获取我的讲题列表失败")
+                XHAlertHUD.showError(withStatus: XHNetworkError.Desription.getTeachListFailue)
             }
         }
     }

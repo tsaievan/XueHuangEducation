@@ -12,6 +12,18 @@ import Alamofire
 typealias SuccessBlock = (Any) -> ()
 typealias FailueBlock = (NSError) -> ()
 
+public struct XHNetworkError {
+    
+    ///< 错误代码
+    struct Code {
+        static let noData: Int = -1
+    }
+    
+    ///< 错误描述
+    struct Desription {
+        static let connectFailue: String = "网络连接失败, 请检查网络"
+    }
+}
 
 class XHNetwork {
     
