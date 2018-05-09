@@ -31,7 +31,7 @@ extension XHTabBarController {
         tabBar.barTintColor = .white
         ///< 将barStyle修改成black模式, tabBar上面那条黑线就看不到了
         tabBar.barStyle = .black
-        tabBar.tintColor = COLOR_GLOBAL_BLUE
+        tabBar.tintColor = UIColor.Global.skyBlue
         addChildViewControllers()
     }
     

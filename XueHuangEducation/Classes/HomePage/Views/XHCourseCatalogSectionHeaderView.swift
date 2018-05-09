@@ -29,7 +29,7 @@ class XHCourseCatalogSectionHeaderView: UIView {
     
     lazy var titleLabel:UILabel = {
         let lbl = UILabel()
-        lbl.textColor = COLOR_GLOBAL_BLUE
+        lbl.textColor = UIColor.Global.skyBlue
         lbl.textAlignment = .left
         lbl.font = UIFont.boldSystemFont(ofSize: 17)
         lbl.sizeToFit()
@@ -54,7 +54,7 @@ class XHCourseCatalogSectionHeaderView: UIView {
 
 extension XHCourseCatalogSectionHeaderView {
     fileprivate func setupUI() {
-        backgroundColor = COLOR_HOMEPAGE_BACKGROUND
+        backgroundColor = UIColor.Global.background
         addSubview(imageView)
         addSubview(titleLabel)
         addSubview(seperatorView)

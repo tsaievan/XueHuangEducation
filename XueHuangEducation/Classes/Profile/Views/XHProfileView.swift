@@ -85,7 +85,7 @@ class XHProfileView: UIView {
     
     lazy var buttonContainerView: UIView = {
         let buttonContainer = UIView()
-        buttonContainer.backgroundColor = COLOR_HOMEPAGE_BACKGROUND
+        buttonContainer.backgroundColor = UIColor.Global.background
         return buttonContainer
     }()
     
@@ -107,7 +107,7 @@ class XHProfileView: UIView {
 // MARK: - 设置UI
 extension XHProfileView {
     fileprivate func setupUI() {
-        backgroundColor = COLOR_HOMEPAGE_BACKGROUND
+        backgroundColor = UIColor.Global.background
         addSubview(backgroundImageView)
         addSubview(bannerView)
         addSubview(iconView)

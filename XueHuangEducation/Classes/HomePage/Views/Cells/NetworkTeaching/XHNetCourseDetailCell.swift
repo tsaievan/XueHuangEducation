@@ -39,7 +39,7 @@ class XHNetCourseDetailCell: UITableViewCell {
     }()
     
     lazy var listenButton: XHButton = {
-        let btn = XHButton(withButtonImage: "catalogList_listen_button", title: "试听", titleColor: COLOR_GLOBAL_BLUE, titleFont: FONT_SIZE_12, gap: 0)
+        let btn = XHButton(withButtonImage: "catalogList_listen_button", title: "试听", titleColor: UIColor.Global.skyBlue, titleFont: FONT_SIZE_12, gap: 0)
         return btn
     }()
     

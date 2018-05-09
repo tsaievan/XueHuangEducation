@@ -8,19 +8,24 @@
 import UIKit
 
 
-///< 屏幕的尺寸
+// MARK: - 屏幕的尺寸
 struct XHSCreen {
     static let bounds = UIScreen.main.bounds
     static let width = UIScreen.main.bounds.width
     static let height = UIScreen.main.bounds.height
 }
 
+// MARK: - 颜色的分类
+extension UIColor {
+    struct Global { ///< 全局的
+        static let darkGray = UIColor(hexColor: "#393A3F")
+        static let lightGray = UIColor(hexColor: "#DEDEE2")
+        static let skyBlue = UIColor(hexColor: "#3399FF")
+        static let background = UIColor(hexColor: "#F2F2F7")
+    }
+}
 
 ///< 全局的颜色
-let COLOR_GLOBAL_DARK_GRAY: UIColor = UIColor(hexColor: "#393A3F")
-let COLOR_GLOBAL_BLUE: UIColor = UIColor(hexColor: "#3399FF")
-let COLOR_CLOBAL_LIGHT_GRAY: UIColor = UIColor(hexColor: "#DEDEE2")
-let COLOR_HOMEPAGE_BACKGROUND: UIColor = UIColor(hexColor: "#F2F2F7")
 let COLOR_HOMEPAGE_CATALOG_SEPERATOR_COLOR: UIColor = UIColor(hexColor: "#EEEEEE")
 let COLOR_CATALOG_BUTTON_BORDER_COLOR: UIColor = UIColor(hexColor: "#CCCCCC")
 let COLOR_CATALOG_BUTTON_TITLE_COLOR: UIColor = UIColor(hexColor: "#333333")

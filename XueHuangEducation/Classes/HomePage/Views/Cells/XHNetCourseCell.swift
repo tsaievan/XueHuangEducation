@@ -103,7 +103,7 @@ class XHNetCourseButtonsContainterView: UIView {
     
     lazy var tipView: UIView = {
         let t = UIView()
-        t.backgroundColor = COLOR_GLOBAL_BLUE
+        t.backgroundColor = UIColor.Global.skyBlue
         t.layer.cornerRadius = 2
         t.layer.masksToBounds = true
         return t
@@ -238,7 +238,7 @@ class XHNetCourseCell: UITableViewCell {
 // MARK: - 设置UI
 extension XHNetCourseCell {
     fileprivate func setupUI() {
-        backgroundColor = COLOR_HOMEPAGE_BACKGROUND
+        backgroundColor = UIColor.Global.background
         contentView.backgroundColor = .clear
         contentView.addSubview(buttonsView)
         contentView.layer.cornerRadius = 5

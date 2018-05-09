@@ -57,7 +57,7 @@ class XHCourseCatalogSectionFooterView: UIView {
 
 extension XHCourseCatalogSectionFooterView {
     fileprivate func setupUI() {
-        backgroundColor = COLOR_HOMEPAGE_BACKGROUND
+        backgroundColor = UIColor.Global.background
         addSubview(containView)
         containView.addSubview(logoImageView)
         containView.addSubview(chTitileImageView)

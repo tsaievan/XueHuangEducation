@@ -66,7 +66,7 @@ class XHLoginDetailView: UIView {
         btn.setTitleColor(.white, for: .normal)
         btn.layer.cornerRadius = 5
         btn.layer.masksToBounds = true
-        btn.backgroundColor = COLOR_GLOBAL_BLUE
+        btn.backgroundColor = UIColor.Global.skyBlue
         btn.addTarget(self, action: #selector(didClickLoginButtonAction), for: .touchUpInside)
         return btn
     }()
@@ -88,7 +88,7 @@ class XHLoginDetailView: UIView {
         let btn = UIButton(type: .custom)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
         btn.setTitle("获取验证码", for: .normal)
-        btn.setTitleColor(COLOR_GLOBAL_DARK_GRAY, for: .normal)
+        btn.setTitleColor(UIColor.Global.darkGray, for: .normal)
         btn.layer.cornerRadius = 5
         btn.layer.masksToBounds = true
         btn.layer.borderWidth = 0.5
@@ -424,7 +424,7 @@ extension XHLoginDetailView {
         let title = "重新发送(\(remainTime))"
         getAuthButton.isEnabled = false
         getAuthButton.setTitle(title, for: .disabled)
-        getAuthButton.setTitleColor(COLOR_CLOBAL_LIGHT_GRAY, for: .disabled)
+        getAuthButton.setTitleColor(UIColor.Global.lightGray, for: .disabled)
     }
 }
 

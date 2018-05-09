@@ -20,7 +20,7 @@ class XHResetPwdNextViewController: XHBaseViewController {
     
     lazy var nameLabel: UILabel = {
         let lbl = UILabel()
-        lbl.textColor = COLOR_CLOBAL_LIGHT_GRAY
+        lbl.textColor = UIColor.Global.lightGray
         lbl.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
         lbl.textAlignment = .center
         guard let username = response?.username else {

@@ -47,7 +47,7 @@ class XHPaperSectionTitleView: UITableViewHeaderFooterView {
     
     lazy var seperatorView: UIView = {
         let v = UIView()
-        v.backgroundColor = COLOR_CLOBAL_LIGHT_GRAY
+        v.backgroundColor = UIColor.Global.lightGray
         return v
     }()
     

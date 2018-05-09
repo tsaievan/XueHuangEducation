@@ -14,8 +14,8 @@ class XHWebViewController: XHBaseViewController {
     
     lazy var progressView: UIProgressView = {
         let pv = UIProgressView(progressViewStyle: .default)
-        pv.progressTintColor = COLOR_GLOBAL_BLUE
-        pv.backgroundColor = COLOR_CLOBAL_LIGHT_GRAY
+        pv.progressTintColor = UIColor.Global.skyBlue
+        pv.backgroundColor = UIColor.Global.lightGray
         pv.progress = 0.0
         return pv
     }()

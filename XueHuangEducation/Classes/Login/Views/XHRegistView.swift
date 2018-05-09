@@ -78,12 +78,12 @@ class XHRegistView: UIView {
     
     ///< 我已经阅读并同意Label
     lazy var agreeDescLabel: UILabel = {
-        let lbl = UILabel(text: "我已经阅读并同意", textColor: COLOR_GLOBAL_DARK_GRAY)
+        let lbl = UILabel(text: "我已经阅读并同意", textColor: UIColor.Global.darkGray)
         return lbl
     }()
     
     lazy var xhProtocolButton: UIButton = {
-        let btn = UIButton(title: "《学煌教育服务协议》", titleColor: COLOR_GLOBAL_BLUE, fontSize: FONT_SIZE_14, target: self, action: #selector(didClickXHProtocolButtonAction), controlEvents: .touchUpInside)
+        let btn = UIButton(title: "《学煌教育服务协议》", titleColor: UIColor.Global.skyBlue, fontSize: FONT_SIZE_14, target: self, action: #selector(didClickXHProtocolButtonAction), controlEvents: .touchUpInside)
         return btn
     }()
     
@@ -95,7 +95,7 @@ class XHRegistView: UIView {
         btn.setTitleColor(.white, for: .normal)
         btn.layer.cornerRadius = 5
         btn.layer.masksToBounds = true
-        btn.backgroundColor = COLOR_GLOBAL_BLUE
+        btn.backgroundColor = UIColor.Global.skyBlue
         btn.addTarget(self, action: #selector(didClickRegistButtonAction), for: .touchUpInside)
         return btn
     }()
@@ -105,7 +105,7 @@ class XHRegistView: UIView {
         let btn = UIButton(type: .custom)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
         btn.setTitle("获取验证码", for: .normal)
-        btn.setTitleColor(COLOR_GLOBAL_DARK_GRAY, for: .normal)
+        btn.setTitleColor(UIColor.Global.darkGray, for: .normal)
         btn.layer.cornerRadius = 5
         btn.layer.masksToBounds = true
         btn.layer.borderWidth = 0.5
@@ -117,8 +117,8 @@ class XHRegistView: UIView {
     
     ///< `我已有账号!`Label
     lazy var haveAccountLabel: UILabel = {
-        let lblText = NSMutableAttributedString(string: "我已有账号!去登录", attributes: [NSAttributedStringKey.foregroundColor : COLOR_GLOBAL_BLUE])
-        lblText.setAttributes([NSAttributedStringKey.foregroundColor : COLOR_GLOBAL_DARK_GRAY], range: NSRange(location: 0, length: "我已有账号!".count))
+        let lblText = NSMutableAttributedString(string: "我已有账号!去登录", attributes: [NSAttributedStringKey.foregroundColor : UIColor.Global.skyBlue])
+        lblText.setAttributes([NSAttributedStringKey.foregroundColor : UIColor.Global.darkGray], range: NSRange(location: 0, length: "我已有账号!".count))
         let lbl = UILabel()
         lbl.attributedText = lblText
         lbl.textAlignment = .center
@@ -411,6 +411,6 @@ extension XHRegistView {
         let title = "重新发送(\(remainTime))"
         getAuthButton.isEnabled = false
         getAuthButton.setTitle(title, for: .disabled)
-        getAuthButton.setTitleColor(COLOR_CLOBAL_LIGHT_GRAY, for: .disabled)
+        getAuthButton.setTitleColor(UIColor.Global.lightGray, for: .disabled)
     }
 }

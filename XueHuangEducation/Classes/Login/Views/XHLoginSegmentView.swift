@@ -21,8 +21,8 @@ class XHLoginSegmentView: UIView {
     lazy var accountButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setTitle("账号登录", for: .normal)
-        btn.setTitleColor(COLOR_GLOBAL_DARK_GRAY, for: .normal)
-        btn.setTitleColor(COLOR_GLOBAL_BLUE, for: .selected)
+        btn.setTitleColor(UIColor.Global.darkGray, for: .normal)
+        btn.setTitleColor(UIColor.Global.skyBlue, for: .selected)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.tag = 0
         btn.addTarget(self, action: #selector(didClickSegmentButtonAction), for: .touchUpInside)
@@ -33,8 +33,8 @@ class XHLoginSegmentView: UIView {
     lazy var phoneButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setTitle("手机快捷登录", for: .normal)
-        btn.setTitleColor(COLOR_GLOBAL_DARK_GRAY, for: .normal)
-        btn.setTitleColor(COLOR_GLOBAL_BLUE, for: .selected)
+        btn.setTitleColor(UIColor.Global.darkGray, for: .normal)
+        btn.setTitleColor(UIColor.Global.skyBlue, for: .selected)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         btn.tag = 1
         btn.addTarget(self, action: #selector(didClickSegmentButtonAction), for: .touchUpInside)
@@ -44,14 +44,14 @@ class XHLoginSegmentView: UIView {
     ///< 提示的蓝色线
     lazy var tipView: UIView = {
         let v = UIView()
-        v.backgroundColor = COLOR_GLOBAL_BLUE
+        v.backgroundColor = UIColor.Global.skyBlue
         return v
     }()
     
     ///< 灰色背景的分割线
     lazy var seperatorView: UIView = {
         let s = UIView()
-        s.backgroundColor = COLOR_CLOBAL_LIGHT_GRAY
+        s.backgroundColor = UIColor.Global.lightGray
         return s
     }()
     

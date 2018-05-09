@@ -103,7 +103,7 @@ class XHCourseCatalogCell: UITableViewCell {
     
     lazy var buttonsView: XHCourseCatalogButtonsContainterView = {
         let cv = XHCourseCatalogButtonsContainterView()
-        cv.backgroundColor = COLOR_HOMEPAGE_BACKGROUND
+        cv.backgroundColor = UIColor.Global.background
         cv.xh_delegate = self
         return cv
     }()
