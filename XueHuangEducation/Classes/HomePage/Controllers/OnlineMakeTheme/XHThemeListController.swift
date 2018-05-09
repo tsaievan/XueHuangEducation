@@ -202,7 +202,7 @@ extension XHThemeListController {
             let params = [
                 "paperCatalogId" : paperCatalogId,
                 "paperId" : paperId,
-                "isJj" : XHSummitType.summit,
+                "isJj" : XHSummitType.summit.rawValue,
                 "isViewAnswer" : XHShowAnalysisType.show.rawValue,
                 "viewType" : XHPaperActionSheet.pageAnalysis.rawValue,
                 "forwardQueNum" : 1
@@ -213,7 +213,7 @@ extension XHThemeListController {
             let params = [
                 "paperCatalogId" : paperCatalogId,
                 "paperId" : paperId,
-                "isJj" : XHSummitType.summit,
+                "isJj" : XHSummitType.summit.rawValue,
                 "isViewAnswer" : XHShowAnalysisType.show.rawValue,
                 "viewType" : XHPaperActionSheet.collection.rawValue,
                 "forwardQueNum" : 1
