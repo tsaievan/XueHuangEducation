@@ -19,19 +19,7 @@ extension String {
     }
 }
 
-// MARK: - 存放一些一算属性
-extension XHNetCourseWareController {
-    ///< 没数据返回0组或者0行
-    private var noData: Int { return 0 }
-    
-    ///< 只返回一组
-    private var oneSection: Int { return 1 }
-    
-    ///< cell的高度
-    private var cellHeight: CGFloat { return 80.0 }
-}
-
-class XHNetCourseWareController: UITableViewController {
+class XHNetCourseWareController: XHTableViewController {
     
     ///< 数据源
     var dataSouce: [XHNetCourseWare]?
@@ -48,6 +36,7 @@ class XHNetCourseWareController: UITableViewController {
     }
     
     // MARK: - 生命周期
+    ///< 页面已经加载
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

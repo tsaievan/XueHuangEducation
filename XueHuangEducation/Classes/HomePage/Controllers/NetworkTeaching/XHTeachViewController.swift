@@ -45,14 +45,6 @@ extension XHHeaderReuseIdentifier.TeachViewController {
 
 // MARK: - 存放一些计算属性
 extension XHTeachViewController {
-    ///< 第一个section
-    private var firstSection: Int { return 0 }
-    
-    ///< 没数据返回0组或者0行
-    private var noData: Int { return 0 }
-    
-    ///< cell的高度
-    private var cellHeight: CGFloat { return 80.0 }
     
     ///< 第一个组头的高度
     private var firstSectionHeight: CGFloat { return 90.0 }
@@ -223,7 +215,7 @@ extension XHTeachViewController {
             let courseId = models[indexPath.row].netCourseId else {
                 return
         }
-        let netVc = XHNetCourseWareController()
+        let netVc = XHNetCourseWareController(style: .grouped)
         netVc.navigationItem.title = courseName
         navigationController?.pushViewController(netVc, animated: true)
         XHTeach.getNetcourseware(withCourseName: courseName, courseId: courseId, success: { (response) in

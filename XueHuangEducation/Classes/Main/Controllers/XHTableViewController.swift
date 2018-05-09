@@ -8,6 +8,20 @@
 
 import UIKit
 
+extension XHTableViewController {
+    ///< 没数据返回0组或者0行
+    var noData: Int { return 0 }
+    
+    ///< cell的高度
+    var cellHeight: CGFloat { return 80.0 }
+    
+    ///< 只返回一组
+    var oneSection: Int { return 1 }
+    
+    ///< 第一个section
+    var firstSection: Int { return 0 }
+}
+
 class XHTableViewController: UITableViewController {
     
     override init(style: UITableViewStyle) {

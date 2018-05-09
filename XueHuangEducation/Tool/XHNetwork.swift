@@ -23,6 +23,7 @@ public struct XHNetworkError {
     ///< 错误描述
     struct Desription {
         struct TeachViewController {}
+        struct ThemeViewController {}
         static let connectFailue: String = "网络连接失败, 请检查网络"
     }
 }
