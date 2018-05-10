@@ -26,7 +26,6 @@
 		573427052096EA0900108D1E /* XHThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573427042096EA0900108D1E /* XHThemeViewController.swift */; };
 		573427072096EA1900108D1E /* XHQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573427062096EA1900108D1E /* XHQuestionViewController.swift */; };
 		5734270920973AE600108D1E /* XHSimpleNetCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734270820973AE600108D1E /* XHSimpleNetCourse.swift */; };
-		5734270B2097489C00108D1E /* XHNetCourseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734270A2097489C00108D1E /* XHNetCourseHeaderView.swift */; };
 		5734270D2097490900108D1E /* XHNetCourseDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734270C2097490900108D1E /* XHNetCourseDetailCell.swift */; };
 		57369A2D2098518E00E2E0F9 /* XHTeachSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57369A2C2098518E00E2E0F9 /* XHTeachSectionHeaderView.swift */; };
 		57369A2F2098866C00E2E0F9 /* XHSectionTitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57369A2E2098866C00E2E0F9 /* XHSectionTitleHeaderView.swift */; };
@@ -131,7 +130,6 @@
 		573427042096EA0900108D1E /* XHThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHThemeViewController.swift; sourceTree = "<group>"; };
 		573427062096EA1900108D1E /* XHQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHQuestionViewController.swift; sourceTree = "<group>"; };
 		5734270820973AE600108D1E /* XHSimpleNetCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHSimpleNetCourse.swift; sourceTree = "<group>"; };
-		5734270A2097489C00108D1E /* XHNetCourseHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourseHeaderView.swift; sourceTree = "<group>"; };
 		5734270C2097490900108D1E /* XHNetCourseDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourseDetailCell.swift; sourceTree = "<group>"; };
 		57369A2C2098518E00E2E0F9 /* XHTeachSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHTeachSectionHeaderView.swift; sourceTree = "<group>"; };
 		57369A2E2098866C00E2E0F9 /* XHSectionTitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHSectionTitleHeaderView.swift; sourceTree = "<group>"; };
@@ -423,7 +421,6 @@
 				573E72FC2099E3D500DD41B2 /* OnlineMakeTheme */,
 				573E72FD2099E3D500DD41B2 /* OnlineQ&A */,
 				5763359B208ED909009DAF86 /* XHCourseCatalogSectionHeaderView.swift */,
-				5734270A2097489C00108D1E /* XHNetCourseHeaderView.swift */,
 				57098816208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift */,
 				577500162096AB6C00DF9AC5 /* XHCatalogListSegmentView.swift */,
 				57633596208EBBD4009DAF86 /* Cells */,
@@ -836,7 +833,6 @@
 				5795B45B208D805400ECD58F /* XHModifyPwdResult.swift in Sources */,
 				571C801F208CC1E5005CD369 /* XHLoginMember.swift in Sources */,
 				572B8CA3208E098C005EC6CD /* XHNetCourse.swift in Sources */,
-				5734270B2097489C00108D1E /* XHNetCourseHeaderView.swift in Sources */,
 				5795B459208D7D8D00ECD58F /* XHResult.swift in Sources */,
 				57A8AF372099522A001FE55B /* XHPaperDetailCell.swift in Sources */,
 				57A8AF3920996A51001FE55B /* XHPaperSectionTitleView.swift in Sources */,

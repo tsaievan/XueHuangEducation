@@ -14,6 +14,24 @@ extension UIColor {
     }
 }
 
+extension String {
+    struct CourseCatalogSectionHeaderView {
+        static let titleLabel = "建工类"
+        static let imageViewImageName = "image_homepage_catalog"
+    }
+}
+
+extension CGFloat {
+    struct CourseCatalogSectionHeaderView {
+        struct Height {
+            static let seperatorView = 1.5
+        }
+    }
+}
+
+fileprivate let seperatorViewHeight = CGFloat.CourseCatalogSectionHeaderView.Height.seperatorView
+fileprivate let titleLabelText = String.CourseCatalogSectionHeaderView.titleLabel
+
 class XHCourseCatalogSectionHeaderView: UIView {
     
     var models: [XHCourseCatalog]? {
@@ -21,7 +39,7 @@ class XHCourseCatalogSectionHeaderView: UIView {
             guard let arrays = models,
             let model = arrays.first,
             let title = model.customName else {
-                titleLabel.text = "建工类"
+                titleLabel.text = titleLabelText
                 return
             }
             titleLabel.text = title
@@ -29,7 +47,7 @@ class XHCourseCatalogSectionHeaderView: UIView {
     }
     
     lazy var imageView: UIImageView = {
-        let iv = UIImageView(image: UIImage(named: "image_homepage_catalog"))
+        let iv = UIImageView(image: UIImage(named: String.CourseCatalogSectionHeaderView.imageViewImageName))
         return iv
     }()
     
@@ -37,7 +55,7 @@ class XHCourseCatalogSectionHeaderView: UIView {
         let lbl = UILabel()
         lbl.textColor = UIColor.Global.skyBlue
         lbl.textAlignment = .left
-        lbl.font = UIFont.boldSystemFont(ofSize: 17)
+        lbl.font = UIFont.boldSystemFont(ofSize: CGFloat.FontSize._17)
         lbl.sizeToFit()
         return lbl
     }()
@@ -75,13 +93,13 @@ extension XHCourseCatalogSectionHeaderView {
         
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
-            make.left.equalTo(imageView.snp.right).offset(5)
+            make.left.equalTo(imageView.snp.right).offset(XHMargin._5)
         }
         
         seperatorView.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(XHMargin._15)
             make.right.equalTo(self).offset(-XHMargin._15)
-            make.height.equalTo(SEPERATOR_LINE_HEIGHT)
+            make.height.equalTo(seperatorViewHeight)
             make.bottom.equalTo(self)
         }
     }

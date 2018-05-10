@@ -75,6 +75,7 @@ extension CGFloat {
         static let _14: CGFloat = 14.0
         static let _15: CGFloat = 15.0
         static let _16: CGFloat = 16.0
+        static let _17: CGFloat = 17.0
     }
 }
 

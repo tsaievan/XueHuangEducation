@@ -8,31 +8,45 @@
 
 import UIKit
 
+extension String {
+    struct CourseCatalogSectionFooterView {
+        static let logoImageName = "image_homepage_logo"
+        static let chTitileImageName = "image_homepage_chTitle"
+        static let enTitleImageName = "image_homepage_enTitle"
+        static let sloganImageName = "image_homepage_slogan"
+    }
+}
+
+fileprivate let logoImageName = String.CourseCatalogSectionFooterView.logoImageName
+fileprivate let chTitileImageName = String.CourseCatalogSectionFooterView.chTitileImageName
+fileprivate let enTitleImageName = String.CourseCatalogSectionFooterView.enTitleImageName
+fileprivate let sloganImageName = String.CourseCatalogSectionFooterView.sloganImageName
+
 class XHCourseCatalogSectionFooterView: UIView {
     lazy var logoImageView: UIImageView = {
         let logo = UIImageView()
-        logo.image = UIImage(named: "image_homepage_logo")
+        logo.image = UIImage(named: logoImageName)
         logo.contentMode = .scaleAspectFill
         return logo
     }()
     
     lazy var chTitileImageView: UIImageView = {
         let ch = UIImageView()
-        ch.image = UIImage(named: "image_homepage_chTitle")
+        ch.image = UIImage(named: chTitileImageName)
         ch.contentMode = .scaleAspectFill
         return ch
     }()
     
     lazy var enTitleImageView: UIImageView = {
         let en = UIImageView()
-        en.image = UIImage(named: "image_homepage_enTitle")
+        en.image = UIImage(named: enTitleImageName)
         en.contentMode = .scaleAspectFill
         return en
     }()
     
     lazy var sloganImageView: UIImageView = {
         let slogan = UIImageView()
-        slogan.image = UIImage(named: "image_homepage_slogan")
+        slogan.image = UIImage(named: sloganImageName)
         slogan.contentMode = .scaleAspectFill
         return slogan
     }()

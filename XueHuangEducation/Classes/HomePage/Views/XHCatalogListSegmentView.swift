@@ -100,7 +100,7 @@ extension XHCatalogListSegmentView {
     @objc
     fileprivate func didClickSegmentViewButtonAction(sender: XHButton) {
         guard let bundleName = Bundle.bundleName,
-        let kls = NSClassFromString(bundleName + "." + "XHButton") else {
+        let kls = NSClassFromString(bundleName + String.point + "XHButton") else {
             return
         }
         for button in subviews {

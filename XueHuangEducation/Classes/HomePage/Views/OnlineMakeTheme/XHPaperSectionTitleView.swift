@@ -27,6 +27,12 @@ extension CGFloat {
     }
 }
 
+extension String {
+    struct PaperSectionTitleView {
+        static let moreButtonImageName = "button_paperList_more"
+    }
+}
+
 fileprivate let headerViewHeight = CGFloat.PaperSectionTitleView.Height.headerView
 fileprivate let seperatorViewHeight = CGFloat.PaperSectionTitleView.Height.seperatorView
 fileprivate let popButtonHeight = CGFloat.PopMenu.Height.popButton
@@ -46,7 +52,7 @@ class XHPaperSectionTitleView: UITableViewHeaderFooterView {
             }
             tempArray.append(name)
         }
-        let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: popButtonHeight, textSize: 13)
+        let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: popButtonHeight, textSize: CGFloat.FontSize._13)
         pop.xh_delegate = self
         return pop
     }()
@@ -59,7 +65,7 @@ class XHPaperSectionTitleView: UITableViewHeaderFooterView {
     
     lazy var moreButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.setImage(UIImage(named: "button_paperList_more"), for: .normal)
+        btn.setImage(UIImage(named: String.PaperSectionTitleView.moreButtonImageName), for: .normal)
         btn.addTarget(self, action: #selector(didClickMoreButtonAction), for: .touchUpInside)
         return btn
     }()

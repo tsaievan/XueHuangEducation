@@ -18,6 +18,12 @@ extension UIColor {
     }
 }
 
+extension String {
+    struct QuestionHeaderView {
+        static let moreButtonImageName = "button_paperList_more"
+    }
+}
+
 class XHQuestionHeaderView: UIView {
     
     weak var xh_delegate: XHQuestionHeaderViewDelegate?
@@ -71,14 +77,14 @@ class XHQuestionHeaderView: UIView {
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: UIColor.QuestionHeaderView.titleLabel, fontSize: CGFloat.FontSize._16)
+        let lbl = UILabel(text: String.empty, textColor: UIColor.QuestionHeaderView.titleLabel, fontSize: CGFloat.FontSize._16)
         lbl.font = UIFont.boldSystemFont(ofSize: CGFloat.FontSize._16)
         return lbl
     }()
     
     lazy var moreButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.setImage(UIImage(named: "button_paperList_more"), for: .normal)
+        btn.setImage(UIImage(named: String.QuestionHeaderView.moreButtonImageName), for: .normal)
         btn.addTarget(self, action: #selector(didClickMoreButtonAction), for: .touchUpInside)
         btn.isHidden = true
         return btn
