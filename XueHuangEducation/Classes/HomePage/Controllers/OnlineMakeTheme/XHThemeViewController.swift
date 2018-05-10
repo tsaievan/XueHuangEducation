@@ -68,8 +68,10 @@ class XHThemeViewController: XHTableViewController {
         ///< 去除分割线
         tableView.tableFooterView = UIView()
     }
+}
 
-    // MARK: - Table view 数据源和代理方法
+// MARK: - Table view 数据源和代理方法
+extension XHThemeViewController {
     ///< 返回组数
     override func numberOfSections(in tableView: UITableView) -> Int {
         guard let count = dataSource?.catalogs.count else {
@@ -187,6 +189,7 @@ class XHThemeViewController: XHTableViewController {
     }
 }
 
+// MARK: - PaperSectionTitleView的代理方法
 extension XHThemeViewController: XHPaperSectionTitleViewDelegate {
     ///< 点击按钮出现menu
     func paperSectionTitleViewDidClickButtonList(sectionView: XHPaperSectionTitleView, sender: UIButton) {

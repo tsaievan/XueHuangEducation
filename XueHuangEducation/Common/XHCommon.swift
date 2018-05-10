@@ -28,6 +28,8 @@ extension UIColor {
 // MARK: - 字符串的分类
 extension String {
     static let empty = "" ///< 空字符串
+    static let point = "." ///< 一个.
+    static let space = " " ///< 空格
     enum Alert: String {
         case info = "信息"
         case cancel = "取消"
@@ -40,6 +42,8 @@ struct XHRatio {
     ///< 宽高比
     struct W_H_R {
         struct TeachViewController {}
+        struct CatalogListViewController {}
+        struct PlayNetCourseViewController {}
     }
 }
 

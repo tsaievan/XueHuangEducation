@@ -35,6 +35,7 @@ class XHLoadingView: UIView {
 extension XHLoadingView {
     fileprivate func startAnimation() {
         loadingImageView.isHidden = false
+        ///< 添加旋转动画
         let animation = CABasicAnimation(keyPath: "transform.rotation")
         animation.fromValue = 0.0
         animation.toValue = Double.pi * 2.0
@@ -76,7 +77,7 @@ extension XHLoadingView {
             ///< 只能用下面的方法, 强行删掉`XHLoadingBackgroundView`
             self.window?.subviews.forEach({ (view) in
                 guard let bundleName = Bundle.bundleName,
-                let kls = NSClassFromString(bundleName + "." + "XHLoadingBackgroundView") else {
+                let kls = NSClassFromString(bundleName + String.point + "XHLoadingBackgroundView") else {
                     return
                 }
                 if view.isKind(of: kls) {

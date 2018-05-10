@@ -9,11 +9,42 @@
 import UIKit
 import pop
 
+/// 按钮类型
+///
+/// - teach: 讲题按钮
+/// - theme: 做题按钮
+/// - answer: 问答按钮
 enum XHButtonType: Int {
     case teach = 0
     case theme = 1
     case answer = 2
 }
+
+extension CGSize {
+    struct CatalogListViewController {
+        static let scrollViewContentSize = CGSize(width: XHSCreen.width * 3, height: 0)
+    }
+}
+
+extension String {
+    struct CatalogListViewController {
+        struct Title {
+            static let teach = "网校讲题"
+            static let theme = "考卷列表"
+            static let answer = "在线问答"
+        }
+    }
+}
+
+extension XHRatio.W_H_R.CatalogListViewController {
+    static let scrollCriticalRatio: CGFloat = 0.6
+}
+
+private let scrollCriticalRatio = XHRatio.W_H_R.CatalogListViewController.scrollCriticalRatio
+
+private let tripleScreensWidth = XHSCreen.width * 3.0
+
+private let segmentViewHeight = 84
 
 ///< 这里的逻辑有点多, 直接将view写在控制器里, 方便调用各个方法, 免得产生太多的胶水代码
 class XHCatalogListViewController: XHBaseViewController {
@@ -24,6 +55,7 @@ class XHCatalogListViewController: XHBaseViewController {
     
     var questionVc: XHQuestionViewController = XHQuestionViewController(style: .grouped)
     
+    // MARK: - 懒加载
     lazy var segmentView: XHCatalogListSegmentView = {
         let s = XHCatalogListSegmentView()
         s.backgroundColor = .white
@@ -35,7 +67,7 @@ class XHCatalogListViewController: XHBaseViewController {
         let sv = UIScrollView()
         sv.delegate = self
         sv.backgroundColor = .white
-        sv.contentSize = CGSize(width: XHSCreen.width * 3, height: 0)
+        sv.contentSize = CGSize.CatalogListViewController.scrollViewContentSize
         sv.showsVerticalScrollIndicator = false
         sv.showsHorizontalScrollIndicator = false
         sv.bounces = false
@@ -59,7 +91,7 @@ class XHCatalogListViewController: XHBaseViewController {
                 let courseId = courseModel.id else {
                 return
             }
-            navigationItem.title = courseName + "." + "网校讲题"
+            navigationItem.title = courseName + String.point + String.CatalogListViewController.Title.teach
             XHHomePage.getTeachCourseList(withCourseName: courseName, courseId: courseId, success: { (response, imageArr) in
                 XHGlobalLoading.stopLoading()
                 let info = (response, imageArr)
@@ -96,7 +128,7 @@ extension XHCatalogListViewController {
         segmentView.snp.makeConstraints { (make) in
             make.top.equalTo(view).offset(TOP_EDGE_AJUSTED)
             make.left.right.equalTo(view)
-            make.height.equalTo(84)
+            make.height.equalTo(segmentViewHeight)
         }
         
         scrollView.snp.makeConstraints { (make) in
@@ -124,7 +156,7 @@ extension XHCatalogListViewController {
             make.top.equalTo(segmentView.snp.bottom)
             make.bottom.equalTo(view)
             make.left.right.equalTo(scrollView)
-            make.width.equalTo(XHSCreen.width * 3)
+            make.width.equalTo(tripleScreensWidth)
         }
     }
 }
@@ -134,12 +166,12 @@ extension XHCatalogListViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView.isEqual(self.scrollView) {
             let offsetX = scrollView.contentOffset.x
-            if offsetX > XHSCreen.width + XHSCreen.width * 0.6 {
-                segmentView.selectedPage = 2
-            }else if offsetX > XHSCreen.width * 0.6 && offsetX <= XHSCreen.width + XHSCreen.width * 0.6 {
-                segmentView.selectedPage = 1
+            if offsetX > XHSCreen.width + XHSCreen.width * scrollCriticalRatio {
+                segmentView.selectedPage = XHButtonType.answer.rawValue
+            }else if offsetX > XHSCreen.width * scrollCriticalRatio && offsetX <= XHSCreen.width + XHSCreen.width * scrollCriticalRatio {
+                segmentView.selectedPage = XHButtonType.theme.rawValue
             }else {
-                segmentView.selectedPage = 0
+                segmentView.selectedPage = XHButtonType.teach.rawValue
             }
         }
     }
@@ -148,18 +180,18 @@ extension XHCatalogListViewController: UIScrollViewDelegate {
 // MARK: - XHCatalogListSegmentView的代理
 extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
     func catalogListSegmentViewDidClickSegmentButton(segmentView: XHCatalogListSegmentView, sender: XHButton) {
-        scrollView.setContentOffset(CGPoint(x: CGFloat(sender.tag) * XHSCreen.width, y: 0), animated: false)
+        scrollView.setContentOffset(CGPoint(x: CGFloat(sender.tag) * XHSCreen.width, y: CGPoint.zero.y), animated: false)
         guard let courseModel = model,
             let courseId = courseModel.id,
         let courseName = courseModel.courseClassName else {
                 return
         }
         if sender.tag == XHButtonType.teach.rawValue { ///< 点击的是网校讲题的按钮
-            navigationItem.title = (model?.courseClassName ?? "") + "." + "网校讲题"
+            navigationItem.title = (model?.courseClassName ?? String.empty) + String.point + String.CatalogListViewController.Title.teach
         }
         
         if sender.tag == XHButtonType.theme.rawValue { ///< 点击的是在线做题的按钮
-            navigationItem.title = "考卷列表"
+            navigationItem.title = String.CatalogListViewController.Title.theme
             XHGlobalLoading.startLoading()
             XHHomePage.getPaperList(withCourseClassId: courseId, success: { (response, title) in
                 XHGlobalLoading.stopLoading()
@@ -171,7 +203,7 @@ extension XHCatalogListViewController: XHCatalogListSegmentViewDelegate {
         }
         
         if sender.tag == XHButtonType.answer.rawValue { ///< 点击的是在线问答的按钮
-            navigationItem.title = "在线问答"
+            navigationItem.title = String.CatalogListViewController.Title.answer
             XHGlobalLoading.startLoading()
             XHHomePage.getQuestionList(withEnterType: XHQuestionEnterType.answer, courseName: courseName, courseId: courseId, success: { (response, title) in
                 XHGlobalLoading.stopLoading()

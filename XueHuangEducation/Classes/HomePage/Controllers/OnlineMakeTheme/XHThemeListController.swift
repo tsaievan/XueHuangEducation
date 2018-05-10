@@ -65,6 +65,12 @@ extension String {
     }
 }
 
+extension Int {
+    struct ForwardQueNum {
+        static let first = 1
+    }
+}
+
 class XHThemeListController: XHTableViewController {
     
     ///< cell的高度
@@ -205,7 +211,7 @@ extension XHThemeListController {
                 "isJj" : XHSummitType.summit.rawValue,
                 "isViewAnswer" : XHShowAnalysisType.show.rawValue,
                 "viewType" : XHPaperActionSheet.pageAnalysis.rawValue,
-                "forwardQueNum" : 1
+                "forwardQueNum" : Int.ForwardQueNum.first
                 ] as [String : Any]
             self.pushWebViewController(withUrl: XHURL.mobileController.checkAnalysisContent, parameters: params)
         })
@@ -216,7 +222,7 @@ extension XHThemeListController {
                 "isJj" : XHSummitType.summit.rawValue,
                 "isViewAnswer" : XHShowAnalysisType.show.rawValue,
                 "viewType" : XHPaperActionSheet.collection.rawValue,
-                "forwardQueNum" : 1
+                "forwardQueNum" : Int.ForwardQueNum.first
                 ] as [String : Any]
             self.pushWebViewController(withUrl: XHURL.mobileController.checkAnalysisContent, parameters: params)
         })
@@ -237,7 +243,7 @@ extension XHThemeListController {
                 "isJj" : XHSummitType.cancel.rawValue,
                 "isViewAnswer" : XHShowAnalysisType.hidden.rawValue,
                 "viewType" : XHPaperActionSheet.pageAnalysis.rawValue,
-                "forwardQueNum" : 1
+                "forwardQueNum" : Int.ForwardQueNum.first
                 ] as [String : Any]
             self.pushWebViewController(withUrl: XHURL.mobileController.checkAnalysisContent, parameters: params)
         }
@@ -259,7 +265,7 @@ extension XHThemeListController {
                 "isJj" : XHSummitType.summit.rawValue,
                 "isViewAnswer" : XHShowAnalysisType.show.rawValue,
                 "viewType" : XHPaperActionSheet.pageAnalysis.rawValue,
-                "forwardQueNum" : 1
+                "forwardQueNum" : Int.ForwardQueNum.first
                 ] as [String : Any]
             self.pushWebViewController(withUrl: XHURL.mobileController.checkAnalysisContent, parameters: params)
         })
@@ -271,7 +277,7 @@ extension XHThemeListController {
                 "isJj" : XHSummitType.summit.rawValue,
                 "isViewAnswer" : XHShowAnalysisType.show.rawValue,
                 "viewType" : XHPaperActionSheet.wrong.rawValue,
-                "forwardQueNum" : 1
+                "forwardQueNum" : Int.ForwardQueNum.first
                 ] as [String : Any]
             self.pushWebViewController(withUrl: XHURL.mobileController.checkAnalysisContent, parameters: params)
         }
@@ -283,7 +289,7 @@ extension XHThemeListController {
                 "isJj" : XHSummitType.summit.rawValue,
                 "isViewAnswer" : XHShowAnalysisType.show.rawValue,
                 "viewType" : XHPaperActionSheet.collection.rawValue,
-                "forwardQueNum" : 1
+                "forwardQueNum" : Int.ForwardQueNum.first
                 ] as [String : Any]
             self.pushWebViewController(withUrl: XHURL.mobileController.checkAnalysisContent, parameters: params)
         })

@@ -11,6 +11,12 @@ import AVKit
 import AVFoundation
 import ZFPlayer
 
+extension XHRatio.W_H_R.PlayNetCourseViewController {
+    static let playerViewRatio: CGFloat = 9.0/16.0
+}
+
+fileprivate let playerViewRatio = XHRatio.W_H_R.PlayNetCourseViewController.playerViewRatio
+
 class XHPlayNetCourseViewController: XHBaseViewController {
     
     var netwareModel: XHNetCourseWare? {
@@ -23,7 +29,7 @@ class XHPlayNetCourseViewController: XHBaseViewController {
                 let url = URL(string: newStr) else {
                     return
             }
-            let title = (videoModel.netCoursewareName ?? "") + " " + (videoModel.teacher ?? "")
+            let title = (videoModel.netCoursewareName ?? String.empty) + String.space + (videoModel.teacher ?? String.empty)
             self.navigationItem.title = "展示视频"
             playerModel.title = title
             playerModel.videoURL = url
@@ -43,7 +49,7 @@ class XHPlayNetCourseViewController: XHBaseViewController {
                     return
             }
             
-            let title = (model?.netCourseName ?? "") + " " + (model?.courseTeacher ?? "")
+            let title = (model?.netCourseName ?? String.empty) + String.space + (model?.courseTeacher ?? String.empty)
             self.navigationItem.title = model?.netCourseName ?? "展示视频"
             playerModel.title = title
             playerModel.videoURL = url
@@ -52,6 +58,7 @@ class XHPlayNetCourseViewController: XHBaseViewController {
         }
     }
     
+    // MARK: - 懒加载
     lazy var playerView: ZFPlayerView = {
         let pl = ZFPlayerView()
         return pl
@@ -68,14 +75,11 @@ class XHPlayNetCourseViewController: XHBaseViewController {
         return model
     }()
     
+    // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         XHGlobalLoading.startLoading()
-    }
-    
-    deinit {
-        
     }
 }
 
@@ -91,7 +95,7 @@ extension XHPlayNetCourseViewController {
         playerView.snp.makeConstraints { (make) in
             make.top.equalTo(view).offset(20);
             make.left.right.equalTo(view);
-            make.height.equalTo(playerView.snp.width).multipliedBy(9.0/16.0)
+            make.height.equalTo(playerView.snp.width).multipliedBy(playerViewRatio)
         }
     }
 }
