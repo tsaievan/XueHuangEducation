@@ -25,7 +25,6 @@ extension AppDelegate {
 
 
 class XHHomePageViewController: XHBaseViewController {
-    
     var dataSource: [[Any]]?
     
     lazy var tableView: XHTableView = {

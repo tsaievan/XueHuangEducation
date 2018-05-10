@@ -275,7 +275,6 @@
 			children = (
 				573427062096EA1900108D1E /* XHQuestionViewController.swift */,
 				57F32A8020A1B66E00AEC633 /* XHShowQuestionWebController.swift */,
-				57A62B012088B73400C9D5D2 /* XHHomePageViewController.swift */,
 			);
 			path = "OnlineQ&A";
 			sourceTree = "<group>";
@@ -408,6 +407,7 @@
 				573E72F62099E3C000DD41B2 /* OnlineMakeTheme */,
 				573E72F72099E3C000DD41B2 /* OnlineQ&A */,
 				577500142096A8CD00DF9AC5 /* XHCatalogListViewController.swift */,
+				57A62B012088B73400C9D5D2 /* XHHomePageViewController.swift */,
 				57A2A6FB2091EAA400DD03BC /* XHShowNetCourseViewController.swift */,
 				57978F872092B26500036159 /* XHPlayNetCourseViewController.swift */,
 			);
