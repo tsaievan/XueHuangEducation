@@ -33,7 +33,7 @@ class XHNetCourseDetailCell: UITableViewCell {
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: COLOR_CATALOG_BUTTON_TITLE_COLOR, fontSize: CGFloat.FontSize._16)
+        let lbl = UILabel(text: String.empty, textColor: COLOR_CATALOG_BUTTON_TITLE_COLOR, fontSize: CGFloat.FontSize._16)
         lbl.numberOfLines = 0
         return lbl
     }()

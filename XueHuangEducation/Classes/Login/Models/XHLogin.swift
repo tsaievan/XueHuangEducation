@@ -103,7 +103,7 @@ class XHLogin {
             }
         }) { (error) in
             if error.code == XHNetworkError.Code.connetFailue {
-                failue?("网络连接失败, 请检查网络")
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
                 failue?("登录失败")
             }
@@ -147,7 +147,7 @@ class XHLogin {
             }
         }) { (error) in
             if error.code == XHNetworkError.Code.connetFailue {
-                failue?("网络连接失败, 请检查网络")
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
                 failue?("登录失败")
             }
@@ -217,7 +217,7 @@ class XHLogin {
             }
         }) { (error) in
             if error.code == XHNetworkError.Code.connetFailue {
-                failue?("网络连接失败, 请检查网络")
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
                 failue?("修改密码失败")
             }
@@ -232,11 +232,11 @@ class XHLogin {
     ///   - success: 退出成功的回调
     ///   - failue: 退出失败的回调
     class func loginOut(success:XHLoginOutSuccess?, failue: XHLoginOutFailue?) {
-        XHNetwork.GET(url: URL_LOGIN_OUT, params: nil, success: { (response) in
+        XHNetwork.GET(url: XHURL.AppController.loginOut, params: nil, success: { (response) in
             success?()
         }) { (error) in
             if error.code == XHNetworkError.Code.connetFailue {
-                failue?("网络连接失败, 请检查网络")
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
                 failue?("退出失败")
             }
@@ -267,7 +267,7 @@ class XHLogin {
             }
         }) { (error) in
             if error.code == XHNetworkError.Code.connetFailue {
-                failue?("网络连接失败, 请检查网络")
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
                 failue?("注册失败")
             }

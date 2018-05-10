@@ -28,6 +28,9 @@ struct XHURL {
         ///< 3. 获取网校讲题课件页面数据
         static let toNetCourseware = "xhweb/appController.do?toNetCourseware"
         
+        ///< 4. 退出登录
+        static let loginOut = "xhweb/appController.do?loginOut"
+        
         ///< 5. 获取考卷列表数据
         static let toMobilePaperList = "xhweb/appController.do?toMobilePaperList"
         
@@ -60,8 +63,7 @@ struct XHURL {
 
 
 
-///< 4. 退出登录
-let URL_LOGIN_OUT = "xhweb/appController.do?loginOut"
+
 
 
 
