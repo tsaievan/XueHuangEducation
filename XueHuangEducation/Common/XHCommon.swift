@@ -80,6 +80,7 @@ extension CGFloat {
 
 // MARK: - 全局的边距
 struct XHMargin {
+    static let _0_5: CGFloat = 0.5
     static let _2: CGFloat = 2
     static let _5: CGFloat = 5
     static let _10: CGFloat = 10

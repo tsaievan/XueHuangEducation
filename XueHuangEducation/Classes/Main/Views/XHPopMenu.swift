@@ -12,6 +12,14 @@ protocol XHPopMenuDelegate: NSObjectProtocol {
     func popMenuViewDidClickButton(menu: XHPopMenu, sender: UIButton)
 }
 
+extension CGFloat {
+    struct PopMenu {
+        struct Height {
+            static let popButton: CGFloat = 40
+        }
+    }
+}
+
 class XHPopMenu: UIView {
     
     var lastButton: UIButton?

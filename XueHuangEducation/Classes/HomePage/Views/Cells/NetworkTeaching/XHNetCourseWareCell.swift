@@ -13,6 +13,12 @@ enum XHNetCourseWareState: Int{
     case charge = 2
 }
 
+extension UIColor {
+    struct NetCourseWareCell {
+        static let teacherLabel = UIColor(hexColor: "#777777")
+    }
+}
+
 class XHNetCourseWareCell: UITableViewCell {
     var model: XHNetCourseWare? {
         didSet {
@@ -50,7 +56,7 @@ class XHNetCourseWareCell: UITableViewCell {
     }()
     
     lazy var teacherLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: COLOR_PAPAER_TYPE_BUTTON_TITLE, fontSize: CGFloat.FontSize._13)
+        let lbl = UILabel(text: "", textColor: UIColor.NetCourseWareCell.teacherLabel, fontSize: CGFloat.FontSize._13)
         return lbl
     }()
     

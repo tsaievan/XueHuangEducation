@@ -25,7 +25,7 @@ class XHQuestionHeaderView: UIView {
     var title: String? {
         didSet {
             titleLabel.text = title
-            if title == "" || title == nil {
+            if title == String.empty || title == nil {
                 moreButton.isHidden = true
             }else {
                 moreButton.isHidden = false
@@ -44,7 +44,7 @@ class XHQuestionHeaderView: UIView {
                 moreButton.isHidden = true
                 return
             }
-            if text == "" {
+            if text == String.empty {
                 moreButton.isHidden = true
             }else {
                 moreButton.isHidden = false
@@ -65,7 +65,7 @@ class XHQuestionHeaderView: UIView {
             }
             tempArray.append(name)
         }
-        let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: 40, textSize: 13)
+        let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: 40, textSize: CGFloat.FontSize._13)
         pop.xh_delegate = self
         return pop
     }()

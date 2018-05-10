@@ -11,8 +11,19 @@ import UIKit
 extension UIColor {
     struct PaperListHeaderView {
         static let seperator = UIColor(hexColor: "#EEEEEE")
+        static let titleLabel = UIColor(hexColor: "#777777")
     }
 }
+
+extension CGFloat {
+    struct PaperListHeaderView {
+        struct Height {
+            static let seperatorView: CGFloat = 0.5
+        }
+    }
+}
+
+fileprivate let seperatorViewHeight = CGFloat.PaperListHeaderView.Height.seperatorView
 
 class XHPaperListHeaderView: UIView {
     
@@ -30,7 +41,7 @@ class XHPaperListHeaderView: UIView {
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: COLOR_PAPAER_TYPE_BUTTON_TITLE, fontSize: CGFloat.FontSize._16)
+        let lbl = UILabel(text: "", textColor: UIColor.PaperListHeaderView.titleLabel, fontSize: CGFloat.FontSize._16)
         lbl.font = UIFont.boldSystemFont(ofSize: CGFloat.FontSize._16)
         return lbl
     }()
@@ -72,9 +83,9 @@ extension XHPaperListHeaderView {
         
         seperatorView.snp.makeConstraints { (make) in
             make.leading.equalTo(imageView)
-            make.bottom.equalTo(self).offset(-0.5)
+            make.bottom.equalTo(self).offset(-XHMargin._0_5)
             make.right.equalTo(self)
-            make.height.equalTo(0.5)
+            make.height.equalTo(seperatorViewHeight)
         }
     }
 }

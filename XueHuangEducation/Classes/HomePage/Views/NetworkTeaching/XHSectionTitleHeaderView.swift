@@ -24,16 +24,21 @@ extension String {
 extension CGFloat {
     struct SectionTitleHeaderView {
         struct Height {
-            static let popButton: CGFloat = 40
             static let headerView: CGFloat = 50
             static let seperatorView: CGFloat = 0.5
         }
     }
 }
 
-private let popButtonHeight = CGFloat.SectionTitleHeaderView.Height.popButton
+private let popButtonHeight = CGFloat.PopMenu.Height.popButton
 private let headerViewHeight = CGFloat.SectionTitleHeaderView.Height.headerView
 private let seperatorViewHeight = CGFloat.SectionTitleHeaderView.Height.seperatorView
+
+extension UIColor {
+    struct SectionTitleHeaderView {
+        static let titleButton_normal = UIColor(hexColor: "#777777")
+    }
+}
 
 class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
     
@@ -44,7 +49,7 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(named: String.SectionTitleHeaderView.titleButtonImageName), for: .normal)
         btn.setTitle(String.SectionTitleHeaderView.titleButtonText, for: .normal)
-        btn.setTitleColor(COLOR_PAPAER_TYPE_BUTTON_TITLE, for: .normal)
+        btn.setTitleColor(UIColor.SectionTitleHeaderView.titleButton_normal, for: .normal)
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: CGFloat.FontSize._16)
         btn.sizeToFit()
         return btn

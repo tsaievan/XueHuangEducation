@@ -18,6 +18,19 @@ extension UIColor {
     }
 }
 
+extension CGFloat {
+    struct PaperSectionTitleView {
+        struct Height {
+            static let headerView: CGFloat = 50
+            static let seperatorView: CGFloat = 0.5
+        }
+    }
+}
+
+fileprivate let headerViewHeight = CGFloat.PaperSectionTitleView.Height.headerView
+fileprivate let seperatorViewHeight = CGFloat.PaperSectionTitleView.Height.seperatorView
+fileprivate let popButtonHeight = CGFloat.PopMenu.Height.popButton
+
 class XHPaperSectionTitleView: UITableViewHeaderFooterView {
     
     weak var xh_delegate: XHPaperSectionTitleViewDelegate?
@@ -33,13 +46,13 @@ class XHPaperSectionTitleView: UITableViewHeaderFooterView {
             }
             tempArray.append(name)
         }
-        let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: 40, textSize: 13)
+        let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: popButtonHeight, textSize: 13)
         pop.xh_delegate = self
         return pop
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: ui, fontSize: CGFloat.FontSize._16)
+        let lbl = UILabel(text: String.empty, textColor: UIColor.PaperSectionTitleView.titleLabel, fontSize: CGFloat.FontSize._16)
         lbl.font = UIFont.boldSystemFont(ofSize: CGFloat.FontSize._16)
         return lbl
     }()
@@ -141,7 +154,7 @@ extension XHPaperSectionTitleView {
         
         seperatorView.snp.makeConstraints { (make) in
             make.width.equalTo(contentView)
-            make.height.equalTo(0.5)
+            make.height.equalTo(seperatorViewHeight)
             make.leading.trailing.equalTo(contentView)
             make.top.equalTo(titleLabel.snp.bottom).offset(XHMargin._10)
         }
@@ -149,7 +162,7 @@ extension XHPaperSectionTitleView {
         headerView.snp.makeConstraints { (make) in
             make.top.equalTo(seperatorView.snp.bottom)
             make.left.right.equalTo(contentView)
-            make.height.equalTo(50).priority(.low)
+            make.height.equalTo(headerViewHeight).priority(.low)
         }
     }
 }
