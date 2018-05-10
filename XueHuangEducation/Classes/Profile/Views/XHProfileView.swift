@@ -130,12 +130,12 @@ extension XHProfileView {
         bannerView.snp.makeConstraints { (make) in
             make.top.equalTo(backgroundImageView.snp.bottom)
             make.left.right.equalTo(self)
-            make.height.equalTo(MARGIN_GLOBAL_44)
+            make.height.equalTo(XHMargin._44)
         }
         
         iconView.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(MARGIN_GLOBAL_10)
-            make.centerY.equalTo(bannerView).offset(-MARGIN_GLOBAL_5)
+            make.left.equalTo(self).offset(XHMargin._10)
+            make.centerY.equalTo(bannerView).offset(-XHMargin._5)
             make.width.height.equalTo(75)
         }
         
@@ -145,29 +145,29 @@ extension XHProfileView {
         }
         
         welcomeLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(iconView.snp.right).offset(MARGIN_GLOBAL_10)
+            make.left.equalTo(iconView.snp.right).offset(XHMargin._10)
             make.centerY.equalTo(bannerView)
         }
         
         buttonContainerView.snp.makeConstraints { (make) in
             make.top.equalTo(bannerView.snp.bottom)
             make.left.right.equalTo(self)
-            make.bottom.equalTo(myTeachButton).offset(MARGIN_GLOBAL_30).priority(.low)
+            make.bottom.equalTo(myTeachButton).offset(XHMargin._30).priority(.low)
         }
         
         myTeachButton.snp.makeConstraints { (make) in
-            make.top.equalTo(buttonContainerView).offset(MARGIN_GLOBAL_30)
-            make.left.equalTo(buttonContainerView).offset(MARGIN_GLOBAL_30 * horizontalScale)
-            make.width.equalTo((XHSCreen.width - 2 * (MARGIN_GLOBAL_30 * horizontalScale + MARGIN_GLOBAL_44 * horizontalScale)) / 3)
+            make.top.equalTo(buttonContainerView).offset(XHMargin._30)
+            make.left.equalTo(buttonContainerView).offset(XHMargin._30 * horizontalScale)
+            make.width.equalTo((XHSCreen.width - 2 * (XHMargin._30 * horizontalScale + XHMargin._44 * horizontalScale)) / 3)
         }
         
         myThemeButton.snp.makeConstraints { (make) in
-            make.left.equalTo(myTeachButton.snp.right).offset(MARGIN_GLOBAL_44 * horizontalScale)
+            make.left.equalTo(myTeachButton.snp.right).offset(XHMargin._44 * horizontalScale)
             make.top.width.equalTo(myTeachButton)
         }
         
         myQuestionButton.snp.makeConstraints { (make) in
-            make.left.equalTo(myThemeButton.snp.right).offset(MARGIN_GLOBAL_44 * horizontalScale)
+            make.left.equalTo(myThemeButton.snp.right).offset(XHMargin._44 * horizontalScale)
             make.top.width.equalTo(myThemeButton)
         }
         

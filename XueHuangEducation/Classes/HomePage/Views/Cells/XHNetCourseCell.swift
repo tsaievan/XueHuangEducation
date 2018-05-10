@@ -86,7 +86,7 @@ extension XHNetCourseButton {
         }
         
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(iconView.snp.bottom).offset(MARGIN_GLOBAL_15)
+            make.top.equalTo(iconView.snp.bottom).offset(XHMargin._15)
             make.leading.trailing.equalTo(iconView)
         }
     }
@@ -135,7 +135,7 @@ class XHNetCourseButtonsContainterView: UIView {
                 return
             }
             ///< 循环创建button
-            let buttonW = (XHSCreen.width - 2.0 * MARGIN_GLOBAL_25) / 2
+            let buttonW = (XHSCreen.width - 2.0 * XHMargin._25) / 2
             let buttonH: CGFloat = 160
             for (index, model) in models.enumerated() {
                 let btn = XHNetCourseButton()
@@ -146,14 +146,14 @@ class XHNetCourseButtonsContainterView: UIView {
                     make.height.equalTo(buttonH)
                     if let beforeButton = beforeButton {
                         if index % 2 == 0 { ///< 第一列
-                            make.left.equalTo(self).offset(MARGIN_GLOBAL_10)
+                            make.left.equalTo(self).offset(XHMargin._10)
                         }else {
-                            make.left.equalTo(beforeButton.snp.right).offset(MARGIN_GLOBAL_10)
+                            make.left.equalTo(beforeButton.snp.right).offset(XHMargin._10)
                         }
-                        make.top.equalTo(tipView.snp.bottom).offset(MARGIN_GLOBAL_10 + (CGFloat(index / 2) * (buttonH + MARGIN_GLOBAL_10)))
+                        make.top.equalTo(tipView.snp.bottom).offset(XHMargin._10 + (CGFloat(index / 2) * (buttonH + XHMargin._10)))
                     }else {
-                        make.top.equalTo(tipView.snp.bottom).offset(MARGIN_GLOBAL_10)
-                        make.left.equalTo(self).offset(MARGIN_GLOBAL_10)
+                        make.top.equalTo(tipView.snp.bottom).offset(XHMargin._10)
+                        make.left.equalTo(self).offset(XHMargin._10)
                     }
                 })
                 btn.model = model
@@ -169,7 +169,7 @@ class XHNetCourseButtonsContainterView: UIView {
                 return
             }
             self.snp.makeConstraints({ (make) in
-                make.bottom.equalTo(last).offset(MARGIN_GLOBAL_10)
+                make.bottom.equalTo(last).offset(XHMargin._10)
             })
             layoutIfNeeded()
         }
@@ -200,15 +200,15 @@ extension XHNetCourseButtonsContainterView {
     
     fileprivate func makeConstraints() {
         tipView.snp.makeConstraints { (make) in
-            make.top.equalTo(MARGIN_GLOBAL_10)
-            make.left.equalTo(MARGIN_GLOBAL_10)
+            make.top.equalTo(XHMargin._10)
+            make.left.equalTo(XHMargin._10)
             make.width.equalTo(4)
             make.height.equalTo(15)
         }
         
         tipLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(tipView)
-            make.left.equalTo(tipView.snp.right).offset(MARGIN_GLOBAL_10)
+            make.left.equalTo(tipView.snp.right).offset(XHMargin._10)
         }
     }
 }
@@ -255,8 +255,8 @@ extension XHNetCourseCell {
     fileprivate func makeConstraints() {
         buttonsView.snp.makeConstraints { (make) in
             make.top.equalTo(contentView)
-            make.left.equalTo(contentView).offset(MARGIN_GLOBAL_10)
-            make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_10)
+            make.left.equalTo(contentView).offset(XHMargin._10)
+            make.right.equalTo(contentView).offset(-XHMargin._10)
             make.bottom.equalTo(contentView).priority(.low)
         }
     }

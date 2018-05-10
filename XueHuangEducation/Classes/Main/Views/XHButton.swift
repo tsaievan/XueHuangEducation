@@ -23,8 +23,8 @@ class XHButton: UIControl {
             imageView?.contentMode = .scaleAspectFit
             addSubview(imageView!)
             imageView?.snp.makeConstraints({ (make) in
-                make.top.left.equalTo(self).offset(MARGIN_GLOBAL_5)
-                make.right.equalTo(self).offset(-MARGIN_GLOBAL_5)
+                make.top.left.equalTo(self).offset(XHMargin._5)
+                make.right.equalTo(self).offset(-XHMargin._5)
             })
         }
         

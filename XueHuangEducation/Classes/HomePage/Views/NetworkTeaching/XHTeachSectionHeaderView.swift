@@ -13,7 +13,7 @@ typealias XHTapTeachSectionHeaderView = () -> ()
 class XHTeachSectionHeaderView: UITableViewHeaderFooterView {
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: String.empty, textColor: nil, fontSize: 16)
+        let lbl = UILabel(text: String.empty, textColor: nil, fontSize: CGFloat.FontSize._16)
         return lbl
     }()
     
@@ -60,12 +60,12 @@ extension XHTeachSectionHeaderView {
     fileprivate func makeConstraints() {
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
-            make.left.equalTo(self).offset(MARGIN_GLOBAL_25)
+            make.left.equalTo(self).offset(XHMargin._25)
         }
         
         button.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
-            make.right.equalTo(self).offset(-MARGIN_GLOBAL_15)
+            make.right.equalTo(self).offset(-XHMargin._15)
         }
     }
 }

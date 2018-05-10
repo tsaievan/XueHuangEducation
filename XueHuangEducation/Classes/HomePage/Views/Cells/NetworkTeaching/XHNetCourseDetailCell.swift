@@ -63,22 +63,22 @@ extension XHNetCourseDetailCell {
     
     fileprivate func makeConstraints() {
         iconImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView).offset(MARGIN_GLOBAL_10)
-            make.left.equalTo(contentView).offset(MARGIN_GLOBAL_15)
-            make.bottom.equalTo(contentView).offset(-MARGIN_GLOBAL_10)
+            make.top.equalTo(contentView).offset(XHMargin._10)
+            make.left.equalTo(contentView).offset(XHMargin._15)
+            make.bottom.equalTo(contentView).offset(-XHMargin._10)
             make.width.equalTo(80)
         }
         
         listenButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(iconImageView)
-            make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_15)
+            make.right.equalTo(contentView).offset(-XHMargin._15)
             make.width.equalTo(28)
         }
         
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(iconImageView).offset(MARGIN_GLOBAL_10)
-            make.left.equalTo(iconImageView.snp.right).offset(MARGIN_GLOBAL_10)
-            make.right.equalTo(listenButton.snp.left).offset(-MARGIN_GLOBAL_10)
+            make.top.equalTo(iconImageView).offset(XHMargin._10)
+            make.left.equalTo(iconImageView.snp.right).offset(XHMargin._10)
+            make.right.equalTo(listenButton.snp.left).offset(-XHMargin._10)
         }
     }
 }

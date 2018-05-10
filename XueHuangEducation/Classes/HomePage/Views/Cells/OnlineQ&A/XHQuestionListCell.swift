@@ -73,16 +73,16 @@ extension XHQuestionListCell {
 
         countView.snp.makeConstraints { (make) in
             make.centerY.equalTo(contentView)
-            make.left.equalTo(titleLabel.snp.right).offset(MARGIN_GLOBAL_10)
-            make.top.equalTo(countLabel).offset(-MARGIN_GLOBAL_2).priority(.low)
-            make.left.equalTo(countLabel).offset(-MARGIN_GLOBAL_5).priority(.low)
-            make.bottom.equalTo(countLabel).offset(MARGIN_GLOBAL_2).priority(.low)
-            make.right.equalTo(countLabel).offset(MARGIN_GLOBAL_5).priority(.low)
+            make.left.equalTo(titleLabel.snp.right).offset(XHMargin._10)
+            make.top.equalTo(countLabel).offset(-XHMargin._2).priority(.low)
+            make.left.equalTo(countLabel).offset(-XHMargin._5).priority(.low)
+            make.bottom.equalTo(countLabel).offset(XHMargin._2).priority(.low)
+            make.right.equalTo(countLabel).offset(XHMargin._5).priority(.low)
         }
         
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(contentView)
-            make.left.equalTo(contentView).offset(MARGIN_GLOBAL_25)
+            make.left.equalTo(contentView).offset(XHMargin._25)
         }
         
         countLabel.snp.makeConstraints { (make) in
@@ -91,7 +91,7 @@ extension XHQuestionListCell {
         
         button.snp.makeConstraints { (make) in
             make.centerY.equalTo(contentView)
-            make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_15)
+            make.right.equalTo(contentView).offset(-XHMargin._15)
         }
     }
 }

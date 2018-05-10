@@ -61,6 +61,7 @@ struct XHHeaderReuseIdentifier {
     struct TeachViewController {}
 }
 
+// MARK: - 定义一些全局的数字
 extension CGFloat {
     static let tableViewMinimumHeaderHeight: CGFloat = 0.01
     static let tableViewMinimumFooterHeight: CGFloat = 0.01
@@ -75,21 +76,8 @@ extension CGFloat {
     }
 }
 
+// MARK: - 全局的边距
 struct XHMargin {
-    /**
-     ///< 全局
-     let MARGIN_GLOBAL_2: CGFloat = 2
-     let MARGIN_GLOBAL_5: CGFloat = 5
-     let MARGIN_GLOBAL_10: CGFloat = 10
-     let MARGIN_GLOBAL_14: CGFloat = 14
-     let MARGIN_GLOBAL_15: CGFloat = 15
-     let MARGIN_GLOBAL_20: CGFloat = 20
-     let MARGIN_GLOBAL_25: CGFloat = 25
-     let MARGIN_GLOBAL_30: CGFloat = 30
-     let MARGIN_GLOBAL_44: CGFloat = 44 ///< 一般navigationBar的高度
-     let MARGIN_GLOBAL_60: CGFloat = 60
-     let TOP_EDGE_AJUSTED: CGFloat = UIDevice.iPhoneX ? 84 : 64
-     */
     static let _2: CGFloat = 2
     static let _5: CGFloat = 5
     static let _10: CGFloat = 10
@@ -115,20 +103,8 @@ let COLOR_QUESTION_COUNT_LABEL_LIGHT_GRAY: UIColor = UIColor(hexColor: "#999999"
 ///< 控件的颜色
 let COLOR_BUTTON_BORDER_GETAUTH_DARKGRAY = UIColor(hexColor: "#D2D2D2")
 
-
-///< 全局的数字
-
 ///< 经常用的数字0
 let GLOBAL_ZERO: CGFloat = 0.0
-
-///< tableView的全局数字
-
-
-
-
-
-///< 宽高比
-let CYCLE_BANNER_HEIGHT_WIDTH_RATIO: CGFloat = 0.35
 
 ///< cell的identifier
 let CELL_IDENTIFIER_HOMEPAGE_CATALOG = "CELL_IDENTIFIER_HOMEPAGE_CATALOG"
@@ -143,18 +119,6 @@ let HEADERVIEW_IDENTIFIER_TEACH_TABLEVIEW = "HEADERVIEW_IDENTIFIER_TEACH_TABLEVI
 let HEADER_TITLE_VIEW_IDENTIFIER_TEACH_TABLEVIEW = "HEADER_TITLE_VIEW_IDENTIFIER_TEACH_TABLEVIEW"
 let HEADER_TITLE_VIEW_IDENTIFIER_PAPER_TABLEVIEW = "HEADER_TITLE_VIEW_IDENTIFIER_PAPER_TABLEVIEW"
 
-///< 一些魔法数字, 边距等
-///< 全局
-let MARGIN_GLOBAL_2: CGFloat = 2
-let MARGIN_GLOBAL_5: CGFloat = 5
-let MARGIN_GLOBAL_10: CGFloat = 10
-let MARGIN_GLOBAL_14: CGFloat = 14
-let MARGIN_GLOBAL_15: CGFloat = 15
-let MARGIN_GLOBAL_20: CGFloat = 20
-let MARGIN_GLOBAL_25: CGFloat = 25
-let MARGIN_GLOBAL_30: CGFloat = 30
-let MARGIN_GLOBAL_44: CGFloat = 44 ///< 一般navigationBar的高度
-let MARGIN_GLOBAL_60: CGFloat = 60
 let TOP_EDGE_AJUSTED: CGFloat = UIDevice.iPhoneX ? 84 : 64
 
 

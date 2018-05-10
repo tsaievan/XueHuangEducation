@@ -59,7 +59,7 @@ class XHCourseCatalogButtonsContainterView: UIView {
                 return
             }
             ///< 循环创建button
-            let buttonW = (XHSCreen.width - 4.0 * MARGIN_GLOBAL_15) / 3
+            let buttonW = (XHSCreen.width - 4.0 * XHMargin._15) / 3
             let buttonH = HEIGHT_HOMEPAGE_CATALOG_BUTTON
             for (index, model) in models.enumerated() {
                 let btn = XHCourseCatalogButton(type: .custom)
@@ -70,14 +70,14 @@ class XHCourseCatalogButtonsContainterView: UIView {
                     make.height.equalTo(buttonH)
                     if let beforeButton = beforeButton {
                         if index % 3 == 0 { ///< 第一列
-                            make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
+                            make.left.equalTo(self).offset(XHMargin._15)
                         }else {
-                            make.left.equalTo(beforeButton.snp.right).offset(MARGIN_GLOBAL_15)
+                            make.left.equalTo(beforeButton.snp.right).offset(XHMargin._15)
                         }
-                    make.top.equalTo(self).offset(MARGIN_GLOBAL_10 + (CGFloat(index / 3) * (buttonH + MARGIN_GLOBAL_10)))
+                    make.top.equalTo(self).offset(XHMargin._10 + (CGFloat(index / 3) * (buttonH + XHMargin._10)))
                     }else {
-                        make.top.equalTo(self).offset(MARGIN_GLOBAL_10)
-                        make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
+                        make.top.equalTo(self).offset(XHMargin._10)
+                        make.left.equalTo(self).offset(XHMargin._15)
                     }
                     
                 })
@@ -96,7 +96,7 @@ class XHCourseCatalogButtonsContainterView: UIView {
                 return
             }
             self.snp.makeConstraints({ (make) in
-                make.bottom.equalTo(last).offset(MARGIN_GLOBAL_10)
+                make.bottom.equalTo(last).offset(XHMargin._10)
             })
             layoutIfNeeded()
         }

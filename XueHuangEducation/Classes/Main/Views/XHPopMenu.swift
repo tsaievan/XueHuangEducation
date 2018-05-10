@@ -47,8 +47,8 @@ class XHPopMenu: UIView {
                     make.height.equalTo(lastButton!)
                 })
                 seperatorView.snp.makeConstraints({ (make) in
-                    make.left.equalTo(self).offset(MARGIN_GLOBAL_5)
-                    make.right.equalTo(self).offset(-MARGIN_GLOBAL_5)
+                    make.left.equalTo(self).offset(XHMargin._5)
+                    make.right.equalTo(self).offset(-XHMargin._5)
                     make.bottom.equalTo(btn.snp.top)
                     make.height.equalTo(0.5)
                 })
@@ -69,7 +69,7 @@ class XHPopMenu: UIView {
 extension XHPopMenu {
     ///< 展示出来
     public func showRight(onView: UIView, atPoint: CGPoint) {
-        frame = CGRect(x: atPoint.x - width, y: atPoint.y + MARGIN_GLOBAL_10, width: frame.width, height: frame.height)
+        frame = CGRect(x: atPoint.x - width, y: atPoint.y + XHMargin._10, width: frame.width, height: frame.height)
         onView.addSubview(self)
     }
     

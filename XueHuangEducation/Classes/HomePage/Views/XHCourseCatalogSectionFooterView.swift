@@ -69,37 +69,37 @@ extension XHCourseCatalogSectionFooterView {
     fileprivate func makeConstraints() {
         containView.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(self)
-            make.left.equalTo(self).offset(MARGIN_GLOBAL_10)
-            make.right.equalTo(self).offset(-MARGIN_GLOBAL_10)
+            make.left.equalTo(self).offset(XHMargin._10)
+            make.right.equalTo(self).offset(-XHMargin._10)
         }
         
         logoImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(containView).offset(MARGIN_GLOBAL_14 * 2)
-            make.left.equalTo(containView).offset(MARGIN_GLOBAL_20)
+            make.top.equalTo(containView).offset(XHMargin._14 * 2)
+            make.left.equalTo(containView).offset(XHMargin._20)
         }
         
         chTitileImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(containView).offset(MARGIN_GLOBAL_20 + MARGIN_GLOBAL_14)
+            make.top.equalTo(containView).offset(XHMargin._20 + XHMargin._14)
             make.width.equalTo(XHSCreen.width * 0.6)
-            make.left.equalTo(logoImageView.snp.right).offset(MARGIN_GLOBAL_15)
-            make.right.equalTo(containView).offset(-MARGIN_GLOBAL_20)
+            make.left.equalTo(logoImageView.snp.right).offset(XHMargin._15)
+            make.right.equalTo(containView).offset(-XHMargin._20)
         }
         
         enTitleImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(chTitileImageView.snp.bottom).offset(MARGIN_GLOBAL_25)
+            make.top.equalTo(chTitileImageView.snp.bottom).offset(XHMargin._25)
             make.leading.trailing.equalTo(chTitileImageView)
         }
         
         
         
         sloganImageView.snp.makeConstraints { (make) in
-            make.leading.equalTo(logoImageView).offset(MARGIN_GLOBAL_20)
-            make.trailing.equalTo(enTitleImageView).offset(-MARGIN_GLOBAL_20)
-            make.top.equalTo(enTitleImageView).offset(MARGIN_GLOBAL_60)
+            make.leading.equalTo(logoImageView).offset(XHMargin._20)
+            make.trailing.equalTo(enTitleImageView).offset(-XHMargin._20)
+            make.top.equalTo(enTitleImageView).offset(XHMargin._60)
         }
         
         containView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(sloganImageView).offset(MARGIN_GLOBAL_20).priority(.low)
+            make.bottom.equalTo(sloganImageView).offset(XHMargin._20).priority(.low)
         }
     }
 }

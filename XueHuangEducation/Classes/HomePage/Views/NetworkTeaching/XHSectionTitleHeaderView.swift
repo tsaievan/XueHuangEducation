@@ -21,6 +21,20 @@ extension String {
     }
 }
 
+extension CGFloat {
+    struct SectionTitleHeaderView {
+        struct Height {
+            static let popButton: CGFloat = 40
+            static let headerView: CGFloat = 50
+            static let seperatorView: CGFloat = 0.5
+        }
+    }
+}
+
+private let popButtonHeight = CGFloat.SectionTitleHeaderView.Height.popButton
+private let headerViewHeight = CGFloat.SectionTitleHeaderView.Height.headerView
+private let seperatorViewHeight = CGFloat.SectionTitleHeaderView.Height.seperatorView
+
 class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
     
     weak var xh_delegate: XHSectionTitleHeaderViewDelegate?
@@ -58,7 +72,7 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
             }
             tempArray.append(name)
         }
-        let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: 40, textSize: 13)
+        let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: popButtonHeight, textSize: CGFloat.FontSize._13)
         pop.xh_delegate = self
         return pop
     }()
@@ -119,26 +133,26 @@ extension XHSectionTitleHeaderView {
     
     fileprivate func makeConstraints() {
         titleButton.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView).offset(MARGIN_GLOBAL_10)
-            make.left.equalTo(contentView).offset(MARGIN_GLOBAL_15)
+            make.top.equalTo(contentView).offset(XHMargin._10)
+            make.left.equalTo(contentView).offset(XHMargin._15)
         }
         
         seperatorView.snp.makeConstraints { (make) in
             make.width.equalTo(contentView)
-            make.height.equalTo(0.5)
+            make.height.equalTo(seperatorViewHeight)
             make.leading.trailing.equalTo(contentView)
-            make.top.equalTo(titleButton.snp.bottom).offset(MARGIN_GLOBAL_10)
+            make.top.equalTo(titleButton.snp.bottom).offset(XHMargin._10)
         }
         
         headerView.snp.makeConstraints { (make) in
             make.top.equalTo(seperatorView.snp.bottom)
             make.left.right.equalTo(contentView)
-            make.height.equalTo(50).priority(.low)
+            make.height.equalTo(headerViewHeight).priority(.low)
         }
         
         moreButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(titleButton)
-            make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_15)
+            make.right.equalTo(contentView).offset(-XHMargin._15)
         }
     }
 }

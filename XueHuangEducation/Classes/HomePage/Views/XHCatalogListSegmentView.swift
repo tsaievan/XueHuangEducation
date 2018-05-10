@@ -80,17 +80,17 @@ extension XHCatalogListSegmentView {
     fileprivate func makeConstraints() {
         myTeachButton.snp.makeConstraints { (make) in
             make.top.equalTo(self)
-            make.left.equalTo(self).offset(MARGIN_GLOBAL_44 * horizontalScale)
-            make.width.equalTo((XHSCreen.width - 2 * (MARGIN_GLOBAL_44 * horizontalScale + MARGIN_GLOBAL_44 * horizontalScale)) / 3)
+            make.left.equalTo(self).offset(XHMargin._44 * horizontalScale)
+            make.width.equalTo((XHSCreen.width - 2 * (XHMargin._44 * horizontalScale + XHMargin._44 * horizontalScale)) / 3)
         }
         
         myThemeButton.snp.makeConstraints { (make) in
-            make.left.equalTo(myTeachButton.snp.right).offset(MARGIN_GLOBAL_44 * horizontalScale)
+            make.left.equalTo(myTeachButton.snp.right).offset(XHMargin._44 * horizontalScale)
             make.top.width.equalTo(myTeachButton)
         }
         
         myQuestionButton.snp.makeConstraints { (make) in
-            make.left.equalTo(myThemeButton.snp.right).offset(MARGIN_GLOBAL_44 * horizontalScale)
+            make.left.equalTo(myThemeButton.snp.right).offset(XHMargin._44 * horizontalScale)
             make.top.width.equalTo(myThemeButton)
         }
     }

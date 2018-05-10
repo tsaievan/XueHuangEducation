@@ -103,13 +103,13 @@ extension XHQuestionHeaderView {
     
     fileprivate func makeConstraints() {
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self).offset(MARGIN_GLOBAL_10)
-            make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
+            make.top.equalTo(self).offset(XHMargin._10)
+            make.left.equalTo(self).offset(XHMargin._15)
         }
         
         moreButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(titleLabel)
-            make.right.equalTo(self).offset(-MARGIN_GLOBAL_15)
+            make.right.equalTo(self).offset(-XHMargin._15)
         }
     }
 }

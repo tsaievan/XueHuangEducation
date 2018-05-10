@@ -124,20 +124,20 @@ extension XHPaperSectionTitleView {
     
     fileprivate func makeConstraints() {
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView).offset(MARGIN_GLOBAL_10)
-            make.left.equalTo(contentView).offset(MARGIN_GLOBAL_15)
+            make.top.equalTo(contentView).offset(XHMargin._10)
+            make.left.equalTo(contentView).offset(XHMargin._15)
         }
         
         moreButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(titleLabel)
-            make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_15)
+            make.right.equalTo(contentView).offset(-XHMargin._15)
         }
         
         seperatorView.snp.makeConstraints { (make) in
             make.width.equalTo(contentView)
             make.height.equalTo(0.5)
             make.leading.trailing.equalTo(contentView)
-            make.top.equalTo(titleLabel.snp.bottom).offset(MARGIN_GLOBAL_10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(XHMargin._10)
         }
         
         headerView.snp.makeConstraints { (make) in

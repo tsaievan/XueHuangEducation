@@ -70,7 +70,7 @@ extension XHCourseCatalogSectionHeaderView {
     fileprivate func makeConstraints() {
         imageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
-            make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
+            make.left.equalTo(self).offset(XHMargin._15)
         }
         
         titleLabel.snp.makeConstraints { (make) in
@@ -79,8 +79,8 @@ extension XHCourseCatalogSectionHeaderView {
         }
         
         seperatorView.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
-            make.right.equalTo(self).offset(-MARGIN_GLOBAL_15)
+            make.left.equalTo(self).offset(XHMargin._15)
+            make.right.equalTo(self).offset(-XHMargin._15)
             make.height.equalTo(SEPERATOR_LINE_HEIGHT)
             make.bottom.equalTo(self)
         }

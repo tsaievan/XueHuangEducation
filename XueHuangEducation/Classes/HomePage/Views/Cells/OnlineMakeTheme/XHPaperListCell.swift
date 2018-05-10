@@ -53,13 +53,13 @@ extension XHPaperListCell {
     fileprivate func makeConstraints() {
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(contentView)
-            make.left.equalTo(contentView).offset(MARGIN_GLOBAL_44)
-            make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_25)
+            make.left.equalTo(contentView).offset(XHMargin._44)
+            make.right.equalTo(contentView).offset(-XHMargin._25)
         }
         
         tipImageView.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel)
-            make.right.equalTo(titleLabel.snp.left).offset(-MARGIN_GLOBAL_5)
+            make.right.equalTo(titleLabel.snp.left).offset(-XHMargin._5)
         }
     }
 }

@@ -62,12 +62,12 @@ extension XHPaperListHeaderView {
     fileprivate func makeConstraints() {
         imageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
-            make.left.equalTo(self).offset(MARGIN_GLOBAL_20)
+            make.left.equalTo(self).offset(XHMargin._20)
         }
         
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(imageView)
-            make.left.equalTo(imageView.snp.right).offset(MARGIN_GLOBAL_10)
+            make.left.equalTo(imageView.snp.right).offset(XHMargin._10)
         }
         
         seperatorView.snp.makeConstraints { (make) in

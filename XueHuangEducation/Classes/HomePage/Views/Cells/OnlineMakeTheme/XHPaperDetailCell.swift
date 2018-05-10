@@ -71,26 +71,26 @@ extension XHPaperDetailCellContentView {
     
     fileprivate func makeConstraints() {
         practiceButton.snp.makeConstraints { (make) in
-            make.top.equalTo(self).offset(MARGIN_GLOBAL_5)
-            make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
+            make.top.equalTo(self).offset(XHMargin._5)
+            make.left.equalTo(self).offset(XHMargin._15)
         }
         
         seperatorView.snp.makeConstraints { (make) in
-            make.top.equalTo(practiceButton.snp.bottom).offset(MARGIN_GLOBAL_5)
-            make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
-            make.right.equalTo(self).offset(-MARGIN_GLOBAL_15)
+            make.top.equalTo(practiceButton.snp.bottom).offset(XHMargin._5)
+            make.left.equalTo(self).offset(XHMargin._15)
+            make.right.equalTo(self).offset(-XHMargin._15)
             make.height.equalTo(0.5)
         }
         
         iconImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(seperatorView.snp.bottom).offset(MARGIN_GLOBAL_5)
-            make.left.equalTo(self).offset(MARGIN_GLOBAL_15)
-            make.bottom.equalTo(self).offset(-MARGIN_GLOBAL_10)
+            make.top.equalTo(seperatorView.snp.bottom).offset(XHMargin._5)
+            make.left.equalTo(self).offset(XHMargin._15)
+            make.bottom.equalTo(self).offset(-XHMargin._10)
         }
         
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(iconImageView).offset(MARGIN_GLOBAL_10)
-            make.left.equalTo(iconImageView.snp.right).offset(MARGIN_GLOBAL_10)
+            make.top.equalTo(iconImageView).offset(XHMargin._10)
+            make.left.equalTo(iconImageView.snp.right).offset(XHMargin._10)
         }
     }
 }
@@ -128,10 +128,10 @@ extension XHPaperDetailCell {
     
     fileprivate func makeConstraints() {
         container.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView).offset(MARGIN_GLOBAL_5)
-            make.left.equalTo(contentView).offset(MARGIN_GLOBAL_10)
-            make.bottom.equalTo(contentView).offset(-MARGIN_GLOBAL_5)
-            make.right.equalTo(contentView).offset(-MARGIN_GLOBAL_10)
+            make.top.equalTo(contentView).offset(XHMargin._5)
+            make.left.equalTo(contentView).offset(XHMargin._10)
+            make.bottom.equalTo(contentView).offset(-XHMargin._5)
+            make.right.equalTo(contentView).offset(-XHMargin._10)
         }
     }
 }
