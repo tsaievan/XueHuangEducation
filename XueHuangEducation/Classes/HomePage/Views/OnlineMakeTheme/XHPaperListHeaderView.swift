@@ -23,7 +23,14 @@ extension CGFloat {
     }
 }
 
+extension String {
+    struct PaperListHeaderView {
+        static let imageViewName = "image_theme_paperList"
+    }
+}
+
 fileprivate let seperatorViewHeight = CGFloat.PaperListHeaderView.Height.seperatorView
+fileprivate let imageViewName = String.PaperListHeaderView.imageViewName
 
 class XHPaperListHeaderView: UIView {
     
@@ -35,13 +42,13 @@ class XHPaperListHeaderView: UIView {
     
     lazy var imageView: UIImageView = {
         let v = UIImageView()
-        v.image = UIImage(named: "image_theme_paperList")
+        v.image = UIImage(named: imageViewName)
         v.sizeToFit()
         return v
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: UIColor.PaperListHeaderView.titleLabel, fontSize: CGFloat.FontSize._16)
+        let lbl = UILabel(text: String.empty, textColor: UIColor.PaperListHeaderView.titleLabel, fontSize: CGFloat.FontSize._16)
         lbl.font = UIFont.boldSystemFont(ofSize: CGFloat.FontSize._16)
         return lbl
     }()

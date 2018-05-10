@@ -25,7 +25,7 @@ class XHNetCourseButton: UIControl {
     }()
     
     lazy var iconLabel: UILabel = {
-        let lbl = UILabel(text: "课程", textColor: .white, fontSize: 20)
+        let lbl = UILabel(text: "课程", textColor: .white, fontSize: CGFloat.FontSize._20)
         return lbl
     }()
     
@@ -76,12 +76,12 @@ extension XHNetCourseButton {
         
         iconImageView.snp.makeConstraints { (make) in
             make.centerX.equalTo(iconView)
-            make.centerY.equalTo(iconView).offset(-10)
+            make.centerY.equalTo(iconView).offset(-XHMargin._10)
         }
         
         iconLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(iconView)
-            make.top.equalTo(iconImageView.snp.bottom).offset(5)
+            make.top.equalTo(iconImageView.snp.bottom).offset(XHMargin._5)
         }
         
         titleLabel.snp.makeConstraints { (make) in

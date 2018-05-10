@@ -19,7 +19,7 @@ class XHQuestionListCell: UITableViewCell {
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: nil, fontSize: 16)
+        let lbl = UILabel(text: String.empty, textColor: nil, fontSize: CGFloat.FontSize._16)
         lbl.textAlignment = .center
         return lbl
     }()
@@ -32,7 +32,7 @@ class XHQuestionListCell: UITableViewCell {
     }()
     
     lazy var countLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: .white, fontSize: 13)
+        let lbl = UILabel(text: String.empty, textColor: .white, fontSize: CGFloat.FontSize._13)
         lbl.textColor = .white
         return lbl
     }()

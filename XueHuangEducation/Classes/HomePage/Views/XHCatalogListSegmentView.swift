@@ -9,9 +9,34 @@
 import UIKit
 import pop
 
+// MARK: - XHCatalogListSegmentView协议
 protocol XHCatalogListSegmentViewDelegate: NSObjectProtocol {
     func catalogListSegmentViewDidClickSegmentButton(segmentView: XHCatalogListSegmentView, sender: XHButton)
 }
+
+extension String {
+    struct CatalogListSegmentView {
+        static let myTeachButtonImageName = "image_profile_myTeach"
+        static let myThemeButtonImageName = "image_profile_myTheme"
+        static let myQuestionButtonImageName = "image_profile_myQuestion"
+    }
+    
+    struct ButtonTitle {
+        static let myTeachButton = "网校讲题"
+        static let myThemeButton = "在线做题"
+        static let myQuestionButton = "在线问答"
+    }
+    
+    static let XHButtonClassName = "XHButton"
+}
+
+fileprivate let myTeachButtonImageName = String.CatalogListSegmentView.myTeachButtonImageName
+fileprivate let myThemeButtonImageName = String.CatalogListSegmentView.myThemeButtonImageName
+fileprivate let myQuestionButtonImageName = String.CatalogListSegmentView.myQuestionButtonImageName
+
+fileprivate let myTeachButton_normal = String.ButtonTitle.myTeachButton
+fileprivate let myThemeButton_normal = String.ButtonTitle.myThemeButton
+fileprivate let myQuestionButton_normal = String.ButtonTitle.myQuestionButton
 
 class XHCatalogListSegmentView: UIView {
     
@@ -23,32 +48,33 @@ class XHCatalogListSegmentView: UIView {
     ///< 上一个被点击的button
     var lastButton: XHButton?
     
+    // MARK: - 懒加载
     lazy var myTeachButton: XHButton = {
-        let btn = XHButton(withButtonImage: "image_profile_myTeach", title: "网校讲题", titleFont: CGFloat.FontSize._13, gap: 0)
+        let btn = XHButton(withButtonImage: myTeachButtonImageName, title: myTeachButton_normal, titleFont: CGFloat.FontSize._13, gap: 0)
         btn.tag = XHButtonType.teach.rawValue
         btn.addTarget(self, action: #selector(didClickSegmentViewButtonAction), for: .touchUpInside)
         return btn
     }()
     
     lazy var myThemeButton: XHButton = {
-        let btn = XHButton(withButtonImage: "image_profile_myTheme", title: "在线做题", titleFont: CGFloat.FontSize._13, gap: 0)
+        let btn = XHButton(withButtonImage: myThemeButtonImageName, title: myThemeButton_normal, titleFont: CGFloat.FontSize._13, gap: 0)
         btn.tag = XHButtonType.theme.rawValue
         btn.addTarget(self, action: #selector(didClickSegmentViewButtonAction), for: .touchUpInside)
         return btn
     }()
     
     lazy var myQuestionButton: XHButton = {
-        let btn = XHButton(withButtonImage: "image_profile_myQuestion", title: "在线问答", titleFont: CGFloat.FontSize._13, gap: 0)
+        let btn = XHButton(withButtonImage: myQuestionButtonImageName, title: myQuestionButton_normal, titleFont: CGFloat.FontSize._13, gap: 0)
         btn.tag = XHButtonType.answer.rawValue
         btn.addTarget(self, action: #selector(didClickSegmentViewButtonAction), for: .touchUpInside)
         return btn
     }()
     
-    var selectedPage: Int = 1 {
+    var selectedPage: Int = XHButtonType.theme.rawValue {
         didSet {
-            if selectedPage == 0 {
+            if selectedPage == XHButtonType.teach.rawValue {
                 didClickSegmentViewButtonAction(sender: myTeachButton)
-            }else if selectedPage == 1 {
+            }else if selectedPage == XHButtonType.theme.rawValue {
                 didClickSegmentViewButtonAction(sender: myThemeButton)
             }else {
                 didClickSegmentViewButtonAction(sender: myQuestionButton)
@@ -56,6 +82,7 @@ class XHCatalogListSegmentView: UIView {
         }
     }
     
+    // MARK: - init方法
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -96,11 +123,13 @@ extension XHCatalogListSegmentView {
     }
 }
 
+
+// MARK: - 按钮点击事件
 extension XHCatalogListSegmentView {
     @objc
     fileprivate func didClickSegmentViewButtonAction(sender: XHButton) {
         guard let bundleName = Bundle.bundleName,
-        let kls = NSClassFromString(bundleName + String.point + "XHButton") else {
+        let kls = NSClassFromString(bundleName + String.point + String.XHButtonClassName) else {
             return
         }
         for button in subviews {
