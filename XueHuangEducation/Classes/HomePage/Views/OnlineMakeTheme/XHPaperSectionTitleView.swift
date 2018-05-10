@@ -12,6 +12,12 @@ protocol XHPaperSectionTitleViewDelegate: NSObjectProtocol {
     func paperSectionTitleViewDidClickButtonList(sectionView: XHPaperSectionTitleView, sender: UIButton)
 }
 
+extension UIColor {
+    struct PaperSectionTitleView {
+        static let titleLabel = UIColor(hexColor: "#777777")
+    }
+}
+
 class XHPaperSectionTitleView: UITableViewHeaderFooterView {
     
     weak var xh_delegate: XHPaperSectionTitleViewDelegate?
@@ -33,7 +39,7 @@ class XHPaperSectionTitleView: UITableViewHeaderFooterView {
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: COLOR_PAPAER_TYPE_BUTTON_TITLE, fontSize: CGFloat.FontSize._16)
+        let lbl = UILabel(text: "", textColor: ui, fontSize: CGFloat.FontSize._16)
         lbl.font = UIFont.boldSystemFont(ofSize: CGFloat.FontSize._16)
         return lbl
     }()

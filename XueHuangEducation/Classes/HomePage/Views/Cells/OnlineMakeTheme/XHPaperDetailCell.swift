@@ -8,6 +8,13 @@
 
 import UIKit
 
+extension UIColor {
+    struct PaperDetailCellContentView {
+        static let titleLabel = UIColor(hexColor: "#777777")
+        static let practiceButton_normal = UIColor(hexColor: "#777777")
+    }
+}
+
 class XHPaperDetailCellContentView: UIView {
     lazy var practiceButton: UIButton = {
         let btn = UIButton(type: .custom)
@@ -31,7 +38,7 @@ class XHPaperDetailCellContentView: UIView {
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: COLOR_PAPAER_TYPE_BUTTON_TITLE, fontSize: CGFloat.FontSize._13)
+        let lbl = UILabel(text: "", textColor: UIColor.PaperDetailCellContentView.titleLabel, fontSize: CGFloat.FontSize._13)
         lbl.numberOfLines = 0
         return lbl
     }()
@@ -44,7 +51,7 @@ class XHPaperDetailCellContentView: UIView {
                     return
             }
             practiceButton.setTitle(buttonTitle, for: .normal)
-            practiceButton.setTitleColor(COLOR_PAPAER_TYPE_BUTTON_TITLE, for: .normal)
+            practiceButton.setTitleColor(UIColor.PaperDetailCellContentView.practiceButton_normal, for: .normal)
             titleLabel.text = labelText
         }
     }
