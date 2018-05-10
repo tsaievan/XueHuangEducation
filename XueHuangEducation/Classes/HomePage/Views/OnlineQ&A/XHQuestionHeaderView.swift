@@ -71,7 +71,7 @@ class XHQuestionHeaderView: UIView {
             }
             tempArray.append(name)
         }
-        let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: 40, textSize: CGFloat.FontSize._13)
+        let pop = XHPopMenu(withButtonTitles: tempArray, tintColor: .darkGray, textColor: .white, buttonHeight: CGFloat.PopMenu.Height.popButton, textSize: CGFloat.FontSize._13)
         pop.xh_delegate = self
         return pop
     }()

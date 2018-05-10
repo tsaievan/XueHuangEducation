@@ -8,13 +8,27 @@
 
 import UIKit
 
+extension UIColor {
+    struct QuestionListCell {
+        static let countView = UIColor(hexColor: "#999999")
+    }
+}
+
+extension String {
+    struct QuestionListCell {
+        static let buttonImageName = "image_homepage_rightArrow"
+    }
+}
+
+fileprivate let buttonImageName = String.QuestionListCell.buttonImageName
+
 class XHQuestionListCell: UITableViewCell {
     
     lazy var countView: UIView = {
         let tv = UIView()
         tv.layer.cornerRadius = CGFloat.smallCornerRadius
         tv.layer.masksToBounds = true
-        tv.backgroundColor = COLOR_QUESTION_COUNT_LABEL_LIGHT_GRAY
+        tv.backgroundColor = UIColor.QuestionListCell.countView
         return tv
     }()
     
@@ -26,7 +40,7 @@ class XHQuestionListCell: UITableViewCell {
     
     lazy var button: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.setImage(UIImage(named: "image_homepage_rightArrow"), for: .normal)
+        btn.setImage(UIImage(named: buttonImageName), for: .normal)
         btn.sizeToFit()
         return btn
     }()

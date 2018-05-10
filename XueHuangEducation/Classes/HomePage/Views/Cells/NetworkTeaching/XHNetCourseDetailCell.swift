@@ -9,6 +9,27 @@
 import UIKit
 import SDWebImage
 
+extension CGFloat {
+    struct NetCourseDetailCell {
+        struct Width {
+            static let iconImageView: CGFloat = 80
+            static let listenButton: CGFloat = 28
+        }
+    }
+}
+
+extension String {
+    struct NetCourseDetailCell {
+        static let listenButtonImageName = "catalogList_listen_button"
+        static let listenButtonTitle = "试听"
+    }
+}
+
+fileprivate let iconImageViewWidth = CGFloat.NetCourseDetailCell.Width.iconImageView
+fileprivate let listenButtonWidth = CGFloat.NetCourseDetailCell.Width.listenButton
+fileprivate let listenButtonImageName = String.NetCourseDetailCell.listenButtonImageName
+fileprivate let listenButtonTitleText = String.NetCourseDetailCell.listenButtonTitle
+
 class XHNetCourseDetailCell: UITableViewCell {
     
     var info: (model: XHSimpleNetCourse, iconArr: String?)? {
@@ -34,12 +55,12 @@ class XHNetCourseDetailCell: UITableViewCell {
     
     lazy var titleLabel: UILabel = {
         let lbl = UILabel(text: String.empty, textColor: COLOR_CATALOG_BUTTON_TITLE_COLOR, fontSize: CGFloat.FontSize._16)
-        lbl.numberOfLines = 0
+        lbl.numberOfLines = Int.zero
         return lbl
     }()
     
     lazy var listenButton: XHButton = {
-        let btn = XHButton(withButtonImage: "catalogList_listen_button", title: "试听", titleColor: UIColor.Global.skyBlue, titleFont: CGFloat.FontSize._12, gap: 0)
+        let btn = XHButton(withButtonImage: listenButtonImageName, title: listenButtonTitleText, titleColor: UIColor.Global.skyBlue, titleFont: CGFloat.FontSize._12, gap: CGFloat.zero)
         return btn
     }()
     
@@ -66,13 +87,13 @@ extension XHNetCourseDetailCell {
             make.top.equalTo(contentView).offset(XHMargin._10)
             make.left.equalTo(contentView).offset(XHMargin._15)
             make.bottom.equalTo(contentView).offset(-XHMargin._10)
-            make.width.equalTo(80)
+            make.width.equalTo(iconImageViewWidth)
         }
         
         listenButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(iconImageView)
             make.right.equalTo(contentView).offset(-XHMargin._15)
-            make.width.equalTo(28)
+            make.width.equalTo(listenButtonWidth)
         }
         
         titleLabel.snp.makeConstraints { (make) in

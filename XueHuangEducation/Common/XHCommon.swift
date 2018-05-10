@@ -67,6 +67,7 @@ extension CGFloat {
     static let tableViewMinimumFooterHeight: CGFloat = 0.01
     static let commonCornerRadius: CGFloat = 5.0
     static let smallCornerRadius: CGFloat = 2.0
+    static let zero: CGFloat = 0.0
     
     ///< 字体大小
     struct FontSize {
@@ -78,6 +79,10 @@ extension CGFloat {
         static let _17: CGFloat = 17.0
         static let _20: CGFloat = 20.0
     }
+}
+
+extension Int {
+    static let zero: Int = 0
 }
 
 // MARK: - 全局的边距

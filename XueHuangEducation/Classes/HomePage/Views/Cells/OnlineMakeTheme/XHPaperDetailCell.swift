@@ -15,10 +15,29 @@ extension UIColor {
     }
 }
 
+extension String {
+    struct PaperDetailCellContentView {
+        static let practiceButtonImageName = "button_paperList_practice"
+        static let iconImageName = "image_paperList_practice"
+    }
+}
+
+extension CGFloat {
+    struct PaperDetailCellContentView {
+        struct Height {
+            static let seperatorView: CGFloat = 0.5
+        }
+    }
+}
+
+fileprivate let practiceButtonImageName = String.PaperDetailCellContentView.practiceButtonImageName
+fileprivate let iconImageName = String.PaperDetailCellContentView.iconImageName
+fileprivate let seperatorViewHeight = CGFloat.PaperDetailCellContentView.Height.seperatorView
+
 class XHPaperDetailCellContentView: UIView {
     lazy var practiceButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.setImage(UIImage(named: "button_paperList_practice"), for: .normal)
+        btn.setImage(UIImage(named: practiceButtonImageName), for: .normal)
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: CGFloat.FontSize._13)
         return btn
     }()
@@ -32,14 +51,14 @@ class XHPaperDetailCellContentView: UIView {
     lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "image_paperList_practice")
+        imageView.image = UIImage(named: iconImageName)
         imageView.sizeToFit()
         return imageView
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: UIColor.PaperDetailCellContentView.titleLabel, fontSize: CGFloat.FontSize._13)
-        lbl.numberOfLines = 0
+        let lbl = UILabel(text: String.empty, textColor: UIColor.PaperDetailCellContentView.titleLabel, fontSize: CGFloat.FontSize._13)
+        lbl.numberOfLines = Int.zero
         return lbl
     }()
     
@@ -86,7 +105,7 @@ extension XHPaperDetailCellContentView {
             make.top.equalTo(practiceButton.snp.bottom).offset(XHMargin._5)
             make.left.equalTo(self).offset(XHMargin._15)
             make.right.equalTo(self).offset(-XHMargin._15)
-            make.height.equalTo(0.5)
+            make.height.equalTo(seperatorViewHeight)
         }
         
         iconImageView.snp.makeConstraints { (make) in

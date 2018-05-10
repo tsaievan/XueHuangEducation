@@ -15,14 +15,34 @@ extension UIColor {
     }
 }
 
+extension CGFloat {
+    struct CourseCatalogButton {
+        struct Width {
+            static let buttonBorder: CGFloat = 0.5
+        }
+        
+        struct Height {
+            static let button: CGFloat = 30.0
+        }
+        
+        struct CornerRadius {
+            static let button: CGFloat = 15.0
+        }
+    }
+}
+
+fileprivate let buttonBorder = CGFloat.CourseCatalogButton.Width.buttonBorder
+fileprivate let buttonHeight = CGFloat.CourseCatalogButton.Height.button
+fileprivate let buttonCornerRadius = CGFloat.CourseCatalogButton.CornerRadius.button
+
 // MARK: - 首页分类的button
 class XHCourseCatalogButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
-        layer.cornerRadius = RADIUS_HOMEPAGE_CATALOG_BUTTON
+        layer.cornerRadius = buttonCornerRadius
         layer.masksToBounds = true
-        layer.borderWidth = 1.5
+        layer.borderWidth = buttonBorder
         layer.borderColor = UIColor.CourseCatalogButton.border.cgColor
     }
     
@@ -60,7 +80,7 @@ class XHCourseCatalogButtonsContainterView: UIView {
             }
             ///< 循环创建button
             let buttonW = (XHSCreen.width - 4.0 * XHMargin._15) / 3
-            let buttonH = HEIGHT_HOMEPAGE_CATALOG_BUTTON
+            let buttonH = buttonHeight
             for (index, model) in models.enumerated() {
                 let btn = XHCourseCatalogButton(type: .custom)
                 btn.tag = index

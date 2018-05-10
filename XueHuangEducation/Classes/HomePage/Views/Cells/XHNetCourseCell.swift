@@ -8,24 +8,49 @@
 
 import UIKit
 
+extension UIColor {
+    struct NetCourseButton {
+        static let iconView = UIColor(hexColor: "#27C1F4")
+    }
+}
+
+extension String {
+    struct NetCourseButton {
+        static let iconImageName = "image_homepage_courseIcon"
+        static let iconLabelText = "课程"
+    }
+}
+
+extension CGFloat {
+    struct NetCourseButton {
+        struct Height {
+            static let iconView: CGFloat = 100.0
+        }
+    }
+}
+
+fileprivate let iconImageName = String.NetCourseButton.iconImageName
+fileprivate let iconLabelText = String.NetCourseButton.iconLabelText
+fileprivate let iconViewHeight = CGFloat.NetCourseButton.Height.iconView
+
 class XHNetCourseButton: UIControl {
     lazy var iconView: UIView = {
         let iv = UIView()
         iv.isUserInteractionEnabled = false
-        iv.backgroundColor = COLOR_HOMEPAGE_COURSE_ICON_BLUE
+        iv.backgroundColor = UIColor.NetCourseButton.iconView
         iv.layer.cornerRadius = CGFloat.commonCornerRadius
         iv.layer.masksToBounds = true
         return iv
     }()
     
     lazy var iconImageView: UIImageView = {
-        let iv = UIImageView(image: UIImage(named: "image_homepage_courseIcon"))
+        let iv = UIImageView(image: UIImage(named: iconImageName))
         iv.isUserInteractionEnabled = false
         return iv
     }()
     
     lazy var iconLabel: UILabel = {
-        let lbl = UILabel(text: "课程", textColor: .white, fontSize: CGFloat.FontSize._20)
+        let lbl = UILabel(text: iconLabelText, textColor: .white, fontSize: CGFloat.FontSize._20)
         return lbl
     }()
     
@@ -37,7 +62,7 @@ class XHNetCourseButton: UIControl {
         }else {
             lbl.font = UIFont.systemFont(ofSize: CGFloat.FontSize._16)
         }
-        lbl.numberOfLines = 0
+        lbl.numberOfLines = Int.zero
         lbl.sizeToFit()
         return lbl
     }()
@@ -71,7 +96,7 @@ extension XHNetCourseButton {
         iconView.snp.makeConstraints { (make) in
             make.top.left.equalTo(self)
             make.width.equalTo(self)
-            make.height.equalTo(100)
+            make.height.equalTo(iconViewHeight)
         }
         
         iconImageView.snp.makeConstraints { (make) in
@@ -96,6 +121,23 @@ protocol XHNetCourseButtonsContainterViewDelegate: NSObjectProtocol {
 }
 
 ///< 首页课程分类的button的容器
+extension CGFloat {
+    struct NetCourseButtonsContainterView {
+        struct Height {
+            static let button: CGFloat = 160.0
+            static let tipView: CGFloat = 15.0
+        }
+        
+        struct Width {
+            static let tipView: CGFloat = 4.0
+        }
+    }
+}
+
+fileprivate let netCourseButtonHeight = CGFloat.NetCourseButtonsContainterView.Height.button
+fileprivate let tipViewHeight = CGFloat.NetCourseButtonsContainterView.Height.tipView
+fileprivate let tipViewWidth = CGFloat.NetCourseButtonsContainterView.Width.tipView
+
 class XHNetCourseButtonsContainterView: UIView {
     
     var xh_delegate: XHNetCourseButtonsContainterViewDelegate?
@@ -109,7 +151,7 @@ class XHNetCourseButtonsContainterView: UIView {
     }()
     
     lazy var tipLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: COLOR_HOMEPAGE_TIP_LABEL_COLOR, fontSize: CGFloat.FontSize._16)
+        let lbl = UILabel(text: String.empty, textColor: COLOR_HOMEPAGE_TIP_LABEL_COLOR, fontSize: CGFloat.FontSize._16)
         return lbl
     }()
     
@@ -135,7 +177,7 @@ class XHNetCourseButtonsContainterView: UIView {
             }
             ///< 循环创建button
             let buttonW = (XHSCreen.width - 2.0 * XHMargin._25) / 2
-            let buttonH: CGFloat = 160
+            let buttonH: CGFloat = netCourseButtonHeight
             for (index, model) in models.enumerated() {
                 let btn = XHNetCourseButton()
                 btn.tag = index
@@ -201,8 +243,8 @@ extension XHNetCourseButtonsContainterView {
         tipView.snp.makeConstraints { (make) in
             make.top.equalTo(XHMargin._10)
             make.left.equalTo(XHMargin._10)
-            make.width.equalTo(4)
-            make.height.equalTo(15)
+            make.width.equalTo(tipViewWidth)
+            make.height.equalTo(tipViewHeight)
         }
         
         tipLabel.snp.makeConstraints { (make) in
