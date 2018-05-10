@@ -28,7 +28,7 @@ class XHRegistView: UIView {
         textField.placeholder = "请输入手机号"
         textField.borderStyle = .roundedRect
         textField.keyboardType = .phonePad
-        textField.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
+        textField.font = UIFont.systemFont(ofSize: CGFloat.FontSize._14)
         textField.clearButtonMode = .whileEditing
         return textField
     }()
@@ -40,7 +40,7 @@ class XHRegistView: UIView {
         textField.borderStyle = .roundedRect
         textField.keyboardType = .phonePad
         textField.isSecureTextEntry = false
-        textField.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
+        textField.font = UIFont.systemFont(ofSize: CGFloat.FontSize._14)
         textField.clearButtonMode = .whileEditing
         return textField
     }()
@@ -50,7 +50,7 @@ class XHRegistView: UIView {
         let textField = UITextField()
         textField.placeholder = "请输入用户名"
         textField.borderStyle = .roundedRect
-        textField.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
+        textField.font = UIFont.systemFont(ofSize: CGFloat.FontSize._14)
         textField.clearButtonMode = .whileEditing
         return textField
     }()
@@ -61,7 +61,7 @@ class XHRegistView: UIView {
         textField.placeholder = "请输入密码"
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
-        textField.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
+        textField.font = UIFont.systemFont(ofSize: CGFloat.FontSize._14)
         textField.clearButtonMode = .whileEditing
         return textField
     }()
@@ -83,14 +83,14 @@ class XHRegistView: UIView {
     }()
     
     lazy var xhProtocolButton: UIButton = {
-        let btn = UIButton(title: "《学煌教育服务协议》", titleColor: UIColor.Global.skyBlue, fontSize: FONT_SIZE_14, target: self, action: #selector(didClickXHProtocolButtonAction), controlEvents: .touchUpInside)
+        let btn = UIButton(title: "《学煌教育服务协议》", titleColor: UIColor.Global.skyBlue, fontSize: CGFloat.FontSize._14, target: self, action: #selector(didClickXHProtocolButtonAction), controlEvents: .touchUpInside)
         return btn
     }()
     
     ///< 注册按钮
     lazy fileprivate var registButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: FONT_SIZE_16)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._16)
         btn.setTitle("注 册", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.layer.cornerRadius = 5
@@ -103,7 +103,7 @@ class XHRegistView: UIView {
     ///< 获取验证码按钮
     lazy fileprivate var getAuthButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._14)
         btn.setTitle("获取验证码", for: .normal)
         btn.setTitleColor(UIColor.Global.darkGray, for: .normal)
         btn.layer.cornerRadius = 5
@@ -122,7 +122,7 @@ class XHRegistView: UIView {
         let lbl = UILabel()
         lbl.attributedText = lblText
         lbl.textAlignment = .center
-        lbl.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
+        lbl.font = UIFont.systemFont(ofSize: CGFloat.FontSize._14)
         lbl.sizeToFit()
         lbl.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTaphaveAccountLabelAction))

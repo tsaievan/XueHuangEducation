@@ -48,7 +48,7 @@ class XHHomePage {
     ///   - failue: 获取首页数据失败的回调
     class func getHomePageList(success: XHGetHomePageListSuccess?, failue: XHGetHomePageListFailue?) {
         
-        XHNetwork.GET(url: URL_HOMEPAGE_LIST, params: nil, success: { (response) in
+        XHNetwork.GET(url: XHURL.AppController.list, params: nil, success: { (response) in
             guard let json = response as? [String : Any],
                 let model = XHHomePageList(JSON: json) else {
                     return
@@ -134,7 +134,7 @@ class XHHomePage {
             "courseClassName" : withCourseName,
             "courseClassId" : courseId
         ]
-        XHNetwork.GET(url: URL_TO_MOBILE_NET_COURSE, params: params, success: { (response) in
+        XHNetwork.GET(url: XHURL.AppController.toMobileNetCourse, params: params, success: { (response) in
             guard let responseJson = response as? [String : Any],
                 let model = XHThemeList(JSON: responseJson) else {
                     return
@@ -182,7 +182,7 @@ class XHHomePage {
         let params = [
             "curCourseClassId" : courseId
         ]
-        XHNetwork.GET(url: URL_TO_MOBILE_PAPER_LIST, params: params, success: { (response) in
+        XHNetwork.GET(url: XHURL.AppController.toMobilePaperList, params: params, success: { (response) in
             guard let responseJson = response as? [String : Any],
                 let model = XHPaperList(JSON: responseJson) else {
                     return
@@ -247,7 +247,7 @@ class XHHomePage {
             "courseClassId" : courseId,
             "actionType" : XHActionType.all.rawValue
         ]
-        XHNetwork.GET(url: URL_TO_QUESTION_LIST, params: params, success: { (response) in
+        XHNetwork.GET(url: XHURL.AppController.toCourseCatalog, params: params, success: { (response) in
             guard let responseJson = response as? [String : Any],
                 let model = XHQuestionList(JSON: responseJson),
                 let total = model.sfCouresCatalog,

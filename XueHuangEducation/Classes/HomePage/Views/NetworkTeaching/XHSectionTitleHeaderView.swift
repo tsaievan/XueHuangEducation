@@ -31,7 +31,7 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
         btn.setImage(UIImage(named: String.SectionTitleHeaderView.titleButtonImageName), for: .normal)
         btn.setTitle(String.SectionTitleHeaderView.titleButtonText, for: .normal)
         btn.setTitleColor(COLOR_PAPAER_TYPE_BUTTON_TITLE, for: .normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: FONT_SIZE_16)
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: CGFloat.FontSize._16)
         btn.sizeToFit()
         return btn
     }()

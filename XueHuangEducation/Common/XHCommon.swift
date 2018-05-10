@@ -64,6 +64,15 @@ struct XHHeaderReuseIdentifier {
 extension CGFloat {
     static let tableViewMinimumHeaderHeight: CGFloat = 0.01
     static let tableViewMinimumFooterHeight: CGFloat = 0.01
+    
+    ///< 字体大小
+    struct FontSize {
+        static let _12: CGFloat = 12.0
+        static let _13: CGFloat = 13.0
+        static let _14: CGFloat = 14.0
+        static let _15: CGFloat = 15.0
+        static let _16: CGFloat = 16.0
+    }
 }
 
 struct XHMargin {
@@ -116,12 +125,7 @@ let GLOBAL_ZERO: CGFloat = 0.0
 
 
 
-///< 字体大小
-let FONT_SIZE_12: CGFloat = 12.0
-let FONT_SIZE_13: CGFloat = 13.0
-let FONT_SIZE_14: CGFloat = 14.0
-let FONT_SIZE_15: CGFloat = 15.0
-let FONT_SIZE_16: CGFloat = 16.0
+
 
 ///< 宽高比
 let CYCLE_BANNER_HEIGHT_WIDTH_RATIO: CGFloat = 0.35

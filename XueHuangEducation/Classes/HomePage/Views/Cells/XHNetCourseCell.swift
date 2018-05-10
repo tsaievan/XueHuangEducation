@@ -33,9 +33,9 @@ class XHNetCourseButton: UIControl {
         let lbl = UILabel()
         lbl.textColor = .darkGray
         if UIDevice.iPhoneSE {
-            lbl.font = UIFont.systemFont(ofSize: FONT_SIZE_13)
+            lbl.font = UIFont.systemFont(ofSize: CGFloat.FontSize._13)
         }else {
-            lbl.font = UIFont.systemFont(ofSize: FONT_SIZE_16)
+            lbl.font = UIFont.systemFont(ofSize: CGFloat.FontSize._16)
         }
         lbl.numberOfLines = 0
         lbl.sizeToFit()
@@ -110,7 +110,7 @@ class XHNetCourseButtonsContainterView: UIView {
     }()
     
     lazy var tipLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: COLOR_HOMEPAGE_TIP_LABEL_COLOR, fontSize: FONT_SIZE_16)
+        let lbl = UILabel(text: "", textColor: COLOR_HOMEPAGE_TIP_LABEL_COLOR, fontSize: CGFloat.FontSize._16)
         return lbl
     }()
     

@@ -65,8 +65,8 @@ class XHQuestionHeaderView: UIView {
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: COLOR_PAPAER_TYPE_BUTTON_TITLE, fontSize: FONT_SIZE_16)
-        lbl.font = UIFont.boldSystemFont(ofSize: FONT_SIZE_16)
+        let lbl = UILabel(text: "", textColor: COLOR_PAPAER_TYPE_BUTTON_TITLE, fontSize: CGFloat.FontSize._16)
+        lbl.font = UIFont.boldSystemFont(ofSize: CGFloat.FontSize._16)
         return lbl
     }()
     

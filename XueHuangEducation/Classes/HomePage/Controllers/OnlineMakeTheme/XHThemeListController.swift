@@ -202,7 +202,7 @@ extension XHThemeListController {
                 "isJj" : XHSummitType.cancel.rawValue,
                 "isViewAnswer" : XHShowAnalysisType.hidden.rawValue,
                 ] as [String : Any]
-            self.pushWebViewController(withUrl: XHURL.mobileController.getPaperQuestion, parameters: params)
+            self.pushWebViewController(withUrl: XHURL.MobileController.getPaperQuestion, parameters: params)
         })
         let check = UIAlertAction(title: String.ThemeListController.AlertTitle.check, style: UIAlertActionStyle.default, handler: { (action) in
             let params = [
@@ -213,7 +213,7 @@ extension XHThemeListController {
                 "viewType" : XHPaperActionSheet.pageAnalysis.rawValue,
                 "forwardQueNum" : Int.ForwardQueNum.first
                 ] as [String : Any]
-            self.pushWebViewController(withUrl: XHURL.mobileController.checkAnalysisContent, parameters: params)
+            self.pushWebViewController(withUrl: XHURL.MobileController.checkAnalysisContent, parameters: params)
         })
         let collection = UIAlertAction(title: String.ThemeListController.AlertTitle.collection, style: UIAlertActionStyle.default, handler: { (action) in
             let params = [
@@ -224,7 +224,7 @@ extension XHThemeListController {
                 "viewType" : XHPaperActionSheet.collection.rawValue,
                 "forwardQueNum" : Int.ForwardQueNum.first
                 ] as [String : Any]
-            self.pushWebViewController(withUrl: XHURL.mobileController.checkAnalysisContent, parameters: params)
+            self.pushWebViewController(withUrl: XHURL.MobileController.checkAnalysisContent, parameters: params)
         })
         let cancel = UIAlertAction(title: String.Alert.cancel.rawValue, style: UIAlertActionStyle.destructive, handler: nil)
         alertVc.addAction(start)
@@ -245,7 +245,7 @@ extension XHThemeListController {
                 "viewType" : XHPaperActionSheet.pageAnalysis.rawValue,
                 "forwardQueNum" : Int.ForwardQueNum.first
                 ] as [String : Any]
-            self.pushWebViewController(withUrl: XHURL.mobileController.checkAnalysisContent, parameters: params)
+            self.pushWebViewController(withUrl: XHURL.MobileController.checkAnalysisContent, parameters: params)
         }
         
         let restart = UIAlertAction(title: String.ThemeListController.AlertTitle.restart, style: UIAlertActionStyle.default) { (action) in
@@ -255,7 +255,7 @@ extension XHThemeListController {
                 "isJj" : XHSummitType.cancel.rawValue,
                 "isViewAnswer" : XHShowAnalysisType.hidden.rawValue,
                 ] as [String : Any]
-            self.pushWebViewController(withUrl: XHURL.mobileController.getPaperQuestion, parameters: params)
+            self.pushWebViewController(withUrl: XHURL.MobileController.getPaperQuestion, parameters: params)
         }
         
         let check = UIAlertAction(title: String.ThemeListController.AlertTitle.check, style: UIAlertActionStyle.default, handler: { (action) in
@@ -267,7 +267,7 @@ extension XHThemeListController {
                 "viewType" : XHPaperActionSheet.pageAnalysis.rawValue,
                 "forwardQueNum" : Int.ForwardQueNum.first
                 ] as [String : Any]
-            self.pushWebViewController(withUrl: XHURL.mobileController.checkAnalysisContent, parameters: params)
+            self.pushWebViewController(withUrl: XHURL.MobileController.checkAnalysisContent, parameters: params)
         })
         
         let wrong = UIAlertAction(title: String.ThemeListController.AlertTitle.wrong, style: UIAlertActionStyle.default) { (action) in
@@ -279,7 +279,7 @@ extension XHThemeListController {
                 "viewType" : XHPaperActionSheet.wrong.rawValue,
                 "forwardQueNum" : Int.ForwardQueNum.first
                 ] as [String : Any]
-            self.pushWebViewController(withUrl: XHURL.mobileController.checkAnalysisContent, parameters: params)
+            self.pushWebViewController(withUrl: XHURL.MobileController.checkAnalysisContent, parameters: params)
         }
         
         let collection = UIAlertAction(title: String.ThemeListController.AlertTitle.collection, style: UIAlertActionStyle.default, handler: { (action) in
@@ -291,7 +291,7 @@ extension XHThemeListController {
                 "viewType" : XHPaperActionSheet.collection.rawValue,
                 "forwardQueNum" : Int.ForwardQueNum.first
                 ] as [String : Any]
-            self.pushWebViewController(withUrl: XHURL.mobileController.checkAnalysisContent, parameters: params)
+            self.pushWebViewController(withUrl: XHURL.MobileController.checkAnalysisContent, parameters: params)
         })
         let cancel = UIAlertAction(title: String.Alert.cancel.rawValue, style: UIAlertActionStyle.destructive, handler: nil)
         alertVc.addAction(resume)

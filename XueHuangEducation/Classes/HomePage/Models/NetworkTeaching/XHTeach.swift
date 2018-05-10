@@ -38,7 +38,7 @@ class XHTeach {
             "netCourseId" : courseId,
             "courseClassName" : courseName,
             ]
-        XHNetwork.GET(url: URL_TO_NET_COURSE_WARE, params: params, success: { (response) in
+        XHNetwork.GET(url: XHURL.AppController.toNetCourseware, params: params, success: { (response) in
             guard let responseJson = response as? [String : Any],
                 let model = XHNetCourseWareList(JSON: responseJson),
                 let courses = model.netCoursewares else {
@@ -59,7 +59,7 @@ class XHTeach {
             "id" : courseId,
             "attrType" : XHAttchmentType.table.rawValue
             ] as [String : Any]
-        XHNetwork.GET(url: URL_IS_ALLOWED_WATCH_VIDEO, params: params, success: { (response) in
+        XHNetwork.GET(url: XHURL.NetCourseController.queAttrIsHave, params: params, success: { (response) in
             guard let responseJson = response as? [String : Any],
                 let model = XHIsAllowedWatch(JSON: responseJson) else {
                     return

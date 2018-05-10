@@ -12,7 +12,7 @@ class XHPaperDetailCellContentView: UIView {
     lazy var practiceButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(named: "button_paperList_practice"), for: .normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: FONT_SIZE_13)
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: CGFloat.FontSize._13)
         return btn
     }()
     
@@ -31,7 +31,7 @@ class XHPaperDetailCellContentView: UIView {
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: COLOR_PAPAER_TYPE_BUTTON_TITLE, fontSize: FONT_SIZE_13)
+        let lbl = UILabel(text: "", textColor: COLOR_PAPAER_TYPE_BUTTON_TITLE, fontSize: CGFloat.FontSize._13)
         lbl.numberOfLines = 0
         return lbl
     }()

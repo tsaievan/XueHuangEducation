@@ -43,7 +43,7 @@ class XHLoginDetailView: UIView {
     lazy fileprivate var userAccountTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
-        textField.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
+        textField.font = UIFont.systemFont(ofSize: CGFloat.FontSize._14)
         textField.clearButtonMode = .whileEditing
         return textField
     }()
@@ -53,7 +53,7 @@ class XHLoginDetailView: UIView {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
-        textField.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
+        textField.font = UIFont.systemFont(ofSize: CGFloat.FontSize._14)
         textField.clearButtonMode = .whileEditing
         return textField
     }()
@@ -61,7 +61,7 @@ class XHLoginDetailView: UIView {
     ///< 登录按钮
     lazy fileprivate var loginButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: FONT_SIZE_16)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._16)
         btn.setTitle("登 录", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.layer.cornerRadius = 5
@@ -86,7 +86,7 @@ class XHLoginDetailView: UIView {
     ///< 获取验证码按钮
     lazy fileprivate var getAuthButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._14)
         btn.setTitle("获取验证码", for: .normal)
         btn.setTitleColor(UIColor.Global.darkGray, for: .normal)
         btn.layer.cornerRadius = 5

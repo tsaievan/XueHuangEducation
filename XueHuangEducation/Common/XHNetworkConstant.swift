@@ -9,48 +9,74 @@
 import UIKit
 
 struct XHURL {
+    ///< baseURL
     static let base = "http://120.77.242.84:8083"
-    struct mobileController {
+    struct MobileController {
         ///< 8. 获取做题页面数据
         static let getPaperQuestion = "/xhweb/mobileController.do?mobilePaperQuestion"
         ///< 11. 查询解析内容
         static let checkAnalysisContent = "/xhweb/mobileController.do?viewJx"
     }
+    
+    struct AppController {
+        ///< 1. 获取主页面数据
+        static let list = "xhweb/appController.do?list"
+        
+        ///< 2. 获取网校讲题页面数据
+        static let toMobileNetCourse = "xhweb/appController.do?toMobileNetCourse"
+        
+        ///< 3. 获取网校讲题课件页面数据
+        static let toNetCourseware = "xhweb/appController.do?toNetCourseware"
+        
+        ///< 5. 获取考卷列表数据
+        static let toMobilePaperList = "xhweb/appController.do?toMobilePaperList"
+        
+        ///< 7. 加载考卷分类
+        static let getTree = "xhweb/appController.do?getTree"
+        
+        ///< 13. 判断用户是否有做题记录
+        static let isQuestionLog = "xhweb/appController.do?isQuestionLog"
+        
+        ///< 14. 获取在线应答页面数据
+        static let toCourseCatalog = "xhweb/appController.do?toCourseCatalog"
+        
+        
+    }
+    
+    struct NetCourseController {
+        ///< 41. 判断用户是否有看视频权限
+        static let queAttrIsHave = "xhweb/netCourseController.do?queAttrIsHave"
+    }
+    
+    struct PaperCatalogController {
+        ///< 35. 判断用户是否有做题权限
+        static let isPriviAnsQuestion = "xhweb/paperCatalogController.do?isPriviAnsQuestion"
+    }
 }
 
-///< baseURL
 
 
-///< 1. 获取主页面数据
-let URL_HOMEPAGE_LIST = "xhweb/appController.do?list"
 
-///< 2. 获取网校讲题页面数据
-let URL_TO_MOBILE_NET_COURSE = "xhweb/appController.do?toMobileNetCourse"
 
-///< 3. 获取网校讲题课件页面数据
-let URL_TO_NET_COURSE_WARE = "xhweb/appController.do?toNetCourseware"
+
 
 ///< 4. 退出登录
 let URL_LOGIN_OUT = "xhweb/appController.do?loginOut"
 
-///< 5. 获取考卷列表数据
-let URL_TO_MOBILE_PAPER_LIST = "xhweb/appController.do?toMobilePaperList"
+
 
 ///< 6. 考卷类型页面数据
 let URL_MOBILE_PAPER_CATALOG = "xhweb/appController.do?mobilePaperCatalog"
 
-///< 7. 加载考卷分类
-let URL_MOBILE_PAPER_CATALOG_NEW = "xhweb/appController.do?getTree"
 
 
 
 
 
-///< 13. 判断用户是否有做题记录
-let URL_HAS_QUESTION_LOG = "xhweb/appController.do?isQuestionLog"
 
-///< 13. 获取在线应答页面数据
-let URL_TO_QUESTION_LIST = "xhweb/appController.do?toCourseCatalog"
+
+
+
 
 ///< 15. 获取本课程问答列表及查询问答
 let URL_GET_QUESTION_LIST = "/xhweb/mobileController.do?toQuestionList"
@@ -88,9 +114,7 @@ let URL_APP_LOGIN_ALTER_PASSWORD = "xhweb/appLogin.do?alterPassword"
 ///< 29. 解密播放视频链接
 let URL_APP_DECRYPT_VIDEO_PLAYER_URL = "xhweb/appController.do?getDecryptPlayMp4Url"
 
-///< 35. 判断用户是否有做题权限
-let URL_IS_ALLOWED_ANSWER_QUESTION = "xhweb/paperCatalogController.do?isPriviAnsQuestion"
 
-///< 41. 判断用户是否有看视频权限
-let URL_IS_ALLOWED_WATCH_VIDEO = "xhweb/netCourseController.do?queAttrIsHave"
+
+
 

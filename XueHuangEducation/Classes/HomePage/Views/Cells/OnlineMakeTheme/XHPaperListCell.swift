@@ -27,8 +27,8 @@ class XHPaperListCell: UITableViewCell {
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: UIColor.Global.skyBlue, fontSize: FONT_SIZE_13)
-        lbl.font = UIFont.boldSystemFont(ofSize: FONT_SIZE_13)
+        let lbl = UILabel(text: "", textColor: UIColor.Global.skyBlue, fontSize: CGFloat.FontSize._13)
+        lbl.font = UIFont.boldSystemFont(ofSize: CGFloat.FontSize._13)
         lbl.numberOfLines = 0
         return lbl
     }()

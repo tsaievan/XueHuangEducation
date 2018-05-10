@@ -29,7 +29,7 @@ class XHMobilePaper {
             "paperId" : paperId,
             "isFree" : String.empty,
             ]
-        XHNetwork.GET(url: URL_MOBILE_PAPER_CATALOG_NEW, params: params, success: { (response) in
+        XHNetwork.GET(url: XHURL.AppController.getTree, params: params, success: { (response) in
             guard let responseJson = response as? [[String : Any]] else {
                 return
             }
@@ -62,7 +62,7 @@ class XHMobilePaper {
             "paperId" : forPaperId,
             "paperCatalogId" : paperCatalogId
         ]
-        XHNetwork.GET(url: URL_IS_ALLOWED_ANSWER_QUESTION, params: params, success: { (response) in
+        XHNetwork.GET(url: XHURL.PaperCatalogController.isPriviAnsQuestion, params: params, success: { (response) in
             guard let responseJson = response as? [String : Any],
             let model = XHIsAllowedAnswer(JSON: responseJson) else {
                 return
@@ -89,7 +89,7 @@ class XHMobilePaper {
             "paperId" : forPaperId,
             "paperCatalogId" : paperCatalogId
         ]
-        XHNetwork.GET(url: URL_HAS_QUESTION_LOG, params: params, success: { (response) in
+        XHNetwork.GET(url: XHURL.AppController.isQuestionLog, params: params, success: { (response) in
             guard let responseJson = response as? [String : Any],
                 let hasQuestionLog = responseJson["success"] as? Bool else {
                     return

@@ -24,21 +24,21 @@ class XHCatalogListSegmentView: UIView {
     var lastButton: XHButton?
     
     lazy var myTeachButton: XHButton = {
-        let btn = XHButton(withButtonImage: "image_profile_myTeach", title: "网校讲题", titleFont: FONT_SIZE_13, gap: 0)
+        let btn = XHButton(withButtonImage: "image_profile_myTeach", title: "网校讲题", titleFont: CGFloat.FontSize._13, gap: 0)
         btn.tag = XHButtonType.teach.rawValue
         btn.addTarget(self, action: #selector(didClickSegmentViewButtonAction), for: .touchUpInside)
         return btn
     }()
     
     lazy var myThemeButton: XHButton = {
-        let btn = XHButton(withButtonImage: "image_profile_myTheme", title: "在线做题", titleFont: FONT_SIZE_13, gap: 0)
+        let btn = XHButton(withButtonImage: "image_profile_myTheme", title: "在线做题", titleFont: CGFloat.FontSize._13, gap: 0)
         btn.tag = XHButtonType.theme.rawValue
         btn.addTarget(self, action: #selector(didClickSegmentViewButtonAction), for: .touchUpInside)
         return btn
     }()
     
     lazy var myQuestionButton: XHButton = {
-        let btn = XHButton(withButtonImage: "image_profile_myQuestion", title: "在线问答", titleFont: FONT_SIZE_13, gap: 0)
+        let btn = XHButton(withButtonImage: "image_profile_myQuestion", title: "在线问答", titleFont: CGFloat.FontSize._13, gap: 0)
         btn.tag = XHButtonType.answer.rawValue
         btn.addTarget(self, action: #selector(didClickSegmentViewButtonAction), for: .touchUpInside)
         return btn

@@ -83,7 +83,7 @@ class XHCourseCatalogButtonsContainterView: UIView {
                 })
                 btn.setTitle(model.courseClassName, for: .normal)
                 btn.setTitleColor(COLOR_CATALOG_BUTTON_TITLE_COLOR, for: .normal)
-                btn.titleLabel?.font = UIFont.systemFont(ofSize: FONT_SIZE_14)
+                btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._14)
                 btn.addTarget(self, action: #selector(didClickCourseCatalogButtonAction), for: .touchUpInside)
                 if index == models.count - 1 { ///< 表明是最后一个按钮
                     lastButton = btn

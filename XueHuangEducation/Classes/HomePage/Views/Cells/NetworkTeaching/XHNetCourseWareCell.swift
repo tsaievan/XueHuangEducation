@@ -43,19 +43,19 @@ class XHNetCourseWareCell: UITableViewCell {
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: COLOR_CATALOG_BUTTON_TITLE_COLOR, fontSize: FONT_SIZE_15)
-        lbl.font = UIFont.boldSystemFont(ofSize: FONT_SIZE_15)
+        let lbl = UILabel(text: "", textColor: COLOR_CATALOG_BUTTON_TITLE_COLOR, fontSize: CGFloat.FontSize._15)
+        lbl.font = UIFont.boldSystemFont(ofSize: CGFloat.FontSize._15)
         lbl.numberOfLines = 2 ///< 防止有些标题过长, 在iPhoneSE等小机型下转到第三行, 跟teacherLabel相冲突
         return lbl
     }()
     
     lazy var teacherLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: COLOR_PAPAER_TYPE_BUTTON_TITLE, fontSize: FONT_SIZE_13)
+        let lbl = UILabel(text: "", textColor: COLOR_PAPAER_TYPE_BUTTON_TITLE, fontSize: CGFloat.FontSize._13)
         return lbl
     }()
     
     lazy var listenButton: XHButton = {
-        let btn = XHButton(withButtonImage: "catalogList_listen_button", title: "试听", titleColor: UIColor.Global.skyBlue, titleFont: FONT_SIZE_12, gap: 0)
+        let btn = XHButton(withButtonImage: "catalogList_listen_button", title: "试听", titleColor: UIColor.Global.skyBlue, titleFont: CGFloat.FontSize._12, gap: 0)
         return btn
     }()
     

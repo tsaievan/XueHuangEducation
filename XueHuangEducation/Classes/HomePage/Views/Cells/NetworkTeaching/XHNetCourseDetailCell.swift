@@ -33,13 +33,13 @@ class XHNetCourseDetailCell: UITableViewCell {
     }()
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: COLOR_CATALOG_BUTTON_TITLE_COLOR, fontSize: FONT_SIZE_16)
+        let lbl = UILabel(text: "", textColor: COLOR_CATALOG_BUTTON_TITLE_COLOR, fontSize: CGFloat.FontSize._16)
         lbl.numberOfLines = 0
         return lbl
     }()
     
     lazy var listenButton: XHButton = {
-        let btn = XHButton(withButtonImage: "catalogList_listen_button", title: "试听", titleColor: UIColor.Global.skyBlue, titleFont: FONT_SIZE_12, gap: 0)
+        let btn = XHButton(withButtonImage: "catalogList_listen_button", title: "试听", titleColor: UIColor.Global.skyBlue, titleFont: CGFloat.FontSize._12, gap: 0)
         return btn
     }()
     
