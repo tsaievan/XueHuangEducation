@@ -8,18 +8,28 @@
 
 import UIKit
 
+// MARK: - XHSectionTitleHeaderView代理
 protocol XHSectionTitleHeaderViewDelegate: NSObjectProtocol {
     func sectionTitleHeaderViewDidClickButtonList(headerView: XHSectionTitleHeaderView, sender: UIButton)
+}
+
+extension String {
+    struct SectionTitleHeaderView {
+        static let titleButtonText = " 讲题列表"
+        static let titleButtonImageName = "catalogList_listen_small_button"
+        static let moreButtonImageName = "button_paperList_more"
+    }
 }
 
 class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
     
     weak var xh_delegate: XHSectionTitleHeaderViewDelegate?
     
+    // MARK: - 懒加载
     lazy var titleButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.setImage(UIImage(named: "catalogList_listen_small_button"), for: .normal)
-        btn.setTitle(" 讲题列表", for: .normal)
+        btn.setImage(UIImage(named: String.SectionTitleHeaderView.titleButtonImageName), for: .normal)
+        btn.setTitle(String.SectionTitleHeaderView.titleButtonText, for: .normal)
         btn.setTitleColor(COLOR_PAPAER_TYPE_BUTTON_TITLE, for: .normal)
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: FONT_SIZE_16)
         btn.sizeToFit()
@@ -55,7 +65,7 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
     
     lazy var moreButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.setImage(UIImage(named: "button_paperList_more"), for: .normal)
+        btn.setImage(UIImage(named: String.SectionTitleHeaderView.moreButtonImageName), for: .normal)
         btn.addTarget(self, action: #selector(didClickMoreButtonAction), for: .touchUpInside)
         btn.isHidden = true
         return btn
@@ -86,7 +96,7 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
             headerView.tapSectionClosure = tapSectionClosure
         }
     }
-    
+    // MARK: - init方法
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -95,10 +105,9 @@ class XHSectionTitleHeaderView: UITableViewHeaderFooterView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
 
+// MARK: - 设置UI
 extension XHSectionTitleHeaderView {
     fileprivate func setupUI() {
         contentView.addSubview(titleButton)
@@ -147,6 +156,7 @@ extension XHSectionTitleHeaderView {
     }
 }
 
+// MARK: - 其他方法
 extension XHSectionTitleHeaderView {
     func dismissPopMenuView() {
         moreButton.isSelected = false
@@ -154,6 +164,7 @@ extension XHSectionTitleHeaderView {
     }
 }
 
+// MARK: - PopMenu的代理方法
 extension XHSectionTitleHeaderView: XHPopMenuDelegate {
     func popMenuViewDidClickButton(menu: XHPopMenu, sender: UIButton) {
         xh_delegate?.sectionTitleHeaderViewDidClickButtonList(headerView: self, sender: sender)

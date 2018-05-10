@@ -25,6 +25,20 @@ enum XHQuestionEnterType: String {
     case broadcast = "5"
 }
 
+enum XHHomePageShowTileType: String {
+    case detail = "0"
+    case button = "1"
+}
+
+extension String {
+    struct HomePage {
+        static let construct = "建工类"
+        static let recommend = "推荐课程"
+        static let hot = "热门课程"
+        static let all = "全部"
+    }
+}
+
 class XHHomePage {
     
     /// 获取首页数据的逻辑
@@ -49,15 +63,15 @@ class XHHomePage {
                         return
                     }
                     ///< 显示的是小标题
-                    if level == "0" {
+                    if level == XHHomePageShowTileType.detail.rawValue {
                         titles.append(catalog)
                     }
-                    var title: String = "建工类"
+                    var title: String = String.HomePage.construct
                     if let titleModel = titles.first {
-                        title = titleModel.courseClassName ?? "建工类"
+                        title = titleModel.courseClassName ?? String.HomePage.construct
                     }
                     ///< 各个按钮的名称
-                    if level == "1" {
+                    if level == XHHomePageShowTileType.button.rawValue {
                         catalog.customName = title
                         newCatalogs.append(catalog)
                     }
@@ -67,7 +81,7 @@ class XHHomePage {
             var newRecomNetCourses = [XHNetCourse]()
             if let recomNetCourses = model.isRecomNetCourse {
                 if let first = recomNetCourses.first {
-                    first.catalogName = "推荐课程"
+                    first.catalogName = String.HomePage.recommend
                 }
                 if recomNetCourses.count >= 4 {
                     for (index, recom) in recomNetCourses.enumerated() {
@@ -84,7 +98,7 @@ class XHHomePage {
             var newHotNetCourses = [XHNetCourse]()
             if let hotNetCourses = model.hotNetCourse {
                 if let first = hotNetCourses.first {
-                    first.catalogName = "热门课程"
+                    first.catalogName = String.HomePage.hot
                 }
                 if hotNetCourses.count >= 4 {
                     for (index, hot) in hotNetCourses.enumerated() {
@@ -100,10 +114,10 @@ class XHHomePage {
             }
             success?(mtArray)
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
-                failue?("网络连接失败, 请检查网络")
+            if error.code == XHNetworkError.Code.connetFailue {
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
-                failue?("数据加载失败")
+                failue?(XHNetworkError.Desription.commonError)
             }
         }
     }
@@ -150,10 +164,10 @@ class XHHomePage {
             }
             success?(fatherArray, model.imgAddr)
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
-                failue?("网络连接失败, 请检查网络")
+            if error.code == XHNetworkError.Code.connetFailue {
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
-                failue?("数据加载失败")
+                failue?(XHNetworkError.Desription.commonError)
             }
         }
     }
@@ -210,10 +224,10 @@ class XHHomePage {
             }
             success?(fatherArray, model.courseClassName)
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
-                failue?("网络连接失败, 请检查网络")
+            if error.code == XHNetworkError.Code.connetFailue {
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
-                failue?("数据加载失败")
+                failue?(XHNetworkError.Desription.commonError)
             }
         }
     }
@@ -231,7 +245,7 @@ class XHHomePage {
             "enterType" : enterType.rawValue,
             "courseClassName" : courseName,
             "courseClassId" : courseId,
-            "actionType" : "all"
+            "actionType" : XHActionType.all.rawValue
         ]
         XHNetwork.GET(url: URL_TO_QUESTION_LIST, params: params, success: { (response) in
             guard let responseJson = response as? [String : Any],
@@ -242,15 +256,15 @@ class XHHomePage {
             }
             total.queCount = model.totalCount
             let originalName = total.courseClassName
-            total.courseClassName = "全部"
+            total.courseClassName = String.HomePage.all
             var array = questions
             array.insert(total, at: 0)
             success?(array, originalName)
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
-                failue?("网络连接失败, 请检查网络")
+            if error.code == XHNetworkError.Code.connetFailue {
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
-                failue?("数据加载失败")
+                failue?(XHNetworkError.Desription.commonError)
             }
         }
     }

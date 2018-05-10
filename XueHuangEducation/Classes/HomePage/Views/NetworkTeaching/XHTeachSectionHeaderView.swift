@@ -13,7 +13,7 @@ typealias XHTapTeachSectionHeaderView = () -> ()
 class XHTeachSectionHeaderView: UITableViewHeaderFooterView {
     
     lazy var titleLabel: UILabel = {
-        let lbl = UILabel(text: "", textColor: nil, fontSize: 16)
+        let lbl = UILabel(text: String.empty, textColor: nil, fontSize: 16)
         return lbl
     }()
     

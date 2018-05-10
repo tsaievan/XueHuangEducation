@@ -27,9 +27,12 @@ extension UIColor {
 
 // MARK: - 字符串的分类
 extension String {
-    static let empty = "" ///< 空字符串
-    static let point = "." ///< 一个.
-    static let space = " " ///< 空格
+    ///< 空字符串
+    static let empty = ""
+    ///< 一个点字符串
+    static let point = "."
+    ///< 空格
+    static let space = " "
     enum Alert: String {
         case info = "信息"
         case cancel = "取消"
@@ -61,6 +64,33 @@ struct XHHeaderReuseIdentifier {
 extension CGFloat {
     static let tableViewMinimumHeaderHeight: CGFloat = 0.01
     static let tableViewMinimumFooterHeight: CGFloat = 0.01
+}
+
+struct XHMargin {
+    /**
+     ///< 全局
+     let MARGIN_GLOBAL_2: CGFloat = 2
+     let MARGIN_GLOBAL_5: CGFloat = 5
+     let MARGIN_GLOBAL_10: CGFloat = 10
+     let MARGIN_GLOBAL_14: CGFloat = 14
+     let MARGIN_GLOBAL_15: CGFloat = 15
+     let MARGIN_GLOBAL_20: CGFloat = 20
+     let MARGIN_GLOBAL_25: CGFloat = 25
+     let MARGIN_GLOBAL_30: CGFloat = 30
+     let MARGIN_GLOBAL_44: CGFloat = 44 ///< 一般navigationBar的高度
+     let MARGIN_GLOBAL_60: CGFloat = 60
+     let TOP_EDGE_AJUSTED: CGFloat = UIDevice.iPhoneX ? 84 : 64
+     */
+    static let _2: CGFloat = 2
+    static let _5: CGFloat = 5
+    static let _10: CGFloat = 10
+    static let _14: CGFloat = 14
+    static let _15: CGFloat = 15
+    static let _20: CGFloat = 20
+    static let _25: CGFloat = 25
+    static let _30: CGFloat = 30
+    static let _44: CGFloat = 44
+    static let _60: CGFloat = 60
 }
 
 

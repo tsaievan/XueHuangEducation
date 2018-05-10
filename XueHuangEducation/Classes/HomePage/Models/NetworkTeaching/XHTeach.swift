@@ -46,10 +46,10 @@ class XHTeach {
             }
             success?(courses)
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
-                failue?("网络连接失败, 请检查网络")
+            if error.code == XHNetworkError.Code.connetFailue {
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
-                failue?("数据加载失败")
+                failue?(XHNetworkError.Desription.commonError)
             }
         }
     }
@@ -67,10 +67,10 @@ class XHTeach {
             
             success?(model)
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
-                failue?("网络连接失败, 请检查网络")
+            if error.code == XHNetworkError.Code.connetFailue {
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
-                failue?("数据加载失败")
+                failue?(XHNetworkError.Desription.commonError)
             }
         }
     }

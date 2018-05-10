@@ -15,6 +15,16 @@ extension XHRatio.W_H_R.PlayNetCourseViewController {
     static let playerViewRatio: CGFloat = 9.0/16.0
 }
 
+extension String {
+    struct PlayNetCourseViewController {
+        struct Title {
+            static let showVideo = "展示视频"
+        }
+    }
+}
+
+fileprivate let showVideo = String.PlayNetCourseViewController.Title.showVideo
+
 fileprivate let playerViewRatio = XHRatio.W_H_R.PlayNetCourseViewController.playerViewRatio
 
 class XHPlayNetCourseViewController: XHBaseViewController {
@@ -30,7 +40,7 @@ class XHPlayNetCourseViewController: XHBaseViewController {
                     return
             }
             let title = (videoModel.netCoursewareName ?? String.empty) + String.space + (videoModel.teacher ?? String.empty)
-            self.navigationItem.title = "展示视频"
+            self.navigationItem.title = showVideo
             playerModel.title = title
             playerModel.videoURL = url
             playerView.playerControlView(controlView, playerModel: playerModel)
@@ -50,7 +60,7 @@ class XHPlayNetCourseViewController: XHBaseViewController {
             }
             
             let title = (model?.netCourseName ?? String.empty) + String.space + (model?.courseTeacher ?? String.empty)
-            self.navigationItem.title = model?.netCourseName ?? "展示视频"
+            self.navigationItem.title = model?.netCourseName ?? showVideo
             playerModel.title = title
             playerModel.videoURL = url
             playerView.playerControlView(controlView, playerModel: playerModel)
@@ -93,7 +103,7 @@ extension XHPlayNetCourseViewController {
     
     fileprivate func makeConstaints() {
         playerView.snp.makeConstraints { (make) in
-            make.top.equalTo(view).offset(20);
+            make.top.equalTo(view).offset(XHMargin._20);
             make.left.right.equalTo(view);
             make.height.equalTo(playerView.snp.width).multipliedBy(playerViewRatio)
         }

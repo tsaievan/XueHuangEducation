@@ -25,6 +25,7 @@ public struct XHNetworkError {
         struct TeachViewController {}
         struct ThemeViewController {}
         static let connectFailue: String = "网络连接失败, 请检查网络"
+        static let commonError: String = "数据加载失败"
     }
 }
 

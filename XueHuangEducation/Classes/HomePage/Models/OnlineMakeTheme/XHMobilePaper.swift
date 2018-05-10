@@ -27,7 +27,7 @@ class XHMobilePaper {
     class func getMobilePaperCatalog(withPaperId paperId: String, success: XHGetMobilePaperCatalogSuccess?, failue: XHGetMobilePaperCatalogFailue?) {
         let params = [
             "paperId" : paperId,
-            "isFree" : "",
+            "isFree" : String.empty,
             ]
         XHNetwork.GET(url: URL_MOBILE_PAPER_CATALOG_NEW, params: params, success: { (response) in
             guard let responseJson = response as? [[String : Any]] else {
@@ -42,10 +42,10 @@ class XHMobilePaper {
             }
             success?(array)
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
-                failue?("网络连接失败, 请检查网络")
+            if error.code == XHNetworkError.Code.connetFailue {
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
-                failue?("数据加载失败")
+                failue?(XHNetworkError.Desription.commonError)
             }
         }
     }
@@ -69,14 +69,21 @@ class XHMobilePaper {
             }
             success?(model)
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
-                failue?("网络连接失败, 请检查网络")
+            if error.code == XHNetworkError.Code.connetFailue {
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
-                failue?("数据加载失败")
+                failue?(XHNetworkError.Desription.commonError)
             }
         }
     }
-    ///< URL_HAS_QUESTION_LOG
+    
+    /// 是否有做题记录的接口
+    ///
+    /// - Parameters:
+    ///   - forPaperId: 考卷id
+    ///   - paperCatalogId: 考卷分类的id
+    ///   - success: 请求成功的回调
+    ///   - failue: 请求失败的回调
     class func hasQuestionLog(forPaperId: String, paperCatalogId: String, success: XHhasQuestionLogSuccess?, failue: XHhasQuestionLogFailue?) {
         let params = [
             "paperId" : forPaperId,
@@ -89,10 +96,10 @@ class XHMobilePaper {
             }
             success?(hasQuestionLog)
         }) { (error) in
-            if error.code == NSURLErrorNotConnectedToInternet {
-                failue?("网络连接失败, 请检查网络")
+            if error.code == XHNetworkError.Code.connetFailue {
+                failue?(XHNetworkError.Desription.connectFailue)
             }else {
-                failue?("数据加载失败")
+                failue?(XHNetworkError.Desription.commonError)
             }
         }
     }

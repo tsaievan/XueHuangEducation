@@ -19,6 +19,6 @@ class XHIsAllowedWatch: XHIsAllowedCommon {
     
     override func mapping(map: Map) {
         super.mapping(map: map)
-        st                <- map["st"]
+        st <- map["st"]
     }
 }
