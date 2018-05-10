@@ -27,7 +27,7 @@ class XHNetCourseDetailCell: UITableViewCell {
     lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = 5
+        imageView.layer.cornerRadius = CGFloat.commonCornerRadius
         imageView.layer.masksToBounds = true
         return imageView
     }()

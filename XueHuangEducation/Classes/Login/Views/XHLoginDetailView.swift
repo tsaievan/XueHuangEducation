@@ -64,7 +64,7 @@ class XHLoginDetailView: UIView {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._16)
         btn.setTitle("登 录", for: .normal)
         btn.setTitleColor(.white, for: .normal)
-        btn.layer.cornerRadius = 5
+        btn.layer.cornerRadius = CGFloat.commonCornerRadius
         btn.layer.masksToBounds = true
         btn.backgroundColor = UIColor.Global.skyBlue
         btn.addTarget(self, action: #selector(didClickLoginButtonAction), for: .touchUpInside)
@@ -89,7 +89,7 @@ class XHLoginDetailView: UIView {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._14)
         btn.setTitle("获取验证码", for: .normal)
         btn.setTitleColor(UIColor.Global.darkGray, for: .normal)
-        btn.layer.cornerRadius = 5
+        btn.layer.cornerRadius = CGFloat.commonCornerRadius
         btn.layer.masksToBounds = true
         btn.layer.borderWidth = 0.5
         btn.layer.borderColor = COLOR_BUTTON_BORDER_GETAUTH_DARKGRAY.cgColor

@@ -40,7 +40,7 @@ class XHCourseCatalogSectionFooterView: UIView {
     lazy var containView: UIView = {
         let v = UIView()
         v.backgroundColor = .white
-        v.layer.cornerRadius = 5
+        v.layer.cornerRadius = CGFloat.commonCornerRadius
         v.layer.masksToBounds = true
         return v
     }()
@@ -89,8 +89,6 @@ extension XHCourseCatalogSectionFooterView {
             make.top.equalTo(chTitileImageView.snp.bottom).offset(XHMargin._25)
             make.leading.trailing.equalTo(chTitileImageView)
         }
-        
-        
         
         sloganImageView.snp.makeConstraints { (make) in
             make.leading.equalTo(logoImageView).offset(XHMargin._20)

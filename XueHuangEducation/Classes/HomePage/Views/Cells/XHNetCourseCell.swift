@@ -13,7 +13,7 @@ class XHNetCourseButton: UIControl {
         let iv = UIView()
         iv.isUserInteractionEnabled = false
         iv.backgroundColor = COLOR_HOMEPAGE_COURSE_ICON_BLUE
-        iv.layer.cornerRadius = 5
+        iv.layer.cornerRadius = CGFloat.commonCornerRadius
         iv.layer.masksToBounds = true
         return iv
     }()
@@ -44,7 +44,6 @@ class XHNetCourseButton: UIControl {
     
     var model: XHNetCourse? {
         didSet {
-            
             titleLabel.text = model?.netCourseName
         }
     }
@@ -104,7 +103,7 @@ class XHNetCourseButtonsContainterView: UIView {
     lazy var tipView: UIView = {
         let t = UIView()
         t.backgroundColor = UIColor.Global.skyBlue
-        t.layer.cornerRadius = 2
+        t.layer.cornerRadius = CGFloat.smallCornerRadius
         t.layer.masksToBounds = true
         return t
     }()
@@ -219,7 +218,7 @@ class XHNetCourseCell: UITableViewCell {
     lazy var buttonsView: XHNetCourseButtonsContainterView = {
         let cv = XHNetCourseButtonsContainterView()
         cv.xh_delegate = self
-        cv.layer.cornerRadius = 5
+        cv.layer.cornerRadius = CGFloat.commonCornerRadius
         cv.layer.masksToBounds = true
         cv.backgroundColor = .white
         return cv
@@ -247,7 +246,7 @@ extension XHNetCourseCell {
         backgroundColor = UIColor.Global.background
         contentView.backgroundColor = .clear
         contentView.addSubview(buttonsView)
-        contentView.layer.cornerRadius = 5
+        contentView.layer.cornerRadius = CGFloat.commonCornerRadius
         contentView.layer.masksToBounds = true
         makeConstraints()
     }

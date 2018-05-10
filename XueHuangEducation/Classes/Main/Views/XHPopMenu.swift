@@ -21,7 +21,7 @@ class XHPopMenu: UIView {
     init(withButtonTitles titles: [String], tintColor: UIColor, textColor: UIColor, buttonHeight: CGFloat, textSize: CGFloat) {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: CGFloat(titles.count) * buttonHeight))
         backgroundColor = tintColor
-        layer.cornerRadius = 5
+        layer.cornerRadius = CGFloat.commonCornerRadius
         layer.masksToBounds = true
         for (index, title) in titles.enumerated() {
             let btn = UIButton(title: title, titleColor: textColor, fontSize: textSize, target: self, action: #selector(didClickPopMenuButton))

@@ -65,6 +65,8 @@ struct XHHeaderReuseIdentifier {
 extension CGFloat {
     static let tableViewMinimumHeaderHeight: CGFloat = 0.01
     static let tableViewMinimumFooterHeight: CGFloat = 0.01
+    static let commonCornerRadius: CGFloat = 5.0
+    static let smallCornerRadius: CGFloat = 2.0
     
     ///< 字体大小
     struct FontSize {

@@ -12,7 +12,7 @@ class XHQuestionListCell: UITableViewCell {
     
     lazy var countView: UIView = {
         let tv = UIView()
-        tv.layer.cornerRadius = 2
+        tv.layer.cornerRadius = CGFloat.smallCornerRadius
         tv.layer.masksToBounds = true
         tv.backgroundColor = COLOR_QUESTION_COUNT_LABEL_LIGHT_GRAY
         return tv

@@ -99,7 +99,7 @@ class XHPaperDetailCell: UITableViewCell {
     
     lazy var container: XHPaperDetailCellContentView = {
         let cv = XHPaperDetailCellContentView()
-        cv.layer.cornerRadius = 5
+        cv.layer.cornerRadius = CGFloat.commonCornerRadius
         cv.layer.masksToBounds = true
         return cv
     }()

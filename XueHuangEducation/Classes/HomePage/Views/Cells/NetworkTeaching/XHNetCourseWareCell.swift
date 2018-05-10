@@ -36,7 +36,7 @@ class XHNetCourseWareCell: UITableViewCell {
     lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "image_teach_courseware")
-        imageView.layer.cornerRadius = 5
+        imageView.layer.cornerRadius = CGFloat.commonCornerRadius
         imageView.layer.masksToBounds = true
         imageView.sizeToFit()
         return imageView

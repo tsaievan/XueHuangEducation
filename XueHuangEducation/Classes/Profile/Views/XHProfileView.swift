@@ -56,7 +56,7 @@ class XHProfileView: UIView {
     
     lazy var iconView: UIView = {
         let icon = UIView()
-        icon.layer.cornerRadius = 5
+        icon.layer.cornerRadius = CGFloat.commonCornerRadius
         icon.layer.masksToBounds = true
         icon.backgroundColor = .white
         return icon
@@ -66,7 +66,7 @@ class XHProfileView: UIView {
         let iconImage = UIImageView()
         iconImage.image = UIImage(named: "image_profile_default")
         iconImage.contentMode = .scaleAspectFit
-        iconImage.layer.cornerRadius = 5
+        iconImage.layer.cornerRadius = CGFloat.commonCornerRadius
         iconImage.layer.masksToBounds = true
         return iconImage
     }()
