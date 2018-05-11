@@ -260,10 +260,10 @@ class XHLogin {
                     failue?("注册失败")
                     return
             }
-            if result == "ok" { ///< 注册成功
+            if result.message == "ok" { ///< 注册成功
                 success?()
             }else {
-                failue?("注册失败")
+                failue?(result.message ?? "注册失败")
             }
         }) { (error) in
             if error.code == XHNetworkError.Code.connetFailue {

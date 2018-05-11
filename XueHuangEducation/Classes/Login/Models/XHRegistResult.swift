@@ -12,16 +12,16 @@ import ObjectMapper
 class XHRegistResult: Mappable {
     ///< 成功: ok
     ///< 失败: error
-    var result: String?
+    var result: XHRegistResult?
     
-    var msg: String?
+    var message: String?
     
     required init?(map: Map) {
     }
     
     func mapping(map: Map) {
-        result  <- map["result"]
-        msg     <- map["msg"]
+        result      <- map["result"]
+        message     <- map["message"]
     }
 
 }
