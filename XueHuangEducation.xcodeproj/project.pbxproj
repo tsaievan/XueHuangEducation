@@ -103,6 +103,9 @@
 		57CA59D9208B7511004C6393 /* XHRegistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA59D8208B7511004C6393 /* XHRegistViewController.swift */; };
 		57D5010920897BB100DD0DBD /* XHResetPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5010820897BB100DD0DBD /* XHResetPwdViewController.swift */; };
 		57D5010B2089A92F00DD0DBD /* UIDevice+XHExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5010A2089A92F00DD0DBD /* UIDevice+XHExtension.swift */; };
+		57E0CA1120A6CC3400CA7801 /* XHProfileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E0CA1020A6CC3400CA7801 /* XHProfileTableView.swift */; };
+		57E0CA1420A6D6D500CA7801 /* XHProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E0CA1320A6D6D500CA7801 /* XHProfileCell.swift */; };
+		57E0CA1620A6E1DC00CA7801 /* XHProfileInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E0CA1520A6E1DC00CA7801 /* XHProfileInfoModel.swift */; };
 		57F32A7F20A174BF00AEC633 /* XHLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A7E20A174BF00AEC633 /* XHLoadingView.swift */; };
 		57F32A8120A1B66E00AEC633 /* XHShowQuestionWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A8020A1B66E00AEC633 /* XHShowQuestionWebController.swift */; };
 		57F32A8720A1EB2700AEC633 /* XHIsAllowedWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A8620A1EB2700AEC633 /* XHIsAllowedWatch.swift */; };
@@ -209,6 +212,9 @@
 		57CA59D8208B7511004C6393 /* XHRegistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHRegistViewController.swift; sourceTree = "<group>"; };
 		57D5010820897BB100DD0DBD /* XHResetPwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHResetPwdViewController.swift; sourceTree = "<group>"; };
 		57D5010A2089A92F00DD0DBD /* UIDevice+XHExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+XHExtension.swift"; sourceTree = "<group>"; };
+		57E0CA1020A6CC3400CA7801 /* XHProfileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHProfileTableView.swift; sourceTree = "<group>"; };
+		57E0CA1320A6D6D500CA7801 /* XHProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHProfileCell.swift; sourceTree = "<group>"; };
+		57E0CA1520A6E1DC00CA7801 /* XHProfileInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHProfileInfoModel.swift; sourceTree = "<group>"; };
 		57F32A7E20A174BF00AEC633 /* XHLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHLoadingView.swift; sourceTree = "<group>"; };
 		57F32A8020A1B66E00AEC633 /* XHShowQuestionWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHShowQuestionWebController.swift; sourceTree = "<group>"; };
 		57F32A8620A1EB2700AEC633 /* XHIsAllowedWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHIsAllowedWatch.swift; sourceTree = "<group>"; };
@@ -248,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				575915E2209C48ED0073A517 /* XHProfile.swift */,
+				57E0CA1520A6E1DC00CA7801 /* XHProfileInfoModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -255,7 +262,9 @@
 		570D3A742095941B005E03FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				57E0CA1220A6D6B700CA7801 /* Cells */,
 				570D3A7520959587005E03FF /* XHProfileView.swift */,
+				57E0CA1020A6CC3400CA7801 /* XHProfileTableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -649,6 +658,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		57E0CA1220A6D6B700CA7801 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				57E0CA1320A6D6D500CA7801 /* XHProfileCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		F4C0DD90C61775D588861981 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -865,6 +882,7 @@
 				574E5A1A2089B4F8009EAF93 /* XHRegistView.swift in Sources */,
 				572B8CA5208E0F2C005EC6CD /* XHHomePageList.swift in Sources */,
 				57A62B1D2088B73400C9D5D2 /* XHProfileViewController.swift in Sources */,
+				57E0CA1420A6D6D500CA7801 /* XHProfileCell.swift in Sources */,
 				57633598208EBC0E009DAF86 /* XHCourseCatalogCell.swift in Sources */,
 				57A62AFA2088983200C9D5D2 /* XHNetwork.swift in Sources */,
 				572E48442095B053006E518D /* XHButton.swift in Sources */,
@@ -881,6 +899,7 @@
 				57A62AC620887A4D00C9D5D2 /* Bundle+XHExtension.swift in Sources */,
 				573427032096E9F600108D1E /* XHTeachViewController.swift in Sources */,
 				570D3A7620959587005E03FF /* XHProfileView.swift in Sources */,
+				57E0CA1120A6CC3400CA7801 /* XHProfileTableView.swift in Sources */,
 				57418EB7209B47E300DC2939 /* XHThemeListController.swift in Sources */,
 				57369A332098B0D700E2E0F9 /* XHRoutine.swift in Sources */,
 				571C801D208CC12C005CD369 /* XHLoginBaseResult.swift in Sources */,
@@ -895,6 +914,7 @@
 				57A62AFC2088AD2F00C9D5D2 /* XHNetworkConstant.swift in Sources */,
 				57A62B152088B73400C9D5D2 /* XHLoginViewController.swift in Sources */,
 				57A62B1B2088B73400C9D5D2 /* XHNavigationController.swift in Sources */,
+				57E0CA1620A6E1DC00CA7801 /* XHProfileInfoModel.swift in Sources */,
 				57A62AEF20887B5600C9D5D2 /* XHCommon.swift in Sources */,
 				57A62ACA20887A4D00C9D5D2 /* UIImage+XHExtension.swift in Sources */,
 				57369A372098B5B000E2E0F9 /* XHPaper.swift in Sources */,

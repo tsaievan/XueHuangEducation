@@ -208,10 +208,18 @@ class XHRegistView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
         setupUI()
+        registNotification()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - 注册通知
+extension XHRegistView {
+    fileprivate func registNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldContentDidChange), name: Notification.Name.UITextFieldTextDidChange, object: nil)
     }
 }
 
@@ -329,9 +337,9 @@ extension XHRegistView {
         if authCodeIsNull {
             return
         }
-        if xhProtocolButton.isSelected != true {
+        if agreeButton.isSelected != true {
             XHAlertHUD.showError(withStatus: "请阅读并同意《学煌教育服务协议》")
-            xhProtocolButton.isSelected = true
+            agreeButton.isSelected = true
             return            
         }
         if !XHRegExTool.isPhoneNumber(phoneNumber: mobieTextField.text!) {
@@ -392,6 +400,7 @@ extension XHRegistView {
     }
 }
 
+// MARK: - 计时器事件
 extension XHRegistView {
     func startCountingDown() {
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCountingDownAction), userInfo: nil, repeats: true)
@@ -412,5 +421,35 @@ extension XHRegistView {
         getAuthButton.isEnabled = false
         getAuthButton.setTitle(title, for: .disabled)
         getAuthButton.setTitleColor(UIColor.Global.lightGray, for: .disabled)
+    }
+}
+
+// MARK: - 通知回调事件
+extension XHRegistView {
+    ///< 设置最大输入手机位数为11
+    @objc fileprivate func textFieldContentDidChange(notification: Notification) {
+        guard let textField = notification.object as? UITextField else {
+            return
+        }
+        if textField == mobieTextField {
+            guard let string = mobieTextField.text else {
+                return
+            }
+            let textString =  string as NSString
+            if textString.length >= 11 {
+                mobieTextField.text = textString.substring(to: 11)
+            }
+            
+        }
+        
+        if textField == authCodeTextField {
+            guard let string = authCodeTextField.text else {
+                return
+            }
+            let textString =  string as NSString
+            if textString.length >= 6 {
+                authCodeTextField.text = textString.substring(to: 6)
+            }
+        }
     }
 }

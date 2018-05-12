@@ -10,14 +10,42 @@ import UIKit
 
 class XHProfileViewController: XHBaseViewController {
     
+    var dataInfo: [XHProfileInfoModel] {
+        let dictArray = [
+            ["title" : "允许2G/3G/4G网络下缓存视频"],
+            ["title" : "允许消息推送"],
+            ["title" : "清除缓存"],
+            ["title" : "关于学煌"],
+            ["title" : "当前版本号:"],
+            ]
+        var mtArr = [XHProfileInfoModel]()
+        for dict in dictArray {
+            guard let model = XHProfileInfoModel(JSON: dict) else {
+                continue
+            }
+            mtArr.append(model)
+        }
+        return mtArr
+    }
+    
+    lazy var profileTableView: XHProfileTableView = {
+        let ptv = XHProfileTableView()
+        ptv.tableHeaderView = profileView
+        ptv.delegate = self
+        ptv.dataSource = self
+        return ptv
+    }()
+    
     lazy var profileView: XHProfileView = {
-        let pv = XHProfileView()
+        let pv = XHProfileView(frame: CGRect(x: 0, y: 0, width: XHSCreen.width, height: 480))
         pv.xh_delegate = self
         return pv
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("\(dataInfo.count)")
         setupUI()
     }
 }
@@ -26,12 +54,13 @@ class XHProfileViewController: XHBaseViewController {
 extension XHProfileViewController {
     fileprivate func setupUI() {
         navigationItem.title = "个人中心"
-        view.addSubview(profileView)
+        view.addSubview(profileTableView)
         makeConstraints()
+        profileTableView.register(XHProfileCell.self, forCellReuseIdentifier: "cell")
     }
     
     fileprivate func makeConstraints() {
-        profileView.snp.makeConstraints { (make) in
+        profileTableView.snp.makeConstraints { (make) in
             make.edges.equalTo(view)
         }
     }
@@ -130,4 +159,22 @@ extension XHProfileViewController: XHProfileViewDelegate {
             })
         }
     }
+}
+
+// MARK: - ProfileTableView的代理方法和数据源方法
+extension XHProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataInfo.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? XHProfileCell else {
+            return UITableViewCell()
+        }
+        cell.model = dataInfo[indexPath.row]
+        return cell
+    }
+
+    
+    
 }

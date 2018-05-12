@@ -245,7 +245,7 @@ class XHLogin {
     
     class func regist(withAccount account: String, password: String, mobile: String, authCode: String, success: XHRegistSuccess?, failue: XHRegistFailue?) {
         let params = [
-            "account" : account,
+            "Accounts" : account,
             "loginPassword" : password,
             "phonebind" : mobile,
             "code" : authCode

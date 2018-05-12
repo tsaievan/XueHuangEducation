@@ -172,9 +172,9 @@ extension XHProfileView {
         }
         
         logoView.snp.makeConstraints { (make) in
-            make.top.equalTo(buttonContainerView.snp.bottom)
-            make.left.right.equalTo(self)
-            make.height.equalTo(200)
+            make.top.equalTo(buttonContainerView.snp.bottom).priority(.low)
+            make.left.right.equalTo(self).priority(.high)
+            make.height.equalTo(200).priority(.low)
         }
     }
 }
