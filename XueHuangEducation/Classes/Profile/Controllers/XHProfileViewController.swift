@@ -19,6 +19,12 @@ class XHProfileViewController: XHBaseViewController {
     var dataInfo: [XHProfileInfoModel] {
         let cacheSize = XHClearCache.getCacheSize()
         let cacheString = String(format: "(%.2fM)", cacheSize)
+        var versionCode = ""
+        if let infoDict = Bundle.main.infoDictionary,
+            let version = infoDict["CFBundleShortVersionString"] as? String {
+            versionCode = version
+        }
+        
         let dictArray = [
             ["title" : "允许2G/3G/4G网络下缓存视频",
              "accessory" : XHProfileCellAccessoryType.xhSwitch,
@@ -30,7 +36,7 @@ class XHProfileViewController: XHBaseViewController {
              "accessory" : XHProfileCellAccessoryType.arrow],
             ["title" : "关于学煌",
              "accessory" : XHProfileCellAccessoryType.arrow],
-            ["title" : "当前版本号:",
+            ["title" : "当前版本号:" + versionCode,
              "accessory" : XHProfileCellAccessoryType.arrow],
             ]
         var mtArr = [XHProfileInfoModel]()
@@ -187,6 +193,10 @@ extension XHProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.model = dataInfo[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
