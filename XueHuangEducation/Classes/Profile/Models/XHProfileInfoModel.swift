@@ -9,17 +9,23 @@
 import UIKit
 import ObjectMapper
 
+enum XHProfileCellAccessoryType {
+    case arrow
+    case xhSwitch
+}
+
 class XHProfileInfoModel: Mappable {
     
     var title: String?
+    var accessory: XHProfileCellAccessoryType?
+    var switchIsOn: Bool?
     
     required init?(map: Map) {
     }
     
     func mapping(map: Map) {
-        title     <- map["title"]
+        title      <- map["title"]
+        accessory  <- map["accessory"]
+        switchIsOn <- map["switchIsOn"]
     }
-    
-
-
 }

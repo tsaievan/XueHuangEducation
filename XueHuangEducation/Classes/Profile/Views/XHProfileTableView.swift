@@ -14,6 +14,8 @@ class XHProfileTableView: XHTableView {
         super.init(frame: frame, style: style)
         backgroundColor = UIColor.Global.background
         tableFooterView = UIView()
+        showsVerticalScrollIndicator = false
+        showsHorizontalScrollIndicator = false 
     }
     
     required init?(coder aDecoder: NSCoder) {

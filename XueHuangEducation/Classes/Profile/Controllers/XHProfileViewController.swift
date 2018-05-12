@@ -12,11 +12,18 @@ class XHProfileViewController: XHBaseViewController {
     
     var dataInfo: [XHProfileInfoModel] {
         let dictArray = [
-            ["title" : "允许2G/3G/4G网络下缓存视频"],
-            ["title" : "允许消息推送"],
-            ["title" : "清除缓存"],
-            ["title" : "关于学煌"],
-            ["title" : "当前版本号:"],
+            ["title" : "允许2G/3G/4G网络下缓存视频",
+             "accessory" : XHProfileCellAccessoryType.xhSwitch,
+             "switchIsOn" : XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY]],
+            ["title" : "允许消息推送",
+             "accessory" : XHProfileCellAccessoryType.xhSwitch,
+             "switchIsOn" : XHPreferences[.USERDEFAULT_SWICH_ALLOW_PUSH_INFO_KEY]],
+            ["title" : "清除缓存",
+             "accessory" : XHProfileCellAccessoryType.arrow],
+            ["title" : "关于学煌",
+             "accessory" : XHProfileCellAccessoryType.arrow],
+            ["title" : "当前版本号:",
+             "accessory" : XHProfileCellAccessoryType.arrow],
             ]
         var mtArr = [XHProfileInfoModel]()
         for dict in dictArray {
@@ -33,19 +40,18 @@ class XHProfileViewController: XHBaseViewController {
         ptv.tableHeaderView = profileView
         ptv.delegate = self
         ptv.dataSource = self
+        ptv.separatorInset = UIEdgeInsets.zero
         return ptv
     }()
     
     lazy var profileView: XHProfileView = {
-        let pv = XHProfileView(frame: CGRect(x: 0, y: 0, width: XHSCreen.width, height: 480))
+        let pv = XHProfileView(frame: CGRect(x: 0, y: 0, width: XHSCreen.width, height: 470))
         pv.xh_delegate = self
         return pv
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("\(dataInfo.count)")
         setupUI()
     }
 }
@@ -174,7 +180,23 @@ extension XHProfileViewController: UITableViewDelegate, UITableViewDataSource {
         cell.model = dataInfo[indexPath.row]
         return cell
     }
+}
 
-    
-    
+extension XHProfileViewController {
+    override func router(withEventName eventName: String, userInfo: [String : Any]) {
+        if eventName == EVENT_PROFILE_CELL_SWITCH_ON_AND_OFF {
+            guard let cell = userInfo[PROFILE_CELL_FOR_SWITCH] as? XHProfileCell,
+            let indexPath = profileTableView.indexPath(for: cell),
+            let xhSwitch = userInfo[PROFILE_CELL_SWITCH_SELF] as? UISwitch else {
+                return
+            }
+            if indexPath.row == XHProfileSwithType.cacheVideo.rawValue { ///< 表明触碰了允许网络下缓存视频的开关
+                XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY] = xhSwitch.isOn
+            }
+            
+            if indexPath.row == XHProfileSwithType.pushInfo.rawValue { ///< 表明触碰了允许消息推送的开关
+                XHPreferences[.USERDEFAULT_SWICH_ALLOW_PUSH_INFO_KEY] = xhSwitch.isOn
+            }
+        }
+    }
 }
