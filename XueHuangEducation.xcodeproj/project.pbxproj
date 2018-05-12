@@ -106,6 +106,7 @@
 		57E0CA1120A6CC3400CA7801 /* XHProfileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E0CA1020A6CC3400CA7801 /* XHProfileTableView.swift */; };
 		57E0CA1420A6D6D500CA7801 /* XHProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E0CA1320A6D6D500CA7801 /* XHProfileCell.swift */; };
 		57E0CA1620A6E1DC00CA7801 /* XHProfileInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E0CA1520A6E1DC00CA7801 /* XHProfileInfoModel.swift */; };
+		57E0CA1D20A7076200CA7801 /* XHClearCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E0CA1C20A7076200CA7801 /* XHClearCacheManager.swift */; };
 		57F32A7F20A174BF00AEC633 /* XHLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A7E20A174BF00AEC633 /* XHLoadingView.swift */; };
 		57F32A8120A1B66E00AEC633 /* XHShowQuestionWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A8020A1B66E00AEC633 /* XHShowQuestionWebController.swift */; };
 		57F32A8720A1EB2700AEC633 /* XHIsAllowedWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A8620A1EB2700AEC633 /* XHIsAllowedWatch.swift */; };
@@ -215,6 +216,7 @@
 		57E0CA1020A6CC3400CA7801 /* XHProfileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHProfileTableView.swift; sourceTree = "<group>"; };
 		57E0CA1320A6D6D500CA7801 /* XHProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHProfileCell.swift; sourceTree = "<group>"; };
 		57E0CA1520A6E1DC00CA7801 /* XHProfileInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHProfileInfoModel.swift; sourceTree = "<group>"; };
+		57E0CA1C20A7076200CA7801 /* XHClearCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = XHClearCacheManager.swift; path = "/Users/tsaievan/Documents/学习/技术/iOS/代码/XHEducation/XueHuangEducation/Tool/XHClearCacheManager.swift"; sourceTree = "<absolute>"; };
 		57F32A7E20A174BF00AEC633 /* XHLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHLoadingView.swift; sourceTree = "<group>"; };
 		57F32A8020A1B66E00AEC633 /* XHShowQuestionWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHShowQuestionWebController.swift; sourceTree = "<group>"; };
 		57F32A8620A1EB2700AEC633 /* XHIsAllowedWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHIsAllowedWatch.swift; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 				57CA59D4208B1BD8004C6393 /* XHPreferenceKey.swift */,
 				57CA59D6208B1F8E004C6393 /* XHPreferenceManager.swift */,
 				57A4E4FC209384C800F8BADE /* XHStorageManager.swift */,
+				57E0CA1C20A7076200CA7801 /* XHClearCacheManager.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 				57614F2D2099EB8500D9EDE5 /* XHNetCourseWare.swift in Sources */,
 				57F32A7F20A174BF00AEC633 /* XHLoadingView.swift in Sources */,
 				572B8C9D208E06F8005EC6CD /* XHHomePage.swift in Sources */,
+				57E0CA1D20A7076200CA7801 /* XHClearCacheManager.swift in Sources */,
 				572D1B7220A0375400B1F0BC /* XHUIWebViewController.swift in Sources */,
 				57D5010B2089A92F00DD0DBD /* UIDevice+XHExtension.swift in Sources */,
 				57A62B1F2088B7BE00C9D5D2 /* XHGetAuthCodeResult.swift in Sources */,

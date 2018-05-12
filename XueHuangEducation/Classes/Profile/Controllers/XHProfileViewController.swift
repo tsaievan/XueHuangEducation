@@ -8,9 +8,17 @@
 
 import UIKit
 
+enum XHProfileCellSelectType: Int {
+    case clearCache = 2
+    case about = 3
+    case version = 4
+}
+
 class XHProfileViewController: XHBaseViewController {
     
     var dataInfo: [XHProfileInfoModel] {
+        let cacheSize = XHClearCache.getCacheSize()
+        let cacheString = String(format: "(%.2fM)", cacheSize)
         let dictArray = [
             ["title" : "允许2G/3G/4G网络下缓存视频",
              "accessory" : XHProfileCellAccessoryType.xhSwitch,
@@ -18,7 +26,7 @@ class XHProfileViewController: XHBaseViewController {
             ["title" : "允许消息推送",
              "accessory" : XHProfileCellAccessoryType.xhSwitch,
              "switchIsOn" : XHPreferences[.USERDEFAULT_SWICH_ALLOW_PUSH_INFO_KEY]],
-            ["title" : "清除缓存",
+            ["title" : "清除缓存" + cacheString,
              "accessory" : XHProfileCellAccessoryType.arrow],
             ["title" : "关于学煌",
              "accessory" : XHProfileCellAccessoryType.arrow],
@@ -179,6 +187,31 @@ extension XHProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.model = dataInfo[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        ///< 点击了清除缓存的cell
+        if indexPath.row == XHProfileCellSelectType.clearCache.rawValue {
+            XHClearCache.clearCache(success: {
+                XHAlertHUD.showSuccess(withStatus: "清除成功", completion: {
+                    self.profileTableView.reloadData()
+                })
+            }, failue: { (errorString) in
+                XHAlertHUD.showError(withStatus: errorString)
+            })
+
+        }
+        
+        ///< 点击了关于学煌的cell
+        if indexPath.row == XHProfileCellSelectType.about.rawValue {
+        
+        }
+        
+        ///< 点击了当前版本号的cell
+        if indexPath.row == XHProfileCellSelectType.version.rawValue {
+            
+        }
     }
 }
 
