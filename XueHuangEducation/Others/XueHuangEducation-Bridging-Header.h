@@ -6,3 +6,4 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MJRefresh/MJRefresh.h>
 #import <ZFPlayer/ZFPlayer.h>
+#import <ZFDownload/ZFDownloadManager.h>

@@ -10,6 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 import ZFPlayer
+import ZFDownload
 
 extension XHRatio.W_H_R.PlayNetCourseViewController {
     static let playerViewRatio: CGFloat = 9.0/16.0
@@ -27,7 +28,7 @@ fileprivate let showVideo = String.PlayNetCourseViewController.Title.showVideo
 
 fileprivate let playerViewRatio = XHRatio.W_H_R.PlayNetCourseViewController.playerViewRatio
 
-class XHPlayNetCourseViewController: XHBaseViewController {
+class XHPlayNetCourseViewController: UIViewController {
     
     var netwareModel: XHNetCourseWare? {
         didSet {
@@ -68,21 +69,41 @@ class XHPlayNetCourseViewController: XHBaseViewController {
         }
     }
     
+    lazy var playerFatherView: UIView = {
+        let v = UIView()
+        view.addSubview(v)
+        v.snp.makeConstraints({ (make) in
+            make.top.equalTo(view).offset(XHMargin._20)
+            make.width.equalTo(XHSCreen.width)
+            make.height.equalTo(XHSCreen.width).multipliedBy(XHRatio.W_H_R.PlayNetCourseViewController.playerViewRatio)
+        })
+        view.layoutIfNeeded()
+        return v
+    }()
+    
     // MARK: - 懒加载
     lazy var playerView: ZFPlayerView = {
         let pl = ZFPlayerView()
+        pl.delegate = self
         return pl
     }()
     
     lazy var controlView: ZFPlayerControlView = {
         let ctrl = ZFPlayerControlView()
+        ctrl.zf_playerHasDownloadFunction(true)
         return ctrl
     }()
     
     lazy var playerModel: ZFPlayerModel = {
         let model = ZFPlayerModel()
-        model.fatherView = view
+        model.fatherView = playerFatherView
         return model
+    }()
+    
+    lazy var downloadButton: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.backgroundColor = .yellow
+        return btn
     }()
     
     // MARK: - 生命周期
@@ -91,6 +112,21 @@ class XHPlayNetCourseViewController: XHBaseViewController {
         setupUI()
         XHGlobalLoading.startLoading()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+    ///< 必须重写这个方法, 不然全屏之后返回会有问题
+    override var shouldAutorotate: Bool {
+        return false
+    }
 }
 
 
@@ -98,15 +134,21 @@ class XHPlayNetCourseViewController: XHBaseViewController {
 extension XHPlayNetCourseViewController {
     fileprivate func setupUI() {
         view.backgroundColor = .black
-        view.addSubview(playerView)
+    }
+}
+
+// MARK: - ZFPlayerDelegate代理方法
+extension XHPlayNetCourseViewController: ZFPlayerDelegate {
+    ///< 下载视频的代理回调
+    func zf_playerDownload(_ url: String!) {
+        let downloader = ZFDownloadManager.shared()
+        let name = (url as NSString).lastPathComponent
+        downloader?.downFileUrl(url, filename: name, fileimage: nil)
+        downloader?.maxCount = 4
     }
     
-    fileprivate func makeConstaints() {
-        playerView.snp.makeConstraints { (make) in
-            make.top.equalTo(view).offset(XHMargin._20);
-            make.left.right.equalTo(view);
-            make.height.equalTo(playerView.snp.width).multipliedBy(playerViewRatio)
-        }
+    func zf_playerBackAction() {
+        navigationController?.popViewController(animated: true)
     }
 }
 

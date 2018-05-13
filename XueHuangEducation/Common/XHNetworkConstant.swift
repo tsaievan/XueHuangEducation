@@ -43,6 +43,8 @@ struct XHURL {
         ///< 14. 获取在线应答页面数据
         static let toCourseCatalog = "xhweb/appController.do?toCourseCatalog"
         
+        ///< 31. 解密下载视频链接
+        static let getDecryptDownloadMp4Url = "xhweb/appController.do?getDecryptDownloadMp4Url"
         
     }
     
@@ -58,27 +60,8 @@ struct XHURL {
 }
 
 
-
-
-
-
-
-
-
-
-
 ///< 6. 考卷类型页面数据
 let URL_MOBILE_PAPER_CATALOG = "xhweb/appController.do?mobilePaperCatalog"
-
-
-
-
-
-
-
-
-
-
 
 ///< 15. 获取本课程问答列表及查询问答
 let URL_GET_QUESTION_LIST = "/xhweb/mobileController.do?toQuestionList"
@@ -113,7 +96,7 @@ let URL_APP_LOGIN_GET_PASSWORD = "xhweb/appLogin.do?getPassword"
 ///< 28. 修改密码
 let URL_APP_LOGIN_ALTER_PASSWORD = "xhweb/appLogin.do?alterPassword"
 
-///< 29. 解密播放视频链接
+///< 30. 解密播放视频链接
 let URL_APP_DECRYPT_VIDEO_PLAYER_URL = "xhweb/appController.do?getDecryptPlayMp4Url"
 
 
