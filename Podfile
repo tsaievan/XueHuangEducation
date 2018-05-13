@@ -13,5 +13,6 @@ pod 'Cache'
 pod 'ZFPlayer'
 pod 'pop'
 pod 'SDCycleScrollView'
+pod 'ZFDownload'
 
 end
