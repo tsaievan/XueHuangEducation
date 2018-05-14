@@ -95,6 +95,7 @@ class XHHomePageViewController: XHBaseViewController {
                 }, failue: { (errorReason) in
                     XHGlobalLoading.stopLoading()
                     XHAlertHUD.showError(withStatus: errorReason)
+                    playerVc.showNavigationBar()
                 })
             }
         }

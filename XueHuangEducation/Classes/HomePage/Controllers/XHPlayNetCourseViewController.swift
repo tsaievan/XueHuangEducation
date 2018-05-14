@@ -144,11 +144,23 @@ extension XHPlayNetCourseViewController: ZFPlayerDelegate {
         let downloader = ZFDownloadManager.shared()
         let name = (url as NSString).lastPathComponent
         downloader?.downFileUrl(url, filename: name, fileimage: nil)
+        ///< 设置最大下载并发数为4
         downloader?.maxCount = 4
     }
     
     func zf_playerBackAction() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+// MARK: - 其他事件
+///< 没网情况下显示navigationBar
+extension XHPlayNetCourseViewController {
+    func showNavigationBar() {
+        ///< 不知道为什么下面的方法不行
+//        navigationController?.setNavigationBarHidden(false, animated: false)
+        ///< 直接设置isHidden属性是可以的
+        navigationController?.navigationBar.isHidden = false
     }
 }
 
