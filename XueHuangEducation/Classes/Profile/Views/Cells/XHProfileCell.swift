@@ -46,7 +46,7 @@ class XHProfileCell: UITableViewCell {
     lazy var xhSwitch: UISwitch = {
         let s = UISwitch()
         ///< 默认打开开关
-        s.tintColor = UIColor.Global.skyBlue
+        s.tintColor = UIColor.Global.lightGray
         s.onTintColor = UIColor.Global.skyBlue
         s.addTarget(self, action: #selector(didSwitchAction), for: .valueChanged)
         return s

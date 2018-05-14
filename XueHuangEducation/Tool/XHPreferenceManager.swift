@@ -11,9 +11,26 @@ import UIKit
 ///< 定义一个全局的偏好设置工具
 let XHPreferences = XHPreferenceManager.shared
 
+let defaultPreferences: [PreferenceKeys : Any] = [
+    PreferenceKeys.USERDEFAULT_SWICH_ALLOW_PUSH_INFO_KEY : true,
+    PreferenceKeys.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY : true
+]
+
 final class XHPreferenceManager {
     static let shared = XHPreferenceManager()
     let defaults = UserDefaults.standard
+    private init() {
+        registDefaultPreferences()
+    }
+    
+    private func registDefaultPreferences() {
+        let defaultValues: [String: Any] = defaultPreferences.reduce([:]) {
+            var dictionary = $0
+            dictionary[$1.key.rawValue] = $1.value
+            return dictionary
+        }
+        defaults.register(defaults: defaultValues)
+    }
 }
 
 extension XHPreferenceManager {
