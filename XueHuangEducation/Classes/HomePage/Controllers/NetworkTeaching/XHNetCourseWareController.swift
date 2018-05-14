@@ -95,7 +95,7 @@ extension XHNetCourseWareController {
             let playerVc = XHPlayNetCourseViewController()
             navigationController?.pushViewController(playerVc, animated: true)
             XHGlobalLoading.startLoading()
-            XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: {[weak playerVc, weak model] (videoUrlString) in
+            XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, decryptedType: XHDecryptedType.play, success: {[weak playerVc, weak model] (videoUrlString) in
                 XHGlobalLoading.stopLoading()
                 model?.video = videoUrlString
                 playerVc?.netwareModel = model
@@ -134,7 +134,7 @@ extension XHNetCourseWareController {
                     let playerVc = XHPlayNetCourseViewController()
                     self.navigationController?.pushViewController(playerVc, animated: true)
                     XHGlobalLoading.startLoading()
-                    XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, success: {[weak playerVc] (videoUrlString) in
+                    XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, decryptedType: XHDecryptedType.play, success: {[weak playerVc] (videoUrlString) in
                         XHGlobalLoading.stopLoading()
                         model.video = videoUrlString
                         playerVc?.netwareModel = model

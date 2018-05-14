@@ -43,9 +43,11 @@ struct XHURL {
         ///< 14. 获取在线应答页面数据
         static let toCourseCatalog = "xhweb/appController.do?toCourseCatalog"
         
+        ///< 30. 解密播放视频链接
+        static let getDecryptPlayMp4Url = "xhweb/appController.do?getDecryptPlayMp4Url"
+        
         ///< 31. 解密下载视频链接
         static let getDecryptDownloadMp4Url = "xhweb/appController.do?getDecryptDownloadMp4Url"
-        
     }
     
     struct NetCourseController {
@@ -96,8 +98,7 @@ let URL_APP_LOGIN_GET_PASSWORD = "xhweb/appLogin.do?getPassword"
 ///< 28. 修改密码
 let URL_APP_LOGIN_ALTER_PASSWORD = "xhweb/appLogin.do?alterPassword"
 
-///< 30. 解密播放视频链接
-let URL_APP_DECRYPT_VIDEO_PLAYER_URL = "xhweb/appController.do?getDecryptPlayMp4Url"
+
 
 
 

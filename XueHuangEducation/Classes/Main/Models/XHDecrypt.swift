@@ -20,33 +20,18 @@ enum XHDecryptedType {
 class XHDecrypt {
 
     class func getDecryptedPlayerUrl(withOriginalUrl originalUrl: String, decryptedType: XHDecryptedType, success: XHGetDecryptedPlayerUrlSuccess?, failue: XHGetDecryptedPlayerUrlFailue?) {
-        var params = [String : Any]()
-        
-        
-        params = [
-            "encryptMp4Url" : originalUrl
-        ]
-        XHNetwork.GET_ResponseString(url: URL_APP_DECRYPT_VIDEO_PLAYER_URL, params: params, success: { (response) in
-            guard let videoUrl = response as? String else {
-                    return
-            }
-            success?(videoUrl)
-        }) { (error) in
-            if error.code == XHNetworkError.Code.connetFailue {
-                failue?(XHNetworkError.Desription.connectFailue)
-            }else {
-                failue?("获取加密视频链接失败")
-            }
-        }
-    }
-    
-    class func getDecryptedDownloadUrl(withOriginalUrl originalUrl: String, success: XHGetDecryptedDownloadUrlSuccess?, failue: XHGetDecryptedDownloadUrlFailue?) {
         let params = [
             "encryptMp4Url" : originalUrl
         ]
-        XHNetwork.GET(url: XHURL.AppController.getDecryptDownloadMp4Url, params: params, success: { (response) in
+        var url = ""
+        if decryptedType == .play {
+            url = XHURL.AppController.getDecryptPlayMp4Url
+        }else {
+            url = XHURL.AppController.getDecryptDownloadMp4Url
+        }
+        XHNetwork.GET_ResponseString(url: url, params: params, success: { (response) in
             guard let videoUrl = response as? String else {
-                return
+                    return
             }
             success?(videoUrl)
         }) { (error) in
