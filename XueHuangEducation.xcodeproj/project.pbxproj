@@ -442,6 +442,7 @@
 		57A4E51E20946D8500F8BADE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				57A4E51F209479AF00F8BADE /* XHDecrypt.swift */,
 				5795B458208D7D8D00ECD58F /* XHResult.swift */,
 				57369A322098B0D700E2E0F9 /* XHRoutine.swift */,
 				57F32A8820A1EB4E00AEC633 /* XHIsAllowedCommon.swift */,
@@ -499,7 +500,6 @@
 			children = (
 				57A62AF520887F0300C9D5D2 /* XHAlertHUD.swift */,
 				57F32A7E20A174BF00AEC633 /* XHLoadingView.swift */,
-				57A4E51F209479AF00F8BADE /* XHDecrypt.swift */,
 				57A62AF7208888E400C9D5D2 /* XHRegExTool.swift */,
 				57A62AF92088983200C9D5D2 /* XHNetwork.swift */,
 				57CA59D4208B1BD8004C6393 /* XHPreferenceKey.swift */,
