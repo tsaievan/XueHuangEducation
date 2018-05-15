@@ -12,6 +12,8 @@ import AVFoundation
 import ZFPlayer
 import ZFDownload
 
+let downloadUrl = "http://120.77.242.84:8083/xhweb/appController.do?getDecryptDownloadMp4Url&encryptMp4Url="
+
 extension XHRatio.W_H_R.PlayNetCourseViewController {
     static let playerViewRatio: CGFloat = 9.0/16.0
 }
@@ -181,8 +183,10 @@ extension XHPlayNetCourseViewController: ZFPlayerDelegate {
             return
         }
         ///< 对原始的url字符串进行处理
-        
-        downloader?.downFileUrl(originalUrlStr, filename: name, fileimage: nil)
+        let fullUrl = downloadUrl + originalUrlStr
+        ///< 一定要做下面这一步, 不然生成URL失败
+        let newStr = (fullUrl as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue)
+        downloader?.downFileUrl(newStr, filename: name, fileimage: nil)
         ///< 设置最大下载并发数为4
         downloader?.maxCount = 4
     }

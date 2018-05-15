@@ -43,6 +43,7 @@ class XHNetCourseWareController: XHTableViewController {
         tableView.register(XHNetCourseWareCell.self, forCellReuseIdentifier: XHCellReuseIdentifier.NetCourseWareController.netcourseWare)
         ///< 去除多余的分割线
         tableView.tableFooterView = UIView()
+        tableView.contentInset = UIEdgeInsets(top: -35, left: 0, bottom: 0, right: 0)
     }
 }
 
