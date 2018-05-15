@@ -108,6 +108,7 @@ class XHPlayNetCourseViewController: UIViewController {
         let v = UIView()
         view.addSubview(v)
         v.snp.makeConstraints({ (make) in
+            make.left.equalTo(view)
             make.top.equalTo(view).offset(XHMargin._20)
             make.width.equalTo(XHSCreen.width)
             make.height.equalTo(XHSCreen.width).multipliedBy(XHRatio.W_H_R.PlayNetCourseViewController.playerViewRatio)
@@ -137,7 +138,14 @@ class XHPlayNetCourseViewController: UIViewController {
     
     lazy var downloadButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.backgroundColor = .yellow
+        btn.setTitle("缓存视频", for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._13)
+        btn.backgroundColor = .clear
+        btn.layer.borderColor = UIColor.white.cgColor
+        btn.layer.borderWidth = 0.5
+        btn.layer.cornerRadius = 15
+        btn.layer.masksToBounds = true
+        btn.addTarget(self, action: #selector(didClickDownloadButtonAction), for: .touchUpInside)
         return btn
     }()
     
@@ -168,6 +176,13 @@ class XHPlayNetCourseViewController: UIViewController {
 // MARK: - 设置UI
 extension XHPlayNetCourseViewController {
     fileprivate func setupUI() {
+        view.addSubview(downloadButton)
+        downloadButton.snp.makeConstraints { (make) in
+            make.right.equalTo(view)
+            make.bottom.equalTo(view).offset(UIDevice.iPhoneX ? -30 : 0)
+            make.width.equalTo(80)
+            make.height.equalTo(30)
+        }
         view.backgroundColor = .black
     }
 }
@@ -185,10 +200,15 @@ extension XHPlayNetCourseViewController: ZFPlayerDelegate {
         ///< 对原始的url字符串进行处理
         let fullUrl = downloadUrl + originalUrlStr
         ///< 一定要做下面这一步, 不然生成URL失败
-        let newStr = (fullUrl as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue)
-        downloader?.downFileUrl(newStr, filename: name, fileimage: nil)
-        ///< 设置最大下载并发数为4
-        downloader?.maxCount = 4
+        guard let newStr = (fullUrl as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue),
+            let newUrl = URL(string: newStr) else {
+                return
+        }
+//        downloader?.downFileUrl(newStr, filename: name, fileimage: nil)
+//        /< 设置最大下载并发数为4
+//        downloader?.maxCount = 4
+//        let request =
+        
     }
     
     func zf_playerBackAction() {
@@ -204,6 +224,15 @@ extension XHPlayNetCourseViewController {
         //        navigationController?.setNavigationBarHidden(false, animated: false)
         ///< 直接设置isHidden属性是可以的
         navigationController?.navigationBar.isHidden = false
+    }
+}
+
+
+// MARK: - 按钮的点击事件
+extension XHPlayNetCourseViewController {
+    @objc
+    fileprivate func didClickDownloadButtonAction(sender: UIButton) {
+        print("点击了下载按钮")
     }
 }
 
