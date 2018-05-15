@@ -21,14 +21,25 @@ extension String {
         struct Title {
             static let showVideo = "展示视频"
         }
+        
+        struct Path {
+            static let downloadPath = "ZFDownLoad/CacheList"
+        }
     }
 }
 
 fileprivate let showVideo = String.PlayNetCourseViewController.Title.showVideo
 
+fileprivate let downloadPath = String.PlayNetCourseViewController.Path.downloadPath
+
 fileprivate let playerViewRatio = XHRatio.W_H_R.PlayNetCourseViewController.playerViewRatio
 
+
+
+
 class XHPlayNetCourseViewController: UIViewController {
+    
+    var originalVideo: String?
     
     var netwareModel: XHNetCourseWare? {
         didSet {
@@ -37,9 +48,21 @@ class XHPlayNetCourseViewController: UIViewController {
                 let videoString = videoModel.video,
                 ///< 防止转换url失败, 必须添加下面的代码
                 let newStr = (videoString as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue),
-                let url = URL(string: newStr) else {
+                var url = URL(string: newStr) else {
                     return
             }
+            ZFDownloadManager.shared().finishedlist.forEach({ (fileModel) in
+                if let file = fileModel as? ZFFileModel,
+                    let name = file.fileName {
+                    ///< 文件名一致, 且下载完成
+                    if name == url.lastPathComponent {
+                        let str = String(format: "%@/%@/%@", XHClearCache.cachePath, downloadPath, name)
+                        url = URL(fileURLWithPath: str)
+                        
+                    }
+                }
+            })
+            
             let title = (videoModel.netCoursewareName ?? String.empty) + String.space + (videoModel.teacher ?? String.empty)
             self.navigationItem.title = showVideo
             playerModel.title = title
@@ -48,7 +71,7 @@ class XHPlayNetCourseViewController: UIViewController {
             playerView.autoPlayTheVideo()
         }
     }
-
+    
     var model: XHNetCourse? {
         didSet {
             XHGlobalLoading.stopLoading()
@@ -56,10 +79,20 @@ class XHPlayNetCourseViewController: UIViewController {
                 let videoString = videoModel.video,
                 ///< 防止转换url失败, 必须添加下面的代码
                 let newStr = (videoString as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue),
-                let url = URL(string: newStr) else {
+                var url = URL(string: newStr) else {
                     return
             }
-            
+            ZFDownloadManager.shared().finishedlist.forEach({ (fileModel) in
+                if let file = fileModel as? ZFFileModel,
+                    let name = file.fileName {
+                    ///< 文件名一致, 且下载完成
+                    if name == url.lastPathComponent {
+                        let str = String(format: "%@/%@/%@", XHClearCache.cachePath, downloadPath, name)
+                        url = URL(fileURLWithPath: str)
+                        
+                    }
+                }
+            })
             let title = (model?.netCourseName ?? String.empty) + String.space + (model?.courseTeacher ?? String.empty)
             self.navigationItem.title = model?.netCourseName ?? showVideo
             playerModel.title = title
@@ -142,8 +175,14 @@ extension XHPlayNetCourseViewController: ZFPlayerDelegate {
     ///< 下载视频的代理回调
     func zf_playerDownload(_ url: String!) {
         let downloader = ZFDownloadManager.shared()
-        let name = (url as NSString).lastPathComponent
-        downloader?.downFileUrl(url, filename: name, fileimage: nil)
+        let name = playerModel.videoURL.lastPathComponent
+        
+        guard let originalUrlStr = originalVideo else {
+            return
+        }
+        ///< 对原始的url字符串进行处理
+        
+        downloader?.downFileUrl(originalUrlStr, filename: name, fileimage: nil)
         ///< 设置最大下载并发数为4
         downloader?.maxCount = 4
     }
@@ -158,7 +197,7 @@ extension XHPlayNetCourseViewController: ZFPlayerDelegate {
 extension XHPlayNetCourseViewController {
     func showNavigationBar() {
         ///< 不知道为什么下面的方法不行
-//        navigationController?.setNavigationBarHidden(false, animated: false)
+        //        navigationController?.setNavigationBarHidden(false, animated: false)
         ///< 直接设置isHidden属性是可以的
         navigationController?.navigationBar.isHidden = false
     }

@@ -42,4 +42,23 @@ class XHDecrypt {
             }
         }
     }
+    
+    class func getDecryptDownloadMp4Url(withOriginalUrl originalUrl: String, success: XHGetDecryptedPlayerUrlSuccess?, failue: XHGetDecryptedPlayerUrlFailue?) {
+        let params = [
+            "encryptMp4Url" : originalUrl
+        ]
+        let url = XHURL.AppController.getDecryptDownloadMp4Url
+        XHNetwork.GET(url: url, params: params, success: { (response) in
+            guard let videoUrl = response as? String else {
+                return
+            }
+            success?(videoUrl)
+        }) { (error) in
+            if error.code == XHNetworkError.Code.connetFailue {
+                failue?(XHNetworkError.Desription.connectFailue)
+            }else {
+                failue?("获取加密视频链接失败")
+            }
+        }
+    }
 }

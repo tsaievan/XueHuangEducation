@@ -92,6 +92,7 @@ class XHHomePageViewController: XHBaseViewController {
                     XHGlobalLoading.stopLoading()
                     model.video = videoUrlString
                     playerVc.model = model
+                    playerVc.originalVideo = videoUrl
                 }, failue: { (errorReason) in
                     XHGlobalLoading.stopLoading()
                     XHAlertHUD.showError(withStatus: errorReason)

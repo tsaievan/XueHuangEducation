@@ -99,6 +99,7 @@ extension XHNetCourseWareController {
                 XHGlobalLoading.stopLoading()
                 model?.video = videoUrlString
                 playerVc?.netwareModel = model
+                playerVc?.originalVideo = videoUrl
             }, failue: { (errorReason) in
                 XHGlobalLoading.stopLoading()
                 XHAlertHUD.showError(withStatus: errorReason)
@@ -138,6 +139,7 @@ extension XHNetCourseWareController {
                         XHGlobalLoading.stopLoading()
                         model.video = videoUrlString
                         playerVc?.netwareModel = model
+                        playerVc?.originalVideo = videoUrl
                     }, failue: { (errorReason) in
                         XHGlobalLoading.stopLoading()
                         XHAlertHUD.showError(withStatus: errorReason)
