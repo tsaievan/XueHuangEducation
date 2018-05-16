@@ -235,6 +235,16 @@ extension XHProfileViewController {
             }
             if indexPath.row == XHProfileSwithType.cacheVideo.rawValue { ///< 表明触碰了允许网络下缓存视频的开关
                 XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY] = xhSwitch.isOn
+                if xhSwitch.isOn == false { ///< 表明关闭了2g/3g/4g开关, 这时候要判断是否有wifi, 没有就关掉下载
+                    if !XHNetwork.isReachableOnEthernetOrWiFi() {
+                        XHDownload.pauseAllDownloads()
+                    }
+                }else {
+                    XHDownload.pauseAllDownloads()
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1, execute: {
+                        XHDownload.startAllDownloads()
+                    })
+                }
             }
             
             if indexPath.row == XHProfileSwithType.pushInfo.rawValue { ///< 表明触碰了允许消息推送的开关

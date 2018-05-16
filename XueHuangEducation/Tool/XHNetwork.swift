@@ -12,6 +12,32 @@ import Alamofire
 typealias SuccessBlock = (Any) -> ()
 typealias FailueBlock = (NSError) -> ()
 
+let monitor: Alamofire.NetworkReachabilityManager? = {
+    guard let m = Alamofire.NetworkReachabilityManager() else {
+        return nil
+    }
+    m.listener = {
+        status in
+        if status == .reachable(.ethernetOrWiFi) { ///< wifi网络
+            XHDownload.pauseAllDownloads()
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1, execute: {
+                XHDownload.startAllDownloads()
+            })
+        } else if status == .reachable(.wwan) { ///< 蜂窝网络
+            if XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY] { ///< 表明开关是打开的
+                XHDownload.startAllDownloads()
+            }else {
+                XHDownload.pauseAllDownloads()
+            }
+        } else if status == .notReachable { ///< 无网络
+            XHDownload.pauseAllDownloads()
+        } else { ///< 其他
+            XHDownload.pauseAllDownloads()
+        }
+    }
+    return m
+}()
+
 public struct XHNetworkError {
     
     ///< 错误代码
@@ -141,6 +167,23 @@ class XHNetwork {
                 task.cancel()
             })
         }
+    }
+    
+    class func download(url: URL) {
+        _ = Alamofire.NetworkReachabilityManager()
+        
+    }
+    
+    class func startMonitor() {
+        monitor?.startListening()
+        
+    }
+
+    class func isReachableOnEthernetOrWiFi() -> Bool {
+        guard let m = monitor else {
+            return false
+        }
+        return m.isReachableOnEthernetOrWiFi
     }
 }
 

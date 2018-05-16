@@ -114,6 +114,9 @@ extension XHTabBarController: UITabBarControllerDelegate {
                         XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
                         let tabBarController = XHTabBarController()
                         UIApplication.shared.keyWindow?.rootViewController = tabBarController
+                        
+                        ///< 暂停视频的下载
+                        XHDownload.pauseAllDownloads()
                         ///< 默认选中登录页面
                         tabBarController.selectedIndex = XHViewControllers.login.rawValue
                     })

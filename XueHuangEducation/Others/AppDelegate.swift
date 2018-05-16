@@ -8,6 +8,13 @@
 
 import UIKit
 import SVProgressHUD
+import ZFDownload
+
+let XHDownload: ZFDownloadManager = {
+    let d = ZFDownloadManager.shared()
+    d!.maxCount = 4
+    return d!
+}()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -70,6 +77,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return
                 }
             }, failue: nil)
+        }
+        ///< 开始监听网络状态的变化
+        XHNetwork.startMonitor()
+        
+        if XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY] { ///< 表明用户此时是打开允许缓存开关的, 此时只要有网就开始下载
+            XHDownload.startAllDownloads()
+        }else { ///< 关闭2g/3g/4g开关,此时要判断是否有wifi, 有就下载, 没有就不下载
+            if XHNetwork.isReachableOnEthernetOrWiFi() {
+                XHDownload.startAllDownloads()
+            }
         }
     }
 

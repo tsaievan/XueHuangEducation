@@ -7,6 +7,7 @@
 
 
 import UIKit
+import ZFDownload
 
 let fileManager = FileManager.default
 
@@ -63,6 +64,10 @@ extension XHClearCacheManager {
     ///< 异步操作清除缓存文件
     func clearCache(success: XHClearCacheSuccess?, failue: XHClearCacheFailue?) {
         DispatchQueue.global().async {
+            ///< 把downloader发起的请求也全部删除
+            let downloader = ZFDownloadManager.shared()
+            downloader?.clearAllFinished()
+            downloader?.clearAllRquests()
             guard let enumerator = fileManager.enumerator(atPath: self.cachePath) else {
                 failue?("清除失败")
                 return
