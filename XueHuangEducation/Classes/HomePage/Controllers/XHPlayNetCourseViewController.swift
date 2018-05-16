@@ -65,7 +65,7 @@ class XHPlayNetCourseViewController: UIViewController {
                     if name == (url.absoluteString as NSString).lastPathComponent {
                         let str = String(format: "%@/%@/%@", XHClearCache.cachePath, downloadPath, name)
                         url = URL(fileURLWithPath: str)
-                        downloadButton.setTitle("已缓存", for: .normal)
+//                        downloadButton.setTitle("已缓存", for: .normal)
                     }
                 }
             })
@@ -83,7 +83,7 @@ class XHPlayNetCourseViewController: UIViewController {
                         let total = (totalString as NSString).doubleValue
                         let ratio = (received / total) * 100
                         let btnTitle = String(format: "%.2f%@", ratio, "%")
-                        downloadButton.setTitle(btnTitle, for: .normal)
+//                        downloadButton.setTitle(btnTitle, for: .normal)
                     }
                     
                 }
@@ -130,7 +130,7 @@ class XHPlayNetCourseViewController: UIViewController {
                         let total = (totalString as NSString).doubleValue
                         let ratio = (received / total) * 100
                         let btnTitle = String(format: "%.2f%@", ratio, "%")
-                        downloadButton.setTitle(btnTitle, for: .normal)
+//                        downloadButton.setTitle(btnTitle, for: .normal)
                     }
                 }
             })
@@ -174,28 +174,34 @@ class XHPlayNetCourseViewController: UIViewController {
         return model
     }()
     
-    lazy var downloadButton: UIButton = {
-        let btn = UIButton(type: .custom)
-        btn.setTitle("缓存视频", for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._13)
-        btn.backgroundColor = .clear
-        btn.layer.borderColor = UIColor.white.cgColor
-        btn.layer.borderWidth = 1
-        btn.layer.cornerRadius = 15
-        btn.layer.masksToBounds = true
-        btn.setTitle("已暂停", for: .selected)
-        btn.addTarget(self, action: #selector(didClickDownloadButtonAction), for: .touchUpInside)
-        return btn
-    }()
+//    lazy var downloadButton: UIButton = {
+//        let btn = UIButton(type: .custom)
+//        btn.setTitle("缓存视频", for: .normal)
+//        btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._13)
+//        btn.backgroundColor = .clear
+//        btn.layer.borderColor = UIColor.white.cgColor
+//        btn.layer.borderWidth = 1
+//        btn.layer.cornerRadius = 15
+//        btn.layer.masksToBounds = true
+//        btn.setTitle("已暂停", for: .selected)
+//        btn.addTarget(self, action: #selector(didClickDownloadButtonAction), for: .touchUpInside)
+//        return btn
+//    }()
     
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         XHGlobalLoading.startLoading()
-        XHDownload.downloadDelegate = self
+//        XHDownload.downloadDelegate = self
         let allowCache = XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY]
         controlView.zf_playerHasDownloadFunction(allowCache)
+        
+        for view in controlView.subviews {
+            if view.isKind(of: UIButton.self) {
+                print("\(view)")
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -222,13 +228,13 @@ class XHPlayNetCourseViewController: UIViewController {
 // MARK: - 设置UI
 extension XHPlayNetCourseViewController {
     fileprivate func setupUI() {
-        view.addSubview(downloadButton)
-        downloadButton.snp.makeConstraints { (make) in
-            make.right.equalTo(view)
-            make.bottom.equalTo(view).offset(UIDevice.iPhoneX ? -30 : 0)
-            make.width.equalTo(80)
-            make.height.equalTo(30)
-        }
+//        view.addSubview(downloadButton)
+//        downloadButton.snp.makeConstraints { (make) in
+//            make.right.equalTo(view)
+//            make.bottom.equalTo(view).offset(UIDevice.iPhoneX ? -30 : 0)
+//            make.width.equalTo(80)
+//            make.height.equalTo(30)
+//        }
         view.backgroundColor = .black
     }
 }
@@ -259,97 +265,96 @@ extension XHPlayNetCourseViewController {
 
 
 // MARK: - 按钮的点击事件
-extension XHPlayNetCourseViewController {
-    @objc
-    fileprivate func didClickDownloadButtonAction(sender: UIButton) {
-        sender.isUserInteractionEnabled = false
-        let name = playerModel.videoURL.lastPathComponent
-        guard let originalUrlStr = originalVideo else {
-            return
-        }
-        
-        ///< 对原始的url字符串进行处理
-        let fullUrl = downloadUrl + originalUrlStr
-        ///< 一定要做下面这一步, 不然生成URL失败
-        guard let newStr = (fullUrl as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue),
-            let newUrl = URL(string: newStr) else {
-                return
-        }
-        
-        if XHDownload.downinglist.count > 0 {
-            XHDownload.downinglist.forEach({ (request) in
-                if let request = request as? ZFHttpRequest {
-                    let last = (request.url.absoluteString as NSString).lastPathComponent
-                    let lastStrings = (last as NSString).components(separatedBy: "?nickname=")
-                    var realLast = String.empty
-                    if lastStrings.count > 0 {
-                        realLast = lastStrings.first!
-                    }
-                    if newUrl.absoluteString.contains(realLast) || newUrl == playerModel.videoURL {
-                        currentRequest = request
-                        
-                        if let fileInfo = request.userInfo["File"] as? ZFFileModel {
-                            if fileInfo.downloadState == .downloading {
-                                if let _ = currentRequest {
-                                    sender.isSelected = true
-                                    XHDownload.stop(currentRequest!)
-                                    sender.isUserInteractionEnabled = true
-                                    return
-                                }
-                            }else {
-                                if let _ = currentRequest {
-                                    sender.isSelected = false
-                                    XHDownload.resumeRequest(currentRequest!)
-                                    sender.isUserInteractionEnabled = true
-                                    return
-                                }
-                            }
-                        }
-                    }
-                }
-            })
-        }else {
-            XHDownload.downFileUrl(newStr, filename: name, fileimage: nil)
-        }
-        sender.isUserInteractionEnabled = true
-    }
-}
+//extension XHPlayNetCourseViewController {
+//    @objc
+//    fileprivate func didClickDownloadButtonAction(sender: UIButton) {
+//        sender.isUserInteractionEnabled = false
+//        let name = playerModel.videoURL.lastPathComponent
+//        guard let originalUrlStr = originalVideo else {
+//            return
+//        }
+//
+//        ///< 对原始的url字符串进行处理
+//        let fullUrl = downloadUrl + originalUrlStr
+//        ///< 一定要做下面这一步, 不然生成URL失败
+//        guard let newStr = (fullUrl as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue),
+//            let newUrl = URL(string: newStr) else {
+//                return
+//        }
+//
+//        if XHDownload.downinglist.count > 0 {
+//            XHDownload.downinglist.forEach({ (request) in
+//                if let request = request as? ZFHttpRequest {
+//                    let last = (request.url.absoluteString as NSString).lastPathComponent
+//                    let lastStrings = (last as NSString).components(separatedBy: "?nickname=")
+//                    var realLast = String.empty
+//                    if lastStrings.count > 0 {
+//                        realLast = lastStrings.first!
+//                    }
+//                    if newUrl.absoluteString.contains(realLast) || newUrl == playerModel.videoURL {
+//                        currentRequest = request
+//
+//                        if let fileInfo = request.userInfo["File"] as? ZFFileModel {
+//                            if fileInfo.downloadState == .downloading {
+//                                if let _ = currentRequest {
+//                                    sender.isSelected = true
+//                                    XHDownload.stop(currentRequest!)
+//                                    sender.isUserInteractionEnabled = true
+//                                    return
+//                                }
+//                            }else {
+//                                if let _ = currentRequest {
+//                                    sender.isSelected = false
+//                                    XHDownload.resumeRequest(currentRequest!)
+//                                    sender.isUserInteractionEnabled = true
+//                                    return
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            })
+//        }else {
+//            XHDownload.downFileUrl(newStr, filename: name, fileimage: nil)
+//        }
+//        sender.isUserInteractionEnabled = true
+//    }
+//}
 
-extension XHPlayNetCourseViewController: ZFDownloadDelegate {
-    func startDownload(_ request: ZFHttpRequest!) {
-        
-    }
-    
-    func finishedDownload(_ request: ZFHttpRequest!) {
-        
-    }
-    
-    func updateCellProgress(_ request: ZFHttpRequest!) {
-        
-        guard let curr = currentRequest,
-            let fileInfo = curr.userInfo["File"] else {
-            return
-        }
-        perform(#selector(updateButtonTile), on: Thread.main, with: fileInfo, waitUntilDone: true)
-    }
-}
+//extension XHPlayNetCourseViewController: ZFDownloadDelegate {
+//    func startDownload(_ request: ZFHttpRequest!) {
+//
+//    }
+//
+//    func finishedDownload(_ request: ZFHttpRequest!) {
+//
+//    }
+//
+//    func updateCellProgress(_ request: ZFHttpRequest!) {
+//        guard let curr = currentRequest,
+//            let fileInfo = curr.userInfo["File"] else {
+//            return
+//        }
+//        perform(#selector(updateButtonTile), on: Thread.main, with: fileInfo, waitUntilDone: true)
+//    }
+//}
 
-extension XHPlayNetCourseViewController {
-    @objc
-    fileprivate func updateButtonTile(fileInfo: ZFFileModel) {
-        if let recievedString = fileInfo.fileReceivedSize,
-            let totalString = fileInfo.fileSize {
-            let received = (recievedString as NSString).doubleValue
-            let total = (totalString as NSString).doubleValue
-            let ratio = (received / total) * 100
-            let btnTitle = String(format: "%.2f%@", ratio, "%")
-            downloadButton.setTitle(btnTitle, for: .normal)
-            if received >= total {
-                downloadButton.setTitle("已缓存", for: .normal)
-            }
-        }
-    }
-}
+//extension XHPlayNetCourseViewController {
+//    @objc
+//    fileprivate func updateButtonTile(fileInfo: ZFFileModel) {
+//        if let recievedString = fileInfo.fileReceivedSize,
+//            let totalString = fileInfo.fileSize {
+//            let received = (recievedString as NSString).doubleValue
+//            let total = (totalString as NSString).doubleValue
+//            let ratio = (received / total) * 100
+//            let btnTitle = String(format: "%.2f%@", ratio, "%")
+//            downloadButton.setTitle(btnTitle, for: .normal)
+//            if received >= total {
+//                downloadButton.setTitle("已缓存", for: .normal)
+//            }
+//        }
+//    }
+//}
 
 
 

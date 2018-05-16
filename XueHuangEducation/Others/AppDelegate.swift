@@ -110,6 +110,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             cookieJar.setCookie(newCookie)
         }
+        ///< 暂停说有下载
+        XHDownload.pauseAllDownloads()
     }
 }
 

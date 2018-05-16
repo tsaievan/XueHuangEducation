@@ -82,7 +82,10 @@ extension XHLoginViewController: XHLoginViewDelegate {
                         XHDownload.startAllDownloads()
                     }else {
                         if XHNetwork.isReachableOnEthernetOrWiFi() {
-                            XHDownload.startAllDownloads()
+                            XHDownload.pauseAllDownloads()
+                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
+                                XHDownload.startAllDownloads()
+                            })
                         }
                     }
                     if self.presentingViewController == nil {
@@ -126,7 +129,16 @@ extension XHLoginViewController: XHLoginViewDelegate {
                         nav.viewControllers.first?.title = "退出登录"
                         self.dismissLoginViewController()
                     }
-                    
+                    if XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY] {
+                        XHDownload.startAllDownloads()
+                    }else {
+                        if XHNetwork.isReachableOnEthernetOrWiFi() {
+                            XHDownload.pauseAllDownloads()
+                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
+                                XHDownload.startAllDownloads()
+                            })
+                        }
+                    }
                 })
             }) { (errorReason) in
                 XHAlertHUD.showError(withStatus: errorReason)

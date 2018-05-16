@@ -203,14 +203,21 @@ extension XHProfileViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: false)
         ///< 点击了清除缓存的cell
         if indexPath.row == XHProfileCellSelectType.clearCache.rawValue {
-            XHClearCache.clearCache(success: {
-                XHAlertHUD.showSuccess(withStatus: "清除成功", completion: {
-                    self.profileTableView.reloadData()
+            let alertVc = UIAlertController(title: "警告", message: "清除缓存将会删除已缓存视频, 清除之后将重新缓存, 是否清除?", preferredStyle: .alert)
+            let confirm = UIAlertAction(title: "确定", style: UIAlertActionStyle.destructive, handler: { (action) in
+                XHClearCache.clearCache(success: {
+                    XHAlertHUD.showSuccess(withStatus: "清除成功", completion: {
+                        self.profileTableView.reloadData()
+                    })
+                }, failue: { (errorString) in
+                    XHAlertHUD.showError(withStatus: errorString)
                 })
-            }, failue: { (errorString) in
-                XHAlertHUD.showError(withStatus: errorString)
             })
-
+            
+            let cancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
+            alertVc.addAction(confirm)
+            alertVc.addAction(cancel)
+            present(alertVc, animated: true, completion: nil)
         }
         
         ///< 点击了关于学煌的cell
