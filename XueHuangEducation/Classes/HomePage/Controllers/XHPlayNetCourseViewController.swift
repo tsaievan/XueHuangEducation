@@ -194,9 +194,6 @@ class XHPlayNetCourseViewController: UIViewController {
         setupUI()
         XHGlobalLoading.startLoading()
 //        XHDownload.downloadDelegate = self
-        let allowCache = XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY]
-        controlView.zf_playerHasDownloadFunction(allowCache)
-        
         for view in controlView.subviews {
             if view.isKind(of: UIButton.self) {
                 print("\(view)")
