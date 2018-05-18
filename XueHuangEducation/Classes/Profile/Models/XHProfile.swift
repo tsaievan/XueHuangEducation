@@ -16,7 +16,7 @@ typealias XHGetMyMobilePaperListSuccess = ([XHCourseCatalog], XHPaperList) -> ()
 typealias XHGetMyMobilePaperListFailue = (NSError) -> ()
 typealias XHGetMyMobieQuestionListSuccess = ([XHCourseCatalog], XHQuestionList) -> ()
 typealias XHGetMyMobieQuestionListFailue = (NSError) -> ()
-typealias XHUpgradeSuccess = (Any) -> ()
+typealias XHUpgradeSuccess = (XHVersion) -> ()
 typealias XHUpgradeFailue = (NSError) -> ()
 
 class XHProfile {
@@ -191,7 +191,7 @@ class XHProfile {
                 let model = XHVersion(JSON: responseJson) else {
                     return
             }
-            
+            success?(model)
         }) { (error) in
             failue?(error)
         }

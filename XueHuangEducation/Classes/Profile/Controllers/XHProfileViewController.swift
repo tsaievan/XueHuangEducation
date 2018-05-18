@@ -230,7 +230,23 @@ extension XHProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == XHProfileCellSelectType.version.rawValue {
             ///< 调用获取版本号的接口
             XHProfile.upgrade(WithCurrentVersion: currentVersion, success: { (response) in
-                print("\(response)")
+                guard let result = response.result,
+                    let urlStr = response.url else {
+//                let url = URL(string: urlStr) else { ///< 保留一个转换url的地方
+                    return
+                }
+                if result == true {
+                    XHAlertHUD.showStatus(status: "当前已是最新版本", timeInterval: 2)
+                }else {
+                    let alertVc = UIAlertController(title: "信息", message: "有最新版本, 是否更新 ?", preferredStyle: UIAlertControllerStyle.alert)
+                    let update = UIAlertAction(title: "立即更新", style: UIAlertActionStyle.default, handler: { (action) in
+                        ///< 跳转到更新的url去
+                    })
+                    let cancel = UIAlertAction(title: "稍后再说", style: UIAlertActionStyle.destructive, handler: nil)
+                    alertVc.addAction(update)
+                    alertVc.addAction(cancel)
+                    self.present(alertVc, animated: true, completion: nil)
+                }
             }, failue: { (error) in
                 if error.code == XHNetworkError.Code.connetFailue {
                     XHAlertHUD.showError(withStatus: XHNetworkError.Desription.connectFailue)

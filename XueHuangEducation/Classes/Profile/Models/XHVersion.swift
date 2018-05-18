@@ -9,7 +9,10 @@
 import UIKit
 import ObjectMapper
 
-class XHVersion: XHResult {
+class XHVersion: NSObject, Mappable, NSCoding {
+    
+    ///< 结果是否有最新版本
+    var result: Bool?
     ///< 信息
     var msg: String?
     ///< app的链接地址
@@ -17,24 +20,25 @@ class XHVersion: XHResult {
     var url: String?
     
     required init?(map: Map) {
-        super.init(map: map)
+        
     }
     
-    override func mapping(map: Map) {
-        super.mapping(map: map)
+    func mapping(map: Map) {
+        result   <- map["result"]
         msg      <- map["msg"]
         url      <- map["url"]
         
     }
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        result = aDecoder.decodeObject(forKey: "result") as? Bool
         msg = aDecoder.decodeObject(forKey: "msg") as? String
         url = aDecoder.decodeObject(forKey: "url") as? String
     }
     
-    override func encode(with aCoder: NSCoder) {
-        super.encode(with: aCoder)
+    func encode(with aCoder: NSCoder) {
         aCoder.encode(result, forKey: "result")
+        aCoder.encode(result, forKey: "msg")
+        aCoder.encode(result, forKey: "url")
     }
     
 }
