@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		266AEA3266FE904F74331219 /* Pods_XueHuangEducation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24AEB8EE5EBF7EF9D075D04 /* Pods_XueHuangEducation.framework */; };
 		57098817208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57098816208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift */; };
+		570C364320AEFA200009FC86 /* XHVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570C364220AEFA200009FC86 /* XHVersion.swift */; };
 		570D3A7120958A72005E03FF /* XHThemeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570D3A7020958A72005E03FF /* XHThemeList.swift */; };
 		570D3A7620959587005E03FF /* XHProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570D3A7520959587005E03FF /* XHProfileView.swift */; };
 		571C801D208CC12C005CD369 /* XHLoginBaseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C801C208CC12C005CD369 /* XHLoginBaseResult.swift */; };
@@ -117,6 +118,7 @@
 		1146A33339A28FE1F29ADDE0 /* Pods-XueHuangEducation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XueHuangEducation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XueHuangEducation/Pods-XueHuangEducation.debug.xcconfig"; sourceTree = "<group>"; };
 		2E63452E6AB35C4E372E7C60 /* Pods-XueHuangEducation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XueHuangEducation.release.xcconfig"; path = "Pods/Target Support Files/Pods-XueHuangEducation/Pods-XueHuangEducation.release.xcconfig"; sourceTree = "<group>"; };
 		57098816208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalogSectionFooterView.swift; sourceTree = "<group>"; };
+		570C364220AEFA200009FC86 /* XHVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHVersion.swift; sourceTree = "<group>"; };
 		570D3A7020958A72005E03FF /* XHThemeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHThemeList.swift; sourceTree = "<group>"; };
 		570D3A7520959587005E03FF /* XHProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHProfileView.swift; sourceTree = "<group>"; };
 		571C801C208CC12C005CD369 /* XHLoginBaseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHLoginBaseResult.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				575915E2209C48ED0073A517 /* XHProfile.swift */,
+				570C364220AEFA200009FC86 /* XHVersion.swift */,
 				57E0CA1520A6E1DC00CA7801 /* XHProfileInfoModel.swift */,
 			);
 			path = Models;
@@ -896,6 +899,7 @@
 				57633598208EBC0E009DAF86 /* XHCourseCatalogCell.swift in Sources */,
 				57A62AFA2088983200C9D5D2 /* XHNetwork.swift in Sources */,
 				572E48442095B053006E518D /* XHButton.swift in Sources */,
+				570C364320AEFA200009FC86 /* XHVersion.swift in Sources */,
 				573E73032099E60E00DD41B2 /* XHTeach.swift in Sources */,
 				577500172096AB6C00DF9AC5 /* XHCatalogListSegmentView.swift in Sources */,
 				577500152096A8CD00DF9AC5 /* XHCatalogListViewController.swift in Sources */,

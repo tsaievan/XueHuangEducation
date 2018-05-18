@@ -48,6 +48,9 @@ struct XHURL {
         
         ///< 31. 解密下载视频链接
         static let getDecryptDownloadMp4Url = "xhweb/appController.do?getDecryptDownloadMp4Url"
+        
+        ///< 37. 检测更新(appController)
+        static let upgrade = "xhweb/appController.do?upgrade"
     }
     
     struct NetCourseController {

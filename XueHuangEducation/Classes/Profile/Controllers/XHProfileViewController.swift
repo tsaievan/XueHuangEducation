@@ -16,13 +16,14 @@ enum XHProfileCellSelectType: Int {
 
 class XHProfileViewController: XHBaseViewController {
     
+    var currentVersion: String = "1.1.0"
+    
     var dataInfo: [XHProfileInfoModel] {
         let cacheSize = XHClearCache.getCacheSize()
         let cacheString = String(format: "(%.2fM)", cacheSize)
-        var versionCode = ""
         if let infoDict = Bundle.main.infoDictionary,
             let version = infoDict["CFBundleShortVersionString"] as? String {
-            versionCode = version
+            currentVersion = version
         }
         
         let dictArray = [
@@ -36,7 +37,7 @@ class XHProfileViewController: XHBaseViewController {
              "accessory" : XHProfileCellAccessoryType.arrow],
             ["title" : "关于学煌",
              "accessory" : XHProfileCellAccessoryType.arrow],
-            ["title" : "当前版本号:" + versionCode,
+            ["title" : "当前版本号:" + currentVersion,
              "accessory" : XHProfileCellAccessoryType.arrow],
             ]
         var mtArr = [XHProfileInfoModel]()
@@ -222,12 +223,21 @@ extension XHProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         ///< 点击了关于学煌的cell
         if indexPath.row == XHProfileCellSelectType.about.rawValue {
-        
+            
         }
         
         ///< 点击了当前版本号的cell
         if indexPath.row == XHProfileCellSelectType.version.rawValue {
-            
+            ///< 调用获取版本号的接口
+            XHProfile.upgrade(WithCurrentVersion: currentVersion, success: { (response) in
+                print("\(response)")
+            }, failue: { (error) in
+                if error.code == XHNetworkError.Code.connetFailue {
+                    XHAlertHUD.showError(withStatus: XHNetworkError.Desription.connectFailue)
+                }else {
+                    XHAlertHUD.showError(withStatus: XHNetworkError.Desription.commonError)
+                }
+            })
         }
     }
 }

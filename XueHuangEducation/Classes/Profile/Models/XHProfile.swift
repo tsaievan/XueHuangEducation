@@ -16,6 +16,8 @@ typealias XHGetMyMobilePaperListSuccess = ([XHCourseCatalog], XHPaperList) -> ()
 typealias XHGetMyMobilePaperListFailue = (NSError) -> ()
 typealias XHGetMyMobieQuestionListSuccess = ([XHCourseCatalog], XHQuestionList) -> ()
 typealias XHGetMyMobieQuestionListFailue = (NSError) -> ()
+typealias XHUpgradeSuccess = (Any) -> ()
+typealias XHUpgradeFailue = (NSError) -> ()
 
 class XHProfile {
     
@@ -169,6 +171,27 @@ class XHProfile {
             var array = questions
             array.insert(total, at: 0)
             success?(array, model)
+        }) { (error) in
+            failue?(error)
+        }
+    }
+    
+    /// 获取可用最新版本的接口
+    ///
+    /// - Parameters:
+    ///   - version: 获取用户当前的版本号
+    ///   - success: 请求数据成功的回调
+    ///   - failue: 请求数据失败的回调
+    class func upgrade(WithCurrentVersion version: String, success: XHUpgradeSuccess?, failue: XHUpgradeFailue?) {
+        let params = [
+            "versions" : version
+        ]
+        XHNetwork.GET(url: XHURL.AppController.upgrade, params: params, success: { (response) in
+            guard let responseJson = response as? [String : Any],
+                let model = XHVersion(JSON: responseJson) else {
+                    return
+            }
+            
         }) { (error) in
             failue?(error)
         }
