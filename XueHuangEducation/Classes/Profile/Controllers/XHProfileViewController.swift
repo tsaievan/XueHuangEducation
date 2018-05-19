@@ -14,6 +14,13 @@ enum XHProfileCellSelectType: Int {
     case version = 4
 }
 
+extension UIEdgeInsets {
+    struct ProfileViewController {
+        ///< tableView的缩进
+        static let tableView = UIEdgeInsetsMake(100, 0, 0, 0)
+    }
+}
+
 class XHProfileViewController: XHBaseViewController {
     
     var currentVersion: String = "1.1.0"
@@ -68,6 +75,10 @@ class XHProfileViewController: XHBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 }
 
