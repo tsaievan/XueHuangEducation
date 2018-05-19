@@ -21,7 +21,10 @@ class XHBaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ///< 让返回按钮没有标题的方法
         let backItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         self.navigationItem.backBarButtonItem = backItem
     }
 }
+
+

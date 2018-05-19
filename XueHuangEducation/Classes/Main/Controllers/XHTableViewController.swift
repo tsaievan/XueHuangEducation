@@ -35,6 +35,8 @@ class XHTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let backItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
