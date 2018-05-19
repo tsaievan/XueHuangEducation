@@ -223,7 +223,9 @@ extension XHProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         ///< 点击了关于学煌的cell
         if indexPath.row == XHProfileCellSelectType.about.rawValue {
-            
+            let aboutVc = XHAboutViewController()
+            aboutVc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(aboutVc, animated: true)
         }
         
         ///< 点击了当前版本号的cell
