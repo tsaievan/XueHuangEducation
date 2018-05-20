@@ -113,6 +113,7 @@
 		57F32A8120A1B66E00AEC633 /* XHShowQuestionWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A8020A1B66E00AEC633 /* XHShowQuestionWebController.swift */; };
 		57F32A8720A1EB2700AEC633 /* XHIsAllowedWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A8620A1EB2700AEC633 /* XHIsAllowedWatch.swift */; };
 		57F32A8920A1EB4E00AEC633 /* XHIsAllowedCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F32A8820A1EB4E00AEC633 /* XHIsAllowedCommon.swift */; };
+		57FCE81920B11D4500E08050 /* XHAboutLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FCE81820B11D4500E08050 /* XHAboutLogoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -225,6 +226,7 @@
 		57F32A8020A1B66E00AEC633 /* XHShowQuestionWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHShowQuestionWebController.swift; sourceTree = "<group>"; };
 		57F32A8620A1EB2700AEC633 /* XHIsAllowedWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHIsAllowedWatch.swift; sourceTree = "<group>"; };
 		57F32A8820A1EB4E00AEC633 /* XHIsAllowedCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHIsAllowedCommon.swift; sourceTree = "<group>"; };
+		57FCE81820B11D4500E08050 /* XHAboutLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHAboutLogoView.swift; sourceTree = "<group>"; };
 		E24AEB8EE5EBF7EF9D075D04 /* Pods_XueHuangEducation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XueHuangEducation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -273,6 +275,7 @@
 				57E0CA1220A6D6B700CA7801 /* Cells */,
 				570D3A7520959587005E03FF /* XHProfileView.swift */,
 				57E0CA1020A6CC3400CA7801 /* XHProfileTableView.swift */,
+				57FCE81820B11D4500E08050 /* XHAboutLogoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -909,6 +912,7 @@
 				577500152096A8CD00DF9AC5 /* XHCatalogListViewController.swift in Sources */,
 				575915E3209C48ED0073A517 /* XHProfile.swift in Sources */,
 				57A62AC820887A4D00C9D5D2 /* UIButton+XHExtension.swift in Sources */,
+				57FCE81920B11D4500E08050 /* XHAboutLogoView.swift in Sources */,
 				579A1E75208DDE70004D4A11 /* XHTableView.swift in Sources */,
 				57A62AC720887A4D00C9D5D2 /* String+XHExtension.swift in Sources */,
 				57369A2D2098518E00E2E0F9 /* XHTeachSectionHeaderView.swift in Sources */,
