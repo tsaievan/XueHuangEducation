@@ -48,7 +48,7 @@ class XHAboutViewController: XHBaseViewController {
     }()
     
     lazy var bottomTitle: UILabel = {
-        let lbl = UILabel(text: "Copyright ©2018, All Rights Reserved", textColor: UIColor.Global.lightGray, fontSize: CGFloat.FontSize._12)
+        let lbl = UILabel(text: "Copyright ©2018 XUEHUANG, All Rights Reserved", textColor: UIColor.Global.lightGray, fontSize: CGFloat.FontSize._12)
         lbl.sizeToFit()
         return lbl
     }()
@@ -103,12 +103,21 @@ extension XHAboutViewController {
     @objc
     fileprivate func didClickQQButtonAction(sender: UIButton) {
         guard let url = URL(string: "mqq://") else {
+            XHAlertHUD.showError(withStatus: "您暂未安装QQ客户端")
             return
         }
         if UIApplication.shared.canOpenURL(url) {
-            
+            ///< 跳转QQ
+            let webView = UIWebView(frame: CGRect.zero)
+            guard let url = URL(string: "mqq://im/chat?chat_type=wpa&uin=2885030819&version=1&src_type=web") else {
+                XHAlertHUD.showError(withStatus: "暂时无法使用QQ")
+                return
+            }
+            let request = URLRequest(url: url)
+            webView.loadRequest(request)
+            view.addSubview(webView)
         }else {
-            print("未安装")
+            XHAlertHUD.showError(withStatus: "您暂未安装QQ客户端")
         }
     }
     

@@ -171,12 +171,10 @@ class XHNetwork {
     
     class func download(url: URL) {
         _ = Alamofire.NetworkReachabilityManager()
-        
     }
     
     class func startMonitor() {
         monitor?.startListening()
-        
     }
 
     class func isReachableOnEthernetOrWiFi() -> Bool {

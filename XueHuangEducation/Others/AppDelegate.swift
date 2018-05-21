@@ -120,8 +120,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //            cookieJar.setCookie(newCookie)
 //        }
-        ///< 暂停说有下载
+        
+        ///< 退出登录的时候要把cookie清空
+        HTTPCookieStorage.shared.removeCookies(since: Date(timeIntervalSince1970: 0))
+        ///< 将cookie的接受改为一直
+        HTTPCookieStorage.shared.cookieAcceptPolicy = .always
+        XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
+        let tabBarController = XHTabBarController()
+        UIApplication.shared.keyWindow?.rootViewController = tabBarController
+        
+        ///< 暂停视频的下载
         XHDownload.pauseAllDownloads()
+        ///< 默认选中登录页面
+        tabBarController.selectedIndex = XHViewControllers.login.rawValue
     }
 }
 
