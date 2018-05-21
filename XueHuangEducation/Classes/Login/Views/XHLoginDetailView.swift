@@ -99,6 +99,16 @@ class XHLoginDetailView: UIView {
         return btn
     }()
     
+    ///< 记住密码的开关
+    lazy fileprivate var rememberPwdSwitch: UISwitch = {
+        let sw = UISwitch()
+        sw.onTintColor = UIColor.Global.skyBlue
+        sw.tintColor = UIColor.Global.lightGray
+        sw.isOn = XHPreferences[.USERDEFAULT_SWICH_REMEMBER_PASSWORD_KEY]
+        sw.addTarget(self, action: #selector(didChangeRemeberPwdSwitchAction), for: .valueChanged)
+        return sw
+    }()
+    
     ///< 发送验证码之后的倒计时器
     weak var countDownTimer: Timer?
     
@@ -183,7 +193,7 @@ class XHLoginDetailView: UIView {
         case .accountLogin:
             viewType = .accountLogin
             getAuthButton.isHidden = true
-            
+            rememberPwdSwitch.isHidden = false
             if let username = XHPreferences[.USERDEFAULT_LOGIN_ACCOUNT] {
                 userAccountTextField.text = username
             }else if let userInfo = XHPreferences[.USERDEFAULT_GET_PASSWORD_RESULT_KEY],
@@ -192,13 +202,21 @@ class XHLoginDetailView: UIView {
             }
             userAccountTextField.placeholder = "请输入用户名"
             passwordTextField.placeholder = "请输入密码"
+            let password = XHPreferences[.USERDEFAULT_LOGIN_PASSWORD] ?? String.empty
+            if rememberPwdSwitch.isOn {
+                passwordTextField.text = password
+            }else {
+                passwordTextField.text = String.empty
+            }
             passwordTextField.snp.remakeConstraints { (make) in
                 make.top.equalTo(userAccountTextField.snp.bottom).offset(15)
-                make.leading.height.trailing.equalTo(userAccountTextField)
+                make.leading.height.equalTo(userAccountTextField)
+                make.right.equalTo(rememberPwdSwitch.snp.left).offset(-15)
             }
         case .phoneLogin:
             viewType = .phoneLogin
             getAuthButton.isHidden = false
+            rememberPwdSwitch.isHidden = true
             if let mobile = XHPreferences[.USERDEFAULT_LOGIN_MOBILE] {
                 userAccountTextField.text = mobile
             }else if let userInfo = XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY],
@@ -218,6 +236,7 @@ class XHLoginDetailView: UIView {
         case .resetPassword:
             viewType = .phoneLogin
             getAuthButton.isHidden = false
+            rememberPwdSwitch.isHidden = true
             userAccountTextField.placeholder = "请输入手机号"
             userAccountTextField.keyboardType = .phonePad
             passwordTextField.placeholder = "请输入验证码"
@@ -234,6 +253,7 @@ class XHLoginDetailView: UIView {
         case .reinput:
             viewType = .reinput
             getAuthButton.isHidden = true
+            rememberPwdSwitch.isHidden = true
             userAccountTextField.placeholder = "请输入密码"
             userAccountTextField.isSecureTextEntry = true
             passwordTextField.placeholder = "请再次输入密码"
@@ -264,6 +284,7 @@ extension XHLoginDetailView {
         addSubview(registButton)
         addSubview(findPwdButton)
         addSubview(getAuthButton)
+        addSubview(rememberPwdSwitch)
         makeConstraints()
     }
     
@@ -300,6 +321,11 @@ extension XHLoginDetailView {
             make.trailing.equalTo(userAccountTextField)
             make.width.equalTo(userAccountTextField).multipliedBy(0.35)
         }
+        
+        rememberPwdSwitch.snp.makeConstraints { (make) in
+            make.centerY.equalTo(passwordTextField)
+            make.trailing.equalTo(userAccountTextField)
+        }
     }
 }
 
@@ -314,17 +340,20 @@ extension XHLoginDetailView {
 // MARK: - 按钮的点击事件
 extension XHLoginDetailView {
     ///< 点击了注册按钮
-    @objc fileprivate func didClickRegistButtonAction(sender: UIButton) {
+    @objc
+    fileprivate func didClickRegistButtonAction(sender: UIButton) {
         xh_delegate?.loginDetailViewDidClickRegistButton?(loginDetailView: self, sender: sender)
     }
     
     ///< 点击了找回账号按钮
-    @objc fileprivate func didClickFindPwdButtonAction(sender: UIButton) {
+    @objc
+    fileprivate func didClickFindPwdButtonAction(sender: UIButton) {
         xh_delegate?.loginDetailViewDidClickResetPwdButton?(loginDetailView: self, sender: sender)
     }
     
     ///< 点击了发送验证码按钮
-    @objc fileprivate func didClickGetAuthButtonAction(sender: UIButton) {
+    @objc
+    fileprivate func didClickGetAuthButtonAction(sender: UIButton) {
         ///< 验证手机号码是否为空
         if accountIsNull {
             return
@@ -340,7 +369,8 @@ extension XHLoginDetailView {
     }
     
     ///< 点击了登录按钮
-    @objc fileprivate func didClickLoginButtonAction(sender: UIButton) {
+    @objc
+    fileprivate func didClickLoginButtonAction(sender: UIButton) {
         if passwordTextField.isFirstResponder {
             passwordTextField.resignFirstResponder()
         }
@@ -367,6 +397,17 @@ extension XHLoginDetailView {
         }
         info = (userAccountTextField.text!, passwordTextField.text!)
         xh_delegate?.loginDetailViewDidClickLoginButton?(loginDetailView: self, sender: sender)
+    }
+    
+    @objc
+    fileprivate func didChangeRemeberPwdSwitchAction(sender: UISwitch) {
+        XHPreferences[.USERDEFAULT_SWICH_REMEMBER_PASSWORD_KEY] = sender.isOn
+        let password = XHPreferences[.USERDEFAULT_LOGIN_PASSWORD] ?? String.empty
+        if sender.isOn {
+            passwordTextField.text = password
+        }else {
+            passwordTextField.text = String.empty
+        }
     }
 }
 

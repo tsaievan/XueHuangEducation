@@ -78,6 +78,7 @@ extension XHLoginViewController: XHLoginViewDelegate {
                     if let mobile = response.phonebind {
                         XHPreferences[.USERDEFAULT_LOGIN_MOBILE] = mobile
                     }
+                    XHPreferences[.USERDEFAULT_LOGIN_PASSWORD] = info.password
                     if XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY] {
                         XHDownload.startAllDownloads()
                     }else {
