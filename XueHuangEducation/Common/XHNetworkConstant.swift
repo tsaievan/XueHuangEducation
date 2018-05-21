@@ -51,6 +51,9 @@ struct XHURL {
         
         ///< 37. 检测更新(appController)
         static let upgrade = "xhweb/appController.do?upgrade"
+        
+        ///< 38. 获取推送消息
+        static let push = "xhweb/appController.do?push"
     }
     
     struct NetCourseController {

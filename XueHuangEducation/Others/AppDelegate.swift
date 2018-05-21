@@ -12,6 +12,7 @@ import ZFDownload
 
 let XHDownload: ZFDownloadManager = {
     let d = ZFDownloadManager.shared()
+    ///< 默认并发下载4个视频
     d!.maxCount = 4
     return d!
 }()
@@ -27,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         setAlertHudAttributes()
         downloadHomepageData()
+        
+        let timer =  Timer(timeInterval: 20, target: self, selector: #selector(getNotificationAction), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer, forMode: .commonModes)
         return true
     }
     
@@ -49,35 +53,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ///< app已经成为焦点
     func applicationDidBecomeActive(_ application: UIApplication) {
         ///< 这里要判断一下能否用当前cookie请求到账号, 如果不能, 提示用户退出
-        guard let nav = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers[XHViewControllers.profile.rawValue] as? XHNavigationController,
-            let loginVc = nav.childViewControllers.first,
-            let bundleName = Bundle.bundleName,
-            let kls = NSClassFromString(bundleName + "." + "XHLoginViewController") else {
-                return
-        }
-        if !loginVc.isKind(of: kls) {
-            XHProfile.getMobile(success: { (response) in
-                guard let _ = response["userName"] else {
-                    XHAlertHUD.dismiss()
-                    XHGlobalLoading.stopLoading()
-                    let alerVc = UIAlertController(title: "信息", message: "您已经长时间未操作, 请重新登录", preferredStyle: .alert)
-                    let confirm = UIAlertAction(title: "确定", style: .default, handler: { (action) in
-                        ///< 退出登录的时候要把cookie清空
-                        HTTPCookieStorage.shared.removeCookies(since: Date(timeIntervalSince1970: 0))
-                        ///< 将cookie的接受改为一直
-                        HTTPCookieStorage.shared.cookieAcceptPolicy = .always
-                        XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
-                        let tabBarController = XHTabBarController()
-                        UIApplication.shared.keyWindow?.rootViewController = tabBarController
-                        ///< 默认选中登录页面
-                        tabBarController.selectedIndex = XHViewControllers.login.rawValue
-                    })
-                    alerVc.addAction(confirm)
-                    UIApplication.shared.keyWindow?.rootViewController?.present(alerVc, animated: true, completion: nil)
-                    return
-                }
-            }, failue: nil)
-        }
+        
+        ///< 根据需求, 先注释掉这个功能
+        
+//        guard let nav = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers[XHViewControllers.profile.rawValue] as? XHNavigationController,
+//            let loginVc = nav.childViewControllers.first,
+//            let bundleName = Bundle.bundleName,
+//            let kls = NSClassFromString(bundleName + "." + "XHLoginViewController") else {
+//                return
+//        }
+//        if !loginVc.isKind(of: kls) {
+//            XHProfile.getMobile(success: { (response) in
+//                guard let _ = response["userName"] else {
+//                    XHAlertHUD.dismiss()
+//                    XHGlobalLoading.stopLoading()
+//                    let alerVc = UIAlertController(title: "信息", message: "您已经长时间未操作, 请重新登录", preferredStyle: .alert)
+//                    let confirm = UIAlertAction(title: "确定", style: .default, handler: { (action) in
+//                        ///< 退出登录的时候要把cookie清空
+//                        HTTPCookieStorage.shared.removeCookies(since: Date(timeIntervalSince1970: 0))
+//                        ///< 将cookie的接受改为一直
+//                        HTTPCookieStorage.shared.cookieAcceptPolicy = .always
+//                        XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
+//                        let tabBarController = XHTabBarController()
+//                        UIApplication.shared.keyWindow?.rootViewController = tabBarController
+//                        ///< 默认选中登录页面
+//                        tabBarController.selectedIndex = XHViewControllers.login.rawValue
+//                    })
+//                    alerVc.addAction(confirm)
+//                    UIApplication.shared.keyWindow?.rootViewController?.present(alerVc, animated: true, completion: nil)
+//                    return
+//                }
+//            }, failue: nil)
+//        }
         ///< 开始监听网络状态的变化
         XHNetwork.startMonitor()
         
@@ -95,21 +102,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ///< 写上`UIApplication.shared.beginBackgroundTask(expirationHandler: nil)`这一句才可以
     ///< 进入程序即将退出这个代理方法
     func applicationWillTerminate(_ application: UIApplication) {
-        let cookieJar = HTTPCookieStorage.shared
-        guard let cookies = cookieJar.cookies else {
-            return
-        }
-        for cookie in cookies {
-            var properties = cookie.properties
-            properties?.removeValue(forKey: HTTPCookiePropertyKey.discard)
-            let date = Date(timeIntervalSinceNow: 3600 * 24 * 30 * 12)
-            properties?[HTTPCookiePropertyKey.expires] = date
-            guard let pros = properties,
-            let newCookie = HTTPCookie(properties: pros) else {
-                continue
-            }
-            cookieJar.setCookie(newCookie)
-        }
+        
+        ///< 根据需求先注释掉这个功能
+        
+//        let cookieJar = HTTPCookieStorage.shared
+//        guard let cookies = cookieJar.cookies else {
+//            return
+//        }
+//        for cookie in cookies {
+//            var properties = cookie.properties
+//            properties?.removeValue(forKey: HTTPCookiePropertyKey.discard)
+//            let date = Date(timeIntervalSinceNow: 3600 * 24 * 30 * 12)
+//            properties?[HTTPCookiePropertyKey.expires] = date
+//            guard let pros = properties,
+//            let newCookie = HTTPCookie(properties: pros) else {
+//                continue
+//            }
+//            cookieJar.setCookie(newCookie)
+//        }
         ///< 暂停说有下载
         XHDownload.pauseAllDownloads()
     }
@@ -122,6 +132,15 @@ extension AppDelegate {
         ///< 显示hud的时候禁止用户交互
         SVProgressHUD.setDefaultMaskType(.clear)
         SVProgressHUD.setForegroundColor(UIColor.white)
+    }
+}
+
+extension AppDelegate {
+    @objc
+    fileprivate func getNotificationAction() {
+        XHPush.getPushedNotification(success: { (response) in
+            
+        }, failue: nil)
     }
 }
 

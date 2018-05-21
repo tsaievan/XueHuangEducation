@@ -19,13 +19,6 @@
         <string>mqzone</string>
         <string>mqqOpensdkSSoLogin</string>
     </array>
-    
-    作者：Aprilsky
-    鏈接：https://www.jianshu.com/p/02d8950aa824
-    來源：簡書
-    著作權歸作者所有。商業轉載請聯繫作者獲得授權，非商業轉載請註明出處。
-    
-    
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
