@@ -102,18 +102,31 @@ extension XHAboutViewController {
     ///< 点击了QQ按钮
     @objc
     fileprivate func didClickQQButtonAction(sender: UIButton) {
-    
+        guard let url = URL(string: "mqq://") else {
+            return
+        }
+        if UIApplication.shared.canOpenURL(url) {
+            
+        }else {
+            print("未安装")
+        }
     }
     
     ///< 点击了打客服电话按钮
     @objc
     fileprivate func didClickPhoneButtonAction(sender: UIButton) {
-        
+        guard let url = URL(string: "tel:02787263816") else {
+            return
+        }
+        UIApplication.shared.openURL(url)
     }
     
     ///< 点击了全国客服电话按钮
     @objc
     fileprivate func didClickMainPhoneButtonAction(sender: UIButton) {
-        
+        guard let url = URL(string: "tel:4000057365") else {
+            return
+        }
+        UIApplication.shared.openURL(url)
     }
 }
