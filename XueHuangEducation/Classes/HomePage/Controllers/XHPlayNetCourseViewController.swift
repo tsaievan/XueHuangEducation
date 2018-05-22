@@ -84,6 +84,10 @@ class XHPlayNetCourseViewController: UIViewController {
                     let encodedName = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, newStr as CFString, "!$&'()*+,-./:;=?@_~%#[]" as CFString, nil, CFStringBuiltInEncodings.UTF8.rawValue) as NSString
                     let encodedFileName = encodedName.lastPathComponent
                     if name == encodedFileName {
+                        guard let _ = fileInfo.fileReceivedSize,
+                            let _ = fileInfo.fileSize else {
+                                return
+                        }
                         let received = (fileInfo.fileReceivedSize as NSString).doubleValue
                         let total = (fileInfo.fileSize as NSString).doubleValue
                         var buttonTitle = String.empty
@@ -299,6 +303,20 @@ extension XHPlayNetCourseViewController: ZFPlayerDelegate {
     ///< 下载视频的代理回调
     func zf_playerDownload(_ url: String!) {
         let name = (url as NSString).lastPathComponent
+        var flag: Bool = false
+        XHDownload.downinglist.forEach { (request) in
+            if let req = request as? ZFHttpRequest {
+                let printedName = (req.url.absoluteString as NSString).lastPathComponent
+                if printedName == name {
+                    XHAlertHUD.showStatus(status: "正在缓存中...", timeInterval: 2)
+                    flag = true
+                    return
+                }
+            }
+        }
+        if flag {
+            return
+        }
         XHDownload.downFileUrl(url, filename: name, fileimage: nil)
         if let net = netwareModel {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
