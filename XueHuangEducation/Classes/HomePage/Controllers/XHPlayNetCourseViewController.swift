@@ -54,7 +54,7 @@ class XHPlayNetCourseViewController: UIViewController {
             guard let videoModel = netwareModel,
                 let videoString = videoModel.video,
                 ///< 防止转换url失败, 必须添加下面的代码
-                let newStr = (videoString as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue),
+                var newStr = (videoString as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue),
                 var url = URL(string: newStr) else {
                     return
             }
@@ -65,27 +65,36 @@ class XHPlayNetCourseViewController: UIViewController {
                     if name == (url.absoluteString as NSString).lastPathComponent {
                         let str = String(format: "%@/%@/%@", XHClearCache.cachePath, downloadPath, name)
                         url = URL(fileURLWithPath: str)
-//                        downloadButton.setTitle("已缓存", for: .normal)
+                        //                        downloadButton.setTitle("已缓存", for: .normal)
                     }
                 }
             })
             
             XHDownload.downinglist.forEach({ (request) in
-//                if let req = request as? ZFHttpRequest,
-//                    let fileInfo = req.userInfo["File"] as? ZFFileModel,
-//                    let recievedString = fileInfo.fileReceivedSize,
-//                    let totalString = fileInfo.fileSize,
-//                    let cur = currentRequest {
-                
-//                    if cur == req {
-//                        let received = (recievedString as NSString).doubleValue
-//                        let total = (totalString as NSString).doubleValue
-//                        let ratio = (received / total) * 100
-//                        let btnTitle = String(format: "%.2f%@", ratio, "%")
-//                        downloadButton.setTitle(btnTitle, for: .normal)
-//                    }
+                if let req = request as? ZFHttpRequest,
+                    let fileInfo = req.userInfo["File"] as? ZFFileModel,
+                    let name = fileInfo.fileName {
+                    if newStr.contains("nickname") {
+                        let stringArr = (newStr as NSString).components(separatedBy: "?nickname")
+                        newStr = stringArr.first!
+                    }
                     
-//                }
+                    let encodedName = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, newStr as CFString, "!$&'()*+,-./:;=?@_~%#[]" as CFString, nil, CFStringBuiltInEncodings.UTF8.rawValue) as NSString
+                    let encodedFileName = encodedName.lastPathComponent
+                    if name == encodedFileName {
+                        let received = (fileInfo.fileReceivedSize as NSString).doubleValue
+                        let total = (fileInfo.fileSize as NSString).doubleValue
+                        var buttonTitle = String.empty
+                        if received < total {
+                            buttonTitle = String(format: "%.2f%@", received * 100 / total, "%")
+                            downloadButton.setTitle(buttonTitle, for: .normal)
+                            downloadButton.isHidden = false
+                        }else {
+                            downloadButton.setTitle("已缓存", for: .normal)
+                            downloadButton.isHidden = false
+                        }
+                    }
+                }
             })
             
             let title = (videoModel.netCoursewareName ?? String.empty) + String.space + (videoModel.teacher ?? String.empty)
@@ -105,7 +114,7 @@ class XHPlayNetCourseViewController: UIViewController {
             guard let videoModel = model,
                 let videoString = videoModel.video,
                 ///< 防止转换url失败, 必须添加下面的代码
-                let newStr = (videoString as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue),
+                var newStr = (videoString as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue),
                 var url = URL(string: newStr) else {
                     return
             }
@@ -124,15 +133,32 @@ class XHPlayNetCourseViewController: UIViewController {
             XHDownload.downinglist.forEach({ (request) in
                 if let req = request as? ZFHttpRequest,
                     let fileInfo = req.userInfo["File"] as? ZFFileModel,
-                    let recievedString = fileInfo.fileReceivedSize,
-                    let totalString = fileInfo.fileSize,
-                    let cur = currentRequest {
-                    if cur == req {
-                        let received = (recievedString as NSString).doubleValue
-                        let total = (totalString as NSString).doubleValue
-                        let ratio = (received / total) * 100
-                        let btnTitle = String(format: "%.2f%@", ratio, "%")
-//                        downloadButton.setTitle(btnTitle, for: .normal)
+                    let name = fileInfo.fileName {
+                    if newStr.contains("nickname") {
+                        let stringArr = (newStr as NSString).components(separatedBy: "?nickname")
+                        newStr = stringArr.first!
+                    }
+                    
+                    let encodedName = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, newStr as CFString, "!$&'()*+,-./:;=?@_~%#[]" as CFString, nil, CFStringBuiltInEncodings.UTF8.rawValue) as NSString
+                    let encodedFileName = encodedName.lastPathComponent
+                    if name == encodedFileName {
+                        guard let _ = fileInfo.fileReceivedSize,
+                            let _ = fileInfo.fileSize else {
+                                return
+                        }
+                        let received = (fileInfo.fileReceivedSize as NSString).doubleValue
+                        let total = (fileInfo.fileSize as NSString).doubleValue
+                        var buttonTitle = String.empty
+                        if received < total {
+                            buttonTitle = String(format: "%.2f%@", received * 100.0 / total, "%")
+                            downloadButton.setTitle(buttonTitle, for: .normal)
+                            currentFileInfo = fileInfo
+                            currentFileInfo!.addObserver(self, forKeyPath: "fileReceivedSize", options: NSKeyValueObservingOptions.new, context: nil)
+                            downloadButton.isHidden = false
+                        }else {
+                            downloadButton.setTitle("已缓存", for: .normal)
+                            downloadButton.isHidden = false
+                        }
                     }
                 }
             })
@@ -177,29 +203,51 @@ class XHPlayNetCourseViewController: UIViewController {
         return model
     }()
     
-//    lazy var downloadButton: UIButton = {
-//        let btn = UIButton(type: .custom)
-//        btn.setTitle("缓存视频", for: .normal)
-//        btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._13)
-//        btn.backgroundColor = .clear
-//        btn.layer.borderColor = UIColor.white.cgColor
-//        btn.layer.borderWidth = 1
-//        btn.layer.cornerRadius = 15
-//        btn.layer.masksToBounds = true
-//        btn.setTitle("已暂停", for: .selected)
-//        btn.addTarget(self, action: #selector(didClickDownloadButtonAction), for: .touchUpInside)
-//        return btn
-//    }()
+    lazy var downloadButton: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._13)
+        btn.backgroundColor = .clear
+        btn.layer.borderColor = UIColor.white.cgColor
+        btn.layer.borderWidth = 1
+        btn.layer.cornerRadius = 15
+        btn.layer.masksToBounds = true
+        btn.isHidden = true
+        return btn
+    }()
     
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         XHGlobalLoading.startLoading()
-//        XHDownload.downloadDelegate = self
-        for view in controlView.subviews {
-            if view.isKind(of: UIButton.self) {
-                print("\(view)")
+        //        XHDownload.downloadDelegate = self
+        XHDownload.downinglist.forEach { (request) in
+            if let req = request as? ZFHttpRequest,
+                let fileInfo = req.userInfo["File"] as? ZFFileModel,
+                let name = fileInfo.fileName {
+                ///< 文件名一致, 且下载完成
+                guard var ori = originalVideo else {
+                    return
+                }
+                if ori.contains("nickname") {
+                    let stringArr = (ori as NSString).components(separatedBy: "?nickname")
+                    ori = stringArr.first!
+                }
+                
+                let encodedName = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, ori as CFString, "!$&'()*+,-./:;=?@_~%#[]" as CFString, nil, CFStringBuiltInEncodings.UTF8.rawValue) as NSString
+                let encodedFileName = encodedName.lastPathComponent
+                if name == encodedFileName {
+                    let received = (fileInfo.fileReceivedSize as NSString).doubleValue
+                    let total = (fileInfo.fileSize as NSString).doubleValue
+                    var buttonTitle = String.empty
+                    if received < total {
+                        buttonTitle = String(format: "%.2f%@", received / total, "%")
+                        downloadButton.setTitle(buttonTitle, for: .normal)
+                        downloadButton.isHidden = false
+                    }else {
+                        downloadButton.isHidden = true
+                    }
+                }
             }
         }
     }
@@ -220,6 +268,9 @@ class XHPlayNetCourseViewController: UIViewController {
     }
     
     deinit {
+        if let fileInfo = currentFileInfo {
+            fileInfo.removeObserver(self, forKeyPath: "fileReceivedSize")
+        }
         print("离开XHPlayNetCourseViewController")
     }
 }
@@ -228,13 +279,13 @@ class XHPlayNetCourseViewController: UIViewController {
 // MARK: - 设置UI
 extension XHPlayNetCourseViewController {
     fileprivate func setupUI() {
-//        view.addSubview(downloadButton)
-//        downloadButton.snp.makeConstraints { (make) in
-//            make.right.equalTo(view)
-//            make.bottom.equalTo(view).offset(UIDevice.iPhoneX ? -30 : 0)
-//            make.width.equalTo(80)
-//            make.height.equalTo(30)
-//        }
+        view.addSubview(downloadButton)
+        downloadButton.snp.makeConstraints { (make) in
+            make.right.equalTo(view)
+            make.bottom.equalTo(view).offset(UIDevice.iPhoneX ? -30 : 0)
+            make.width.equalTo(80)
+            make.height.equalTo(30)
+        }
         view.backgroundColor = .black
     }
 }
@@ -245,6 +296,16 @@ extension XHPlayNetCourseViewController: ZFPlayerDelegate {
     func zf_playerDownload(_ url: String!) {
         let name = (url as NSString).lastPathComponent
         XHDownload.downFileUrl(url, filename: name, fileimage: nil)
+        if let net = netwareModel {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+                self.netwareModel = net
+            })
+        }
+        if let m = model {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+                self.model = m
+            })
+        }
     }
     
     func zf_playerBackAction() {
@@ -289,6 +350,24 @@ extension XHPlayNetCourseViewController {
                 }
             }
         })
+    }
+}
+
+extension XHPlayNetCourseViewController {
+    @objc
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let fileInfo = currentFileInfo {
+            let received = (fileInfo.fileReceivedSize as NSString).doubleValue
+            let total = (fileInfo.fileSize as NSString).doubleValue
+            var buttonTitle = String.empty
+            if received < total {
+                buttonTitle = String(format: "%.2f%@", received * 100.0 / total, "%")
+                downloadButton.setTitle(buttonTitle, for: .normal)
+                downloadButton.isHidden = false
+            }else {
+                downloadButton.isHidden = true
+            }
+        }
     }
 }
 

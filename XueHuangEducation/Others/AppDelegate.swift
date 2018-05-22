@@ -56,35 +56,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ///< 根据需求, 先注释掉这个功能
         
-//        guard let nav = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers[XHViewControllers.profile.rawValue] as? XHNavigationController,
-//            let loginVc = nav.childViewControllers.first,
-//            let bundleName = Bundle.bundleName,
-//            let kls = NSClassFromString(bundleName + "." + "XHLoginViewController") else {
-//                return
-//        }
-//        if !loginVc.isKind(of: kls) {
-//            XHProfile.getMobile(success: { (response) in
-//                guard let _ = response["userName"] else {
-//                    XHAlertHUD.dismiss()
-//                    XHGlobalLoading.stopLoading()
-//                    let alerVc = UIAlertController(title: "信息", message: "您已经长时间未操作, 请重新登录", preferredStyle: .alert)
-//                    let confirm = UIAlertAction(title: "确定", style: .default, handler: { (action) in
-//                        ///< 退出登录的时候要把cookie清空
-//                        HTTPCookieStorage.shared.removeCookies(since: Date(timeIntervalSince1970: 0))
-//                        ///< 将cookie的接受改为一直
-//                        HTTPCookieStorage.shared.cookieAcceptPolicy = .always
-//                        XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
-//                        let tabBarController = XHTabBarController()
-//                        UIApplication.shared.keyWindow?.rootViewController = tabBarController
-//                        ///< 默认选中登录页面
-//                        tabBarController.selectedIndex = XHViewControllers.login.rawValue
-//                    })
-//                    alerVc.addAction(confirm)
-//                    UIApplication.shared.keyWindow?.rootViewController?.present(alerVc, animated: true, completion: nil)
-//                    return
-//                }
-//            }, failue: nil)
-//        }
+        guard let nav = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers[XHViewControllers.profile.rawValue] as? XHNavigationController,
+            let loginVc = nav.childViewControllers.first,
+            let bundleName = Bundle.bundleName,
+            let kls = NSClassFromString(bundleName + "." + "XHLoginViewController") else {
+                return
+        }
+        if !loginVc.isKind(of: kls) {
+            XHProfile.getMobile(success: { (response) in
+                guard let _ = response["userName"] else {
+                    XHAlertHUD.dismiss()
+                    XHGlobalLoading.stopLoading()
+                    let alerVc = UIAlertController(title: "信息", message: "您已经长时间未操作, 请重新登录", preferredStyle: .alert)
+                    let confirm = UIAlertAction(title: "确定", style: .default, handler: { (action) in
+                        ///< 退出登录的时候要把cookie清空
+                        HTTPCookieStorage.shared.removeCookies(since: Date(timeIntervalSince1970: 0))
+                        ///< 将cookie的接受改为一直
+                        HTTPCookieStorage.shared.cookieAcceptPolicy = .always
+                        XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] = nil
+                        let tabBarController = XHTabBarController()
+                        UIApplication.shared.keyWindow?.rootViewController = tabBarController
+                        ///< 默认选中登录页面
+                        tabBarController.selectedIndex = XHViewControllers.login.rawValue
+                    })
+                    alerVc.addAction(confirm)
+                    UIApplication.shared.keyWindow?.rootViewController?.present(alerVc, animated: true, completion: nil)
+                    return
+                }
+            }, failue: nil)
+        }
         ///< 开始监听网络状态的变化
         XHNetwork.startMonitor()
         
