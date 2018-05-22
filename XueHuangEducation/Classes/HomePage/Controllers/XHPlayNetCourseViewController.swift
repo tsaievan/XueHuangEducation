@@ -42,6 +42,7 @@ fileprivate let playerViewRatio = XHRatio.W_H_R.PlayNetCourseViewController.play
 
 class XHPlayNetCourseViewController: UIViewController {
     
+    ///< 当前正在下载的文件
     var currentFileInfo: ZFFileModel?
     
     var currentRequest: ZFHttpRequest?
@@ -65,7 +66,8 @@ class XHPlayNetCourseViewController: UIViewController {
                     if name == (url.absoluteString as NSString).lastPathComponent {
                         let str = String(format: "%@/%@/%@", XHClearCache.cachePath, downloadPath, name)
                         url = URL(fileURLWithPath: str)
-                        //                        downloadButton.setTitle("已缓存", for: .normal)
+                        downloadButton.setTitle("已缓存", for: .normal)
+                        downloadButton.isHidden = false
                     }
                 }
             })
@@ -88,6 +90,8 @@ class XHPlayNetCourseViewController: UIViewController {
                         if received < total {
                             buttonTitle = String(format: "%.2f%@", received * 100 / total, "%")
                             downloadButton.setTitle(buttonTitle, for: .normal)
+                            currentFileInfo = fileInfo
+                            currentFileInfo!.addObserver(self, forKeyPath: "fileReceivedSize", options: NSKeyValueObservingOptions.new, context: nil)
                             downloadButton.isHidden = false
                         }else {
                             downloadButton.setTitle("已缓存", for: .normal)
@@ -125,7 +129,8 @@ class XHPlayNetCourseViewController: UIViewController {
                     if name == (url.absoluteString as NSString).lastPathComponent  {
                         let str = String(format: "%@/%@/%@", XHClearCache.cachePath, downloadPath, name)
                         url = URL(fileURLWithPath: str)
-                        cachedUrl = url
+                        downloadButton.setTitle("已缓存", for: .normal)
+                        downloadButton.isHidden = false
                     }
                 }
             })
@@ -221,6 +226,7 @@ class XHPlayNetCourseViewController: UIViewController {
         setupUI()
         XHGlobalLoading.startLoading()
         //        XHDownload.downloadDelegate = self
+        XHDownload.downloadDelegate = self
         XHDownload.downinglist.forEach { (request) in
             if let req = request as? ZFHttpRequest,
                 let fileInfo = req.userInfo["File"] as? ZFFileModel,
@@ -268,9 +274,7 @@ class XHPlayNetCourseViewController: UIViewController {
     }
     
     deinit {
-        if let fileInfo = currentFileInfo {
-            fileInfo.removeObserver(self, forKeyPath: "fileReceivedSize")
-        }
+        currentFileInfo?.removeObserver(self, forKeyPath: "fileReceivedSize")
         print("离开XHPlayNetCourseViewController")
     }
 }
@@ -429,23 +433,23 @@ extension XHPlayNetCourseViewController {
 //    }
 //}
 
-//extension XHPlayNetCourseViewController: ZFDownloadDelegate {
-//    func startDownload(_ request: ZFHttpRequest!) {
-//
-//    }
-//
-//    func finishedDownload(_ request: ZFHttpRequest!) {
-//
-//    }
-//
-//    func updateCellProgress(_ request: ZFHttpRequest!) {
+extension XHPlayNetCourseViewController: ZFDownloadDelegate {
+    func startDownload(_ request: ZFHttpRequest!) {
+
+    }
+
+    func finishedDownload(_ request: ZFHttpRequest!) {
+
+    }
+
+    func updateCellProgress(_ request: ZFHttpRequest!) {
 //        guard let curr = currentRequest,
 //            let fileInfo = curr.userInfo["File"] else {
 //            return
 //        }
 //        perform(#selector(updateButtonTile), on: Thread.main, with: fileInfo, waitUntilDone: true)
-//    }
-//}
+    }
+}
 
 //extension XHPlayNetCourseViewController {
 //    @objc
