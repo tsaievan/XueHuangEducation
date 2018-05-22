@@ -214,11 +214,12 @@ class XHPlayNetCourseViewController: UIViewController {
     
     lazy var downloadButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._13)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._12)
+        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         btn.backgroundColor = .clear
-        btn.layer.borderColor = UIColor.white.cgColor
+        btn.layer.borderColor = COLOR_BUTTON_BORDER_DOWNLOAD_PROGRESS_PINK.cgColor
         btn.layer.borderWidth = 1
-        btn.layer.cornerRadius = 15
+        btn.layer.cornerRadius = 8
         btn.layer.masksToBounds = true
         btn.isHidden = true
         return btn
@@ -287,11 +288,10 @@ class XHPlayNetCourseViewController: UIViewController {
 // MARK: - 设置UI
 extension XHPlayNetCourseViewController {
     fileprivate func setupUI() {
-        view.addSubview(downloadButton)
+        controlView.addSubview(downloadButton)
         downloadButton.snp.makeConstraints { (make) in
-            make.right.equalTo(view)
-            make.bottom.equalTo(view).offset(UIDevice.iPhoneX ? -30 : 0)
-            make.width.equalTo(80)
+            make.right.equalTo(controlView).offset(-8)
+            make.bottom.equalTo(controlView).offset(-40)
             make.height.equalTo(30)
         }
         view.backgroundColor = .black
