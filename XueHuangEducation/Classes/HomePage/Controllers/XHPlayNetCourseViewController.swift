@@ -97,6 +97,8 @@ class XHPlayNetCourseViewController: UIViewController {
         }
     }
     
+    var cachedUrl: URL?
+    
     var model: XHNetCourse? {
         didSet {
             XHGlobalLoading.stopLoading()
@@ -114,6 +116,7 @@ class XHPlayNetCourseViewController: UIViewController {
                     if name == (url.absoluteString as NSString).lastPathComponent  {
                         let str = String(format: "%@/%@/%@", XHClearCache.cachePath, downloadPath, name)
                         url = URL(fileURLWithPath: str)
+                        cachedUrl = url
                     }
                 }
             })
@@ -257,6 +260,35 @@ extension XHPlayNetCourseViewController {
         //        navigationController?.setNavigationBarHidden(false, animated: false)
         ///< 直接设置isHidden属性是可以的
         navigationController?.navigationBar.isHidden = false
+    }
+}
+
+extension XHPlayNetCourseViewController {
+    ///< 缓存之后, 即时断网也可以查看视频
+    func playCachedVideo() {
+        ZFDownloadManager.shared().finishedlist.forEach({ (fileModel) in
+            if let file = fileModel as? ZFFileModel,
+                let name = file.fileName {
+                ///< 文件名一致, 且下载完成
+                guard var ori = originalVideo else {
+                    return
+                }
+                if ori.contains("nickname") {
+                    let stringArr = (ori as NSString).components(separatedBy: "?nickname")
+                    ori = stringArr.first!
+                }
+                
+                let encodedName = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, ori as CFString, "!$&'()*+,-./:;=?@_~%#[]" as CFString, nil, CFStringBuiltInEncodings.UTF8.rawValue) as NSString
+                let encodedFileName = encodedName.lastPathComponent
+                if name == encodedFileName {
+                    let str = String(format: "%@/%@/%@", XHClearCache.cachePath, downloadPath, name)
+                    let url = URL(fileURLWithPath: str)
+                    playerModel.videoURL = url
+                    playerView.playerControlView(controlView, playerModel: playerModel)
+                    playerView.autoPlayTheVideo()
+                }
+            }
+        })
     }
 }
 

@@ -104,7 +104,9 @@ extension XHNetCourseWareController {
                 }, failue: { (errorReason) in
                     XHGlobalLoading.stopLoading()
                     XHAlertHUD.showError(withStatus: errorReason)
+                    playerVc.originalVideo = videoUrl
                     playerVc.showNavigationBar()
+                    playerVc.playCachedVideo()
             })
         }else { ///< 表明是收费课程
             ///< 要先判断是否登录, 没有登录的话要先弹出登录框
@@ -144,7 +146,9 @@ extension XHNetCourseWareController {
                         }, failue: { (errorReason) in
                             XHGlobalLoading.stopLoading()
                             XHAlertHUD.showError(withStatus: errorReason)
+                            playerVc.originalVideo = videoUrl
                             playerVc.showNavigationBar()
+                            playerVc.playCachedVideo()
                     })
                 }else {
                     let message = isAllowedWatch.msg ?? String.NetCourseWareController.getPrivilegeFailue
@@ -193,7 +197,9 @@ extension XHNetCourseWareController {
                 }, failue: { (errorReason) in
                     XHGlobalLoading.stopLoading()
                     XHAlertHUD.showError(withStatus: errorReason)
+                    playerVc.originalVideo = videoUrl
                     playerVc.showNavigationBar()
+                    playerVc.playCachedVideo()
             })
         }else { ///< 表明是收费课程
             ///< 要先判断是否登录, 没有登录的话要先弹出登录框
@@ -233,7 +239,9 @@ extension XHNetCourseWareController {
                         }, failue: { (errorReason) in
                             XHGlobalLoading.stopLoading()
                             XHAlertHUD.showError(withStatus: errorReason)
+                            playerVc.originalVideo = videoUrl
                             playerVc.showNavigationBar()
+                            playerVc.playCachedVideo()
                     })
                 }else {
                     let message = isAllowedWatch.msg ?? String.NetCourseWareController.getPrivilegeFailue
