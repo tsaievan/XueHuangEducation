@@ -35,10 +35,10 @@ class XHNetCourseDetailCell: UITableViewCell {
     var info: (model: XHSimpleNetCourse, iconArr: String?)? {
         didSet {
             guard let imageArr = info?.iconArr,
-            let newStr = (imageArr as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue),
-            let model = info?.model,
-            let text = model.netCourseName else {
-                return
+                let newStr = (imageArr as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue),
+                let model = info?.model,
+                let text = model.netCourseName else {
+                    return
             }
             titleLabel.text = text
             iconImageView.sd_setImage(with: URL(string: newStr), placeholderImage: nil, options: SDWebImageOptions.retryFailed, completed: nil)
@@ -61,6 +61,7 @@ class XHNetCourseDetailCell: UITableViewCell {
     
     lazy var listenButton: XHButton = {
         let btn = XHButton(withButtonImage: listenButtonImageName, title: listenButtonTitleText, titleColor: UIColor.Global.skyBlue, titleFont: CGFloat.FontSize._12, gap: CGFloat.zero)
+        btn.addTarget(self, action: #selector(didClickListenButtonAction), for: .touchUpInside)
         return btn
     }()
     
@@ -101,5 +102,12 @@ extension XHNetCourseDetailCell {
             make.left.equalTo(iconImageView.snp.right).offset(XHMargin._10)
             make.right.equalTo(listenButton.snp.left).offset(-XHMargin._10)
         }
+    }
+}
+
+extension XHNetCourseDetailCell {
+    @objc
+    fileprivate func didClickListenButtonAction(sender: XHButton) {
+        router(withEventName: EVENT_CLICK_NETCOURSE_DETAIL_CELL_LISTEN_BUTTON, userInfo: [CELL_FOR_NETCOURSE_DETAIL_CELL_LISTEN_BUTTON : self])
     }
 }

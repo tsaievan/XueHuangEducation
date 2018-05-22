@@ -101,10 +101,10 @@ extension XHNetCourseWareController {
                 model?.video = videoUrlString
                 playerVc?.netwareModel = model
                 playerVc?.originalVideo = videoUrl
-            }, failue: { (errorReason) in
-                XHGlobalLoading.stopLoading()
-                XHAlertHUD.showError(withStatus: errorReason)
-                playerVc.showNavigationBar()
+                }, failue: { (errorReason) in
+                    XHGlobalLoading.stopLoading()
+                    XHAlertHUD.showError(withStatus: errorReason)
+                    playerVc.showNavigationBar()
             })
         }else { ///< 表明是收费课程
             ///< 要先判断是否登录, 没有登录的话要先弹出登录框
@@ -141,10 +141,10 @@ extension XHNetCourseWareController {
                         model.video = videoUrlString
                         playerVc?.netwareModel = model
                         playerVc?.originalVideo = videoUrl
-                    }, failue: { (errorReason) in
-                        XHGlobalLoading.stopLoading()
-                        XHAlertHUD.showError(withStatus: errorReason)
-                        playerVc.showNavigationBar()
+                        }, failue: { (errorReason) in
+                            XHGlobalLoading.stopLoading()
+                            XHAlertHUD.showError(withStatus: errorReason)
+                            playerVc.showNavigationBar()
                     })
                 }else {
                     let message = isAllowedWatch.msg ?? String.NetCourseWareController.getPrivilegeFailue
@@ -162,3 +162,94 @@ extension XHNetCourseWareController {
         }
     }
 }
+
+extension XHNetCourseWareController {
+    @objc
+    override func router(withEventName eventName: String, userInfo: [String : Any]) {
+        guard let cell = userInfo[CELL_FOR_NETCOURSE_WARE_CELL_LISTEN_BUTTON] as? XHNetCourseWareCell,
+            let indexPath = tableView.indexPath(for: cell) else {
+                return
+        }
+        guard let datas = dataSouce else {
+            return
+        }
+        let model = datas[indexPath.row]
+        guard let type = model.state else {
+            return
+        }
+        
+        if type == XHNetCourseWareState.free.rawValue { ///< 表明是试听课程
+            guard let videoUrl = model.video else {
+                return
+            }
+            let playerVc = XHPlayNetCourseViewController()
+            navigationController?.pushViewController(playerVc, animated: true)
+            XHGlobalLoading.startLoading()
+            XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, decryptedType: XHDecryptedType.play, success: {[weak playerVc, weak model] (videoUrlString) in
+                XHGlobalLoading.stopLoading()
+                model?.video = videoUrlString
+                playerVc?.netwareModel = model
+                playerVc?.originalVideo = videoUrl
+                }, failue: { (errorReason) in
+                    XHGlobalLoading.stopLoading()
+                    XHAlertHUD.showError(withStatus: errorReason)
+                    playerVc.showNavigationBar()
+            })
+        }else { ///< 表明是收费课程
+            ///< 要先判断是否登录, 没有登录的话要先弹出登录框
+            guard let _ = XHPreferences[.USERDEFAULT_ACCOUNT_LOGIN_RESULT_KEY] else {
+                let alertVc = UIAlertController(title: String.Alert.info.rawValue, message: String.NetCourseWareController.watchAfterLogin, preferredStyle: UIAlertControllerStyle.alert)
+                let action = UIAlertAction(title: String.Alert.cancel.rawValue, style: UIAlertActionStyle.destructive, handler: nil)
+                ///< 弹出登录界面
+                let confirm = UIAlertAction(title: String.Alert.confirm.rawValue, style: UIAlertActionStyle.default, handler: { (action) in
+                    let loginVc = XHLoginViewController()
+                    let loginNav = XHNavigationController(rootViewController: loginVc)
+                    self.navigationController?.present(loginNav, animated: true, completion: nil)
+                })
+                alertVc.addAction(action)
+                alertVc.addAction(confirm)
+                present(alertVc, animated: true, completion: nil)
+                return
+            }
+            guard let netCoursewareId = model.netCoursewareId else {
+                return
+            }
+            XHTeach.isAllowedWatchVideo(withCourseId: netCoursewareId, success: { (isAllowedWatch) in
+                guard let success = isAllowedWatch.success else {
+                    return
+                }
+                if success == true { ///< 这个是有看视频的权限的
+                    guard let videoUrl = model.video else {
+                        return
+                    }
+                    let playerVc = XHPlayNetCourseViewController()
+                    self.navigationController?.pushViewController(playerVc, animated: true)
+                    XHGlobalLoading.startLoading()
+                    XHDecrypt.getDecryptedPlayerUrl(withOriginalUrl: videoUrl, decryptedType: XHDecryptedType.play, success: {[weak playerVc] (videoUrlString) in
+                        XHGlobalLoading.stopLoading()
+                        model.video = videoUrlString
+                        playerVc?.netwareModel = model
+                        playerVc?.originalVideo = videoUrl
+                        }, failue: { (errorReason) in
+                            XHGlobalLoading.stopLoading()
+                            XHAlertHUD.showError(withStatus: errorReason)
+                            playerVc.showNavigationBar()
+                    })
+                }else {
+                    let message = isAllowedWatch.msg ?? String.NetCourseWareController.getPrivilegeFailue
+                    let alertVc = UIAlertController(title: String.Alert.info.rawValue, message: message, preferredStyle: UIAlertControllerStyle.alert)
+                    let action = UIAlertAction(title: String.Alert.cancel.rawValue, style: UIAlertActionStyle.destructive, handler: nil)
+                    ///< 弹出登录界面
+                    let confirm = UIAlertAction(title: String.Alert.confirm.rawValue, style: UIAlertActionStyle.default, handler: nil)
+                    alertVc.addAction(action)
+                    alertVc.addAction(confirm)
+                    self.present(alertVc, animated: true, completion: nil)
+                }
+            }, failue: { (errorReason) in
+                XHAlertHUD.showError(withStatus: errorReason)
+            })
+        }
+    }
+}
+
+

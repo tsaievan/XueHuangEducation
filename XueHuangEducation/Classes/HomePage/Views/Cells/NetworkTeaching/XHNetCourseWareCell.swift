@@ -89,6 +89,7 @@ class XHNetCourseWareCell: UITableViewCell {
     
     lazy var listenButton: XHButton = {
         let btn = XHButton(withButtonImage: listenButtonImageName, title: listenButtonTitleText, titleColor: UIColor.Global.skyBlue, titleFont: CGFloat.FontSize._12, gap: CGFloat.zero)
+        btn.addTarget(self, action: #selector(didClickListenButtonAction), for: .touchUpInside)
         return btn
     }()
     
@@ -135,5 +136,12 @@ extension XHNetCourseWareCell {
             make.leading.equalTo(titleLabel)
             make.bottom.equalTo(iconImageView)
         }
+    }
+}
+
+extension XHNetCourseWareCell {
+    @objc
+    fileprivate func didClickListenButtonAction(sender: XHButton) {
+        router(withEventName: EVENT_CLICK_NETCOURSE_WARE_CELL_LISTEN_BUTTON, userInfo: [CELL_FOR_NETCOURSE_WARE_CELL_LISTEN_BUTTON : self])
     }
 }

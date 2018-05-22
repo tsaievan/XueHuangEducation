@@ -54,7 +54,7 @@ extension XHTeachViewController {
 }
 
 class XHTeachViewController: XHTableViewController {
-
+    
     ///< tableView的数据源
     var dataSource: (catalogs: [XHCourseCatalog], themeList: XHThemeList?)?
     
@@ -240,8 +240,8 @@ extension XHTeachViewController {
 extension XHTeachViewController: XHSectionTitleHeaderViewDelegate {
     func sectionTitleHeaderViewDidClickButtonList(headerView: XHSectionTitleHeaderView, sender: UIButton) {
         guard let themeList = newInfo?.themeList,
-        let catalogs = themeList.sCourseCatalogs else {
-            return
+            let catalogs = themeList.sCourseCatalogs else {
+                return
         }
         let catalog = catalogs[sender.tag]
         XHProfile.getMyMobileNetCourse(withCourseClassId: catalog.id ?? String.empty, success: { (catalogs, themeModel) in
@@ -253,6 +253,33 @@ extension XHTeachViewController: XHSectionTitleHeaderViewDelegate {
             }else { ///< 获取列表失败
                 XHAlertHUD.showError(withStatus: XHNetworkError.Desription.TeachViewController.getTeachListFailue)
             }
+        }
+    }
+}
+
+extension XHTeachViewController {
+    @objc
+    override func router(withEventName eventName: String, userInfo: [String : Any]) {
+        guard let cell = userInfo[CELL_FOR_NETCOURSE_DETAIL_CELL_LISTEN_BUTTON] as? XHNetCourseDetailCell,
+            let indexPath = tableView.indexPath(for: cell) else {
+                return
+        }
+        guard let datas = dataSource?.catalogs else {
+            return
+        }
+        let sectionModel = datas[indexPath.section]
+        guard let models = sectionModel.netCourses,
+            let courseName = models[indexPath.row].netCourseName,
+            let courseId = models[indexPath.row].netCourseId else {
+                return
+        }
+        let netVc = XHNetCourseWareController(style: .grouped)
+        netVc.navigationItem.title = courseName
+        navigationController?.pushViewController(netVc, animated: true)
+        XHTeach.getNetcourseware(withCourseName: courseName, courseId: courseId, success: { (response) in
+            netVc.models = response
+        }) { (errorReason) in
+            XHAlertHUD.showError(withStatus: errorReason)
         }
     }
 }
