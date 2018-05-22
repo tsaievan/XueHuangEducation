@@ -77,14 +77,13 @@ class XHPlayNetCourseViewController: UIViewController {
                     let totalString = fileInfo.fileSize,
                     let cur = currentRequest {
                     
-                    
-                    if cur == req {
-                        let received = (recievedString as NSString).doubleValue
-                        let total = (totalString as NSString).doubleValue
-                        let ratio = (received / total) * 100
-                        let btnTitle = String(format: "%.2f%@", ratio, "%")
+//                    if cur == req {
+//                        let received = (recievedString as NSString).doubleValue
+//                        let total = (totalString as NSString).doubleValue
+//                        let ratio = (received / total) * 100
+//                        let btnTitle = String(format: "%.2f%@", ratio, "%")
 //                        downloadButton.setTitle(btnTitle, for: .normal)
-                    }
+//                    }
                     
                 }
             })
@@ -165,6 +164,7 @@ class XHPlayNetCourseViewController: UIViewController {
     
     lazy var controlView: ZFPlayerControlView = {
         let ctrl = ZFPlayerControlView()
+        ctrl.zf_playerHasDownloadFunction(true)
         return ctrl
     }()
     
