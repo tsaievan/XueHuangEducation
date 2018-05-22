@@ -71,12 +71,12 @@ class XHPlayNetCourseViewController: UIViewController {
             })
             
             XHDownload.downinglist.forEach({ (request) in
-                if let req = request as? ZFHttpRequest,
-                    let fileInfo = req.userInfo["File"] as? ZFFileModel,
-                    let recievedString = fileInfo.fileReceivedSize,
-                    let totalString = fileInfo.fileSize,
-                    let cur = currentRequest {
-                    
+//                if let req = request as? ZFHttpRequest,
+//                    let fileInfo = req.userInfo["File"] as? ZFFileModel,
+//                    let recievedString = fileInfo.fileReceivedSize,
+//                    let totalString = fileInfo.fileSize,
+//                    let cur = currentRequest {
+                
 //                    if cur == req {
 //                        let received = (recievedString as NSString).doubleValue
 //                        let total = (totalString as NSString).doubleValue
@@ -85,7 +85,7 @@ class XHPlayNetCourseViewController: UIViewController {
 //                        downloadButton.setTitle(btnTitle, for: .normal)
 //                    }
                     
-                }
+//                }
             })
             
             let title = (videoModel.netCoursewareName ?? String.empty) + String.space + (videoModel.teacher ?? String.empty)
