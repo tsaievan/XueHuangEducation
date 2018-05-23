@@ -181,6 +181,7 @@ extension AppDelegate {
                 }
                 content.title = title
                 content.sound = UNNotificationSound.default()
+                content.badge = NSNumber(value: UIApplication.shared.applicationIconBadgeNumber + 1)
                 let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
                 let requestIdentifier = pushId
                 let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
@@ -193,12 +194,13 @@ extension AppDelegate {
                         UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
                             view.frame = CGRect(x: 0, y: 0, width: XHSCreen.width, height: XHSCreen.height)
                         }, completion: nil)
+                        UIApplication.shared.applicationIconBadgeNumber = 0
+                        content.badge = 0
                     }
                 })
             } else { ///< iOS 10.0 以下的消息推送
                 
             }
-            
         }, failue: nil)
     }
 }
