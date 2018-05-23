@@ -180,6 +180,7 @@ extension AppDelegate {
                     return
                 }
                 content.title = title
+                content.sound = UNNotificationSound.default()
                 let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
                 let requestIdentifier = pushId
                 let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
