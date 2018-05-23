@@ -15,6 +15,7 @@
 		571C801D208CC12C005CD369 /* XHLoginBaseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C801C208CC12C005CD369 /* XHLoginBaseResult.swift */; };
 		571C801F208CC1E5005CD369 /* XHLoginMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C801E208CC1E5005CD369 /* XHLoginMember.swift */; };
 		571C8021208CC488005CD369 /* XHAccountLoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C8020208CC488005CD369 /* XHAccountLoginResult.swift */; };
+		5721C5C720B5571F00550DCD /* XHPushNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721C5C620B5571F00550DCD /* XHPushNotificationModel.swift */; };
 		572B8C9D208E06F8005EC6CD /* XHHomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572B8C9C208E06F8005EC6CD /* XHHomePage.swift */; };
 		572B8C9F208E0944005EC6CD /* XHCourseCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572B8C9E208E0944005EC6CD /* XHCourseCatalog.swift */; };
 		572B8CA3208E098C005EC6CD /* XHNetCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572B8CA2208E098C005EC6CD /* XHNetCourse.swift */; };
@@ -127,6 +128,7 @@
 		571C801C208CC12C005CD369 /* XHLoginBaseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHLoginBaseResult.swift; sourceTree = "<group>"; };
 		571C801E208CC1E5005CD369 /* XHLoginMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHLoginMember.swift; sourceTree = "<group>"; };
 		571C8020208CC488005CD369 /* XHAccountLoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHAccountLoginResult.swift; sourceTree = "<group>"; };
+		5721C5C620B5571F00550DCD /* XHPushNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHPushNotificationModel.swift; sourceTree = "<group>"; };
 		572B8C9C208E06F8005EC6CD /* XHHomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHHomePage.swift; sourceTree = "<group>"; };
 		572B8C9E208E0944005EC6CD /* XHCourseCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalog.swift; sourceTree = "<group>"; };
 		572B8CA2208E098C005EC6CD /* XHNetCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourse.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 				57369A322098B0D700E2E0F9 /* XHRoutine.swift */,
 				57F32A8820A1EB4E00AEC633 /* XHIsAllowedCommon.swift */,
 				573B2E2520B2E07100781747 /* XHPush.swift */,
+				5721C5C620B5571F00550DCD /* XHPushNotificationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -888,6 +891,7 @@
 				57A62B162088B73400C9D5D2 /* XHLogin.swift in Sources */,
 				57418EB9209B490F00DC2939 /* XHMobilePaper.swift in Sources */,
 				573C61872099B14D00B9F6DC /* XHQuestionListCell.swift in Sources */,
+				5721C5C720B5571F00550DCD /* XHPushNotificationModel.swift in Sources */,
 				57A62AF620887F0300C9D5D2 /* XHAlertHUD.swift in Sources */,
 				57614F2D2099EB8500D9EDE5 /* XHNetCourseWare.swift in Sources */,
 				57F32A7F20A174BF00AEC633 /* XHLoadingView.swift in Sources */,

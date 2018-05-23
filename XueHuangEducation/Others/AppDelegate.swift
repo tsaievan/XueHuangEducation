@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 import SVProgressHUD
 import ZFDownload
 
@@ -28,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         setAlertHudAttributes()
         downloadHomepageData()
+        registNotification()
         
         let timer =  Timer(timeInterval: 20, target: self, selector: #selector(getNotificationAction), userInfo: nil, repeats: true)
         RunLoop.current.add(timer, forMode: .commonModes)
@@ -150,8 +152,42 @@ extension AppDelegate {
     @objc
     fileprivate func getNotificationAction() {
         XHPush.getPushedNotification(success: { (response) in
+            if #available(iOS 10.0, *) {
+                let content = UNMutableNotificationContent()
+                guard let title = response.title,
+                let pushId = response.pushId else {
+                    return
+                }
+                content.title = title
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                let requestIdentifier = pushId
+                let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
+                    print("\(error?.localizedDescription)")
+                })
+            } else {
+                // Fallback on earlier versions
+            }
             
         }, failue: nil)
+    }
+}
+
+// MARK: - 通知相关
+extension AppDelegate {
+    fileprivate func registNotification() {
+        ///< iOS10 以后的版本
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (accepted, error) in
+                if !accepted {
+                    print("用户不允许消息通知")
+                }
+            }
+        } else {
+            
+        }
+        
+        
     }
 }
 

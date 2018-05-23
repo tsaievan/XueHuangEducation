@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias XHGetPushedNotificationSuccess = (String) -> ()
+typealias XHGetPushedNotificationSuccess = (XHPushNotificationModel) -> ()
 typealias XHGetPushedNotificationFailue = (String) -> ()
 
 class XHPush {
@@ -20,10 +20,11 @@ class XHPush {
     ///   - failue: 请求接口失败的回调
     class func getPushedNotification(success: XHGetPushedNotificationSuccess?, failue: XHGetPushedNotificationFailue?) {
         XHNetwork.GET(url: XHURL.AppController.push, params: nil, success: { (response) in
-            guard let videoUrl = response as? String else {
+            guard let responseJson = response as? [String : Any],
+            let model = XHPushNotificationModel(JSON: responseJson) else {
                 return
             }
-            success?(videoUrl)
+            success?(model)
         }) { (error) in
             if error.code == XHNetworkError.Code.connetFailue {
                 failue?(XHNetworkError.Desription.connectFailue)
