@@ -1082,11 +1082,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C7LGV8HA52;
+				DEVELOPMENT_TEAM = ZFJ3GTSF26;
 				INFOPLIST_FILE = XueHuangEducation/Others/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tsaievan.XueHuangEducation;
+				PRODUCT_BUNDLE_IDENTIFIER = con.mt.www.LoveGuQin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XueHuangEducation/Others/XueHuangEducation-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1102,11 +1102,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C7LGV8HA52;
+				DEVELOPMENT_TEAM = ZFJ3GTSF26;
 				INFOPLIST_FILE = XueHuangEducation/Others/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tsaievan.XueHuangEducation;
+				PRODUCT_BUNDLE_IDENTIFIER = con.mt.www.LoveGuQin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XueHuangEducation/Others/XueHuangEducation-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

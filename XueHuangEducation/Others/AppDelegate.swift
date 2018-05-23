@@ -12,8 +12,8 @@ import ZFDownload
 
 let XHDownload: ZFDownloadManager = {
     let d = ZFDownloadManager.shared()
-    ///< 默认并发下载4个视频
-    d!.maxCount = 4
+    ///< 默认并发下载1个视频 (需求如此)
+    d!.maxCount = 1
     return d!
 }()
 
