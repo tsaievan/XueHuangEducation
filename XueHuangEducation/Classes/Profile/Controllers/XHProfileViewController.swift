@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 enum XHProfileCellSelectType: Int {
     case clearCache = 2
@@ -79,6 +80,7 @@ class XHProfileViewController: XHBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        ///< 请求用户的名称
         XHProfile.getMobile(success: { (response) in
             guard let _ = response["userName"] else {
                 XHAlertHUD.dismiss()
@@ -316,6 +318,14 @@ extension XHProfileViewController {
             
             if indexPath.row == XHProfileSwithType.pushInfo.rawValue { ///< 表明触碰了允许消息推送的开关
                 XHPreferences[.USERDEFAULT_SWICH_ALLOW_PUSH_INFO_KEY] = xhSwitch.isOn
+                guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+                    return
+                }
+                if xhSwitch.isOn {
+                    delegate.startGetPushedNotificationTimer()
+                }else {
+                    delegate.invaliatedGetPushedNotificationTimer()
+                }
             }
         }
     }

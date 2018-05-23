@@ -8,7 +8,11 @@
 
 import UIKit
 
+let XHAdvertisement = XHAdvertisementView.shared
+
 class XHAdvertisementView: UIView {
+    
+    static let shared = XHAdvertisementView()
     
     var content: String? {
         didSet {
@@ -29,7 +33,7 @@ class XHAdvertisementView: UIView {
     
     lazy var indicatorView: UIView = {
         let indicator = UIView()
-        indicator.backgroundColor = COLOR_ADVERTISEMENT_BORDER
+        indicator.backgroundColor = .white
         return indicator
     }()
     
@@ -54,7 +58,7 @@ class XHAdvertisementView: UIView {
 
 extension XHAdvertisementView {
     fileprivate func setupUI() {
-        backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+        backgroundColor = UIColor.black.withAlphaComponent(0.5)
         addSubview(webView)
         addSubview(indicatorView)
         addSubview(dismissButton)

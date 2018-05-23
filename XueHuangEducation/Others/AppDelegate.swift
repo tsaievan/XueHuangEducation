@@ -22,6 +22,8 @@ let XHDownload: ZFDownloadManager = {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    weak var pushTimer: Timer?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -31,8 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         downloadHomepageData()
         registNotification()
         
-        let timer =  Timer(timeInterval: 10, target: self, selector: #selector(getNotificationAction), userInfo: nil, repeats: true)
-        RunLoop.current.add(timer, forMode: .commonModes)
+        let push = XHPreferences[.USERDEFAULT_SWICH_ALLOW_PUSH_INFO_KEY]
+        if push {
+            startGetPushedNotificationTimer()
+        }else {
+            invaliatedGetPushedNotificationTimer()
+        }
         return true
     }
     
@@ -149,9 +155,23 @@ extension AppDelegate {
 }
 
 extension AppDelegate {
+    func startGetPushedNotificationTimer() {
+        let timer =  Timer(timeInterval: 10, target: self, selector: #selector(getNotificationAction), userInfo: nil, repeats: true)
+        pushTimer = timer
+        RunLoop.current.add(timer, forMode: .commonModes)
+    }
+    
+    func invaliatedGetPushedNotificationTimer() {
+        pushTimer?.invalidate()
+    }
+}
+
+extension AppDelegate {
     @objc
     fileprivate func getNotificationAction() {
         XHPush.getPushedNotification(success: { (response) in
+            
+            ///< iOS 10.0 以上的消息推送
             if #available(iOS 10.0, *) {
                 let content = UNMutableNotificationContent()
                 guard let title = response.title,
@@ -164,9 +184,8 @@ extension AppDelegate {
                 let requestIdentifier = pushId
                 let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
                 UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
-                    print("\(error?.localizedDescription)")
                     DispatchQueue.main.async {
-                        let view = XHAdvertisementView(frame: XHSCreen.bounds)
+                        let view = XHAdvertisement
                         view.frame = CGRect(x: 0, y: -XHSCreen.height, width: XHSCreen.width, height: XHSCreen.height)
                         view.content = details
                         self.window?.addSubview(view)
@@ -175,8 +194,8 @@ extension AppDelegate {
                         }, completion: nil)
                     }
                 })
-            } else {
-                // Fallback on earlier versions
+            } else { ///< iOS 10.0 以下的消息推送
+                
             }
             
         }, failue: nil)
@@ -190,14 +209,15 @@ extension AppDelegate {
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (accepted, error) in
                 if !accepted {
-                    print("用户不允许消息通知")
+                    XHPreferences[.USERDEFAULT_SWICH_ALLOW_PUSH_INFO_KEY] = false
+                }else {
+                    XHPreferences[.USERDEFAULT_SWICH_ALLOW_PUSH_INFO_KEY] = true
                 }
             }
         } else {
-            
+            let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(settings)
         }
-        
-        
     }
 }
 
