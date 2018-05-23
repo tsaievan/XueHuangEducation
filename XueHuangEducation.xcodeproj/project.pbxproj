@@ -16,6 +16,7 @@
 		571C801F208CC1E5005CD369 /* XHLoginMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C801E208CC1E5005CD369 /* XHLoginMember.swift */; };
 		571C8021208CC488005CD369 /* XHAccountLoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C8020208CC488005CD369 /* XHAccountLoginResult.swift */; };
 		5721C5C720B5571F00550DCD /* XHPushNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721C5C620B5571F00550DCD /* XHPushNotificationModel.swift */; };
+		5721C5C920B5660500550DCD /* XHAdvertisementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5721C5C820B5660500550DCD /* XHAdvertisementView.swift */; };
 		572B8C9D208E06F8005EC6CD /* XHHomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572B8C9C208E06F8005EC6CD /* XHHomePage.swift */; };
 		572B8C9F208E0944005EC6CD /* XHCourseCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572B8C9E208E0944005EC6CD /* XHCourseCatalog.swift */; };
 		572B8CA3208E098C005EC6CD /* XHNetCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572B8CA2208E098C005EC6CD /* XHNetCourse.swift */; };
@@ -129,6 +130,7 @@
 		571C801E208CC1E5005CD369 /* XHLoginMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHLoginMember.swift; sourceTree = "<group>"; };
 		571C8020208CC488005CD369 /* XHAccountLoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHAccountLoginResult.swift; sourceTree = "<group>"; };
 		5721C5C620B5571F00550DCD /* XHPushNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHPushNotificationModel.swift; sourceTree = "<group>"; };
+		5721C5C820B5660500550DCD /* XHAdvertisementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHAdvertisementView.swift; sourceTree = "<group>"; };
 		572B8C9C208E06F8005EC6CD /* XHHomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHHomePage.swift; sourceTree = "<group>"; };
 		572B8C9E208E0944005EC6CD /* XHCourseCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHCourseCatalog.swift; sourceTree = "<group>"; };
 		572B8CA2208E098C005EC6CD /* XHNetCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XHNetCourse.swift; sourceTree = "<group>"; };
@@ -623,6 +625,7 @@
 				579A1E74208DDE70004D4A11 /* XHTableView.swift */,
 				572E48432095B053006E518D /* XHButton.swift */,
 				5740F467209DE53500757347 /* XHPopMenu.swift */,
+				5721C5C820B5660500550DCD /* XHAdvertisementView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -862,6 +865,7 @@
 				5740F46A209F40C400757347 /* XHRegistResult.swift in Sources */,
 				574E5A1C2089CEE2009EAF93 /* XHGetPasswordResult.swift in Sources */,
 				57A62B1C2088B73400C9D5D2 /* XHTabBarController.swift in Sources */,
+				5721C5C920B5660500550DCD /* XHAdvertisementView.swift in Sources */,
 				57098817208EFC3F0036018C /* XHCourseCatalogSectionFooterView.swift in Sources */,
 				573B2E2620B2E07100781747 /* XHPush.swift in Sources */,
 				57418EBD209B54E300DC2939 /* XHQuestionHeaderView.swift in Sources */,

@@ -217,7 +217,7 @@ class XHPlayNetCourseViewController: UIViewController {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._12)
         btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         btn.backgroundColor = .clear
-        btn.layer.borderColor = COLOR_BUTTON_BORDER_DOWNLOAD_PROGRESS_PINK.cgColor
+        btn.layer.borderColor = COLOR_ADVERTISEMENT_BORDER.cgColor
         btn.layer.borderWidth = 1
         btn.layer.cornerRadius = 8
         btn.layer.masksToBounds = true

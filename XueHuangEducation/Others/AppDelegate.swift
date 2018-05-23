@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         downloadHomepageData()
         registNotification()
         
-        let timer =  Timer(timeInterval: 20, target: self, selector: #selector(getNotificationAction), userInfo: nil, repeats: true)
+        let timer =  Timer(timeInterval: 10, target: self, selector: #selector(getNotificationAction), userInfo: nil, repeats: true)
         RunLoop.current.add(timer, forMode: .commonModes)
         return true
     }
@@ -155,7 +155,8 @@ extension AppDelegate {
             if #available(iOS 10.0, *) {
                 let content = UNMutableNotificationContent()
                 guard let title = response.title,
-                let pushId = response.pushId else {
+                let pushId = response.pushId,
+                let details = response.details else {
                     return
                 }
                 content.title = title
@@ -164,6 +165,15 @@ extension AppDelegate {
                 let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
                 UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
                     print("\(error?.localizedDescription)")
+                    DispatchQueue.main.async {
+                        let view = XHAdvertisementView(frame: XHSCreen.bounds)
+                        view.frame = CGRect(x: 0, y: -XHSCreen.height, width: XHSCreen.width, height: XHSCreen.height)
+                        view.content = details
+                        self.window?.addSubview(view)
+                        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                            view.frame = CGRect(x: 0, y: 0, width: XHSCreen.width, height: XHSCreen.height)
+                        }, completion: nil)
+                    }
                 })
             } else {
                 // Fallback on earlier versions
