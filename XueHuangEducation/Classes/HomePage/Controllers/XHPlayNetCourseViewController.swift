@@ -92,7 +92,7 @@ class XHPlayNetCourseViewController: UIViewController {
                         let total = (fileInfo.fileSize as NSString).doubleValue
                         var buttonTitle = String.empty
                         if received < total {
-                            buttonTitle = String(format: "%.2f%@", received * 100 / total, "%")
+                            buttonTitle = String(format: "正在缓存 %.f%@", received * 100 / total, "%")
                             downloadButton.setTitle(buttonTitle, for: .normal)
                             currentFileInfo = fileInfo
                             currentFileInfo!.addObserver(self, forKeyPath: "fileReceivedSize", options: NSKeyValueObservingOptions.new, context: nil)
@@ -159,7 +159,7 @@ class XHPlayNetCourseViewController: UIViewController {
                         let total = (fileInfo.fileSize as NSString).doubleValue
                         var buttonTitle = String.empty
                         if received < total {
-                            buttonTitle = String(format: "%.2f%@", received * 100.0 / total, "%")
+                            buttonTitle = String(format: "正在缓存 %.f%@", received * 100.0 / total, "%")
                             downloadButton.setTitle(buttonTitle, for: .normal)
                             currentFileInfo = fileInfo
                             currentFileInfo!.addObserver(self, forKeyPath: "fileReceivedSize", options: NSKeyValueObservingOptions.new, context: nil)
@@ -217,7 +217,7 @@ class XHPlayNetCourseViewController: UIViewController {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat.FontSize._12)
         btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         btn.backgroundColor = .clear
-        btn.layer.borderColor = COLOR_ADVERTISEMENT_BORDER.cgColor
+        btn.layer.borderColor = COLOR_BUTTON_BORDER_DOWNLOAD_PROGRESS_PINK.cgColor
         btn.layer.borderWidth = 1
         btn.layer.cornerRadius = 8
         btn.layer.masksToBounds = true
@@ -252,7 +252,7 @@ class XHPlayNetCourseViewController: UIViewController {
                     let total = (fileInfo.fileSize as NSString).doubleValue
                     var buttonTitle = String.empty
                     if received < total {
-                        buttonTitle = String(format: "%.2f%@", received / total, "%")
+                        buttonTitle = String(format: "正在缓存 %.f%@", received / total, "%")
                         downloadButton.setTitle(buttonTitle, for: .normal)
                         downloadButton.isHidden = false
                     }else {
@@ -328,12 +328,18 @@ extension XHPlayNetCourseViewController: ZFPlayerDelegate {
         let newStr = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (downloadUrl + ori) as CFString, "!$&'()*+,-./:;=?@_~%#[]" as CFString, nil, CFStringBuiltInEncodings.UTF8.rawValue) as String
         XHDownload.downFileUrl(newStr, filename: name, fileimage: nil)
         if let net = netwareModel {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                if !self.downloadButton.isHidden {
+                    self.downloadButton.isHidden = false
+                }
                 self.netwareModel = net
             })
         }
         if let m = model {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                if !self.downloadButton.isHidden {
+                    self.downloadButton.isHidden = false
+                }
                 self.model = m
             })
         }
@@ -392,7 +398,7 @@ extension XHPlayNetCourseViewController {
             let total = (fileInfo.fileSize as NSString).doubleValue
             var buttonTitle = String.empty
             if received < total {
-                buttonTitle = String(format: "%.2f%@", received * 100.0 / total, "%")
+                buttonTitle = String(format: "正在缓存 %.f%@", received * 100.0 / total, "%")
                 downloadButton.setTitle(buttonTitle, for: .normal)
                 downloadButton.isHidden = false
             }else {
