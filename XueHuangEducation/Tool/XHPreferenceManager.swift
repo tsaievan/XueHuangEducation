@@ -14,7 +14,8 @@ let XHPreferences = XHPreferenceManager.shared
 let defaultPreferences: [PreferenceKeys : Any] = [
     PreferenceKeys.USERDEFAULT_SWICH_ALLOW_PUSH_INFO_KEY : true,
     PreferenceKeys.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY : true,
-    PreferenceKeys.USERDEFAULT_SWICH_REMEMBER_PASSWORD_KEY : true
+    PreferenceKeys.USERDEFAULT_SWICH_REMEMBER_PASSWORD_KEY : true,
+    PreferenceKeys.USERDEFAULT_FIRST_INSTALL_APP: true
 ]
 
 final class XHPreferenceManager {

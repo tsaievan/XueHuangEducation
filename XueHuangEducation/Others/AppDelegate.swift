@@ -38,11 +38,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registNotification()
         
         let push = XHPreferences[.USERDEFAULT_SWICH_ALLOW_PUSH_INFO_KEY]
+        let first = XHPreferences[.USERDEFAULT_FIRST_INSTALL_APP]
         if push {
+            if first {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 30, execute: {
+                    self.getNotificationAction()
+                })
+            }
             startGetPushedNotificationTimer()
         }else {
             invaliatedGetPushedNotificationTimer()
         }
+        XHPreferences[.USERDEFAULT_FIRST_INSTALL_APP] = false
         return true
     }
     
@@ -160,8 +167,8 @@ extension AppDelegate {
 
 extension AppDelegate {
     func startGetPushedNotificationTimer() {
-        ///< 每隔20min请求一次消息推送数据
-        let timer =  Timer(timeInterval: 20 * 60, target: self, selector: #selector(getNotificationAction), userInfo: nil, repeats: true)
+        ///< 每隔10min请求一次消息推送数据
+        let timer =  Timer(timeInterval: 10 * 60, target: self, selector: #selector(getNotificationAction), userInfo: nil, repeats: true)
         pushTimer = timer
         RunLoop.current.add(timer, forMode: .commonModes)
     }

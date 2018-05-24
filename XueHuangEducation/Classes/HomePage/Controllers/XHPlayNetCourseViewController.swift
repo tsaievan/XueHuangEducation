@@ -302,6 +302,22 @@ extension XHPlayNetCourseViewController {
 extension XHPlayNetCourseViewController: ZFPlayerDelegate {
     ///< 下载视频的代理回调
     func zf_playerDownload(_ url: String!) {
+        ///< 没有wifi且没有打开2G/3G/4G网络下缓存视频的开关
+        if !XHNetwork.isReachableOnEthernetOrWiFi() && !XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY] {
+            let alertVc = UIAlertController(title: "警告", message: "您尚未开启允许2G/3G/4G网络下缓存视频的开关", preferredStyle: UIAlertControllerStyle.alert)
+            let open = UIAlertAction(title: "立即开启", style: UIAlertActionStyle.default, handler: { (action) in
+                guard let tabBarController = UIApplication.shared.keyWindow?.rootViewController as? XHTabBarController else {
+                    return
+                }
+                tabBarController.selectedIndex = 2
+            })
+            let cancel = UIAlertAction(title: "稍后再说", style: UIAlertActionStyle.destructive, handler: nil)
+            alertVc.addAction(open)
+            alertVc.addAction(cancel)
+            present(alertVc, animated: true, completion: nil)
+            return
+        }
+        
         let name = (url as NSString).lastPathComponent
         var flag: Bool = false
         
