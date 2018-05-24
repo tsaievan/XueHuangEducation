@@ -166,7 +166,7 @@ extension XHCourseCatalogCell {
     fileprivate func makeConstraints() {
         buttonsView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(contentView)
-            make.bottom.equalTo(contentView).priority(.low)
+            make.bottom.equalTo(contentView).priority(.high)
         }
     }
 }

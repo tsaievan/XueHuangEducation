@@ -24,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     weak var pushTimer: Timer?
+    
+    var notiTitle: String?
+    
+    var notiDetails: String?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -170,15 +174,16 @@ extension AppDelegate {
     @objc
     fileprivate func getNotificationAction() {
         XHPush.getPushedNotification(success: { (response) in
-            
-            ///< iOS 10.0 以上的消息推送
-            if #available(iOS 10.0, *) {
-                let content = UNMutableNotificationContent()
-                guard let title = response.title,
+            guard let title = response.title,
                 let pushId = response.pushId,
                 let details = response.details else {
                     return
-                }
+            }
+            self.notiTitle = title
+            self.notiDetails = details
+            ///< iOS 10.0 以上的消息推送
+            if #available(iOS 10.0, *) {
+                let content = UNMutableNotificationContent()
                 content.title = title
                 content.sound = UNNotificationSound.default()
                 content.badge = NSNumber(value: UIApplication.shared.applicationIconBadgeNumber + 1)
@@ -199,7 +204,19 @@ extension AppDelegate {
                     }
                 })
             } else { ///< iOS 10.0 以下的消息推送
-                
+                let app = UIApplication.shared
+                if app.currentUserNotificationSettings?.types != .none {
+                    let content = UILocalNotification()
+                    content.fireDate = Date(timeIntervalSinceNow: 1)
+                    ///< 这里要设置alertBody属性, 而不是alertTitle属性, 很坑
+                    content.alertBody = title
+                    content.soundName = UILocalNotificationDefaultSoundName
+                    content.applicationIconBadgeNumber += 1
+                    app.scheduleLocalNotification(content)
+                }else {
+                    let settings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: nil)
+                    app.registerUserNotificationSettings(settings)
+                }
             }
         }, failue: nil)
     }
@@ -217,9 +234,38 @@ extension AppDelegate {
                     XHPreferences[.USERDEFAULT_SWICH_ALLOW_PUSH_INFO_KEY] = true
                 }
             }
-        } else {
+        }else {
+            let app = UIApplication.shared
             let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            UIApplication.shared.registerUserNotificationSettings(settings)
+            app.registerUserNotificationSettings(settings)
+        }
+    }
+}
+
+extension AppDelegate {
+    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
+        if notificationSettings.types != .none {
+            let content = UILocalNotification()
+            content.fireDate = Date(timeIntervalSinceNow: 1)
+            ///< 这里要设置alertBody属性, 而不是alertTitle属性, 很坑
+            content.alertBody = notiTitle
+            content.soundName = UILocalNotificationDefaultSoundName
+            content.applicationIconBadgeNumber += 1
+            application.scheduleLocalNotification(content)
+        }
+    }
+    
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        DispatchQueue.main.async {
+            let view = XHAdvertisement
+            view.frame = CGRect(x: 0, y: -XHSCreen.height, width: XHSCreen.width, height: XHSCreen.height)
+            view.content = self.notiDetails
+            self.window?.addSubview(view)
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                view.frame = CGRect(x: 0, y: 0, width: XHSCreen.width, height: XHSCreen.height)
+            }, completion: nil)
+            UIApplication.shared.applicationIconBadgeNumber = 0
+            notification.applicationIconBadgeNumber = 0
         }
     }
 }

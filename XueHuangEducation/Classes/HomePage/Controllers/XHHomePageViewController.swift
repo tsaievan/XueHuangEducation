@@ -195,6 +195,11 @@ extension XHHomePageViewController: UITableViewDelegate, UITableViewDataSource {
         return 0.01
     }
     
+    ///< 这个方法一定要加上, 不然在iOS 9.0系统上会出现布局的问题(iOS11 没问题)
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
     ///< 点击cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ///< 取消选中

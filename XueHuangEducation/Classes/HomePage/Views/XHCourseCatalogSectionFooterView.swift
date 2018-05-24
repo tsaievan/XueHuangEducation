@@ -27,6 +27,7 @@ class XHCourseCatalogSectionFooterView: UIView {
         let logo = UIImageView()
         logo.image = UIImage(named: logoImageName)
         logo.contentMode = .scaleAspectFill
+        logo.sizeToFit()
         return logo
     }()
     
@@ -34,6 +35,7 @@ class XHCourseCatalogSectionFooterView: UIView {
         let ch = UIImageView()
         ch.image = UIImage(named: chTitileImageName)
         ch.contentMode = .scaleAspectFill
+        ch.sizeToFit()
         return ch
     }()
     
@@ -41,6 +43,7 @@ class XHCourseCatalogSectionFooterView: UIView {
         let en = UIImageView()
         en.image = UIImage(named: enTitleImageName)
         en.contentMode = .scaleAspectFill
+        en.sizeToFit()
         return en
     }()
     
@@ -48,6 +51,7 @@ class XHCourseCatalogSectionFooterView: UIView {
         let slogan = UIImageView()
         slogan.image = UIImage(named: sloganImageName)
         slogan.contentMode = .scaleAspectFill
+        slogan.sizeToFit()
         return slogan
     }()
     
