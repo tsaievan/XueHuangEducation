@@ -160,7 +160,8 @@ extension AppDelegate {
 
 extension AppDelegate {
     func startGetPushedNotificationTimer() {
-        let timer =  Timer(timeInterval: 10, target: self, selector: #selector(getNotificationAction), userInfo: nil, repeats: true)
+        ///< 每隔20min请求一次消息推送数据
+        let timer =  Timer(timeInterval: 20 * 60, target: self, selector: #selector(getNotificationAction), userInfo: nil, repeats: true)
         pushTimer = timer
         RunLoop.current.add(timer, forMode: .commonModes)
     }
@@ -181,6 +182,10 @@ extension AppDelegate {
             }
             self.notiTitle = title
             self.notiDetails = details
+            let pId = XHPreferences[.USERDEFAULT_PUSH_INFO_ID]
+            if pId == pushId { ///< 如果pushId和本地保存的pId一致, 则不弹提示框
+                return
+            }
             ///< iOS 10.0 以上的消息推送
             if #available(iOS 10.0, *) {
                 let content = UNMutableNotificationContent()
@@ -218,6 +223,7 @@ extension AppDelegate {
                     app.registerUserNotificationSettings(settings)
                 }
             }
+            XHPreferences[.USERDEFAULT_PUSH_INFO_ID] = pushId
         }, failue: nil)
     }
 }
@@ -256,16 +262,20 @@ extension AppDelegate {
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        DispatchQueue.main.async {
-            let view = XHAdvertisement
-            view.frame = CGRect(x: 0, y: -XHSCreen.height, width: XHSCreen.width, height: XHSCreen.height)
-            view.content = self.notiDetails
-            self.window?.addSubview(view)
-            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                view.frame = CGRect(x: 0, y: 0, width: XHSCreen.width, height: XHSCreen.height)
-            }, completion: nil)
-            UIApplication.shared.applicationIconBadgeNumber = 0
-            notification.applicationIconBadgeNumber = 0
+        if #available(iOS 10.0, *) {
+            
+        }else {
+            DispatchQueue.main.async {
+                let view = XHAdvertisement
+                view.frame = CGRect(x: 0, y: -XHSCreen.height, width: XHSCreen.width, height: XHSCreen.height)
+                view.content = self.notiDetails
+                self.window?.addSubview(view)
+                UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    view.frame = CGRect(x: 0, y: 0, width: XHSCreen.width, height: XHSCreen.height)
+                }, completion: nil)
+                UIApplication.shared.applicationIconBadgeNumber = 0
+                notification.applicationIconBadgeNumber = 0
+            }
         }
     }
 }
