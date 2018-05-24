@@ -110,7 +110,7 @@ class XHPlayNetCourseViewController: UIViewController {
             playerModel.title = title
             playerModel.videoURL = url
             playerView.playerControlView(controlView, playerModel: playerModel)
-            playerView.autoPlayTheVideo()
+//            playerView.autoPlayTheVideo()
         }
     }
     
@@ -176,7 +176,7 @@ class XHPlayNetCourseViewController: UIViewController {
             playerModel.title = title
             playerModel.videoURL = url
             playerView.playerControlView(controlView, playerModel: playerModel)
-            playerView.autoPlayTheVideo()
+//            playerView.autoPlayTheVideo()
         }
     }
     
@@ -304,6 +304,7 @@ extension XHPlayNetCourseViewController: ZFPlayerDelegate {
     func zf_playerDownload(_ url: String!) {
         let name = (url as NSString).lastPathComponent
         var flag: Bool = false
+        
         XHDownload.downinglist.forEach { (request) in
             if let req = request as? ZFHttpRequest {
                 let printedName = (req.url.absoluteString as NSString).lastPathComponent
@@ -317,7 +318,15 @@ extension XHPlayNetCourseViewController: ZFPlayerDelegate {
         if flag {
             return
         }
-        XHDownload.downFileUrl(url, filename: name, fileimage: nil)
+        guard var ori = originalVideo else {
+            return
+        }
+        if ori.contains("nickname") {
+            let stringArr = (ori as NSString).components(separatedBy: "?nickname")
+            ori = stringArr.first!
+        }
+        let newStr = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (downloadUrl + ori) as CFString, "!$&'()*+,-./:;=?@_~%#[]" as CFString, nil, CFStringBuiltInEncodings.UTF8.rawValue) as String
+        XHDownload.downFileUrl(newStr, filename: name, fileimage: nil)
         if let net = netwareModel {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
                 self.netwareModel = net
@@ -368,7 +377,7 @@ extension XHPlayNetCourseViewController {
                     let url = URL(fileURLWithPath: str)
                     playerModel.videoURL = url
                     playerView.playerControlView(controlView, playerModel: playerModel)
-                    playerView.autoPlayTheVideo()
+//                    playerView.autoPlayTheVideo()
                 }
             }
         })
