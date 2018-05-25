@@ -55,13 +55,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     ///< app即将失去焦点
     func applicationWillResignActive(_ application: UIApplication) {
-
+//        XHDownload.xh_pauseAllDownloads()
     }
     
     ///< app已经进入后台
     func applicationDidEnterBackground(_ application: UIApplication) {
         ///< 这一句很重要
         UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+//        XHDownload.xh_pauseAllDownloads()
     }
 
     ///< app即将进入前台
@@ -107,13 +108,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ///< 开始监听网络状态的变化
         XHNetwork.startMonitor()
         
-        if XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY] { ///< 表明用户此时是打开允许缓存开关的, 此时只要有网就开始下载
-            XHDownload.startAllDownloads()
-        }else { ///< 关闭2g/3g/4g开关,此时要判断是否有wifi, 有就下载, 没有就不下载
-            if XHNetwork.isReachableOnEthernetOrWiFi() {
-                XHDownload.startAllDownloads()
-            }
-        }
+        ///< 程序退出, 或者进入, 或者失去焦点, 或者获得焦点, 都暂时不对当前正在下载的操作做任何暂停和继续 (需求如此)
+//        if XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY] { ///< 表明用户此时是打开允许缓存开关的, 此时只要有网就开始下载
+//            XHDownload.xh_resumeAllDownloads()
+//        }else { ///< 关闭2g/3g/4g开关,此时要判断是否有wifi, 有就下载, 没有就不下载
+//            if XHNetwork.isReachableOnEthernetOrWiFi() {
+//                XHDownload.xh_resumeAllDownloads()
+//            }
+//        }
     }
 
     ///< 在app即将退出的时候, 将当前的cookie保存下来
@@ -149,7 +151,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.keyWindow?.rootViewController = tabBarController
         
         ///< 暂停视频的下载
-        XHDownload.pauseAllDownloads()
+//        XHDownload.xh_pauseAllDownloads()
         ///< 默认选中登录页面
         tabBarController.selectedIndex = XHViewControllers.login.rawValue
     }
@@ -286,4 +288,26 @@ extension AppDelegate {
         }
     }
 }
+
+extension ZFDownloadManager {
+    func xh_pauseAllDownloads() {
+        XHDownload.downinglist.forEach { (request) in
+            if let req = request as? ZFHttpRequest {
+                if req.isExecuting() {
+                    XHDownload.stop(req)
+                }
+            }
+        }
+    }
+    
+    func xh_resumeAllDownloads() {
+        XHDownload.downinglist.forEach { (request) in
+            if let req = request as? ZFHttpRequest {
+                XHDownload.resumeRequest(req)
+            }
+        }
+    }
+}
+
+
 

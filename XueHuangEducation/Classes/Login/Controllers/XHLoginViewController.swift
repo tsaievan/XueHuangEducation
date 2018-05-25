@@ -80,12 +80,12 @@ extension XHLoginViewController: XHLoginViewDelegate {
                     }
                     XHPreferences[.USERDEFAULT_LOGIN_PASSWORD] = info.password
                     if XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY] {
-                        XHDownload.startAllDownloads()
+                        XHDownload.xh_resumeAllDownloads()
                     }else {
                         if XHNetwork.isReachableOnEthernetOrWiFi() {
-                            XHDownload.pauseAllDownloads()
+                            XHDownload.xh_pauseAllDownloads()
                             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
-                                XHDownload.startAllDownloads()
+                                XHDownload.xh_resumeAllDownloads()
                             })
                         }
                     }
@@ -131,12 +131,12 @@ extension XHLoginViewController: XHLoginViewDelegate {
                         self.dismissLoginViewController()
                     }
                     if XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY] {
-                        XHDownload.startAllDownloads()
+                        XHDownload.xh_resumeAllDownloads()
                     }else {
                         if XHNetwork.isReachableOnEthernetOrWiFi() {
-                            XHDownload.pauseAllDownloads()
+                            XHDownload.xh_pauseAllDownloads()
                             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
-                                XHDownload.startAllDownloads()
+                                XHDownload.xh_resumeAllDownloads()
                             })
                         }
                     }

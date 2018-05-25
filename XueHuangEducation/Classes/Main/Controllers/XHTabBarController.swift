@@ -116,7 +116,7 @@ extension XHTabBarController: UITabBarControllerDelegate {
                         UIApplication.shared.keyWindow?.rootViewController = tabBarController
                         
                         ///< 暂停视频的下载
-                        XHDownload.pauseAllDownloads()
+                        XHDownload.xh_pauseAllDownloads()
                         ///< 默认选中登录页面
                         tabBarController.selectedIndex = XHViewControllers.login.rawValue
                     })

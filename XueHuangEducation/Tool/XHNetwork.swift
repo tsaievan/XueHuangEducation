@@ -19,20 +19,20 @@ let monitor: Alamofire.NetworkReachabilityManager? = {
     m.listener = {
         status in
         if status == .reachable(.ethernetOrWiFi) { ///< wifi网络
-            XHDownload.pauseAllDownloads()
+            XHDownload.xh_pauseAllDownloads()
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1, execute: {
-                XHDownload.startAllDownloads()
+                XHDownload.xh_resumeAllDownloads()
             })
         } else if status == .reachable(.wwan) { ///< 蜂窝网络
             if XHPreferences[.USERDEFAULT_SWICH_ALLOW_CACHE_VIDEO_KEY] { ///< 表明开关是打开的
-                XHDownload.startAllDownloads()
+                XHDownload.xh_resumeAllDownloads()
             }else {
-                XHDownload.pauseAllDownloads()
+                XHDownload.xh_pauseAllDownloads()
             }
         } else if status == .notReachable { ///< 无网络
-            XHDownload.pauseAllDownloads()
+            XHDownload.xh_pauseAllDownloads()
         } else { ///< 其他
-            XHDownload.pauseAllDownloads()
+            XHDownload.xh_pauseAllDownloads()
         }
     }
     return m
