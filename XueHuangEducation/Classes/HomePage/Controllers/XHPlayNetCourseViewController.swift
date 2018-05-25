@@ -209,6 +209,10 @@ class XHPlayNetCourseViewController: UIViewController {
     lazy var playerModel: ZFPlayerModel = {
         let model = ZFPlayerModel()
         model.fatherView = playerFatherView
+        ///< 视频占位图的网络url设置为nil
+        model.placeholderImageURLString = nil
+        ///< 本地占位图设置为一个空的Image, 显示的就是没有黑色的背景, 没有默认的占位图
+        model.placeholderImage = UIImage()
         return model
     }()
     
