@@ -153,6 +153,8 @@ class XHPlayNetCourseViewController: UIViewController {
                     if name == encodedFileName {
                         guard let _ = fileInfo.fileReceivedSize,
                             let _ = fileInfo.fileSize else {
+                                downloadButton.setTitle("等待缓存", for: .normal)
+                                downloadButton.isHidden = false
                                 return
                         }
                         let received = (fileInfo.fileReceivedSize as NSString).doubleValue
