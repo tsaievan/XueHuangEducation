@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setAlertHudAttributes()
         downloadHomepageData()
         registNotification()
+        XHDownload.vCdelegate = self
         
         let push = XHPreferences[.USERDEFAULT_SWICH_ALLOW_PUSH_INFO_KEY]
         let first = XHPreferences[.USERDEFAULT_FIRST_INSTALL_APP]
@@ -289,6 +290,12 @@ extension AppDelegate {
     }
 }
 
+extension AppDelegate: ZFDownloadDelegate {
+    func allowNextRequest() {
+        
+    }
+}
+
 extension ZFDownloadManager {
     func xh_pauseAllDownloads() {
         XHDownload.downinglist.forEach { (request) in
@@ -308,6 +315,8 @@ extension ZFDownloadManager {
         }
     }
 }
+
+
 
 
 
